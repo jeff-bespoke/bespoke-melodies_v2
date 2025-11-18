@@ -26,7 +26,10 @@
 <section class="song-portal">
   <div class="bm-song-portal">
     <div class="song-portal__inner">
-      <h1 class="song-portal__heading">Your Song Portal</h1>
+      <header class="bm-portal-header">
+        <h1>Your Song Portal</h1>
+        <p class="bm-portal-tagline">Where your story becomes song.</p>
+      </header>
       <p class="song-portal__intro">
         Welcome to your bespoke song hub. Track your song’s progress, read updates from me, and preview your track before final delivery.
       </p>
@@ -239,16 +242,21 @@
                 <div class="song-portal__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progress_percent }}" data-song-portal-progress>
                   <span class="song-portal__progress-fill" style="width: {{ progress_percent }}%"></span>
                 </div>
-                <div class="song-portal__update-card{% if status_message == blank %} is-hidden{% endif %}" data-song-portal-status-message>
-                  <p class="song-portal__update-label">Update from Jeff</p>
-                  <p class="song-portal__update-text"><span data-song-portal-status-message-text>{{ status_message }}</span></p>
+                <div class="song-portal__update-card bm-update-card{% if status_message == blank %} is-hidden{% endif %}" data-song-portal-status-message>
+                  <div class="bm-update-label-row">
+                    <span class="bm-update-label">Update from Jeff</span>
+                    <span class="bm-update-subcopy">A personal note on your song’s progress.</span>
+                  </div>
+                  <div class="bm-update-body">
+                    <p class="song-portal__update-text"><span data-song-portal-status-message-text>{{ status_message }}</span></p>
+                  </div>
                 </div>
               </div>
             </section>
 
-            <section class="song-portal__audio">
+            <section class="song-portal__audio bm-audio-section">
               <h3 class="song-portal__section-heading">Your song</h3>
-              <div class="song-portal__audio-card">
+              <div class="song-portal__audio-card bm-audio-card">
                 <div class="song-portal__audio-player{% if preview_audio_url == '' %} is-hidden{% endif %}" data-song-portal-preview-wrapper>
                   <p class="song-portal__note">Preview mix – for listening only.</p>
                   <audio controls controlsList="nodownload" preload="none" data-song-portal-preview>
@@ -261,6 +269,7 @@
                 <p class="song-portal__note{% unless preview_audio_url == '' %} is-hidden{% endunless %}" data-song-portal-preview-empty>Your preview will appear here once it’s ready to listen.</p>
 
                 <a class="song-portal__button song-portal__button--primary{% unless final_approved and final_audio_url != '' %} is-hidden{% endunless %}" href="{{ final_audio_url }}" data-song-portal-final-download>Download final song</a>
+                <div class="bm-download-caption{% unless final_approved and final_audio_url != '' %} is-hidden{% endunless %}">Forever yours to keep.</div>
                 <p class="song-portal__note song-portal__note--small{% if final_approved and final_audio_url != '' %} is-hidden{% endif %}" data-song-portal-final-empty>Once you’ve approved the final version by email, your download link will appear here.</p>
               </div>
 
@@ -516,26 +525,42 @@
   }
   /* Song Portal: base layout */
   .bm-song-portal .song-portal {
-    padding: 3rem 1rem 4rem;
-    background: var(--color-background, #f8f6f3);
+    padding: 3.5rem 1.25rem 4.5rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f6f3 100%);
   }
   .bm-song-portal .song-portal__inner {
     max-width: 960px;
     margin: 0 auto;
   }
-  .bm-song-portal .song-portal__heading {
-    font-size: 2.5rem;
+  .bm-song-portal .bm-portal-header {
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .bm-song-portal .bm-portal-header h1 {
+    font-size: 2.75rem;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    color: #2d231f;
+  }
+  .bm-song-portal .bm-portal-tagline {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.95rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
   .bm-song-portal .song-portal__intro {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     color: rgba(0, 0, 0, 0.7);
+    max-width: 740px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .bm-song-portal .song-portal__chat-cta {
     max-width: 720px;
-    margin: -1rem auto 2.5rem;
+    margin: -0.5rem auto 2.5rem;
     text-align: center;
     font-size: 0.95rem;
     color: rgba(0, 0, 0, 0.75);
@@ -602,7 +627,7 @@
   }
   /* Song Portal: status tracker */
   .bm-song-portal .song-portal__status {
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
   }
   .bm-song-portal .song-portal__section-heading {
     font-size: 1.1rem;
@@ -615,9 +640,10 @@
     list-style: none;
     padding: 0;
     margin: 0 0 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.25rem;
+    justify-content: space-between;
   }
   .bm-song-portal .song-portal__step {
     display: flex;
@@ -625,12 +651,14 @@
     gap: 0.65rem;
     color: rgba(0, 0, 0, 0.55);
     font-weight: 600;
+    flex: 1 1 180px;
+    min-width: 0;
   }
   .bm-song-portal .song-portal__step-dot {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    border: 2px solid rgba(0, 0, 0, 0.12);
+    border: 2px solid rgba(0, 0, 0, 0.14);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -641,18 +669,19 @@
     width: 12px;
     height: 12px;
     opacity: 0;
+    color: #fff;
   }
   .bm-song-portal .song-portal__step.is-current {
     color: #4b0e3f;
   }
   .bm-song-portal .song-portal__step.is-current .song-portal__step-dot {
     border-color: #c9a86a;
-    box-shadow: 0 0 0 6px rgba(201, 168, 106, 0.14);
+    box-shadow: 0 0 0 7px rgba(201, 168, 106, 0.18);
   }
   .bm-song-portal .song-portal__step.is-current .song-portal__step-dot::after {
     content: '';
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     background: #c9a86a;
     border-radius: 50%;
   }
@@ -663,10 +692,16 @@
     background: #c9a86a;
     border-color: #c9a86a;
     color: #fff;
-    box-shadow: 0 10px 18px rgba(201, 168, 106, 0.35);
+    box-shadow: 0 10px 20px rgba(201, 168, 106, 0.4);
   }
   .bm-song-portal .song-portal__step.is-complete .song-portal__check-icon {
     opacity: 1;
+  }
+  .bm-song-portal .song-portal__step:not(.is-current):not(.is-complete) {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .bm-song-portal .song-portal__step:not(.is-current):not(.is-complete) .song-portal__step-dot {
+    border-color: rgba(0, 0, 0, 0.12);
   }
   .bm-song-portal .song-portal__status-summary strong {
     font-weight: 700;
@@ -674,10 +709,10 @@
   .bm-song-portal .song-portal__progress {
     position: relative;
     width: 100%;
-    height: 12px;
+    height: 8px;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(75, 14, 63, 0.08), rgba(75, 14, 63, 0.02));
-    margin: 0.75rem 0 1rem;
+    background: rgba(0, 0, 0, 0.06);
+    margin: 0.85rem 0 1.05rem;
     overflow: hidden;
     border: 1px solid rgba(75, 14, 63, 0.08);
   }
@@ -688,18 +723,31 @@
     background: #c9a86a;
   }
   /* Song Portal: update note */
-  .bm-song-portal .song-portal__update-card {
-    background: #fff;
+  .bm-song-portal .bm-update-card {
+    background: #fffcf8;
     border-left: 4px solid #c9a86a;
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    padding: 1.1rem 1.4rem 1.2rem;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
   }
-  .bm-song-portal .song-portal__update-label {
-    margin: 0 0 0.35rem;
+  .bm-song-portal .bm-update-label-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    align-items: baseline;
+  }
+  .bm-song-portal .bm-update-label {
+    margin: 0;
     font-weight: 700;
     color: #4b0e3f;
-    font-size: 0.95rem;
+    font-size: 0.98rem;
+  }
+  .bm-song-portal .bm-update-subcopy {
+    color: rgba(0, 0, 0, 0.55);
+    font-size: 0.9rem;
+  }
+  .bm-song-portal .bm-update-body {
+    margin-top: 0.4rem;
   }
   .bm-song-portal .song-portal__update-text {
     margin: 0;
@@ -707,13 +755,18 @@
   }
   /* Song Portal: audio */
   .bm-song-portal .song-portal__audio {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .bm-song-portal .bm-audio-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
   .bm-song-portal .song-portal__audio-card {
     background: #fbfafd;
     border: 1px solid rgba(75, 14, 63, 0.08);
-    border-radius: 16px;
-    padding: 1.5rem;
+    border-radius: 18px;
+    padding: 1.75rem;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
   }
   .bm-song-portal .song-portal__audio-player audio {
@@ -733,8 +786,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.95rem 1.85rem;
-    border-radius: 999px;
+    padding: 1rem 2rem;
+    border-radius: 9999px;
     background: transparent;
     border: 1px solid rgba(0, 0, 0, 0.35);
     color: inherit;
@@ -748,13 +801,19 @@
   .bm-song-portal .song-portal__button--primary {
     background: #4b0e3f;
     color: #fff;
-    border-color: #4b0e3f;
+    border-color: #c9a86a;
     margin-top: 1rem;
+    box-shadow: 0 10px 22px rgba(201, 168, 106, 0.26);
   }
   .bm-song-portal .song-portal__button--primary:hover {
     background: #5b134d;
-    box-shadow: 0 12px 24px rgba(201, 168, 106, 0.4);
-    border-color: #a88953;
+    box-shadow: 0 14px 30px rgba(201, 168, 106, 0.4), 0 0 0 4px rgba(201, 168, 106, 0.2);
+    border-color: #c9a86a;
+  }
+  .bm-song-portal .bm-download-caption {
+    color: rgba(0, 0, 0, 0.55);
+    font-size: 0.9rem;
+    margin-top: 0.35rem;
   }
   .bm-song-portal .song-portal__footer {
     border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -780,7 +839,8 @@
   }
   @media (max-width: 599px) {
     .bm-song-portal .song-portal__stepper {
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      justify-content: center;
+      gap: 0.75rem;
     }
     .bm-song-portal .song-portal__audio-card,
     .bm-song-portal .song-portal__card,
