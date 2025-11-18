@@ -1,0 +1,129 @@
+{% comment %}
+  Renders a Song Portal Card for a specific order.
+  Accepts:
+  - order: The Order object.
+  - blocks: The section blocks defining the status steps.
+{% endcomment %}
+
+{% assign commission_item = nil %}
+{% for line_item in order.line_items %}
+  {% if line_item.product.type == 'Bespoke Song' or line_item.product.tags contains 'bespoke-song' %}
+    {% assign commission_item = line_item %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if commission_item == nil %}
+  {% assign commission_item = order.line_items.first %}
+{% endif %}
+
+{% comment %} Metafield Logic {% endcomment %}
+{% assign status_metafield = order.metafields.custom.song_portal_status | default: order.metafields.song_portal.status %}
+{% assign status_message = order.metafields.custom.status_message | default: order.metafields.song_portal.status_message %}
+{% assign preview_audio = order.metafields.custom.preview_audio | default: order.metafields.song_portal.preview_audio %}
+{% assign final_audio = order.metafields.custom.final_audio | default: order.metafields.song_portal.final_audio %}
+{% assign final_approved = order.metafields.custom.final_approved | default: order.metafields.song_portal.final_approved %}
+
+{% comment %} Normalize Status {% endcomment %}
+{% assign current_status_handle = status_metafield | downcase | replace: ' ', '_' | default: 'order_received' %}
+
+{% comment %} Calculate Progress based on Blocks {% endcomment %}
+{% assign current_step_index = 0 %}
+{% assign total_steps = 0 %}
+{% assign progress_percent = 10 %}
+
+{% for block in blocks %}
+  {% assign total_steps = total_steps | plus: 1 %}
+  {% if block.settings.handle == current_status_handle %}
+    {% assign current_step_index = forloop.index %}
+    {% assign progress_percent = block.settings.progress %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} Fallback if status not found in blocks {% endcomment %}
+{% if current_step_index == 0 %}
+  {% assign current_step_index = 1 %}
+{% endif %}
+
+<article class="song-card" data-song-card data-song-title="{{ commission_item.title | escape }}">
+  <header class="song-card__header">
+    <div class="song-card__order-info">
+      <span class="song-card__eyebrow">Order {{ order.name }}</span>
+      <h2 class="song-card__title">{{ commission_item.title }}</h2>
+      <div class="song-card__meta">
+        <span>{{ order.created_at | date: format: 'date' }}</span>
+        {% if commission_item.variant.title != 'Default Title' %}
+          <span>{{ commission_item.variant.title }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="status-tracker">
+    <div class="status-tracker__steps">
+      {% for block in blocks %}
+        {% assign step_status = 'pending' %}
+        {% if forloop.index < current_step_index %}
+          {% assign step_status = 'is-complete' %}
+        {% elsif forloop.index == current_step_index %}
+          {% assign step_status = 'is-active' %}
+        {% endif %}
+
+        <div class="status-step {{ step_status }}">
+          <div class="status-step__dot">
+            <svg class="status-step__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <span class="status-step__label">{{ block.settings.title }}</span>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="status-tracker__progress-container">
+      <div class="status-tracker__progress-bar" data-progress-bar data-width="{{ progress_percent }}" style="width: 0%"></div>
+    </div>
+
+    {% if status_message != blank %}
+      <div class="status-message">
+        <h3 class="status-message__heading">Update from Jeff</h3>
+        <p class="status-message__text">{{ status_message }}</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="audio-section">
+    <div class="audio-player__wrapper">
+      {% if preview_audio != blank %}
+        <span class="audio-player__label">Preview Mix</span>
+        <audio controls class="audio-player" controlsList="nodownload">
+          <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      {% elsif final_audio != blank %}
+         <span class="audio-player__label">Final Song</span>
+         <audio controls class="audio-player" controlsList="nodownload">
+          <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      {% else %}
+        <span class="audio-player__label">Audio Preview</span>
+        <div style="font-size: 0.9rem; color: rgba(0,0,0,0.5); font-style: italic;">
+          Your preview will appear here when ready.
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="audio-actions">
+      {% if final_approved == true and final_audio != blank %}
+        <a href="{{ final_audio.url | default: final_audio }}" class="btn-portal" data-download-btn>
+          Download Song
+        </a>
+      {% elsif preview_audio != blank %}
+        <button class="btn-portal btn-portal--outline" disabled style="opacity: 0.5; cursor: default;">
+          Download Locked
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</article>

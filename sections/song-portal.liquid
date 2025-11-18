@@ -1,872 +1,186 @@
-{% comment %}
-  Song Portal section rebuilt per bespoke commission spec.
-  - Shows different states for logged-out users, logged-in users with/without commissions.
-  - Treats any order as a commission, preferring line items with product_type "Bespoke Song" or tag `bespoke-song` but falling back to the first item when no match exists.
-  - Reads Order metafields in namespace `custom` (song_portal_status, status_message, preview_audio, final_audio, final_approved), with legacy fallbacks to `song_portal`.
-  - Renders premium-styled cards with status tracker, progress bar, audio preview/final download, and communication note.
-{% endcomment %}
+{{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'song-portal.js' | asset_url }}" defer="defer"></script>
 
-{% if customer and settings.tawk_embed_url != blank %}
-  <script>
-    var Tawk_API = Tawk_API || {};
-    var Tawk_LoadStart = new Date();
-
-    Tawk_API.visitor = {
-      name: "{{ customer.first_name }} {{ customer.last_name }}",
-      email: "{{ customer.email }}"
-    };
-  </script>
-  <script
-    src="{{ settings.tawk_embed_url }}"
-    async
-    crossorigin="*"
-  ></script>
-{% endif %}
-
-<section class="song-portal">
-  <div class="bm-song-portal">
-    <div class="song-portal__inner">
-      <header class="bm-portal-header">
-        <h1>Your Song Portal</h1>
-        <p class="bm-portal-tagline">Where your story becomes song.</p>
-      </header>
-      <p class="song-portal__intro">
-        Welcome to your bespoke song hub. Track your song’s progress, read updates from me, and preview your track before final delivery.
-      </p>
-      {% if customer %}
-        <p class="song-portal__chat-cta">
-          Have questions, update ideas, or feedback on your song? Use the chat bubble in the corner of the screen to message Jeff directly.
-        </p>
+<section class="song-portal-section">
+  <div class="song-portal__container">
+    <header class="song-portal__header">
+      <h1 class="song-portal__title">{{ section.settings.heading }}</h1>
+      {% if section.settings.subheading != blank %}
+        <p class="song-portal__subtitle">{{ section.settings.subheading }}</p>
       {% endif %}
+    </header>
 
-      {% unless customer %}
-        <div class="song-portal__card song-portal__card--locked">
-          <p class="song-portal__message">Please log in to view your song portal.</p>
-          <a href="/account/login" class="song-portal__button">Log in to continue</a>
-        </div>
-      {% else %}
-        {% assign commission_count = 0 %}
+    {% if section.settings.intro_text != blank %}
+      <p class="song-portal__intro">{{ section.settings.intro_text }}</p>
+    {% endif %}
 
+    {% unless customer %}
+      <div class="song-portal__state-card">
+        <h2 class="song-portal__state-title">Please Log In</h2>
+        <p class="song-portal__state-text">You must be logged in to view your song portal.</p>
+        <a href="{{ routes.account_login_url }}" class="btn-portal">Log In</a>
+      </div>
+    {% else %}
+      {% assign commission_count = 0 %}
       {% for order in customer.orders %}
-        {% assign has_commission = false %}
-        {% assign matched_line_item = nil %}
-
+        {% assign is_commission = false %}
         {% for line_item in order.line_items %}
-          {% if line_item.product %}
-            {% assign product_tags_string = line_item.product.tags | join: ',' %}
-            {% if line_item.product.product_type == 'Bespoke Song' or product_tags_string contains 'bespoke-song' %}
-              {% assign has_commission = true %}
-              {% assign matched_line_item = line_item %}
-              {% break %}
-            {% endif %}
+          {% if line_item.product.type == 'Bespoke Song' or line_item.product.tags contains 'bespoke-song' %}
+            {% assign is_commission = true %}
+            {% break %}
           {% endif %}
         {% endfor %}
-
-        {% if matched_line_item == nil and order.line_items.size > 0 %}
-          {% assign matched_line_item = order.line_items.first %}
-          {% assign has_commission = true %}
+        
+        {% comment %}Fallback: treat all orders as commissions if not strictly filtered{% endcomment %}
+        {% if is_commission == false and order.line_items.size > 0 %}
+           {% assign is_commission = true %}
         {% endif %}
 
-        {% if has_commission %}
+        {% if is_commission %}
           {% assign commission_count = commission_count | plus: 1 %}
-
-          {%- comment -%}
-            Metafields: status, progress_percent, status_message, preview_audio, final_audio, final_approved.
-            Update copy or step labels below if your workflow changes.
-          {%- endcomment -%}
-          {% assign portal_metafields = order.metafields.song_portal %}
-          {% assign custom_metafields = order.metafields.custom %}
-          {% assign hyphenated_metafields = order.metafields['song-portal'] %}
-
-          {%- comment -%}
-            Metafield access is defensive to support orders where definitions are not storefront-visible.
-            Each key pulls from the namespace object first, then a direct string handle fallback (e.g., "song_portal.status").
-          {%- endcomment -%}
-          {% assign status_metafield = custom_metafields.song_portal_status | default: custom_metafields['song_portal_status'] | default: order.metafields['custom.song_portal_status'] | default: custom_metafields.status | default: custom_metafields['status'] | default: order.metafields['custom.status'] | default: portal_metafields.song_portal_status | default: portal_metafields['song_portal_status'] | default: portal_metafields.status | default: portal_metafields['status'] | default: order.metafields['song_portal.song_portal_status'] | default: order.metafields['song_portal.status'] | default: hyphenated_metafields.status | default: hyphenated_metafields['status'] | default: order.metafields['song-portal.status'] %}
-          {% assign progress_metafield = portal_metafields.progress_percent | default: portal_metafields['progress_percent'] | default: order.metafields['song_portal.progress_percent'] | default: custom_metafields.progress_percent | default: custom_metafields['progress_percent'] | default: order.metafields['custom.progress_percent'] | default: hyphenated_metafields.progress_percent | default: hyphenated_metafields['progress_percent'] | default: order.metafields['song-portal.progress_percent'] %}
-          {% assign status_message_metafield = custom_metafields.status_message | default: custom_metafields['status_message'] | default: order.metafields['custom.status_message'] | default: portal_metafields.status_message | default: portal_metafields['status_message'] | default: order.metafields['song_portal.status_message'] | default: hyphenated_metafields.status_message | default: hyphenated_metafields['status_message'] | default: order.metafields['song-portal.status_message'] %}
-          {% assign preview_audio_metafield = order.metafields['custom']['preview_audio'] | default: custom_metafields.preview_audio | default: custom_metafields['preview_audio'] | default: portal_metafields.preview_audio | default: portal_metafields['preview_audio'] | default: order.metafields['song_portal.preview_audio'] | default: hyphenated_metafields.preview_audio | default: hyphenated_metafields['preview_audio'] | default: order.metafields['song-portal.preview_audio'] %}
-          {% assign final_audio_metafield = order.metafields['custom']['final_audio'] | default: custom_metafields.final_audio | default: custom_metafields['final_audio'] | default: portal_metafields.final_audio | default: portal_metafields['final_audio'] | default: order.metafields['song_portal.final_audio'] | default: hyphenated_metafields.final_audio | default: hyphenated_metafields['final_audio'] | default: order.metafields['song-portal.final_audio'] %}
-          {% assign final_approved_metafield = portal_metafields.final_approved %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = portal_metafields['final_approved'] %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = order.metafields['song_portal.final_approved'] %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = custom_metafields.final_approved %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = custom_metafields['final_approved'] %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = order.metafields['custom.final_approved'] %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = hyphenated_metafields.final_approved %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = hyphenated_metafields['final_approved'] %}
-          {% endif %}
-          {% if final_approved_metafield == blank and final_approved_metafield != false %}
-            {% assign final_approved_metafield = order.metafields['song-portal.final_approved'] %}
-          {% endif %}
-
-          {% assign raw_status_unset = status_metafield.value | default: status_metafield %}
-          {% assign progress_percent = progress_metafield.value | default: progress_metafield %}
-          {% assign status_message = status_message_metafield.value | default: status_message_metafield %}
-          {% assign preview_audio_value = preview_audio_metafield.value | default: preview_audio_metafield %}
-          {% assign final_audio_value = final_audio_metafield.value | default: final_audio_metafield %}
-          {% assign final_approved = final_approved_metafield.value | default: final_approved_metafield %}
-
-          {% assign preview_audio_url = '' %}
-          {% if preview_audio_value and preview_audio_value.url %}
-            {% assign preview_audio_url = preview_audio_value.url %}
-          {% elsif preview_audio_value and preview_audio_value.preview_image and preview_audio_value.preview_image.src %}
-            {% assign preview_audio_url = preview_audio_value.preview_image.src %}
-          {% elsif preview_audio_value != blank %}
-            {% assign preview_audio_url = preview_audio_value %}
-          {% endif %}
-
-          {% assign final_audio_url = '' %}
-          {% if final_audio_value and final_audio_value.url %}
-            {% assign final_audio_url = final_audio_value.url %}
-          {% elsif final_audio_value and final_audio_value.preview_image and final_audio_value.preview_image.src %}
-            {% assign final_audio_url = final_audio_value.preview_image.src %}
-          {% elsif final_audio_value != blank %}
-            {% assign final_audio_url = final_audio_value %}
-          {% endif %}
-
-          {% assign raw_status = raw_status_unset
-            | downcase
-            | strip
-            | replace: ' ', '_'
-            | replace: '-', '_'
-            | default: 'order_received' %}
-
-          {% assign inferred_progress = 0 %}
-          {% case raw_status %}
-            {% when 'order_received' %}{% assign inferred_progress = 10 %}
-            {% when 'initial_consultation' %}{% assign inferred_progress = 20 %}
-            {% when 'writing_lyrics' %}{% assign inferred_progress = 35 %}
-            {% when 'lyrics_ready_for_review' %}{% assign inferred_progress = 50 %}
-            {% when 'lyrics_approved' %}{% assign inferred_progress = 65 %}
-            {% when 'producing_music' %}{% assign inferred_progress = 80 %}
-            {% when 'music_ready_for_review' %}{% assign inferred_progress = 90 %}
-            {% when 'final_delivery' %}{% assign inferred_progress = 100 %}
-            {% else %}{% assign inferred_progress = 10 %}
-          {% endcase %}
-          {% if progress_percent == blank %}
-            {% assign progress_percent = inferred_progress %}
-          {% endif %}
-
-          {% assign status_steps = 'order_received|Order received,initial_consultation|Initial consultation,writing_lyrics|Working on lyrics,lyrics_ready_for_review|Lyrics ready for review,lyrics_approved|Lyrics approved,producing_music|Working on music,music_ready_for_review|Music ready for review,final_delivery|Final delivery' | split: ',' %}
-          {% assign current_step_index = 1 %}
-          {% assign status_label = 'Order received' %}
-          {% for step_pair in status_steps %}
-            {% assign parts = step_pair | split: '|' %}
-            {% assign step_handle = parts | first %}
-            {% assign step_label = parts | last %}
-            {% if step_handle == raw_status %}
-              {% assign current_step_index = forloop.index %}
-              {% assign status_label = step_label %}
-            {% endif %}
-          {% endfor %}
-
-          {% assign portal_data_missing = true %}
-          {% if portal_metafields != blank or status_metafield != blank or progress_metafield != blank or status_message_metafield != blank or preview_audio_metafield != blank or final_audio_metafield != blank or final_approved_metafield != blank or final_approved_metafield == false %}
-            {% assign portal_data_missing = false %}
-          {% endif %}
-
-          <article
-            class="song-portal__card"
-            data-song-portal-card
-            data-order-id="{{ order.id }}"
-            data-portal-status="{{ raw_status }}"
-            data-portal-progress="{{ progress_percent }}"
-            data-portal-status-message="{{ status_message | escape }}"
-            data-portal-preview-audio="{{ preview_audio_url }}"
-            data-portal-final-audio="{{ final_audio_url }}"
-            data-portal-final-approved="{{ final_approved }}"
-            data-portal-title="{{ matched_line_item.title | default: 'Bespoke song' | escape }}"
-            data-portal-missing="{{ portal_data_missing }}"
-          >
-            <header class="song-portal__card-header">
-              <div>
-                <p class="song-portal__eyebrow">Order {{ order.name }}</p>
-                <h2 class="song-portal__card-title">{{ matched_line_item.title | default: 'Bespoke song' }}</h2>
-                <p class="song-portal__date">{{ order.created_at | date: format: 'date' }}</p>
-              </div>
-              {% if matched_line_item.properties != blank %}
-                <dl class="song-portal__properties">
-                  {% for property in matched_line_item.properties %}
-                    {% unless property.first contains '_' or property.last == blank %}
-                      <div class="song-portal__property">
-                        <dt>{{ property.first }}</dt>
-                        <dd>{{ property.last }}</dd>
-                      </div>
-                    {% endunless %}
-                  {% endfor %}
-                </dl>
-              {% endif %}
-            </header>
-
-            <div class="song-portal__alert{% unless portal_data_missing %} is-hidden{% endunless %}" data-song-portal-alert role="status">No portal data found—check your order metafields.</div>
-
-            <section class="song-portal__status">
-              <h3 class="song-portal__section-heading">Status tracker</h3>
-                <ol class="song-portal__stepper">
-                  {% for step_pair in status_steps %}
-                    {% assign parts = step_pair | split: '|' %}
-                    {% assign step_handle = parts | first %}
-                    {% assign step_label = parts | last %}
-                  {% assign step_classes = 'song-portal__step' %}
-                  {% if forloop.index < current_step_index %}
-                    {% assign step_classes = step_classes | append: ' is-complete' %}
-                  {% elsif forloop.index == current_step_index %}
-                    {% assign step_classes = step_classes | append: ' is-current' %}
-                  {% endif %}
-                  <li class="{{ step_classes | strip }}">
-                    <span class="song-portal__step-dot" aria-hidden="true">
-                      <svg class="song-portal__check-icon" viewBox="0 0 16 12" role="presentation">
-                        <path d="M1.5 6.5 6 11l8.5-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </span>
-                    <span class="song-portal__step-label">{{ step_label }}</span>
-                  </li>
-                {% endfor %}
-              </ol>
-              <div class="song-portal__status-summary">
-                <p><strong>Current status:</strong> <span data-song-portal-status-label>{{ status_label }}</span></p>
-                <div class="song-portal__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progress_percent }}" data-song-portal-progress>
-                  <span class="song-portal__progress-fill" style="width: {{ progress_percent }}%"></span>
-                </div>
-                <div class="song-portal__update-card bm-update-card{% if status_message == blank %} is-hidden{% endif %}" data-song-portal-status-message>
-                  <div class="bm-update-label-row">
-                    <span class="bm-update-label">Update from Jeff</span>
-                    <span class="bm-update-subcopy">A personal note on your song’s progress.</span>
-                  </div>
-                  <div class="bm-update-body">
-                    <p class="song-portal__update-text"><span data-song-portal-status-message-text>{{ status_message }}</span></p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section class="song-portal__audio bm-audio-section">
-              <h3 class="song-portal__section-heading">Your song</h3>
-              <div class="song-portal__audio-card bm-audio-card">
-                <div class="song-portal__audio-player{% if preview_audio_url == '' %} is-hidden{% endif %}" data-song-portal-preview-wrapper>
-                  <p class="song-portal__note">Preview mix – for listening only.</p>
-                  <audio controls controlsList="nodownload" preload="none" data-song-portal-preview>
-                    {% if preview_audio_url != '' %}
-                      <source src="{{ preview_audio_url }}" type="audio/mpeg">
-                    {% endif %}
-                    Your browser doesn’t support audio playback.
-                  </audio>
-                </div>
-                <p class="song-portal__note{% unless preview_audio_url == '' %} is-hidden{% endunless %}" data-song-portal-preview-empty>Your preview will appear here once it’s ready to listen.</p>
-
-                <a class="song-portal__button song-portal__button--primary{% unless final_approved and final_audio_url != '' %} is-hidden{% endunless %}" href="{{ final_audio_url }}" data-song-portal-final-download>Download final song</a>
-                <div class="bm-download-caption{% unless final_approved and final_audio_url != '' %} is-hidden{% endunless %}">Forever yours to keep.</div>
-                <p class="song-portal__note song-portal__note--small{% if final_approved and final_audio_url != '' %} is-hidden{% endif %}" data-song-portal-final-empty>Once you’ve approved the final version by email, your download link will appear here.</p>
-              </div>
-
-            </section>
-
-            <footer class="song-portal__footer">
-              <p>All communication and approvals happen over email. If you have questions or feedback, just reply to my latest message and I’ll update your portal accordingly.</p>
-            </footer>
-          </article>
+          {% render 'song-portal-card', order: order, blocks: section.blocks %}
         {% endif %}
       {% endfor %}
 
       {% if commission_count == 0 %}
-        <div class="song-portal__card song-portal__card--empty">
-          <h2 class="song-portal__card-title">No commissions yet</h2>
-          <p>Once you purchase a bespoke song, your personal portal will appear here with status updates, previews, and your final download.</p>
+        <div class="song-portal__state-card">
+          <h2 class="song-portal__state-title">No Active Commissions</h2>
+          <p class="song-portal__state-text">{{ section.settings.empty_state_text }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn-portal">Browse Songs</a>
         </div>
       {% endif %}
     {% endunless %}
-    </div>
   </div>
 </section>
 
-<script>
-  (() => {
-    const proxyPath = {{ section.settings.song_portal_proxy_path | json }};
-
-    const getSafeFilename = (card) => {
-      const rawTitle = card?.dataset.portalTitle || 'final-song';
-      const normalized = rawTitle
-        .toLowerCase()
-        .replace(/[^a-z0-9\s_-]/g, '')
-        .trim()
-        .replace(/\s+/g, '-');
-
-      return (normalized || 'final-song') + '.mp3';
-    };
-
-    const downloadFile = (url, filename) => {
-      return fetch(url)
-        .then((response) => {
-          if (!response.ok) throw new Error(`Download failed (${response.status})`);
-          return response.blob();
-        })
-        .then((blob) => {
-          const blobUrl = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = filename;
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-          URL.revokeObjectURL(blobUrl);
-        })
-        .catch(() => {
-          window.location.href = url;
-        });
-    };
-
-    const attachDownloadHandler = (button, card) => {
-      if (!button || button.dataset.songPortalDownloadBound === 'true') return;
-      button.dataset.songPortalDownloadBound = 'true';
-
-      button.addEventListener('click', (event) => {
-        const downloadUrl = button.getAttribute('href');
-        if (!downloadUrl) return;
-
-        event.preventDefault();
-        const filename = getSafeFilename(card);
-        downloadFile(downloadUrl, filename);
-      });
-    };
-
-    const initDownloadButtons = () => {
-      const cards = document.querySelectorAll('[data-song-portal-card]');
-      cards.forEach((card) => {
-        const button = card.querySelector('[data-song-portal-final-download]');
-        if (button) {
-          attachDownloadHandler(button, card);
-        }
-      });
-    };
-
-    const statusLabels = {
-      order_received: 'Order received',
-      initial_consultation: 'Initial consultation',
-      writing_lyrics: 'Working on lyrics',
-      lyrics_ready_for_review: 'Lyrics ready for review',
-      lyrics_approved: 'Lyrics approved',
-      producing_music: 'Working on music',
-      music_ready_for_review: 'Music ready for review',
-      final_delivery: 'Final delivery'
-    };
-
-    const normalizeStatus = (value) => {
-      if (!value && value !== 0) return 'order_received';
-      const normalized = String(value)
-        .toLowerCase()
-        .trim()
-        .replace(/[\s-]+/g, '_');
-
-      if (statusLabels[normalized]) return normalized;
-      return 'order_received';
-    };
-
-    const inferProgress = (status) => {
-      switch (status) {
-        case 'order_received':
-          return 10;
-        case 'initial_consultation':
-          return 20;
-        case 'writing_lyrics':
-          return 35;
-        case 'lyrics_ready_for_review':
-          return 50;
-        case 'lyrics_approved':
-          return 65;
-        case 'producing_music':
-          return 80;
-        case 'music_ready_for_review':
-          return 90;
-        case 'final_delivery':
-          return 100;
-        default:
-          return 10;
-      }
-    };
-
-    const normalizeProgress = (value, status) => {
-      if (value === null || value === undefined || value === '') return inferProgress(status);
-      const numeric = Number(value);
-      if (Number.isFinite(numeric)) return Math.min(Math.max(numeric, 0), 100);
-      return inferProgress(status);
-    };
-
-    const parseBoolean = (value) => {
-      if (typeof value === 'boolean') return value;
-      if (typeof value === 'string') return value.toLowerCase() === 'true' || value === '1';
-      if (typeof value === 'number') return value === 1;
-      return false;
-    };
-
-    const updateCard = (card, data) => {
-      const alert = card.querySelector('[data-song-portal-alert]');
-      if (alert) {
-        alert.classList.add('is-hidden');
-      }
-
-      const rawStatus = normalizeStatus(data.status || card.dataset.portalStatus);
-      const statusLabel = statusLabels[rawStatus] || statusLabels.order_received;
-      const statusLabelEl = card.querySelector('[data-song-portal-status-label]');
-      if (statusLabelEl) {
-        statusLabelEl.textContent = statusLabel;
-      }
-
-      const progressValue = normalizeProgress(data.progress_percent, rawStatus);
-      const progressContainer = card.querySelector('[data-song-portal-progress]');
-      if (progressContainer) {
-        progressContainer.setAttribute('aria-valuenow', progressValue);
-        const fill = progressContainer.querySelector('.song-portal__progress-fill');
-        if (fill) {
-          fill.style.width = `${progressValue}%`;
-        }
-      }
-
-      const message = data.status_message || '';
-      const messageWrapper = card.querySelector('[data-song-portal-status-message]');
-      const messageText = card.querySelector('[data-song-portal-status-message-text]');
-      if (messageWrapper && messageText) {
-        if (message === '') {
-          messageWrapper.classList.add('is-hidden');
-        } else {
-          messageWrapper.classList.remove('is-hidden');
-          messageText.textContent = message;
-        }
-      }
-
-      const previewUrl = data.preview_audio || '';
-      const previewWrapper = card.querySelector('[data-song-portal-preview-wrapper]');
-      const previewEmpty = card.querySelector('[data-song-portal-preview-empty]');
-      const previewAudio = card.querySelector('[data-song-portal-preview]');
-      if (previewWrapper && previewEmpty && previewAudio) {
-        if (previewUrl === '') {
-          previewWrapper.classList.add('is-hidden');
-          previewEmpty.classList.remove('is-hidden');
-        } else {
-          previewWrapper.classList.remove('is-hidden');
-          previewEmpty.classList.add('is-hidden');
-          const source = previewAudio.querySelector('source');
-          if (source) {
-            source.src = previewUrl;
-            previewAudio.load();
-          } else {
-            previewAudio.src = previewUrl;
-          }
-        }
-      }
-
-      const finalAudio = data.final_audio || '';
-      const finalApproved = parseBoolean(data.final_approved);
-      const downloadButton = card.querySelector('[data-song-portal-final-download]');
-      const finalEmpty = card.querySelector('[data-song-portal-final-empty]');
-      if (downloadButton && finalEmpty) {
-        if (finalApproved && finalAudio !== '') {
-          downloadButton.classList.remove('is-hidden');
-          downloadButton.href = finalAudio;
-          attachDownloadHandler(downloadButton, card);
-          finalEmpty.classList.add('is-hidden');
-        } else {
-          downloadButton.classList.add('is-hidden');
-          finalEmpty.classList.remove('is-hidden');
-        }
-      }
-
-      card.dataset.portalMissing = 'false';
-    };
-
-    const hydrateFromProxy = () => {
-      if (!proxyPath) return;
-
-      const cards = document.querySelectorAll('[data-song-portal-card]');
-      cards.forEach((card) => {
-        if (card.dataset.portalMissing !== 'true') return;
-        const orderId = card.dataset.orderId;
-        if (!orderId) return;
-
-        fetch(`${proxyPath}?order_id=${encodeURIComponent(orderId)}`)
-          .then((response) => {
-            if (!response.ok) throw new Error(`Proxy request failed (${response.status})`);
-            return response.json();
-          })
-          .then((payload) => {
-            if (payload && payload.data) {
-              updateCard(card, payload.data);
-            } else if (payload) {
-              updateCard(card, payload);
-            }
-          })
-          .catch(() => {});
-      });
-    };
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initDownloadButtons();
-      hydrateFromProxy();
-    });
-  })();
-</script>
-
-<style>
-  .is-hidden {
-    display: none !important;
-  }
-  /* Song Portal: base layout */
-  .bm-song-portal .song-portal {
-    padding: 3.5rem 1.25rem 4.5rem;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f6f3 100%);
-  }
-  .bm-song-portal .song-portal__inner {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  .bm-song-portal .bm-portal-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .bm-song-portal .bm-portal-header h1 {
-    font-size: 2.75rem;
-    letter-spacing: 0.02em;
-    font-weight: 700;
-    margin: 0 0 0.35rem;
-    color: #2d231f;
-  }
-  .bm-song-portal .bm-portal-tagline {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 0.95rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .bm-song-portal .song-portal__intro {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: rgba(0, 0, 0, 0.7);
-    max-width: 740px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .bm-song-portal .song-portal__chat-cta {
-    max-width: 720px;
-    margin: -0.5rem auto 2.5rem;
-    text-align: center;
-    font-size: 0.95rem;
-    color: rgba(0, 0, 0, 0.75);
-    background: #fff9f0;
-    border: 1px solid rgba(201, 168, 106, 0.35);
-    border-radius: 9999px;
-    padding: 1rem 1.75rem;
-    font-weight: 600;
-  }
-  /* Song Portal: card */
-  .bm-song-portal .song-portal__card {
-    background: #fff;
-    border-radius: 18px;
-    padding: 2.25rem;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.07);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    border-top: 3px solid #c9a86a;
-    margin-bottom: 2rem;
-  }
-  .bm-song-portal .song-portal__card--locked,
-  .bm-song-portal .song-portal__card--empty {
-    text-align: center;
-  }
-  .bm-song-portal .song-portal__card-header {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .bm-song-portal .song-portal__eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.5);
-    margin-bottom: 0.25rem;
-  }
-  .bm-song-portal .song-portal__card-title {
-    margin: 0;
-    font-size: 1.75rem;
-  }
-  .bm-song-portal .song-portal__date {
-    margin: 0.25rem 0 0;
-    color: rgba(0, 0, 0, 0.6);
-  }
-  .bm-song-portal .song-portal__properties {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.5rem 1rem;
-    margin: 0;
-  }
-  .bm-song-portal .song-portal__property {
-    display: flex;
-    flex-direction: column;
-  }
-  .bm-song-portal .song-portal__property dt {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: rgba(0, 0, 0, 0.5);
-  }
-  .bm-song-portal .song-portal__property dd {
-    margin: 0;
-    font-weight: 600;
-  }
-  /* Song Portal: status tracker */
-  .bm-song-portal .song-portal__status {
-    margin-bottom: 2.25rem;
-  }
-  .bm-song-portal .song-portal__section-heading {
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-    color: rgba(0, 0, 0, 0.6);
-  }
-  .bm-song-portal .song-portal__stepper {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem 1.25rem;
-    justify-content: space-between;
-  }
-  .bm-song-portal .song-portal__step {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    color: rgba(0, 0, 0, 0.55);
-    font-weight: 600;
-    flex: 1 1 180px;
-    min-width: 0;
-  }
-  .bm-song-portal .song-portal__step-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid rgba(0, 0, 0, 0.14);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    position: relative;
-  }
-  .bm-song-portal .song-portal__check-icon {
-    width: 12px;
-    height: 12px;
-    opacity: 0;
-    color: #fff;
-  }
-  .bm-song-portal .song-portal__step.is-current {
-    color: #4b0e3f;
-  }
-  .bm-song-portal .song-portal__step.is-current .song-portal__step-dot {
-    border-color: #c9a86a;
-    box-shadow: 0 0 0 7px rgba(201, 168, 106, 0.18);
-  }
-  .bm-song-portal .song-portal__step.is-current .song-portal__step-dot::after {
-    content: '';
-    width: 7px;
-    height: 7px;
-    background: #c9a86a;
-    border-radius: 50%;
-  }
-  .bm-song-portal .song-portal__step.is-complete {
-    color: #2d231f;
-  }
-  .bm-song-portal .song-portal__step.is-complete .song-portal__step-dot {
-    background: #c9a86a;
-    border-color: #c9a86a;
-    color: #fff;
-    box-shadow: 0 10px 20px rgba(201, 168, 106, 0.4);
-  }
-  .bm-song-portal .song-portal__step.is-complete .song-portal__check-icon {
-    opacity: 1;
-  }
-  .bm-song-portal .song-portal__step:not(.is-current):not(.is-complete) {
-    color: rgba(0, 0, 0, 0.5);
-  }
-  .bm-song-portal .song-portal__step:not(.is-current):not(.is-complete) .song-portal__step-dot {
-    border-color: rgba(0, 0, 0, 0.12);
-  }
-  .bm-song-portal .song-portal__status-summary strong {
-    font-weight: 700;
-  }
-  .bm-song-portal .song-portal__progress {
-    position: relative;
-    width: 100%;
-    height: 8px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.06);
-    margin: 0.85rem 0 1.05rem;
-    overflow: hidden;
-    border: 1px solid rgba(75, 14, 63, 0.08);
-  }
-  .bm-song-portal .song-portal__progress-fill {
-    display: block;
-    height: 100%;
-    border-radius: 999px;
-    background: #c9a86a;
-  }
-  /* Song Portal: update note */
-  .bm-song-portal .bm-update-card {
-    background: #fffcf8;
-    border-left: 4px solid #c9a86a;
-    border-radius: 12px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-  }
-  .bm-song-portal .bm-update-label-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 1rem;
-    align-items: baseline;
-  }
-  .bm-song-portal .bm-update-label {
-    margin: 0;
-    font-weight: 700;
-    color: #4b0e3f;
-    font-size: 0.98rem;
-  }
-  .bm-song-portal .bm-update-subcopy {
-    color: rgba(0, 0, 0, 0.55);
-    font-size: 0.9rem;
-  }
-  .bm-song-portal .bm-update-body {
-    margin-top: 0.4rem;
-  }
-  .bm-song-portal .song-portal__update-text {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.78);
-  }
-  /* Song Portal: audio */
-  .bm-song-portal .song-portal__audio {
-    margin-bottom: 2.5rem;
-  }
-  .bm-song-portal .bm-audio-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .bm-song-portal .song-portal__audio-card {
-    background: #fbfafd;
-    border: 1px solid rgba(75, 14, 63, 0.08);
-    border-radius: 18px;
-    padding: 1.75rem;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
-  }
-  .bm-song-portal .song-portal__audio-player audio {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-  .bm-song-portal .song-portal__note {
-    color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 0.5rem;
-  }
-  .bm-song-portal .song-portal__note--small {
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
-  /* Song Portal: buttons */
-  .bm-song-portal .song-portal__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    border-radius: 9999px;
-    background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.35);
-    color: inherit;
-    text-decoration: none;
-    font-weight: 700;
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .bm-song-portal .song-portal__button:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-  .bm-song-portal .song-portal__button--primary {
-    background: #4b0e3f;
-    color: #fff;
-    border-color: #c9a86a;
-    margin-top: 1rem;
-    box-shadow: 0 10px 22px rgba(201, 168, 106, 0.26);
-  }
-  .bm-song-portal .song-portal__button--primary:hover {
-    background: #5b134d;
-    box-shadow: 0 14px 30px rgba(201, 168, 106, 0.4), 0 0 0 4px rgba(201, 168, 106, 0.2);
-    border-color: #c9a86a;
-  }
-  .bm-song-portal .bm-download-caption {
-    color: rgba(0, 0, 0, 0.55);
-    font-size: 0.9rem;
-    margin-top: 0.35rem;
-  }
-  .bm-song-portal .song-portal__footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    padding-top: 1.5rem;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 0.95rem;
-  }
-  .bm-song-portal .song-portal__alert {
-    background: rgba(192, 6, 102, 0.08);
-    border: 1px solid rgba(192, 6, 102, 0.25);
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    color: rgba(0, 0, 0, 0.8);
-    font-weight: 600;
-  }
-  @media (min-width: 768px) {
-    .bm-song-portal .song-portal__card-header {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-  }
-  @media (max-width: 599px) {
-    .bm-song-portal .song-portal__stepper {
-      justify-content: center;
-      gap: 0.75rem;
-    }
-    .bm-song-portal .song-portal__audio-card,
-    .bm-song-portal .song-portal__card,
-    .bm-song-portal .song-portal__button--primary {
-      width: 100%;
-    }
-  }
-</style>
-
 {% schema %}
 {
-  "name": "Song portal",
-  "tag": "section",
-  "class": "song-portal",
+  "name": "Song Portal",
   "settings": [
     {
       "type": "text",
-      "id": "song_portal_proxy_path",
-      "label": "Song portal data endpoint",
-      "info": "Optional app proxy or endpoint that returns JSON metafields for an order (status, progress_percent, status_message, preview_audio, final_audio, final_approved). Leave blank to rely on storefront-visible order metafields."
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Song Portal"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Where your story becomes song."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro Text",
+      "default": "Welcome to your bespoke song hub. Track your song’s progress, read updates from me, and preview your track before final delivery."
+    },
+    {
+      "type": "textarea",
+      "id": "empty_state_text",
+      "label": "Empty State Text",
+      "default": "Once you purchase a bespoke song, your personal portal will appear here with status updates, previews, and your final download."
     }
   ],
-  "blocks": [],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Status Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Order Received"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Status Handle (Metafield Value)",
+          "default": "order_received",
+          "info": "Must match the value in custom.song_portal_status"
+        },
+        {
+          "type": "range",
+          "id": "progress",
+          "label": "Progress Percentage",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 10
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Song portal"
+      "name": "Song Portal",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Order Received",
+            "handle": "order_received",
+            "progress": 10
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Initial Consultation",
+            "handle": "initial_consultation",
+            "progress": 20
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Working on Lyrics",
+            "handle": "writing_lyrics",
+            "progress": 35
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Lyrics Ready",
+            "handle": "lyrics_ready_for_review",
+            "progress": 50
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Lyrics Approved",
+            "handle": "lyrics_approved",
+            "progress": 65
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Working on Music",
+            "handle": "producing_music",
+            "progress": 80
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Music Ready",
+            "handle": "music_ready_for_review",
+            "progress": 90
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Final Delivery",
+            "handle": "final_delivery",
+            "progress": 100
+          }
+        }
+      ]
     }
   ]
 }
