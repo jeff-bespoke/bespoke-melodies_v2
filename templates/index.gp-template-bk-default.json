@@ -1,1 +1,526 @@
-{"order":["hero_p9CmMG","1762625603c61808d6","custom_liquid_GmLBph","custom_liquid_d6QcYW","custom_liquid_cnkfKJ","custom_liquid_ciqcYn","custom_liquid_bmtpKP","custom_liquid_YmwRNH","custom_liquid_aXfTPT","product_list_themegen"],"sections":{"1762625603c61808d6":{"block_order":["button_tTyhkd"],"blocks":{"button_tTyhkd":{"blocks":{},"name":"t:names.button","settings":{"custom_width":100,"custom_width_mobile":100,"label":"Create Your Melody","link":"https://tally.so/r/OD1kzg","open_in_new_tab":false,"style_class":"button","width":"fit-content","width_mobile":"fit-content"},"type":"button"}},"settings":{"align_baseline":false,"background_image_position":"cover","background_media":"none","border":"none","border_opacity":100,"border_radius":0,"border_width":1,"color_scheme":"","content_direction":"column","gap":12,"gradient_direction":"to top","horizontal_alignment":"flex-start","horizontal_alignment_flex_direction_column":"center","overlay_color":"#00000026","overlay_style":"solid","padding-block-end":0,"padding-block-start":0,"section_height":"","section_height_custom":50,"section_width":"page-width","toggle_overlay":false,"vertical_alignment":"center","vertical_alignment_flex_direction_column":"center","vertical_on_mobile":true,"video_position":"cover"},"type":"_blocks"},"custom_liquid_GmLBph":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"\u003cstyle\u003e\n  /* ===== Bespoke: Process Section (luxury gradient + subtle texture + motion) ===== */\n  .bmx-process {\n    --ink:#1a1714; --muted:#5f5b56; --paper:#ffffff; --accent:#2c1a37;\n    background: linear-gradient(180deg, #f9f8f6 0%, #f3f0ec 40%, #f8f6f4 100%);\n    position: relative;\n    overflow: hidden;\n    padding: 100px 0;\n  }\n\n  /* light, transparent music-note background texture */\n  .bmx-process::before {\n    content: \"♪ ♫ ♩ ♬\";\n    position: absolute;\n    top: -40%;\n    left: -10%;\n    font-size: 300px;\n    font-family: serif;\n    color: rgba(44, 26, 55, 0.03);\n    transform: rotate(-15deg);\n    letter-spacing: 40px;\n    white-space: nowrap;\n    user-select: none;\n  }\n  .bmx-process::after {\n    content: \"♩ ♫ ♬ ♪\";\n    position: absolute;\n    bottom: -35%;\n    right: -5%;\n    font-size: 280px;\n    font-family: serif;\n    color: rgba(44, 26, 55, 0.025);\n    transform: rotate(12deg);\n    letter-spacing: 35px;\n    user-select: none;\n  }\n\n  .bmx-process .wrap {\n    position: relative;\n    z-index: 2;\n    max-width: 1100px;\n    margin: 0 auto;\n    padding: 0 24px;\n    text-align: center;\n  }\n\n  .bmx-process h2 {\n    font-family:\"Playfair Display\", Georgia, \"Times New Roman\", serif;\n    font-size: 34px;\n    color:var(--ink);\n    margin-bottom:16px;\n  }\n\n  .bmx-process p.sub {\n    max-width:760px;\n    margin:0 auto 56px;\n    color:var(--muted);\n    font-size:18px;\n    line-height:1.75;\n  }\n\n  .bmx-process .steps {\n    display:grid;\n    grid-template-columns:repeat(3,1fr);\n    gap:30px;\n    text-align:left;\n  }\n\n  .bmx-process .step {\n    background:var(--paper);\n    border-radius:18px;\n    padding:44px 32px;\n    box-shadow:0 10px 25px rgba(0,0,0,0.05);\n    opacity:0;\n    transform:translateY(30px);\n    transition:opacity .9s ease,transform .9s ease,box-shadow .3s ease,background .3s ease;\n  }\n  .bmx-process .step.visible {\n    opacity:1;\n    transform:translateY(0);\n  }\n  .bmx-process .step:hover {\n    box-shadow:0 18px 38px rgba(0,0,0,0.08);\n    background:linear-gradient(180deg,#ffffff 0%,#fdfbf8 100%);\n  }\n\n  /* Subtle spotlight on middle card */\n  .bmx-process .step:nth-child(2) {\n    background:linear-gradient(180deg,#f5f2ee 0%,#ffffff 80%);\n    border:1px solid #ece6e0;\n  }\n\n  .bmx-process .num {\n    font-family:\"Playfair Display\", Georgia, serif;\n    font-size:38px;\n    font-weight:500;\n    color:var(--accent);\n    margin-bottom:16px;\n  }\n\n  .bmx-process .title {\n    font-family:\"Playfair Display\", Georgia, serif;\n    font-weight:600;\n    color:var(--ink);\n    font-size:20px;\n    margin-bottom:12px;\n  }\n\n  .bmx-process .text {\n    color:var(--muted);\n    line-height:1.7;\n    font-size:16px;\n  }\n\n  @media(max-width:900px){\n    .bmx-process .steps{grid-template-columns:1fr}\n    .bmx-process .step{text-align:center}\n  }\n\u003c/style\u003e\n\n\u003csection class=\"bmx-process\" aria-labelledby=\"bm-proc-title\"\u003e\n  \u003cdiv class=\"wrap\"\u003e\n    \u003ch2 id=\"bm-proc-title\"\u003eHow Your Song Comes to Life\u003c/h2\u003e\n    \u003cp class=\"sub\"\u003e\n      Every song starts with a real story — yours. My goal is to understand what you feel and turn it into music that feels honest, beautiful, and lasting.\n    \u003c/p\u003e\n\n    \u003cdiv class=\"steps\" role=\"list\"\u003e\n      \u003carticle class=\"step\" role=\"listitem\"\u003e\n        \u003cdiv class=\"num\"\u003e1\u003c/div\u003e\n        \u003cdiv class=\"title\"\u003eThe Consultation\u003c/div\u003e\n        \u003cdiv class=\"text\"\u003e\n          We begin with a short written consultation where you share who the song is for, the moments that matter, and the feeling you want captured.\n          You don’t need perfect words — just what’s true. I’ll shape it with care.\n        \u003c/div\u003e\n      \u003c/article\u003e\n\n      \u003carticle class=\"step\" role=\"listitem\"\u003e\n        \u003cdiv class=\"num\"\u003e2\u003c/div\u003e\n        \u003cdiv class=\"title\"\u003eWriting \u0026 Collaboration\u003c/div\u003e\n        \u003cdiv class=\"text\"\u003e\n          I craft lyrics and melody that bring your story to life, aiming to capture its heart — not just its details.\n          You’ll review and approve the lyrics before I move into production, so every line feels right to you.\n        \u003c/div\u003e\n      \u003c/article\u003e\n\n      \u003carticle class=\"step\" role=\"listitem\"\u003e\n        \u003cdiv class=\"num\"\u003e3\u003c/div\u003e\n        \u003cdiv class=\"title\"\u003eProduction \u0026 Final Approval\u003c/div\u003e\n        \u003cdiv class=\"text\"\u003e\n          Once the words are set, I produce the song using studio-quality AI tools and refine every note.\n          You’ll have final approval before delivery — your song, exactly as it should be.\n        \u003c/div\u003e\n      \u003c/article\u003e\n    \u003c/div\u003e\n  \u003c/div\u003e\n\u003c/section\u003e\n\n\u003cscript\u003e\n  (function(){\n    var steps = document.querySelectorAll('.bmx-process .step');\n    if(!steps.length) return;\n    if(!('IntersectionObserver' in window)){\n      steps.forEach(s=\u003es.classList.add('visible'));\n      return;\n    }\n    var obs = new IntersectionObserver(entries=\u003e{\n      entries.forEach(e=\u003e{\n        if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}\n      });\n    },{threshold:0.2});\n    steps.forEach(s=\u003eobs.observe(s));\n  })();\n\u003c/script\u003e","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"custom_liquid_YmwRNH":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"\u003cdiv class=\"song-scroll-wrapper\"\u003e\n  \u003cdiv class=\"song-scroll-inner\"\u003e\n\n    \u003c!-- Pop Romance --\u003e\n    \u003cdiv class=\"song-card genre-pop-romance\"\u003e\n      \u003cdiv class=\"song-genre\"\u003e\n        Pop Romance\n      \u003c/div\u003e\n\n      \u003cbutton class=\"song-play-btn\" type=\"button\" aria-label=\"Play Pop Romance\"\u003e\n        \u003cspan class=\"song-play-icon\"\u003e\u003c/span\u003e\n      \u003c/button\u003e\n\n      \u003caudio class=\"song-audio\"\u003e\n        \u003csource src=\"{{ 'Run_to_me.mp3' | file_url }}\" type=\"audio/mpeg\"\u003e\n      \u003c/audio\u003e\n    \u003c/div\u003e\n\n    \u003c!-- Adult Contemporary --\u003e\n    \u003cdiv class=\"song-card genre-adult-contemporary\"\u003e\n      \u003cdiv class=\"song-genre\"\u003e\n        Adult Contemporary\n      \u003c/div\u003e\n\n      \u003cbutton class=\"song-play-btn\" type=\"button\" aria-label=\"Play Adult Contemporary\"\u003e\n        \u003cspan class=\"song-play-icon\"\u003e\u003c/span\u003e\n      \u003c/button\u003e\n\n      \u003caudio class=\"song-audio\"\u003e\n        \u003csource src=\"{{ 'Just_for_Tonight_Our_Lullaby.mp3' | file_url }}\" type=\"audio/mpeg\"\u003e\n      \u003c/audio\u003e\n    \u003c/div\u003e\n\n    \u003c!-- Power Ballad --\u003e\n    \u003cdiv class=\"song-card genre-power-ballad\"\u003e\n      \u003cdiv class=\"song-genre\"\u003e\n        Power Ballad\n      \u003c/div\u003e\n\n      \u003cbutton class=\"song-play-btn\" type=\"button\" aria-label=\"Play Power Ballad\"\u003e\n        \u003cspan class=\"song-play-icon\"\u003e\u003c/span\u003e\n      \u003c/button\u003e\n\n      \u003caudio class=\"song-audio\"\u003e\n        \u003csource src=\"{{ 'Whisper_to_me_then.mp3' | file_url }}\" type=\"audio/mpeg\"\u003e\n      \u003c/audio\u003e\n    \u003c/div\u003e\n\n    \u003c!-- Progressive Funk --\u003e\n    \u003cdiv class=\"song-card genre-progressive-funk\"\u003e\n      \u003cdiv class=\"song-genre\"\u003e\n        Progressive Funk\n      \u003c/div\u003e\n\n      \u003cbutton class=\"song-play-btn\" type=\"button\" aria-label=\"Play Progressive Funk\"\u003e\n        \u003cspan class=\"song-play-icon\"\u003e\u003c/span\u003e\n      \u003c/button\u003e\n\n      \u003caudio class=\"song-audio\"\u003e\n        \u003csource src=\"{{ 'Eine_Kleine_Nachtmusik.mp3' | file_url }}\" type=\"audio/mpeg\"\u003e\n      \u003c/audio\u003e\n    \u003c/div\u003e\n\n    \u003c!-- Country --\u003e\n    \u003cdiv class=\"song-card genre-country\"\u003e\n      \u003cdiv class=\"song-genre\"\u003e\n        Country\n      \u003c/div\u003e\n\n      \u003cbutton class=\"song-play-btn\" type=\"button\" aria-label=\"Play Country\"\u003e\n        \u003cspan class=\"song-play-icon\"\u003e\u003c/span\u003e\n      \u003c/button\u003e\n\n      \u003caudio class=\"song-audio\"\u003e\n        \u003csource src=\"{{ 'long_long_road.mp3' | file_url }}\" type=\"audio/mpeg\"\u003e\n      \u003c/audio\u003e\n    \u003c/div\u003e\n\n    \u003c!-- Dance Pop --\u003e\n    \u003cdiv class=\"song-card genre-dance-pop\"\u003e\n      \u003cdiv class=\"song-genre\"\u003e\n        Dance Pop\n      \u003c/div\u003e\n\n      \u003cbutton class=\"song-play-btn\" type=\"button\" aria-label=\"Play Dance Pop\"\u003e\n        \u003cspan class=\"song-play-icon\"\u003e\u003c/span\u003e\n      \u003c/button\u003e\n\n      \u003caudio class=\"song-audio\"\u003e\n        \u003csource src=\"{{ 'pop_dance.mp3' | file_url }}\" type=\"audio/mpeg\"\u003e\n      \u003c/audio\u003e\n    \u003c/div\u003e\n\n  \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cstyle\u003e\n  .song-scroll-wrapper {\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    padding: 32px 0;\n  }\n\n  .song-scroll-inner {\n    display: flex;\n    gap: 16px;\n    min-width: 100%;\n  }\n\n  .song-card {\n    min-width: 230px;\n    max-width: 260px;\n    flex: 0 0 auto;\n    border-radius: 18px;\n    padding: 18px 18px 24px 18px;\n    color: #000;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: space-between;\n  }\n\n  .song-genre {\n    font-size: 0.8rem;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    font-weight: 600;\n    margin-bottom: 16px;\n    opacity: 0.85;\n  }\n\n  /* Black play button */\n  .song-play-btn {\n    width: 56px;\n    height: 56px;\n    border-radius: 999px;\n    border: none;\n    background: #000;\n    color: #fff;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: transform 0.15s ease, opacity 0.15s ease;\n  }\n\n  .song-play-btn:hover {\n    transform: translateY(-1px);\n    opacity: 0.9;\n  }\n\n  .song-play-btn:focus-visible {\n    outline: 2px solid #000;\n    outline-offset: 3px;\n  }\n\n  /* Play icon (triangle) */\n  .song-play-icon {\n    display: block;\n    width: 0;\n    height: 0;\n    border-style: solid;\n    border-width: 9px 0 9px 15px;\n    border-color: transparent transparent transparent #ffffff;\n    margin-left: 3px;\n  }\n\n  /* Pause icon when playing */\n  .song-play-btn.playing .song-play-icon {\n    width: 14px;\n    height: 14px;\n    border: none;\n    position: relative;\n    margin-left: 0;\n  }\n\n  .song-play-btn.playing .song-play-icon::before,\n  .song-play-btn.playing .song-play-icon::after {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    width: 4px;\n    background: #ffffff;\n    border-radius: 1px;\n  }\n\n  .song-play-btn.playing .song-play-icon::before {\n    left: 1px;\n  }\n\n  .song-play-btn.playing .song-play-icon::after {\n    right: 1px;\n  }\n\n  /* Different background colors per genre card */\n  .genre-pop-romance {\n    background: linear-gradient(135deg, #ffe6f0, #fff5f9);\n  }\n\n  .genre-adult-contemporary {\n    background: linear-gradient(135deg, #f2f5ff, #eef2ff);\n  }\n\n  .genre-power-ballad {\n    background: linear-gradient(135deg, #fdf0e3, #ffe9cc);\n  }\n\n  .genre-progressive-funk {\n    background: linear-gradient(135deg, #e9fff6, #d6f5ea);\n  }\n\n  .genre-country {\n    background: linear-gradient(135deg, #fff7e6, #ffefd2);\n  }\n\n  .genre-dance-pop {\n    background: linear-gradient(135deg, #f4e9ff, #efe1ff);\n  }\n\n  .song-audio {\n    display: none; /* hide native controls/timer completely */\n  }\n\u003c/style\u003e\n\n\u003cscript\u003e\n  document.addEventListener('DOMContentLoaded', function () {\n    var cards = document.querySelectorAll('.song-card');\n    var currentAudio = null;\n    var currentButton = null;\n\n    cards.forEach(function (card) {\n      var audio = card.querySelector('.song-audio');\n      var button = card.querySelector('.song-play-btn');\n\n      button.addEventListener('click', function () {\n        // Stop any other track\n        if (currentAudio \u0026\u0026 currentAudio !== audio) {\n          currentAudio.pause();\n          currentAudio.currentTime = 0;\n          if (currentButton) {\n            currentButton.classList.remove('playing');\n          }\n        }\n\n        if (audio.paused) {\n          audio.play();\n          button.classList.add('playing');\n          currentAudio = audio;\n          currentButton = button;\n        } else {\n          audio.pause();\n          audio.currentTime = 0;\n          button.classList.remove('playing');\n          currentAudio = null;\n          currentButton = null;\n        }\n      });\n\n      // If audio ends naturally, reset button state\n      audio.addEventListener('ended', function () {\n        button.classList.remove('playing');\n        if (currentAudio === audio) {\n          currentAudio = null;\n          currentButton = null;\n        }\n      });\n    });\n  });\n\u003c/script\u003e","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"custom_liquid_aXfTPT":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"\u003cdiv class=\"bm-faq-wrapper\"\u003e\n  \u003ch2 class=\"bm-faq-title\"\u003eFrequently Asked Questions\u003c/h2\u003e\n\n  {% assign faqs = \n    \"\n    What if I’m not sure how to describe what I want?||\n    You don’t need musical language or a fully formed concept — that’s what my process is for.\n    \u003cbr\u003e\u003cbr\u003e\n    A short questionnaire and a guided chat help me understand the person, story, and emotion behind the song.\n    \u003cbr\u003e\u003cbr\u003e\n    From there, I translate your answers into a clear creative direction so you never feel responsible for 'directing' the music.\n\n    ---\n    How do you make sure the first version is right?||\n    Most of the work happens before I start composing.\n    \u003cbr\u003e\u003cbr\u003e\n    The survey, our conversation, and any reference points you share give me a strong sense of tone, pacing, and emotional arc.\n    \u003cbr\u003e\u003cbr\u003e\n    I treat the first version as a finished piece — not a draft — so when you hear it, it should feel intentional, polished, and true to what you shared.\n\n    ---\n    What happens if the creative direction doesn’t feel right?||\n    If the song feels emotionally off — the vibe, energy, or tone isn’t matching your vision — we talk about what feels misaligned.\n    \u003cbr\u003e\u003cbr\u003e\n    I don’t offer endless tiny technical edits. Instead, I focus on meaningful creative alignment, shifting the mood or direction so the piece feels honest and expressive.\n    \u003cbr\u003e\u003cbr\u003e\n    The goal is clarity and emotional truth, not mechanical tweaking.\n\n    ---\n    Can I request changes?||\n    Yes — when the changes are meaningful.\n    \u003cbr\u003e\u003cbr\u003e\n    If hearing the song makes you realize the emotion or style needs to lean in a different direction, we address that thoughtfully.\n    \u003cbr\u003e\u003cbr\u003e\n    I don’t provide mix-by-mix or engineering revisions, but I absolutely welcome feedback that helps bring the artistic direction into clearer focus.\n\n    ---\n    Who owns the rights to my song?||\n    You receive broad permission to use and share your commissioned song in any normal personal or creative context — including posting online, playing it at events, or sharing it with friends and family.\n    \u003cbr\u003e\u003cbr\u003e\n    I don’t resell your commissioned piece, and anything personal you share with me always remains yours.\n    \u003cbr\u003e\u003cbr\u003e\n    I create each piece using my own writing and direction, supported by professional digital production tools. Because different platforms have evolving terms, I don’t make legal guarantees for large-scale commercial uses like national advertising, film/TV placements, or major-label releases.\n    \u003cbr\u003e\u003cbr\u003e\n    For everyday personal and online use, you’re fully covered. If you ever plan a major commercial release, I’m happy to provide documentation of my creative role so you (or your legal advisor) can confirm everything aligns with current guidelines.\n    \u003cbr\u003e\u003cbr\u003e\n    I reserve the right to use short excerpts of the work in my portfolio or marketing unless you request complete privacy.\n\n    ---\n    Will the song feel artificial because AI is involved?||\n    AI is simply the instrument used to perform and render the music — not the author.\n    \u003cbr\u003e\u003cbr\u003e\n    I write the lyrics, shape the melody, define the emotional tone, and guide how the performance should feel.\n    \u003cbr\u003e\u003cbr\u003e\n    The technology helps produce the final delivery, but the meaning, structure, and creative decisions behind the song are fully human.\n    \u003cbr\u003e\u003cbr\u003e\n    The finished piece should feel personal, expressive, and emotionally grounded — not artificial or generic.\n\n    ---\n    What is your refund policy?||\n    I want the experience to feel fair, transparent, and comfortable.\n    \u003cbr\u003e\u003cbr\u003e\n    Because each song is handcrafted and tailored to your story, the refund structure follows the natural checkpoints of the creative process:\n    \u003cbr\u003e\u003cbr\u003e\n    \u003cstrong\u003e• Before final lyric approval:\u003c/strong\u003e Full refund — no questions asked.\u003cbr\u003e\n    \u003cstrong\u003e• After lyric approval but before the first musical rendering:\u003c/strong\u003e 50% refund.\u003cbr\u003e\n    \u003cstrong\u003e• After the first musical rendering:\u003c/strong\u003e 25% refund.\u003cbr\u003e\n    \u003cstrong\u003e• After the second musical edit:\u003c/strong\u003e The work is considered complete and non-refundable.\u003cbr\u003e\u003cbr\u003e\n    These stages protect you without locking you in, and I always encourage early communication so we can address any misalignment as soon as it appears.\n    \"\n  | split: \"---\" %}\n\n  {% for faq in faqs %}\n    {% assign parts = faq | split: \"||\" %}\n    \u003cdiv class=\"bm-faq-item\"\u003e\n      \u003cbutton class=\"bm-faq-question\" onclick=\"this.classList.toggle('open')\"\u003e\n        \u003cspan class=\"bm-faq-icon\"\u003e𝄞\u003c/span\u003e\n        {{ parts[0] | strip }}\n      \u003c/button\u003e\n      \u003cdiv class=\"bm-faq-answer\"\u003e\n        \u003cp\u003e{{ parts[1] }}\u003c/p\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  {% endfor %}\n\u003c/div\u003e\n\n\u003cstyle\u003e\n  .bm-faq-wrapper {\n    max-width: 800px;\n    margin: 0 auto;\n    padding: 48px 16px;\n  }\n\n  .bm-faq-title {\n    text-align: center;\n    margin-bottom: 32px;\n    font-size: 1.8rem;\n    letter-spacing: .02em;\n  }\n\n  .bm-faq-item {\n    border-bottom: 1px solid rgba(0,0,0,0.1);\n    padding: 12px 0;\n  }\n\n  .bm-faq-question {\n    width: 100%;\n    text-align: left;\n    background: none;\n    border: none;\n    padding: 12px 0;\n    font-size: 1.1rem;\n    font-weight: 600;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    color: #111; /* Fixes mobile turning text blue */\n  }\n\n  .bm-faq-icon {\n    display: inline-block;\n    font-size: 1.2rem;\n    transition: transform 0.25s ease;\n  }\n\n  .bm-faq-question.open .bm-faq-icon {\n    transform: rotate(90deg);\n  }\n\n  .bm-faq-answer {\n    display: none;\n    padding: 0 4px 12px 36px;\n    line-height: 1.6;\n    font-size: 1rem;\n    opacity: 0.9;\n    color: #333; /* Fixes mobile blue text */\n  }\n\n  .bm-faq-question.open + .bm-faq-answer {\n    display: block;\n  }\n\u003c/style\u003e","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"custom_liquid_bmtpKP":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"custom_liquid_ciqcYn":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"custom_liquid_cnkfKJ":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"\u003cstyle\u003e\n  /* ===== Bespoke: Turnaround — single selector (luxury, minimal) ===== */\n  .bmx-speed {\n    --ink:#1a1714; --muted:#5f5b56; --paper:#ffffff; --accent:#2c1a37;\n    --ivory:#f9f8f6; --line:#e8e0d7; --gold:#d8b46a;\n    background: linear-gradient(180deg,#ffffff 0%,#faf8f6 55%,#f5f1ee 100%);\n    padding: 96px 0 86px;\n  }\n  .bmx-speed .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; text-align: center; }\n\n  .bmx-speed h2 {\n    font-family: \"Playfair Display\", Georgia, \"Times New Roman\", serif;\n    font-size: 34px; color: var(--ink); margin: 0 0 10px; letter-spacing: .2px;\n  }\n  .bmx-speed .sub { max-width: 700px; margin: 0 auto 18px; color: var(--muted); line-height: 1.75; font-size: 18px; }\n  .bmx-speed .divider { width: 180px; height: 1px; margin: 18px auto 26px;\n    background: linear-gradient(90deg,transparent,rgba(216,180,106,.55),transparent);\n  }\n\n  .bmx-speed .card {\n    background: var(--paper);\n    border: 1px solid var(--line);\n    border-radius: 18px;\n    padding: 28px 22px;\n    box-shadow: 0 12px 28px rgba(0,0,0,.05);\n  }\n\n  /* price badge */\n  .bmx-speed .price {\n    display: inline-block;\n    font-variant-numeric: tabular-nums;\n    font-weight: 700;\n    color: var(--ink);\n    font-size: 28px;\n    padding: 10px 18px;\n    border-radius: 999px;\n    border: 1px solid #eee7de;\n    background: linear-gradient(180deg,#ffffff 0%,#fdfbf8 100%);\n    box-shadow: 0 6px 16px rgba(0,0,0,.05);\n    margin-bottom: 14px;\n  }\n\n  .bmx-speed .note {\n    color: var(--muted);\n    font-size: 13px;\n    margin: 6px 0 22px;\n  }\n\n  /* pills */\n  .bmx-speed .pills {\n    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;\n    margin: 8px 0 12px;\n  }\n  .bmx-speed .pill {\n    position: relative;\n  }\n  .bmx-speed .pill input {\n    position: absolute; inset: 0; opacity: 0; pointer-events: none;\n  }\n  .bmx-speed .pill label {\n    display: inline-block; cursor: pointer; user-select: none;\n    padding: 10px 14px; border-radius: 999px;\n    border: 1px solid var(--line);\n    background: #fff;\n    color: var(--ink);\n    font-size: 15px;\n    transition: all .2s ease;\n  }\n  .bmx-speed .pill label:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.06); }\n  .bmx-speed .pill input:checked + label {\n    background: #2c1a37; color: #fff; border-color: #2c1a37;\n    box-shadow: 0 8px 22px rgba(43,23,55,.18);\n  }\n\n  .bmx-speed .hintline {\n    color: var(--muted);\n    font-size: 14px;\n    margin: 10px 0 18px;\n  }\n\n  .bmx-speed .cta { margin-top: 6px; }\n  .bmx-speed .btn {\n    display: inline-block; padding: 14px 26px; border-radius: 999px;\n    background: var(--accent); color: #fff; text-decoration: none;\n    border: 1px solid var(--accent); transition: all .2s ease;\n    box-shadow: 0 8px 22px rgba(43,23,55,.12);\n  }\n  .bmx-speed .btn:hover { background: #3a214b; border-color: #3a214b; transform: translateY(-1px); }\n  .bmx-speed .tini { color: var(--muted); font-size: 12px; margin-top: 8px; }\n\n  /* subtle entrance */\n  .bmx-speed .card { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }\n  .bmx-speed .card.visible { opacity: 1; transform: translateY(0); }\n\n  @media (prefers-reduced-motion: reduce) {\n    .bmx-speed .card { opacity: 1 !important; transform: none !important; transition: none !important; }\n  }\n\u003c/style\u003e\n\n\u003csection class=\"bmx-speed\" aria-labelledby=\"bm-speed-title\"\u003e\n  \u003cdiv class=\"wrap\"\u003e\n    \u003ch2 id=\"bm-speed-title\"\u003eChoose Your Turnaround\u003c/h2\u003e\n    \u003cp class=\"sub\"\u003eOne bespoke song. Same care and quality — you simply choose the pace.\u003c/p\u003e\n    \u003cdiv class=\"divider\" role=\"presentation\"\u003e\u003c/div\u003e\n\n    \u003cdiv class=\"card\" role=\"group\" aria-label=\"Turnaround selector\"\u003e\n      \u003cdiv class=\"price\" id=\"bm-price\" aria-live=\"polite\"\u003e$299\u003c/div\u003e\n      \u003cdiv class=\"note\"\u003ePrice updates as you choose a timeline.\u003c/div\u003e\n\n      \u003cdiv class=\"pills\" id=\"bm-pills\"\u003e\n        \u003c!-- Radios keep it accessible; labels are the pills --\u003e\n        \u003cdiv class=\"pill\"\u003e\n          \u003cinput type=\"radio\" name=\"speed\" id=\"bm-2w\" value=\"2 Weeks\" data-price=\"299\" checked\u003e\n          \u003clabel for=\"bm-2w\"\u003e2 Weeks\u003c/label\u003e\n        \u003c/div\u003e\n        \u003cdiv class=\"pill\"\u003e\n          \u003cinput type=\"radio\" name=\"speed\" id=\"bm-1w\" value=\"1 Week\" data-price=\"399\"\u003e\n          \u003clabel for=\"bm-1w\"\u003e1 Week\u003c/label\u003e\n        \u003c/div\u003e\n        \u003cdiv class=\"pill\"\u003e\n          \u003cinput type=\"radio\" name=\"speed\" id=\"bm-48h\" value=\"48 Hours\" data-price=\"750\"\u003e\n          \u003clabel for=\"bm-48h\"\u003e48 Hours\u003c/label\u003e\n        \u003c/div\u003e\n        \u003cdiv class=\"pill\"\u003e\n          \u003cinput type=\"radio\" name=\"speed\" id=\"bm-24h\" value=\"24 Hours\" data-price=\"1200\"\u003e\n          \u003clabel for=\"bm-24h\"\u003e24 Hours\u003c/label\u003e\n        \u003c/div\u003e\n        \u003cdiv class=\"pill\"\u003e\n          \u003cinput type=\"radio\" name=\"speed\" id=\"bm-6h\" value=\"6 Hours\" data-price=\"2500\"\u003e\n          \u003clabel for=\"bm-6h\"\u003e6 Hours\u003c/label\u003e\n        \u003c/div\u003e\n      \u003c/div\u003e\n\n      \u003cdiv class=\"hintline\" id=\"bm-hint\"\u003eSame composition and production — only the timeline changes.\u003c/div\u003e\n\n      \u003cdiv class=\"cta\"\u003e\n        \u003ca id=\"bm-begin\" class=\"btn\" href=\"https://tally.so/r/OD1kzg\"\u003eBegin your song\u003c/a\u003e\n        \u003cdiv class=\"tini\"\u003eYour selection is passed to the form.\u003c/div\u003e\n      \u003c/div\u003e\n    \u003c/div\u003e\n  \u003c/div\u003e\n\u003c/section\u003e\n\n\u003cscript\u003e\n  (function(){\n    // reveal animation\n    var card = document.querySelector('.bmx-speed .card');\n    if (card){\n      if (!('IntersectionObserver' in window)) { card.classList.add('visible'); }\n      else {\n        var obs = new IntersectionObserver(function(entries){\n          entries.forEach(function(e){\n            if(e.isIntersecting){ card.classList.add('visible'); obs.unobserve(card); }\n          });\n        }, {threshold:0.2});\n        obs.observe(card);\n      }\n    }\n\n    // price + CTA link updates\n    var priceEl = document.getElementById('bm-price');\n    var beginEl = document.getElementById('bm-begin');\n    var pills = document.querySelectorAll('#bm-pills input[type=\"radio\"]');\n    var baseUrl = 'https://tally.so/r/OD1kzg';\n\n    function update(){\n      var chosen = document.querySelector('#bm-pills input[type=\"radio\"]:checked');\n      if (!chosen) return;\n      var p = chosen.getAttribute('data-price');\n      var label = chosen.value || '';\n      priceEl.textContent = '$' + Number(p).toLocaleString();\n      // Pass selection to Tally as a query param so it can prefill\n      var url = baseUrl + '?turnaround=' + encodeURIComponent(label) + '\u0026price=' + encodeURIComponent('$' + p);\n      beginEl.setAttribute('href', url);\n    }\n    pills.forEach(function(r){ r.addEventListener('change', update); });\n    update();\n  })();\n\u003c/script\u003e","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"custom_liquid_d6QcYW":{"name":"t:names.custom_liquid","settings":{"color_scheme":"","custom_liquid":"\u003cdiv class=\"my-promise-section\" style=\"padding: 64px 16px 48px 16px; text-align: center;\"\u003e\n  \u003cdiv style=\"max-width: 800px; margin: 0 auto;\"\u003e\n    \u003ch2 style=\"margin-bottom: 8px;\"\u003e\n      My Promise to You\n    \u003c/h2\u003e\n\n    \u003cp style=\"margin-bottom: 24px; font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7;\"\u003e\n      Quality, integrity, and care in every commission\n    \u003c/p\u003e\n\n    \u003cp style=\"margin: 0 auto; max-width: 720px; line-height: 1.7; font-size: 1rem;\"\u003e\n      Every project is a commissioned piece, created with refinement, discretion, and personal care. \n      The experience is white-glove from the first message to the final delivery. Communication is clear, timely, \n      and thoughtfully handled so you always know what to expect. The entire process is designed to feel smooth, \n      guided, and private.\n      \u003cbr\u003e\u003cbr\u003e\n      If at any point early in the process the direction doesn’t feel right, \u003cstrong\u003eI will refund your payment*\u003c/strong\u003e, \n      handled simply and without hesitation.\n      \u003cbr\u003e\u003cbr\u003e\n      \u003csmall\u003e*See the Refund Policy FAQ below for full details.\u003c/small\u003e\n    \u003c/p\u003e\n  \u003c/div\u003e\n\u003c/div\u003e","padding-block-end":0,"padding-block-start":0,"section_width":"page-width"},"type":"custom-liquid"},"hero_p9CmMG":{"block_order":["group_6w9b3Y","jumbo_text_hL3t9T"],"blocks":{"group_6w9b3Y":{"block_order":["text_Eh3BEw"],"blocks":{"text_Eh3BEw":{"blocks":{},"name":"t:names.text","settings":{"alignment":"center","background":false,"background_color":"#00000026","case":"none","color":"","corner_radius":0,"font":"var(--font-heading--family)","font_size":"1.125rem","letter_spacing":"normal","line_height":"normal","max_width":"narrow","padding-block-end":0,"padding-block-start":26,"padding-inline-end":0,"padding-inline-start":0,"text":"\u003cp\u003eGive the gift of an unforgettable moment.\u003c/p\u003e\u003cp\u003e\u003c/p\u003e","type_preset":"custom","width":"100%","wrap":"pretty"},"type":"text"}},"name":"t:names.group","settings":{"align_baseline":false,"background_image_position":"cover","background_media":"none","border":"none","border_opacity":100,"border_radius":0,"border_width":1,"color_scheme":"","content_direction":"column","custom_height":100,"custom_width":100,"custom_width_mobile":100,"gap":16,"gradient_direction":"to top","height":"fit","horizontal_alignment":"flex-start","horizontal_alignment_flex_direction_column":"flex-start","inherit_color_scheme":true,"link":"","open_in_new_tab":false,"overlay_color":"#00000026","overlay_style":"solid","padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"placeholder":"","toggle_overlay":false,"vertical_alignment":"center","vertical_alignment_flex_direction_column":"center","vertical_on_mobile":true,"video_position":"cover","width":"fill","width_mobile":"fill"},"type":"group"},"jumbo_text_hL3t9T":{"blocks":{},"name":"t:names.jumbo_text","settings":{"alignment":"center","animation_repeat":false,"case":"none","font":"heading","letter_spacing":"-0.03em","line_height":"0.8","text":"Your story. Your melody.","text_effect":"none"},"type":"jumbo-text"}},"custom_css":[".banner {position: relative; min-height: 80vh; text-align: center; overflow: hidden; box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, 0.38);}",".banner__heading {color: #fff; font-size: clamp(40px, 5vw, 80px); font-weight: 700; letter-spacing: 0.02em; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25); margin: 0 0 10px;}",".banner__text {color: rgba(255, 255, 255, 0.9); max-width: 700px; margin: auto; font-size: 18px; line-height: 1.6;}",".banner .button {background: #4b1f36; border: 1px solid #4b1f36; border-radius: 999px; color: #fff;}"],"name":"t:names.hero","settings":{"align_baseline":false,"blurred_reflection":false,"color_scheme":"scheme-2","content_direction":"column","custom_mobile_media":false,"gap":0,"gradient_direction":"to bottom","horizontal_alignment":"flex-start","horizontal_alignment_flex_direction_column":"flex-start","image_1":"shopify://shop_images/heroimage1.jpg","link":"","media_type_1":"image","media_type_1_mobile":"image","media_type_2":"image","media_type_2_mobile":"image","open_in_new_tab":false,"overlay_color":"#03030378","overlay_style":"gradient","padding-block-end":26,"padding-block-start":0,"reflection_opacity":75,"section_height":"medium","section_height_custom":5,"section_width":"full-width","stack_media_on_mobile":false,"toggle_overlay":false,"vertical_alignment":"center","vertical_alignment_flex_direction_column":"space-between","vertical_on_mobile":true},"type":"hero"},"product_list_themegen":{"blocks":{"static-header":{"block_order":["product_list_text_Bd9pVh"],"blocks":{"product_list_text_Bd9pVh":{"blocks":{},"disabled":true,"name":"t:names.collection_title","settings":{"alignment":"left","background":false,"background_color":"#00000026","case":"none","color":"","corner_radius":0,"font":"var(--font-heading--family)","font_size":"","letter_spacing":"normal","line_height":"normal","max_width":"normal","padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"text":"\u003ch3\u003e{{ closest.collection.title }}\u003c/h3\u003e","type_preset":"custom","width":"fit-content","wrap":"pretty"},"type":"_product-list-text"}},"name":"t:names.header","settings":{"align_baseline":true,"background_image_position":"cover","background_media":"none","border":"none","border_opacity":100,"border_radius":0,"border_width":1,"color_scheme":"","content_direction":"row","custom_height":100,"custom_width":100,"custom_width_mobile":100,"gap":12,"height":"fit","horizontal_alignment":"space-between","horizontal_alignment_flex_direction_column":"flex-start","inherit_color_scheme":true,"padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"vertical_alignment":"flex-end","vertical_alignment_flex_direction_column":"center","vertical_on_mobile":false,"video_position":"cover","width":"fill","width_mobile":"fill"},"static":true,"type":"_product-list-content"},"static-product-card":{"block_order":["product_card_gallery_PhczVC","group_McqFAT"],"blocks":{"group_McqFAT":{"block_order":["text_MEKzFi","price_37riDf","swatches_87VJC8"],"blocks":{"price_37riDf":{"blocks":{},"name":"t:names.product_price","settings":{"alignment":"left","case":"none","color":"var(--color-foreground)","font":"var(--font-body--family)","font_size":"1rem","letter_spacing":"normal","line_height":"normal","padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"show_installments":false,"show_sale_price_first":true,"show_tax_info":false,"type_preset":"paragraph","width":"100%"},"type":"price"},"swatches_87VJC8":{"blocks":{},"name":"t:names.swatches","settings":{"hide_padding":false,"product_swatches_alignment":"flex-start","product_swatches_alignment_mobile":"flex-start","product_swatches_padding_bottom":0,"product_swatches_padding_left":0,"product_swatches_padding_right":0,"product_swatches_padding_top":4},"type":"swatches"},"text_MEKzFi":{"blocks":{},"name":"t:names.text","settings":{"alignment":"left","background":false,"background_color":"#00000026","case":"none","color":"","corner_radius":0,"font":"var(--font-body--family)","font_size":"1.5rem","letter_spacing":"normal","line_height":"normal","max_width":"normal","padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"text":"\u003ch5\u003e{{ closest.product.title }}\u003c/h5\u003e","type_preset":"custom","width":"100%","wrap":"pretty"},"type":"text"}},"name":"t:names.group","settings":{"align_baseline":false,"background_image_position":"cover","background_media":"none","border":"none","border_opacity":100,"border_radius":0,"border_width":1,"color_scheme":"","content_direction":"column","custom_height":100,"custom_width":100,"custom_width_mobile":100,"gap":4,"gradient_direction":"to top","height":"fit","horizontal_alignment":"flex-start","horizontal_alignment_flex_direction_column":"flex-start","inherit_color_scheme":true,"link":"","open_in_new_tab":false,"overlay_color":"#00000026","overlay_style":"solid","padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"toggle_overlay":false,"vertical_alignment":"center","vertical_alignment_flex_direction_column":"center","vertical_on_mobile":true,"video_position":"cover","width":"fill","width_mobile":"fill"},"type":"_product-card-group"},"product_card_gallery_PhczVC":{"blocks":{},"name":"t:names.product_card_media","settings":{"border":"none","border_opacity":100,"border_radius":0,"border_width":1,"image_ratio":"square","padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0},"type":"_product-card-gallery"}},"name":"t:names.product_card","settings":{"border":"none","border_opacity":100,"border_radius":0,"border_width":1,"color_scheme":"","inherit_color_scheme":true,"padding-block-end":0,"padding-block-start":0,"padding-inline-end":0,"padding-inline-start":0,"product_card_gap":8},"static":true,"type":"_product-card"}},"disabled":true,"name":"t:names.products_grid","settings":{"carousel_on_mobile":false,"collection":"media-and-entertainment-example-products","color_scheme":"scheme-1","columns":4,"columns_gap":24,"gap":28,"horizontal_alignment":"flex-start","icons_shape":"none","icons_style":"arrow","layout_type":"grid","max_products":8,"mobile_card_size":"60cqw","mobile_columns":"2","padding-block-end":48,"padding-block-start":48,"rows_gap":36,"section_width":"page-width"},"type":"product-list"}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_p9CmMG": {
+      "type": "hero",
+      "blocks": {
+        "group_6w9b3Y": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_Eh3BEw": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Give the gift of an unforgettable moment.</p><p></p>",
+                "width": "100%",
+                "max_width": "narrow",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 26,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_Eh3BEw"
+          ]
+        },
+        "jumbo_text_hL3t9T": {
+          "type": "jumbo-text",
+          "name": "t:names.jumbo_text",
+          "settings": {
+            "text": "Your story. Your melody.",
+            "font": "heading",
+            "alignment": "center",
+            "line_height": "0.8",
+            "letter_spacing": "-0.03em",
+            "case": "none",
+            "text_effect": "none",
+            "animation_repeat": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "group_6w9b3Y",
+        "jumbo_text_hL3t9T"
+      ],
+      "custom_css": [
+        ".banner {position: relative; min-height: 80vh; text-align: center; overflow: hidden; box-shadow: inset 0 0 0 100vmax rgba(0, 0, 0, 0.38);}",
+        ".banner__heading {color: #fff; font-size: clamp(40px, 5vw, 80px); font-weight: 700; letter-spacing: 0.02em; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25); margin: 0 0 10px;}",
+        ".banner__text {color: rgba(255, 255, 255, 0.9); max-width: 700px; margin: auto; font-size: 18px; line-height: 1.6;}",
+        ".banner .button {background: #4b1f36; border: 1px solid #4b1f36; border-radius: 999px; color: #fff;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/heroimage1.jpg",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "space-between",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "medium",
+        "section_height_custom": 5,
+        "color_scheme": "scheme-2",
+        "toggle_overlay": false,
+        "overlay_color": "#03030378",
+        "overlay_style": "gradient",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 0,
+        "padding-block-end": 26
+      }
+    },
+    "1762625603c61808d6": {
+      "type": "_blocks",
+      "blocks": {
+        "button_tTyhkd": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Create Your Melody",
+            "link": "https://tally.so/r/OD1kzg",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "button_tTyhkd"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_GmLBph": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<style>\n  /* ===== Bespoke: Process Section (luxury gradient + subtle texture + motion) ===== */\n  .bmx-process {\n    --ink:#1a1714; --muted:#5f5b56; --paper:#ffffff; --accent:#2c1a37;\n    background: linear-gradient(180deg, #f9f8f6 0%, #f3f0ec 40%, #f8f6f4 100%);\n    position: relative;\n    overflow: hidden;\n    padding: 100px 0;\n  }\n\n  /* light, transparent music-note background texture */\n  .bmx-process::before {\n    content: \"♪ ♫ ♩ ♬\";\n    position: absolute;\n    top: -40%;\n    left: -10%;\n    font-size: 300px;\n    font-family: serif;\n    color: rgba(44, 26, 55, 0.03);\n    transform: rotate(-15deg);\n    letter-spacing: 40px;\n    white-space: nowrap;\n    user-select: none;\n  }\n  .bmx-process::after {\n    content: \"♩ ♫ ♬ ♪\";\n    position: absolute;\n    bottom: -35%;\n    right: -5%;\n    font-size: 280px;\n    font-family: serif;\n    color: rgba(44, 26, 55, 0.025);\n    transform: rotate(12deg);\n    letter-spacing: 35px;\n    user-select: none;\n  }\n\n  .bmx-process .wrap {\n    position: relative;\n    z-index: 2;\n    max-width: 1100px;\n    margin: 0 auto;\n    padding: 0 24px;\n    text-align: center;\n  }\n\n  .bmx-process h2 {\n    font-family:\"Playfair Display\", Georgia, \"Times New Roman\", serif;\n    font-size: 34px;\n    color:var(--ink);\n    margin-bottom:16px;\n  }\n\n  .bmx-process p.sub {\n    max-width:760px;\n    margin:0 auto 56px;\n    color:var(--muted);\n    font-size:18px;\n    line-height:1.75;\n  }\n\n  .bmx-process .steps {\n    display:grid;\n    grid-template-columns:repeat(3,1fr);\n    gap:30px;\n    text-align:left;\n  }\n\n  .bmx-process .step {\n    background:var(--paper);\n    border-radius:18px;\n    padding:44px 32px;\n    box-shadow:0 10px 25px rgba(0,0,0,0.05);\n    opacity:0;\n    transform:translateY(30px);\n    transition:opacity .9s ease,transform .9s ease,box-shadow .3s ease,background .3s ease;\n  }\n  .bmx-process .step.visible {\n    opacity:1;\n    transform:translateY(0);\n  }\n  .bmx-process .step:hover {\n    box-shadow:0 18px 38px rgba(0,0,0,0.08);\n    background:linear-gradient(180deg,#ffffff 0%,#fdfbf8 100%);\n  }\n\n  /* Subtle spotlight on middle card */\n  .bmx-process .step:nth-child(2) {\n    background:linear-gradient(180deg,#f5f2ee 0%,#ffffff 80%);\n    border:1px solid #ece6e0;\n  }\n\n  .bmx-process .num {\n    font-family:\"Playfair Display\", Georgia, serif;\n    font-size:38px;\n    font-weight:500;\n    color:var(--accent);\n    margin-bottom:16px;\n  }\n\n  .bmx-process .title {\n    font-family:\"Playfair Display\", Georgia, serif;\n    font-weight:600;\n    color:var(--ink);\n    font-size:20px;\n    margin-bottom:12px;\n  }\n\n  .bmx-process .text {\n    color:var(--muted);\n    line-height:1.7;\n    font-size:16px;\n  }\n\n  @media(max-width:900px){\n    .bmx-process .steps{grid-template-columns:1fr}\n    .bmx-process .step{text-align:center}\n  }\n</style>\n\n<section class=\"bmx-process\" aria-labelledby=\"bm-proc-title\">\n  <div class=\"wrap\">\n    <h2 id=\"bm-proc-title\">How Your Song Comes to Life</h2>\n    <p class=\"sub\">\n      Every song starts with a real story — yours. My goal is to understand what you feel and turn it into music that feels honest, beautiful, and lasting.\n    </p>\n\n    <div class=\"steps\" role=\"list\">\n      <article class=\"step\" role=\"listitem\">\n        <div class=\"num\">1</div>\n        <div class=\"title\">The Consultation</div>\n        <div class=\"text\">\n          We begin with a short written consultation where you share who the song is for, the moments that matter, and the feeling you want captured.\n          You don’t need perfect words — just what’s true. I’ll shape it with care.\n        </div>\n      </article>\n\n      <article class=\"step\" role=\"listitem\">\n        <div class=\"num\">2</div>\n        <div class=\"title\">Writing & Collaboration</div>\n        <div class=\"text\">\n          I craft lyrics and melody that bring your story to life, aiming to capture its heart — not just its details.\n          You’ll review and approve the lyrics before I move into production, so every line feels right to you.\n        </div>\n      </article>\n\n      <article class=\"step\" role=\"listitem\">\n        <div class=\"num\">3</div>\n        <div class=\"title\">Production & Final Approval</div>\n        <div class=\"text\">\n          Once the words are set, I produce the song using studio-quality AI tools and refine every note.\n          You’ll have final approval before delivery — your song, exactly as it should be.\n        </div>\n      </article>\n    </div>\n  </div>\n</section>\n\n<script>\n  (function(){\n    var steps = document.querySelectorAll('.bmx-process .step');\n    if(!steps.length) return;\n    if(!('IntersectionObserver' in window)){\n      steps.forEach(s=>s.classList.add('visible'));\n      return;\n    }\n    var obs = new IntersectionObserver(entries=>{\n      entries.forEach(e=>{\n        if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}\n      });\n    },{threshold:0.2});\n    steps.forEach(s=>obs.observe(s));\n  })();\n</script>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_d6QcYW": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"my-promise-section\" style=\"padding: 64px 16px 48px 16px; text-align: center;\">\n  <div style=\"max-width: 800px; margin: 0 auto;\">\n    <h2 style=\"margin-bottom: 8px;\">\n      My Promise to You\n    </h2>\n\n    <p style=\"margin-bottom: 24px; font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7;\">\n      Quality, integrity, and care in every commission\n    </p>\n\n    <p style=\"margin: 0 auto; max-width: 720px; line-height: 1.7; font-size: 1rem;\">\n      Every project is a commissioned piece, created with refinement, discretion, and personal care. \n      The experience is white-glove from the first message to the final delivery. Communication is clear, timely, \n      and thoughtfully handled so you always know what to expect. The entire process is designed to feel smooth, \n      guided, and private.\n      <br><br>\n      If at any point early in the process the direction doesn’t feel right, <strong>I will refund your payment*</strong>, \n      handled simply and without hesitation.\n      <br><br>\n      <small>*See the Refund Policy FAQ below for full details.</small>\n    </p>\n  </div>\n</div>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_cnkfKJ": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<style>\n  /* ===== Bespoke: Turnaround — single selector (luxury, minimal) ===== */\n  .bmx-speed {\n    --ink:#1a1714; --muted:#5f5b56; --paper:#ffffff; --accent:#2c1a37;\n    --ivory:#f9f8f6; --line:#e8e0d7; --gold:#d8b46a;\n    background: linear-gradient(180deg,#ffffff 0%,#faf8f6 55%,#f5f1ee 100%);\n    padding: 96px 0 86px;\n  }\n  .bmx-speed .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; text-align: center; }\n\n  .bmx-speed h2 {\n    font-family: \"Playfair Display\", Georgia, \"Times New Roman\", serif;\n    font-size: 34px; color: var(--ink); margin: 0 0 10px; letter-spacing: .2px;\n  }\n  .bmx-speed .sub { max-width: 700px; margin: 0 auto 18px; color: var(--muted); line-height: 1.75; font-size: 18px; }\n  .bmx-speed .divider { width: 180px; height: 1px; margin: 18px auto 26px;\n    background: linear-gradient(90deg,transparent,rgba(216,180,106,.55),transparent);\n  }\n\n  .bmx-speed .card {\n    background: var(--paper);\n    border: 1px solid var(--line);\n    border-radius: 18px;\n    padding: 28px 22px;\n    box-shadow: 0 12px 28px rgba(0,0,0,.05);\n  }\n\n  /* price badge */\n  .bmx-speed .price {\n    display: inline-block;\n    font-variant-numeric: tabular-nums;\n    font-weight: 700;\n    color: var(--ink);\n    font-size: 28px;\n    padding: 10px 18px;\n    border-radius: 999px;\n    border: 1px solid #eee7de;\n    background: linear-gradient(180deg,#ffffff 0%,#fdfbf8 100%);\n    box-shadow: 0 6px 16px rgba(0,0,0,.05);\n    margin-bottom: 14px;\n  }\n\n  .bmx-speed .note {\n    color: var(--muted);\n    font-size: 13px;\n    margin: 6px 0 22px;\n  }\n\n  /* pills */\n  .bmx-speed .pills {\n    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;\n    margin: 8px 0 12px;\n  }\n  .bmx-speed .pill {\n    position: relative;\n  }\n  .bmx-speed .pill input {\n    position: absolute; inset: 0; opacity: 0; pointer-events: none;\n  }\n  .bmx-speed .pill label {\n    display: inline-block; cursor: pointer; user-select: none;\n    padding: 10px 14px; border-radius: 999px;\n    border: 1px solid var(--line);\n    background: #fff;\n    color: var(--ink);\n    font-size: 15px;\n    transition: all .2s ease;\n  }\n  .bmx-speed .pill label:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.06); }\n  .bmx-speed .pill input:checked + label {\n    background: #2c1a37; color: #fff; border-color: #2c1a37;\n    box-shadow: 0 8px 22px rgba(43,23,55,.18);\n  }\n\n  .bmx-speed .hintline {\n    color: var(--muted);\n    font-size: 14px;\n    margin: 10px 0 18px;\n  }\n\n  .bmx-speed .cta { margin-top: 6px; }\n  .bmx-speed .btn {\n    display: inline-block; padding: 14px 26px; border-radius: 999px;\n    background: var(--accent); color: #fff; text-decoration: none;\n    border: 1px solid var(--accent); transition: all .2s ease;\n    box-shadow: 0 8px 22px rgba(43,23,55,.12);\n  }\n  .bmx-speed .btn:hover { background: #3a214b; border-color: #3a214b; transform: translateY(-1px); }\n  .bmx-speed .tini { color: var(--muted); font-size: 12px; margin-top: 8px; }\n\n  /* subtle entrance */\n  .bmx-speed .card { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }\n  .bmx-speed .card.visible { opacity: 1; transform: translateY(0); }\n\n  @media (prefers-reduced-motion: reduce) {\n    .bmx-speed .card { opacity: 1 !important; transform: none !important; transition: none !important; }\n  }\n</style>\n\n<section class=\"bmx-speed\" aria-labelledby=\"bm-speed-title\">\n  <div class=\"wrap\">\n    <h2 id=\"bm-speed-title\">Choose Your Turnaround</h2>\n    <p class=\"sub\">One bespoke song. Same care and quality — you simply choose the pace.</p>\n    <div class=\"divider\" role=\"presentation\"></div>\n\n    <div class=\"card\" role=\"group\" aria-label=\"Turnaround selector\">\n      <div class=\"price\" id=\"bm-price\" aria-live=\"polite\">$299</div>\n      <div class=\"note\">Price updates as you choose a timeline.</div>\n\n      <div class=\"pills\" id=\"bm-pills\">\n        <!-- Radios keep it accessible; labels are the pills -->\n        <div class=\"pill\">\n          <input type=\"radio\" name=\"speed\" id=\"bm-2w\" value=\"2 Weeks\" data-price=\"299\" checked>\n          <label for=\"bm-2w\">2 Weeks</label>\n        </div>\n        <div class=\"pill\">\n          <input type=\"radio\" name=\"speed\" id=\"bm-1w\" value=\"1 Week\" data-price=\"399\">\n          <label for=\"bm-1w\">1 Week</label>\n        </div>\n        <div class=\"pill\">\n          <input type=\"radio\" name=\"speed\" id=\"bm-48h\" value=\"48 Hours\" data-price=\"750\">\n          <label for=\"bm-48h\">48 Hours</label>\n        </div>\n        <div class=\"pill\">\n          <input type=\"radio\" name=\"speed\" id=\"bm-24h\" value=\"24 Hours\" data-price=\"1200\">\n          <label for=\"bm-24h\">24 Hours</label>\n        </div>\n        <div class=\"pill\">\n          <input type=\"radio\" name=\"speed\" id=\"bm-6h\" value=\"6 Hours\" data-price=\"2500\">\n          <label for=\"bm-6h\">6 Hours</label>\n        </div>\n      </div>\n\n      <div class=\"hintline\" id=\"bm-hint\">Same composition and production — only the timeline changes.</div>\n\n      <div class=\"cta\">\n        <a id=\"bm-begin\" class=\"btn\" href=\"https://tally.so/r/OD1kzg\">Begin your song</a>\n        <div class=\"tini\">Your selection is passed to the form.</div>\n      </div>\n    </div>\n  </div>\n</section>\n\n<script>\n  (function(){\n    // reveal animation\n    var card = document.querySelector('.bmx-speed .card');\n    if (card){\n      if (!('IntersectionObserver' in window)) { card.classList.add('visible'); }\n      else {\n        var obs = new IntersectionObserver(function(entries){\n          entries.forEach(function(e){\n            if(e.isIntersecting){ card.classList.add('visible'); obs.unobserve(card); }\n          });\n        }, {threshold:0.2});\n        obs.observe(card);\n      }\n    }\n\n    // price + CTA link updates\n    var priceEl = document.getElementById('bm-price');\n    var beginEl = document.getElementById('bm-begin');\n    var pills = document.querySelectorAll('#bm-pills input[type=\"radio\"]');\n    var baseUrl = 'https://tally.so/r/OD1kzg';\n\n    function update(){\n      var chosen = document.querySelector('#bm-pills input[type=\"radio\"]:checked');\n      if (!chosen) return;\n      var p = chosen.getAttribute('data-price');\n      var label = chosen.value || '';\n      priceEl.textContent = '$' + Number(p).toLocaleString();\n      // Pass selection to Tally as a query param so it can prefill\n      var url = baseUrl + '?turnaround=' + encodeURIComponent(label) + '&price=' + encodeURIComponent('$' + p);\n      beginEl.setAttribute('href', url);\n    }\n    pills.forEach(function(r){ r.addEventListener('change', update); });\n    update();\n  })();\n</script>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_ciqcYn": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_bmtpKP": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_YmwRNH": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"song-scroll-wrapper\">\n  <div class=\"song-scroll-inner\">\n\n    <!-- Pop Romance -->\n    <div class=\"song-card genre-pop-romance\">\n      <div class=\"song-genre\">\n        Pop Romance\n      </div>\n\n      <button class=\"song-play-btn\" type=\"button\" aria-label=\"Play Pop Romance\">\n        <span class=\"song-play-icon\"></span>\n      </button>\n\n      <audio class=\"song-audio\">\n        <source src=\"{{ 'Run_to_me.mp3' | file_url }}\" type=\"audio/mpeg\">\n      </audio>\n    </div>\n\n    <!-- Adult Contemporary -->\n    <div class=\"song-card genre-adult-contemporary\">\n      <div class=\"song-genre\">\n        Adult Contemporary\n      </div>\n\n      <button class=\"song-play-btn\" type=\"button\" aria-label=\"Play Adult Contemporary\">\n        <span class=\"song-play-icon\"></span>\n      </button>\n\n      <audio class=\"song-audio\">\n        <source src=\"{{ 'Just_for_Tonight_Our_Lullaby.mp3' | file_url }}\" type=\"audio/mpeg\">\n      </audio>\n    </div>\n\n    <!-- Power Ballad -->\n    <div class=\"song-card genre-power-ballad\">\n      <div class=\"song-genre\">\n        Power Ballad\n      </div>\n\n      <button class=\"song-play-btn\" type=\"button\" aria-label=\"Play Power Ballad\">\n        <span class=\"song-play-icon\"></span>\n      </button>\n\n      <audio class=\"song-audio\">\n        <source src=\"{{ 'Whisper_to_me_then.mp3' | file_url }}\" type=\"audio/mpeg\">\n      </audio>\n    </div>\n\n    <!-- Progressive Funk -->\n    <div class=\"song-card genre-progressive-funk\">\n      <div class=\"song-genre\">\n        Progressive Funk\n      </div>\n\n      <button class=\"song-play-btn\" type=\"button\" aria-label=\"Play Progressive Funk\">\n        <span class=\"song-play-icon\"></span>\n      </button>\n\n      <audio class=\"song-audio\">\n        <source src=\"{{ 'Eine_Kleine_Nachtmusik.mp3' | file_url }}\" type=\"audio/mpeg\">\n      </audio>\n    </div>\n\n    <!-- Country -->\n    <div class=\"song-card genre-country\">\n      <div class=\"song-genre\">\n        Country\n      </div>\n\n      <button class=\"song-play-btn\" type=\"button\" aria-label=\"Play Country\">\n        <span class=\"song-play-icon\"></span>\n      </button>\n\n      <audio class=\"song-audio\">\n        <source src=\"{{ 'long_long_road.mp3' | file_url }}\" type=\"audio/mpeg\">\n      </audio>\n    </div>\n\n    <!-- Dance Pop -->\n    <div class=\"song-card genre-dance-pop\">\n      <div class=\"song-genre\">\n        Dance Pop\n      </div>\n\n      <button class=\"song-play-btn\" type=\"button\" aria-label=\"Play Dance Pop\">\n        <span class=\"song-play-icon\"></span>\n      </button>\n\n      <audio class=\"song-audio\">\n        <source src=\"{{ 'pop_dance.mp3' | file_url }}\" type=\"audio/mpeg\">\n      </audio>\n    </div>\n\n  </div>\n</div>\n\n<style>\n  .song-scroll-wrapper {\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    padding: 32px 0;\n  }\n\n  .song-scroll-inner {\n    display: flex;\n    gap: 16px;\n    min-width: 100%;\n  }\n\n  .song-card {\n    min-width: 230px;\n    max-width: 260px;\n    flex: 0 0 auto;\n    border-radius: 18px;\n    padding: 18px 18px 24px 18px;\n    color: #000;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: space-between;\n  }\n\n  .song-genre {\n    font-size: 0.8rem;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    font-weight: 600;\n    margin-bottom: 16px;\n    opacity: 0.85;\n  }\n\n  /* Black play button */\n  .song-play-btn {\n    width: 56px;\n    height: 56px;\n    border-radius: 999px;\n    border: none;\n    background: #000;\n    color: #fff;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    transition: transform 0.15s ease, opacity 0.15s ease;\n  }\n\n  .song-play-btn:hover {\n    transform: translateY(-1px);\n    opacity: 0.9;\n  }\n\n  .song-play-btn:focus-visible {\n    outline: 2px solid #000;\n    outline-offset: 3px;\n  }\n\n  /* Play icon (triangle) */\n  .song-play-icon {\n    display: block;\n    width: 0;\n    height: 0;\n    border-style: solid;\n    border-width: 9px 0 9px 15px;\n    border-color: transparent transparent transparent #ffffff;\n    margin-left: 3px;\n  }\n\n  /* Pause icon when playing */\n  .song-play-btn.playing .song-play-icon {\n    width: 14px;\n    height: 14px;\n    border: none;\n    position: relative;\n    margin-left: 0;\n  }\n\n  .song-play-btn.playing .song-play-icon::before,\n  .song-play-btn.playing .song-play-icon::after {\n    content: \"\";\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    width: 4px;\n    background: #ffffff;\n    border-radius: 1px;\n  }\n\n  .song-play-btn.playing .song-play-icon::before {\n    left: 1px;\n  }\n\n  .song-play-btn.playing .song-play-icon::after {\n    right: 1px;\n  }\n\n  /* Different background colors per genre card */\n  .genre-pop-romance {\n    background: linear-gradient(135deg, #ffe6f0, #fff5f9);\n  }\n\n  .genre-adult-contemporary {\n    background: linear-gradient(135deg, #f2f5ff, #eef2ff);\n  }\n\n  .genre-power-ballad {\n    background: linear-gradient(135deg, #fdf0e3, #ffe9cc);\n  }\n\n  .genre-progressive-funk {\n    background: linear-gradient(135deg, #e9fff6, #d6f5ea);\n  }\n\n  .genre-country {\n    background: linear-gradient(135deg, #fff7e6, #ffefd2);\n  }\n\n  .genre-dance-pop {\n    background: linear-gradient(135deg, #f4e9ff, #efe1ff);\n  }\n\n  .song-audio {\n    display: none; /* hide native controls/timer completely */\n  }\n</style>\n\n<script>\n  document.addEventListener('DOMContentLoaded', function () {\n    var cards = document.querySelectorAll('.song-card');\n    var currentAudio = null;\n    var currentButton = null;\n\n    cards.forEach(function (card) {\n      var audio = card.querySelector('.song-audio');\n      var button = card.querySelector('.song-play-btn');\n\n      button.addEventListener('click', function () {\n        // Stop any other track\n        if (currentAudio && currentAudio !== audio) {\n          currentAudio.pause();\n          currentAudio.currentTime = 0;\n          if (currentButton) {\n            currentButton.classList.remove('playing');\n          }\n        }\n\n        if (audio.paused) {\n          audio.play();\n          button.classList.add('playing');\n          currentAudio = audio;\n          currentButton = button;\n        } else {\n          audio.pause();\n          audio.currentTime = 0;\n          button.classList.remove('playing');\n          currentAudio = null;\n          currentButton = null;\n        }\n      });\n\n      // If audio ends naturally, reset button state\n      audio.addEventListener('ended', function () {\n        button.classList.remove('playing');\n        if (currentAudio === audio) {\n          currentAudio = null;\n          currentButton = null;\n        }\n      });\n    });\n  });\n</script>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_aXfTPT": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"bm-faq-wrapper\">\n  <h2 class=\"bm-faq-title\">Frequently Asked Questions</h2>\n\n  {% assign faqs = \n    \"\n    What if I’m not sure how to describe what I want?||\n    You don’t need musical language or a fully formed concept — that’s what my process is for.\n    <br><br>\n    A short questionnaire and a guided chat help me understand the person, story, and emotion behind the song.\n    <br><br>\n    From there, I translate your answers into a clear creative direction so you never feel responsible for 'directing' the music.\n\n    ---\n    How do you make sure the first version is right?||\n    Most of the work happens before I start composing.\n    <br><br>\n    The survey, our conversation, and any reference points you share give me a strong sense of tone, pacing, and emotional arc.\n    <br><br>\n    I treat the first version as a finished piece — not a draft — so when you hear it, it should feel intentional, polished, and true to what you shared.\n\n    ---\n    What happens if the creative direction doesn’t feel right?||\n    If the song feels emotionally off — the vibe, energy, or tone isn’t matching your vision — we talk about what feels misaligned.\n    <br><br>\n    I don’t offer endless tiny technical edits. Instead, I focus on meaningful creative alignment, shifting the mood or direction so the piece feels honest and expressive.\n    <br><br>\n    The goal is clarity and emotional truth, not mechanical tweaking.\n\n    ---\n    Can I request changes?||\n    Yes — when the changes are meaningful.\n    <br><br>\n    If hearing the song makes you realize the emotion or style needs to lean in a different direction, we address that thoughtfully.\n    <br><br>\n    I don’t provide mix-by-mix or engineering revisions, but I absolutely welcome feedback that helps bring the artistic direction into clearer focus.\n\n    ---\n    Who owns the rights to my song?||\n    You receive broad permission to use and share your commissioned song in any normal personal or creative context — including posting online, playing it at events, or sharing it with friends and family.\n    <br><br>\n    I don’t resell your commissioned piece, and anything personal you share with me always remains yours.\n    <br><br>\n    I create each piece using my own writing and direction, supported by professional digital production tools. Because different platforms have evolving terms, I don’t make legal guarantees for large-scale commercial uses like national advertising, film/TV placements, or major-label releases.\n    <br><br>\n    For everyday personal and online use, you’re fully covered. If you ever plan a major commercial release, I’m happy to provide documentation of my creative role so you (or your legal advisor) can confirm everything aligns with current guidelines.\n    <br><br>\n    I reserve the right to use short excerpts of the work in my portfolio or marketing unless you request complete privacy.\n\n    ---\n    Will the song feel artificial because AI is involved?||\n    AI is simply the instrument used to perform and render the music — not the author.\n    <br><br>\n    I write the lyrics, shape the melody, define the emotional tone, and guide how the performance should feel.\n    <br><br>\n    The technology helps produce the final delivery, but the meaning, structure, and creative decisions behind the song are fully human.\n    <br><br>\n    The finished piece should feel personal, expressive, and emotionally grounded — not artificial or generic.\n\n    ---\n    What is your refund policy?||\n    I want the experience to feel fair, transparent, and comfortable.\n    <br><br>\n    Because each song is handcrafted and tailored to your story, the refund structure follows the natural checkpoints of the creative process:\n    <br><br>\n    <strong>• Before final lyric approval:</strong> Full refund — no questions asked.<br>\n    <strong>• After lyric approval but before the first musical rendering:</strong> 50% refund.<br>\n    <strong>• After the first musical rendering:</strong> 25% refund.<br>\n    <strong>• After the second musical edit:</strong> The work is considered complete and non-refundable.<br><br>\n    These stages protect you without locking you in, and I always encourage early communication so we can address any misalignment as soon as it appears.\n    \"\n  | split: \"---\" %}\n\n  {% for faq in faqs %}\n    {% assign parts = faq | split: \"||\" %}\n    <div class=\"bm-faq-item\">\n      <button class=\"bm-faq-question\" onclick=\"this.classList.toggle('open')\">\n        <span class=\"bm-faq-icon\">𝄞</span>\n        {{ parts[0] | strip }}\n      </button>\n      <div class=\"bm-faq-answer\">\n        <p>{{ parts[1] }}</p>\n      </div>\n    </div>\n  {% endfor %}\n</div>\n\n<style>\n  .bm-faq-wrapper {\n    max-width: 800px;\n    margin: 0 auto;\n    padding: 48px 16px;\n  }\n\n  .bm-faq-title {\n    text-align: center;\n    margin-bottom: 32px;\n    font-size: 1.8rem;\n    letter-spacing: .02em;\n  }\n\n  .bm-faq-item {\n    border-bottom: 1px solid rgba(0,0,0,0.1);\n    padding: 12px 0;\n  }\n\n  .bm-faq-question {\n    width: 100%;\n    text-align: left;\n    background: none;\n    border: none;\n    padding: 12px 0;\n    font-size: 1.1rem;\n    font-weight: 600;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    color: #111; /* Fixes mobile turning text blue */\n  }\n\n  .bm-faq-icon {\n    display: inline-block;\n    font-size: 1.2rem;\n    transition: transform 0.25s ease;\n  }\n\n  .bm-faq-question.open .bm-faq-icon {\n    transform: rotate(90deg);\n  }\n\n  .bm-faq-answer {\n    display: none;\n    padding: 0 4px 12px 36px;\n    line-height: 1.6;\n    font-size: 1rem;\n    opacity: 0.9;\n    color: #333; /* Fixes mobile blue text */\n  }\n\n  .bm-faq-question.open + .bm-faq-answer {\n    display: block;\n  }\n</style>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "product_list_themegen": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_Bd9pVh": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "disabled": true,
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_Bd9pVh"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_PhczVC": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group_McqFAT": {
+              "type": "_product-card-group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 4,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_MEKzFi": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<h5>{{ closest.product.title }}</h5>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1.5rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_37riDf": {
+                  "type": "price",
+                  "name": "t:names.product_price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "swatches_87VJC8": {
+                  "type": "swatches",
+                  "name": "t:names.swatches",
+                  "settings": {
+                    "product_swatches_alignment": "flex-start",
+                    "product_swatches_alignment_mobile": "flex-start",
+                    "hide_padding": false,
+                    "product_swatches_padding_top": 4,
+                    "product_swatches_padding_bottom": 0,
+                    "product_swatches_padding_left": 0,
+                    "product_swatches_padding_right": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_MEKzFi",
+                "price_37riDf",
+                "swatches_87VJC8"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_gallery_PhczVC",
+            "group_McqFAT"
+          ]
+        }
+      },
+      "disabled": true,
+      "name": "t:names.products_grid",
+      "settings": {
+        "collection": "media-and-entertainment-example-products",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 24,
+        "rows_gap": 36,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    }
+  },
+  "order": [
+    "hero_p9CmMG",
+    "1762625603c61808d6",
+    "custom_liquid_GmLBph",
+    "custom_liquid_d6QcYW",
+    "custom_liquid_cnkfKJ",
+    "custom_liquid_ciqcYn",
+    "custom_liquid_bmtpKP",
+    "custom_liquid_YmwRNH",
+    "custom_liquid_aXfTPT",
+    "product_list_themegen"
+  ]
+}
