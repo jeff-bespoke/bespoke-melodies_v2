@@ -21,6 +21,13 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
     justify-content: center; /* Center items if they don't overflow */
+    cursor: grab;
+  }
+  
+  .song-scroll-inner.active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    transform: scale(1);
   }
   
   .song-scroll-inner::-webkit-scrollbar { 
@@ -240,6 +247,39 @@
     var cards = document.querySelectorAll('.song-card');
     var currentAudio = null;
     var currentButton = null;
+
+    // Drag to scroll logic
+    const slider = document.querySelector('.song-scroll-inner');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+      // Prevent default dragging behavior of images/links
+      e.preventDefault(); 
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll-fast
+      slider.scrollLeft = scrollLeft - walk;
+    });
 
     cards.forEach(function (card) {
       var audio = card.querySelector('.song-audio');
