@@ -1,0 +1,158 @@
+<div class="bm-faq-wrapper">
+  <h2 class="bm-faq-title">Frequently Asked Questions</h2>
+
+  {% assign faqs = 
+    "
+    What if I’m not sure how to describe what I want?||
+    You don’t need musical language or a fully formed concept — that’s what my process is for.
+    <br><br>
+    A short questionnaire and a guided chat help me understand the person, story, and emotion behind the song.
+    <br><br>
+    From there, I translate your answers into a clear creative direction so you never feel responsible for 'directing' the music.
+
+    ---
+    How do you make sure the first version is right?||
+    Most of the work happens before I start composing.
+    <br><br>
+    The survey, our conversation, and any reference points you share give me a strong sense of tone, pacing, and emotional arc.
+    <br><br>
+    I treat the first version as a finished piece — not a draft — so when you hear it, it should feel intentional, polished, and true to what you shared.
+
+    ---
+    What happens if the creative direction doesn’t feel right?||
+    If the song feels emotionally off — the vibe, energy, or tone isn’t matching your vision — we talk about what feels misaligned.
+    <br><br>
+    I don’t offer endless tiny technical edits. Instead, I focus on meaningful creative alignment, shifting the mood or direction so the piece feels honest and expressive.
+    <br><br>
+    The goal is clarity and emotional truth, not mechanical tweaking.
+
+    ---
+    Can I request changes?||
+    Yes — when the changes are meaningful.
+    <br><br>
+    If hearing the song makes you realize the emotion or style needs to lean in a different direction, we address that thoughtfully.
+    <br><br>
+    I don’t provide mix-by-mix or engineering revisions, but I absolutely welcome feedback that helps bring the artistic direction into clearer focus.
+
+    ---
+    Who owns the rights to my song?||
+    You receive broad permission to use and share your commissioned song in any normal personal or creative context — including posting online, playing it at events, or sharing it with friends and family.
+    <br><br>
+    I don’t resell your commissioned piece, and anything personal you share with me always remains yours.
+    <br><br>
+    I create each piece using my own writing and direction, supported by professional digital production tools. Because different platforms have evolving terms, I don’t make legal guarantees for large-scale commercial uses like national advertising, film/TV placements, or major-label releases.
+    <br><br>
+    For everyday personal and online use, you’re fully covered. If you ever plan a major commercial release, I’m happy to provide documentation of my creative role so you (or your legal advisor) can confirm everything aligns with current guidelines.
+    <br><br>
+    I reserve the right to use short excerpts of the work in my portfolio or marketing unless you request complete privacy.
+
+    ---
+    Will the song feel artificial because AI is involved?||
+    AI is simply the instrument used to perform and render the music — not the author.
+    <br><br>
+    I write the lyrics, shape the melody, define the emotional tone, and guide how the performance should feel.
+    <br><br>
+    The technology helps produce the final delivery, but the meaning, structure, and creative decisions behind the song are fully human.
+    <br><br>
+    The finished piece should feel personal, expressive, and emotionally grounded — not artificial or generic.
+
+    ---
+    What is your refund policy?||
+    I want the experience to feel fair, transparent, and comfortable.
+    <br><br>
+    Because each song is handcrafted and tailored to your story, the refund structure follows the natural checkpoints of the creative process:
+    <br><br>
+    <strong>• Before final lyric approval:</strong> Full refund — no questions asked.<br>
+    <strong>• After lyric approval but before the first musical rendering:</strong> 50% refund.<br>
+    <strong>• After the first musical rendering:</strong> 25% refund.<br>
+    <strong>• After the second musical edit:</strong> The work is considered complete and non-refundable.<br><br>
+    These stages protect you without locking you in, and I always encourage early communication so we can address any misalignment as soon as it appears.
+    "
+  | split: "---" %}
+
+  {% for faq in faqs %}
+    {% assign parts = faq | split: "||" %}
+    <div class="bm-faq-item">
+      <button class="bm-faq-question" onclick="this.classList.toggle('open')">
+        <span class="bm-faq-icon">𝄞</span>
+        {{ parts[0] | strip }}
+      </button>
+      <div class="bm-faq-answer">
+        <p>{{ parts[1] }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .bm-faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 16px;
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+  }
+
+  .bm-faq-title {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 1.8rem;
+    letter-spacing: .02em;
+    font-family: "Playfair Display", serif;
+    color: #f5f5f5;
+  }
+
+  .bm-faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 0;
+  }
+
+  .bm-faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f5f5f5;
+    font-family: "Inter", sans-serif;
+    transition: color 0.2s ease;
+  }
+  
+  .bm-faq-question:hover {
+    color: #D4AF37;
+  }
+
+  .bm-faq-icon {
+    display: inline-block;
+    font-size: 1.2rem;
+    transition: transform 0.25s ease;
+    color: #D4AF37;
+  }
+
+  .bm-faq-question.open .bm-faq-icon {
+    transform: rotate(90deg);
+  }
+
+  .bm-faq-answer {
+    display: none;
+    padding: 0 4px 12px 36px;
+    line-height: 1.6;
+    font-size: 1rem;
+    opacity: 0.9;
+    color: #a0a0a0;
+  }
+
+  .bm-faq-answer strong {
+    color: #f5f5f5;
+  }
+
+  .bm-faq-question.open + .bm-faq-answer {
+    display: block;
+  }
+</style>

@@ -564,3 +564,118 @@
     --cart-secondary-font-weight: var(--font-{{ settings.cart_price_font }}--weight);
   }
 {% endstyle %}
+
+{% style %}
+  /* Dark Luxury Theme Overrides */
+  :root {
+    /* Colors */
+    --color-background: #1a1a1a;
+    --color-foreground: #f5f5f5;
+    --color-foreground-rgb: 245, 245, 245;
+    --color-background-rgb: 26, 26, 26;
+    
+    --color-link: #D4AF37;
+    --color-button: #D4AF37;
+    --color-button-text: #1a1a1a;
+    --color-base-accent-1: #D4AF37;
+    --color-base-accent-2: #D4AF37;
+    
+    --color-border: #D4AF37;
+    --color-border-rgb: 212, 175, 55;
+    
+    /* Custom Gold Variables */
+    --color-gold: #D4AF37;
+    --color-gold-dim: rgba(212, 175, 55, 0.1);
+    --color-gold-glow: rgba(212, 175, 55, 0.3);
+
+    /* Typography Overrides */
+    --font-body-family: 'Inter', sans-serif;
+    --font-heading-family: 'Playfair Display', serif;
+    
+    --font-body--family: 'Inter', sans-serif;
+    --font-heading--family: 'Playfair Display', serif;
+    --font-subheading--family: 'Playfair Display', serif;
+  }
+
+  /* Global Element Styles */
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-heading-family);
+    color: #ffffff;
+  }
+
+  /* Buttons */
+  .button, .btn {
+    background-color: var(--color-gold);
+    color: #1a1a1a;
+    border: 1px solid var(--color-gold);
+    font-family: var(--font-body-family);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+  }
+
+  .button:hover, .btn:hover {
+    background-color: #b5952f;
+    border-color: #b5952f;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px var(--color-gold-glow);
+  }
+
+  .button--secondary, .btn--secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .button--secondary:hover, .btn--secondary:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+  }
+
+  /* Inputs */
+  input, textarea, select, .field__input {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+
+  input:focus, textarea:focus, select:focus, .field__input:focus {
+    border-color: var(--color-gold) !important;
+    box-shadow: 0 0 0 1px var(--color-gold) !important;
+  }
+  
+  /* Header/Footer adjustments */
+  .header-wrapper, .footer {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .header__menu-item, .footer__link {
+    color: #ffffff;
+  }
+  
+  .header__menu-item:hover, .footer__link:hover {
+    color: var(--color-gold);
+  }
+
+  /* Force Dark Luxury on all color schemes */
+  [class*="color-scheme-"] {
+    --color-background: #1a1a1a;
+    --color-foreground: #f5f5f5;
+    --color-foreground-rgb: 245, 245, 245;
+    --color-background-rgb: 26, 26, 26;
+    --color-link: #D4AF37;
+    --color-button: #D4AF37;
+    --color-button-text: #1a1a1a;
+    --color-base-accent-1: #D4AF37;
+    --color-base-accent-2: #D4AF37;
+    --color-border: #D4AF37;
+    --color-border-rgb: 212, 175, 55;
+  }
+{% endstyle %}

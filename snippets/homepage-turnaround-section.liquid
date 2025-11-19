@@ -1,0 +1,189 @@
+<style>
+  /* ===== Bespoke: Turnaround — single selector (Dark Luxury) ===== */
+  .bmx-speed {
+    --ink: #f5f5f5;
+    --muted: #a0a0a0;
+    --paper: #252525;
+    --accent: #D4AF37;
+    --ivory: #1a1a1a;
+    --line: rgba(212, 175, 55, 0.2);
+    --gold: #D4AF37;
+    background: linear-gradient(180deg, #1a1a1a 0%, #222222 100%);
+    padding: 96px 0 86px;
+  }
+  .bmx-speed .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; text-align: center; }
+
+  .bmx-speed h2 {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 34px; color: var(--ink); margin: 0 0 10px; letter-spacing: .2px;
+  }
+  .bmx-speed .sub { max-width: 700px; margin: 0 auto 18px; color: var(--muted); line-height: 1.75; font-size: 18px; }
+  .bmx-speed .divider { width: 180px; height: 1px; margin: 18px auto 26px;
+    background: linear-gradient(90deg,transparent,rgba(212, 175, 55, 0.55),transparent);
+  }
+
+  .bmx-speed .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 22px;
+    box-shadow: 0 12px 28px rgba(0,0,0,.2);
+  }
+
+  /* price badge */
+  .bmx-speed .price {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: #1a1a1a; /* Keep price dark on gold badge? Or gold on dark? Let's go Gold on Dark */
+    color: var(--gold);
+    font-size: 28px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    margin-bottom: 14px;
+  }
+
+  .bmx-speed .note {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 6px 0 22px;
+  }
+
+  /* pills */
+  .bmx-speed .pills {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin: 8px 0 12px;
+  }
+  .bmx-speed .pill {
+    position: relative;
+  }
+  .bmx-speed .pill input {
+    position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  }
+  .bmx-speed .pill label {
+    display: inline-block; cursor: pointer; user-select: none;
+    padding: 10px 14px; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #2d2d2d;
+    color: var(--ink);
+    font-size: 15px;
+    transition: all .2s ease;
+  }
+  .bmx-speed .pill label:hover { transform: translateY(-1px); border-color: var(--gold); color: var(--gold); }
+  .bmx-speed .pill input:checked + label {
+    background: var(--gold); color: #1a1a1a; border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    font-weight: 600;
+  }
+
+  .bmx-speed .hintline {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 10px 0 18px;
+  }
+
+  .bmx-speed .cta { margin-top: 6px; }
+  .bmx-speed .btn {
+    display: inline-block; padding: 14px 26px; border-radius: 999px;
+    background: var(--accent); color: #1a1a1a; text-decoration: none;
+    border: 1px solid var(--accent); transition: all .2s ease;
+    box-shadow: 0 8px 22px rgba(212, 175, 55, 0.2);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .bmx-speed .btn:hover { background: #b5952f; border-color: #b5952f; transform: translateY(-1px); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+  .bmx-speed .tini { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+  /* subtle entrance */
+  .bmx-speed .card { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .bmx-speed .card.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bmx-speed .card { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+</style>
+
+<section class="bmx-speed" aria-labelledby="bm-speed-title">
+  <div class="wrap">
+    <h2 id="bm-speed-title">Choose Your Turnaround</h2>
+    <p class="sub">One bespoke song. Same care and quality — you simply choose the pace.</p>
+    <div class="divider" role="presentation"></div>
+
+    <div class="card" role="group" aria-label="Turnaround selector">
+      <div class="price" id="bm-price" aria-live="polite">$299</div>
+      <div class="note">Price updates as you choose a timeline.</div>
+
+      <div class="pills" id="bm-pills">
+        <!-- Radios keep it accessible; labels are the pills -->
+        <div class="pill">
+          <input type="radio" name="speed" id="bm-2w" value="2 Weeks" data-price="299" checked>
+          <label for="bm-2w">2 Weeks</label>
+        </div>
+        <div class="pill">
+          <input type="radio" name="speed" id="bm-1w" value="1 Week" data-price="399">
+          <label for="bm-1w">1 Week</label>
+        </div>
+        <div class="pill">
+          <input type="radio" name="speed" id="bm-48h" value="48 Hours" data-price="750">
+          <label for="bm-48h">48 Hours</label>
+        </div>
+        <div class="pill">
+          <input type="radio" name="speed" id="bm-24h" value="24 Hours" data-price="1200">
+          <label for="bm-24h">24 Hours</label>
+        </div>
+        <div class="pill">
+          <input type="radio" name="speed" id="bm-6h" value="6 Hours" data-price="2500">
+          <label for="bm-6h">6 Hours</label>
+        </div>
+      </div>
+
+      <div class="hintline" id="bm-hint">Same composition and production — only the timeline changes.</div>
+
+      <div class="cta">
+        <a id="bm-begin" class="btn" href="https://tally.so/r/OD1kzg">Begin your song</a>
+        <div class="tini">Your selection is passed to the form.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    // reveal animation
+    var card = document.querySelector('.bmx-speed .card');
+    if (card){
+      if (!('IntersectionObserver' in window)) { card.classList.add('visible'); }
+      else {
+        var obs = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){ card.classList.add('visible'); obs.unobserve(card); }
+          });
+        }, {threshold:0.2});
+        obs.observe(card);
+      }
+    }
+
+    // price + CTA link updates
+    var priceEl = document.getElementById('bm-price');
+    var beginEl = document.getElementById('bm-begin');
+    var pills = document.querySelectorAll('#bm-pills input[type="radio"]');
+    var baseUrl = 'https://tally.so/r/OD1kzg';
+
+    function update(){
+      var chosen = document.querySelector('#bm-pills input[type="radio"]:checked');
+      if (!chosen) return;
+      var p = chosen.getAttribute('data-price');
+      var label = chosen.value || '';
+      priceEl.textContent = '$' + Number(p).toLocaleString();
+      // Pass selection to Tally as a query param so it can prefill
+      var url = baseUrl + '?turnaround=' + encodeURIComponent(label) + '&price=' + encodeURIComponent('$' + p);
+      beginEl.setAttribute('href', url);
+    }
+    pills.forEach(function(r){ r.addEventListener('change', update); });
+    update();
+  })();
+</script>
