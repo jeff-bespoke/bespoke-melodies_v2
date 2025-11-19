@@ -664,35 +664,35 @@
     color: var(--color-gold);
   }
 
-  /* Targeted Dark Luxury Theme Class */
+  /* Targeted Dark Luxury Theme Class - Forced Overrides */
   .color-scheme-dark-luxury {
-    --color-background: #1a1a1a;
-    --color-foreground: #f5f5f5;
-    --color-foreground-rgb: 245, 245, 245;
-    --color-background-rgb: 26, 26, 26;
-    --color-link: #D4AF37;
-    --color-button: #D4AF37;
-    --color-button-text: #1a1a1a;
-    --color-base-accent-1: #D4AF37;
-    --color-base-accent-2: #D4AF37;
-    --color-border: #D4AF37;
-    --color-border-rgb: 212, 175, 55;
+    --color-background: #1a1a1a !important;
+    --color-foreground: #f5f5f5 !important;
+    --color-foreground-rgb: 245, 245, 245 !important;
+    --color-background-rgb: 26, 26, 26 !important;
+    --color-link: #D4AF37 !important;
+    --color-button: #D4AF37 !important;
+    --color-button-text: #1a1a1a !important;
+    --color-base-accent-1: #D4AF37 !important;
+    --color-base-accent-2: #D4AF37 !important;
+    --color-border: #D4AF37 !important;
+    --color-border-rgb: 212, 175, 55 !important;
     
     /* Ensure shadows and other elements don't look weird on dark */
-    --color-shadow: #000000;
-    --color-shadow-rgb: 0, 0, 0;
-    --gradient-base-background-1: #1a1a1a;
-    --gradient-base-background-2: #1a1a1a;
-    --gradient-base-accent-1: #D4AF37;
-    --gradient-base-accent-2: #D4AF37;
+    --color-shadow: #000000 !important;
+    --color-shadow-rgb: 0, 0, 0 !important;
+    --gradient-base-background-1: #1a1a1a !important;
+    --gradient-base-background-2: #1a1a1a !important;
+    --gradient-base-accent-1: #D4AF37 !important;
+    --gradient-base-accent-2: #D4AF37 !important;
     
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: #1a1a1a !important;
+    color: #f5f5f5 !important;
   }
   
   /* Apply to specific sections if they don't have the class directly but are wrapped */
   .dark-luxury-section {
-    background-color: #1a1a1a;
-    color: #f5f5f5;
+    background-color: #1a1a1a !important;
+    color: #f5f5f5 !important;
   }
 {% endstyle %}
