@@ -47,6 +47,26 @@
 </div>
 
 {% stylesheet %}
+  /* Force Dark Luxury Footer */
+  .footer-content, .section-background {
+    background-color: #1a1a1a !important;
+    color: #f5f5f5 !important;
+  }
+  
+  .footer-content a {
+    color: #f5f5f5 !important;
+    transition: color 0.2s ease;
+  }
+  
+  .footer-content a:hover {
+    color: #D4AF37 !important;
+  }
+  
+  .footer-content h2, .footer-content h3, .footer-content h4, .footer-content h5 {
+    color: #D4AF37 !important;
+    font-family: "Playfair Display", serif !important;
+  }
+
   /* Mobile: Single column layout (base styles) */
   .footer-content {
     display: grid;

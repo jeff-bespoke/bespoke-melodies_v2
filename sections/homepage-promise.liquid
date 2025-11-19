@@ -9,6 +9,23 @@
   .my-promise-container {
     max-width: 800px;
     margin: 0 auto;
+    padding: 48px 32px;
+    background: linear-gradient(145deg, #1f1f1f, #1a1a1a);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+  }
+  
+  /* Decorative gold accent line */
+  .my-promise-container::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: #D4AF37;
+    margin: 32px auto 0;
+    opacity: 0.6;
   }
   
   .my-promise-section h2 {
