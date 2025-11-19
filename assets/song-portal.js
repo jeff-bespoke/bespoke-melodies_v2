@@ -10,6 +10,7 @@ class SongPortal {
       this.initAudio(card);
       this.initDownloads(card);
       this.animateProgress(card);
+      this.animateSteps(card);
     });
   }
 
@@ -30,12 +31,8 @@ class SongPortal {
     if (!downloadBtn) return;
 
     downloadBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const url = downloadBtn.href;
-      const title = card.dataset.songTitle || 'bespoke-song';
-      const filename = `${this.slugify(title)}.mp3`;
-
-      this.downloadFile(url, filename);
+      // Allow default behavior (download) but track if needed
+      // e.preventDefault(); // Removed to allow native download attribute to work if present
     });
   }
 
@@ -44,42 +41,20 @@ class SongPortal {
     if (!progressBar) return;
 
     const targetWidth = progressBar.dataset.width;
-    // Small delay to ensure CSS transition catches it
+    // Delay to ensure CSS transition catches it after load
     setTimeout(() => {
       progressBar.style.width = `${targetWidth}%`;
-    }, 100);
+    }, 300);
   }
 
-  slugify(text) {
-    return text
-      .toString()
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-');
-  }
-
-  async downloadFile(url, filename) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error('Network response was not ok');
-      
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error('Download failed:', error);
-      // Fallback to direct link
-      window.open(url, '_blank');
-    }
+  animateSteps(card) {
+    const steps = card.querySelectorAll('.status-step');
+    steps.forEach((step, index) => {
+      // Staggered entrance
+      setTimeout(() => {
+        step.classList.add('is-visible');
+      }, 100 + (index * 150));
+    });
   }
 }
 
