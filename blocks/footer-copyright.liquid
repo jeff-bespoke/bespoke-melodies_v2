@@ -10,9 +10,11 @@
   style="{% render 'typography-style', preset: 'custom', settings: block_settings %}"
   {{ block.shopify_attributes }}
 >
-  <span class="footer-utilities__text">
-    &copy; {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url -}}
+  <span class="footer-utilities__text" style="color: #f5f5f5 !important;">
+    <a href="mailto:jeff@bespokemelodies.com" style="color: #D4AF37 !important; text-decoration: none; margin-right: 10px;">jeff@bespokemelodies.com</a>
+    <span class="desktop-only" style="opacity: 0.5;">|</span>
+    &copy; 2025
+    {{ shop.name | link_to: routes.root_url, style: 'color: #f5f5f5 !important; text-decoration: none;' -}}
     {%- if block_settings.show_powered_by -%}
       , {{ powered_by_link }}
     {%- endif -%}
