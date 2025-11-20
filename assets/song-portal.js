@@ -123,9 +123,8 @@ class SongPortal {
   }
 
   async submitToWebhook(data) {
-    // WEBHOOK_URL should be configured in theme settings or hardcoded here
-    // For now, using a placeholder that needs to be configured
-    const webhookUrl = window.LYRICS_WEBHOOK_URL || 'https://hook.us1.make.com/YOUR_WEBHOOK_ID';
+    // Zapier webhook URL for lyrics approval/change requests
+    const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
     const response = await fetch(webhookUrl, {
       method: 'POST',
