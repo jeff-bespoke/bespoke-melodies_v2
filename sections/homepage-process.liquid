@@ -18,12 +18,13 @@
     left: -10%;
     font-size: 300px;
     font-family: serif;
-    color: rgba(212, 175, 55, 0.05); /* Gold tint */
+    color: rgba(212, 175, 55, 0.05);
     transform: rotate(-15deg);
     letter-spacing: 40px;
     white-space: nowrap;
     user-select: none;
   }
+  
   .bmx-process::after {
     content: "♩ ♫ ♬ ♪";
     position: absolute;
@@ -31,7 +32,7 @@
     right: -5%;
     font-size: 280px;
     font-family: serif;
-    color: rgba(212, 175, 55, 0.05); /* Gold tint */
+    color: rgba(212, 175, 55, 0.05);
     transform: rotate(12deg);
     letter-spacing: 35px;
     user-select: none;
@@ -66,15 +67,44 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     text-align: left;
-    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4);
-    background: #2a2a2a;
-    border-color: var(--accent);
   }
 
-  /* Subtle spotlight on middle card */
+  .bmx-process .step {
+    background: var(--paper);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 18px;
+    padding: 44px 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    position: relative;
+  }
+  
+  .bmx-process .step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Colored left borders for visual variety */
+  .bmx-process .step:nth-child(1) {
+    border-left: 3px solid rgba(205, 127, 50, 0.6);
+  }
+  
   .bmx-process .step:nth-child(2) {
+    border-left: 3px solid rgba(212, 175, 55, 0.6);
     background: #2a2a2a;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+  
+  .bmx-process .step:nth-child(3) {
+    border-left: 3px solid rgba(183, 110, 121, 0.6);
+  }
+  
+  .bmx-process .step:hover {
+    background: #2a2a2a;
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent);
   }
 
   .bmx-process .num {
@@ -100,8 +130,12 @@
   }
 
   @media(max-width: 900px){
-    .bmx-process .steps{grid-template-columns: 1fr}
-    .bmx-process .step{text-align: center}
+    .bmx-process .steps {
+      grid-template-columns: 1fr;
+    }
+    .bmx-process .step {
+      text-align: center;
+    }
   }
   
   @media (max-width: 480px) {
@@ -125,7 +159,7 @@
         <div class="title">The Consultation</div>
         <div class="text">
           We begin with a short written consultation where you share who the song is for, the moments that matter, and the feeling you want captured.
-          You don’t need perfect words — just what’s true. I’ll shape it with care.
+          You don't need perfect words — just what's true. I'll shape it with care.
         </div>
       </article>
 
@@ -134,7 +168,7 @@
         <div class="title">Writing & Collaboration</div>
         <div class="text">
           I craft lyrics and melody that bring your story to life, aiming to capture its heart — not just its details.
-          You’ll review and approve the lyrics before I move into production, so every line feels right to you.
+          You'll review and approve the lyrics before I move into production, so every line feels right to you.
         </div>
       </article>
 
@@ -143,7 +177,7 @@
         <div class="title">Production & Final Approval</div>
         <div class="text">
           Once the words are set, I produce the song using studio-quality AI tools and refine every note.
-          You’ll have final approval before delivery — your song, exactly as it should be.
+          You'll have final approval before delivery — your song, exactly as it should be.
         </div>
       </article>
     </div>
