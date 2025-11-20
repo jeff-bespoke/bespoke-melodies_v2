@@ -92,6 +92,87 @@
     {% endif %}
   </div>
 
+  {% comment %} Lyrics Approval Section {% endcomment %}
+  {% assign lyrics_file_url = order.metafields.custom.lyrics_file_url | default: order.metafields.song_portal.lyrics_file_url %}
+  
+  {% if current_status_handle == 'lyrics_ready_for_review' %}
+    <div class="lyrics-approval-section">
+      <div class="lyrics-approval__header">
+        <h3 class="lyrics-approval__title">🎵 Your Lyrics Are Ready for Review</h3>
+        <p class="lyrics-approval__subtitle">Please review your custom lyrics and let me know if you approve or would like changes.</p>
+      </div>
+
+      {% if lyrics_file_url != blank %}
+        <div class="lyrics-file">
+          <a href="{{ lyrics_file_url }}" target="_blank" class="btn-portal btn-portal--outline btn-lyrics-download" download>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <polyline points="9 15 12 18 15 15"></polyline>
+            </svg>
+            Download Lyrics Document
+          </a>
+        </div>
+      {% endif %}
+
+      <div class="approval-actions">
+        <form class="lyrics-approval-form" data-lyrics-approval-form data-order-id="{{ order.id }}">
+          <input type="hidden" name="order_id" value="{{ order.id }}">
+          <input type="hidden" name="order_name" value="{{ order.name }}">
+          <input type="hidden" name="customer_email" value="{{ customer.email }}">
+          <input type="hidden" name="action" value="approve">
+          <button type="submit" class="btn-portal btn-approve" data-approve-btn>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Approve Lyrics
+          </button>
+        </form>
+
+        <button type="button" class="btn-portal btn-portal--outline btn-request-changes" data-show-changes>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          Request Changes
+        </button>
+      </div>
+
+      <div class="change-request-section" data-change-request-section style="display: none;">
+        <form class="change-request-form" data-change-request-form data-order-id="{{ order.id }}">
+          <input type="hidden" name="order_id" value="{{ order.id }}">
+          <input type="hidden" name="order_name" value="{{ order.name }}">
+          <input type="hidden" name="customer_email" value="{{ customer.email }}">
+          <input type="hidden" name="action" value="request_changes">
+          
+          <label for="change-text-{{ order.id }}" class="change-request__label">
+            What changes would you like to make?
+          </label>
+          <textarea 
+            id="change-text-{{ order.id }}" 
+            name="change_request" 
+            class="change-request__textarea"
+            rows="5" 
+            placeholder="Please describe what you'd like changed in the lyrics. Be as specific as possible..."
+            required
+          ></textarea>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn-portal btn-submit-changes">
+              Send Change Request
+            </button>
+            <button type="button" class="btn-portal btn-portal--ghost btn-cancel" data-cancel-changes>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="approval-feedback" data-approval-feedback style="display: none;"></div>
+    </div>
+  {% endif %}
+
   <div class="audio-section">
     <div class="audio-player__wrapper">
       {% if preview_audio != blank %}
