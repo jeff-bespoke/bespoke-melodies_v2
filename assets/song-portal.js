@@ -126,16 +126,16 @@ class SongPortal {
     // Zapier webhook URL for lyrics approval/change requests
     const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
+    // Use URLSearchParams to avoid CORS preflight
+    const params = new URLSearchParams({
+      ...data,
+      timestamp: new Date().toISOString(),
+      shop: Shopify.shop || window.location.hostname
+    });
+
     const response = await fetch(webhookUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...data,
-        timestamp: new Date().toISOString(),
-        shop: Shopify.shop || window.location.hostname
-      })
+      body: params
     });
 
     if (!response.ok) {
