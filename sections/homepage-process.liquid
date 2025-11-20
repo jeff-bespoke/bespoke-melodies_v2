@@ -66,23 +66,6 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     text-align: left;
-  }
-
-  .bmx-process .step {
-    background: var(--paper);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 18px;
-    padding: 44px 32px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity .9s ease, transform .9s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease;
-  }
-  .bmx-process .step.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .bmx-process .step:hover {
     box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4);
     background: #2a2a2a;
     border-color: var(--accent);

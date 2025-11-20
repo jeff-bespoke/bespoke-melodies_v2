@@ -137,31 +137,49 @@
     background: transparent;
   }
 
-  /* Dark luxury cards with subtle gold accents */
+  /* Luxury jewel-tone cards with rich color */
   .genre-pop-romance { 
-    background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(135deg, #4a1a1f 0%, #2a1520 50%, #1a1a1a 100%);
+    border: 1px solid rgba(183, 110, 121, 0.4);
   }
+  
   .genre-adult-contemporary { 
-    background: linear-gradient(120deg, #252525 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(120deg, #1a2d4d 0%, #152038 50%, #1a1a1a 100%);
+    border: 1px solid rgba(100, 149, 237, 0.4);
   }
+  
   .genre-power-ballad { 
-    background: linear-gradient(to top, #252525 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(to top, #3d2820 0%, #2a1f18 50%, #1a1a1a 100%);
+    border: 1px solid rgba(205, 127, 50, 0.4);
   }
+  
   .genre-progressive-funk { 
-    background: linear-gradient(to right, #252525 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(to right, #0f4c3a 0%, #1a3329 50%, #1a1a1a 100%);
+    border: 1px solid rgba(52, 211, 153, 0.4);
   }
+  
   .genre-country { 
-    background: linear-gradient(to top, #252525 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(to top, #3d2420 0%, #2a1a15 50%, #1a1a1a 100%);
+    border: 1px solid rgba(205, 127, 50, 0.5);
   }
+  
   .genre-dance-pop { 
-    background: linear-gradient(to top, #252525 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(to top, #3d2645 0%, #2a1a2f 50%, #1a1a1a 100%);
+    border: 1px solid rgba(186, 85, 211, 0.4);
   }
+  
+  /* Enhanced hover with colored glow */
+  .song-card:hover {
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2), 
+                0 0 40px rgba(var(--card-glow), 0.15);
+  }
+  
+  .genre-pop-romance { --card-glow: 183, 110, 121; }
+  .genre-adult-contemporary { --card-glow: 100, 149, 237; }
+  .genre-power-ballad { --card-glow: 205, 127, 50; }
+  .genre-progressive-funk { --card-glow: 52, 211, 153; }
+  .genre-country { --card-glow: 205, 127, 50; }
+  .genre-dance-pop { --card-glow: 186, 85, 211; }
 
   .song-audio { display: none; }
   
