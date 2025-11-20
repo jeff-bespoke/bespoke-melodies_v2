@@ -1,69 +1,155 @@
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'charcoal': '#1a1a1a',
-                    'charcoal-light': '#2d2d2d',
-                    'gold': '#D4AF37',
-                    'gold-hover': '#b5952f',
-                    'off-white': '#f5f5f5',
-                },
-                fontFamily: {
-                    'serif': ['"Playfair Display"', 'serif'],
-                    'sans': ['"Inter"', 'sans-serif'],
-                }
-            }
-        }
-    }
-</script>
+<style>
+  /* ===== Bespoke: AI Advantage Section (Dark Luxury) ===== */
+  .bmx-ai-advantage {
+    --ink: #f5f5f5;
+    --muted: #a0a0a0;
+    --paper: #252525;
+    --accent: #D4AF37;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0;
+  }
 
-<section class="py-20 px-4 bg-charcoal-light/30">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Human Artistry. Unconstrained Production.
-            </h2>
-            <div class="w-24 h-1 bg-gold mx-auto rounded-full shadow-[0_0_10px_#D4AF37]"></div>
+  .bmx-ai-advantage::before {
+    content: "⚡";
+    position: absolute;
+    top: -20%;
+    left: -5%;
+    font-size: 400px;
+    color: rgba(212, 175, 55, 0.03);
+    transform: rotate(-15deg);
+    user-select: none;
+  }
+
+  .bmx-ai-advantage .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .bmx-ai-advantage h2 {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 34px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .bmx-ai-advantage .divider {
+    width: 96px;
+    height: 3px;
+    background: var(--accent);
+    margin: 0 auto 56px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  }
+
+  .bmx-ai-advantage .columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .bmx-ai-advantage .column {
+    background: var(--paper);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 18px;
+    padding: 44px 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: box-shadow .3s ease, background .3s ease, border-color .3s ease;
+  }
+
+  .bmx-ai-advantage .column:hover {
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4);
+    background: #2a2a2a;
+    border-color: var(--accent);
+  }
+
+  .bmx-ai-advantage .icon-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .bmx-ai-advantage .icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .bmx-ai-advantage .icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--accent);
+    fill: none;
+  }
+
+  .bmx-ai-advantage .column-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 22px;
+  }
+
+  .bmx-ai-advantage .column-text {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  @media(max-width: 900px){
+    .bmx-ai-advantage .columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="bmx-ai-advantage" aria-labelledby="bm-ai-title">
+  <div class="wrap">
+    <h2 id="bm-ai-title">Human Artistry. Unconstrained Production.</h2>
+    <div class="divider"></div>
+
+    <div class="columns">
+      <!-- Column 1: The Human Element -->
+      <div class="column">
+        <div class="icon-row">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+            </svg>
+          </div>
+          <h3 class="column-title">The Human Element</h3>
         </div>
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <!-- Column 1: The Human Element -->
-            <div class="space-y-6 p-8 rounded-2xl bg-white/5 border border-white/5">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-gold/10 rounded-full text-gold">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-serif text-white">The Human Element</h3>
-                </div>
-                <p class="text-gray-400 leading-relaxed">
-                    I write every lyric and melody personally. A machine cannot understand your partner's inside
-                    jokes, the specific ache of a memory, or the story of how you met. That part remains 100% human.
-                </p>
-            </div>
-            <!-- Column 2: The AI Advantage -->
-            <div class="space-y-6 p-8 rounded-2xl bg-white/5 border border-white/5">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 bg-gold/10 rounded-full text-gold">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-serif text-white">The AI Advantage</h3>
-                </div>
-                <p class="text-gray-400 leading-relaxed">
-                    Traditional orchestral production requires booking musicians, engineers, and studio space—a
-                    process that takes weeks of coordination. By utilizing advanced AI instrumentation, I can
-                    orchestrate your song immediately after writing it. We eliminate the logistical delays of the
-                    studio, delivering a full symphonic arrangement on the timeline you actually need.
-                </p>
-            </div>
+        <p class="column-text">
+          I write every lyric and melody personally. A machine cannot understand your partner's inside jokes, the specific ache of a memory, or the story of how you met. That part remains 100% human.
+        </p>
+      </div>
+
+      <!-- Column 2: The AI Advantage -->
+      <div class="column">
+        <div class="icon-row">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="column-title">The AI Advantage</h3>
         </div>
+        <p class="column-text">
+          Traditional orchestral production requires booking musicians, engineers, and studio space—a process that takes weeks of coordination. By utilizing advanced AI instrumentation, I can orchestrate your song immediately after writing it. We eliminate the logistical delays of the studio, delivering a full symphonic arrangement on the timeline you actually need.
+        </p>
+      </div>
     </div>
+  </div>
 </section>
 
 {% schema %}
