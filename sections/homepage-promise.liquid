@@ -5,7 +5,7 @@
     --muted: #a0a0a0;
     --paper: #252525;
     --accent: #D4AF37;
-    background: linear-gradient(180deg, #1a1a1a 0%, #2a2520 100%);
+    background: #1a1a1a;
     position: relative;
     padding: 80px 0 100px 0;
     border-top: 2px solid rgba(212, 175, 55, 0.15);
@@ -87,6 +87,12 @@
   .bmx-promise .text small {
     opacity: 0.7;
     font-size: 14px;
+  }
+  
+  @media (max-width: 480px) {
+    .bmx-promise h2 { font-size: 28px; }
+    .bmx-promise .subtitle { font-size: 12px; }
+    .bmx-promise .text { font-size: 15px; }
   }
 </style>
 

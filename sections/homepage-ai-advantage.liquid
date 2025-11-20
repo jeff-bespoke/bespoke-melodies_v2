@@ -9,6 +9,7 @@
     position: relative;
     overflow: hidden;
     padding: 100px 0;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
   }
 
   .bmx-ai-advantage .wrap {
@@ -99,6 +100,12 @@
     .bmx-ai-advantage .columns {
       grid-template-columns: 1fr;
     }
+  }
+  
+  @media (max-width: 480px) {
+    .bmx-ai-advantage h2 { font-size: 28px; }
+    .bmx-ai-advantage .column-title { font-size: 20px; }
+    .bmx-ai-advantage .column-text { font-size: 15px; }
   }
 </style>
 
