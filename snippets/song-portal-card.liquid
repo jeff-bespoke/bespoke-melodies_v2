@@ -101,12 +101,13 @@
   {% endif %}
 
   {% if show_lyrics_display %}
-    <div class="lyrics-display-section">
-      <div class="lyrics-display__header">
+    <div class="lyrics-display-section" id="lyrics-accordion">
+      <button class="lyrics-display__header" aria-expanded="false" aria-controls="lyrics-content">
         <h3 class="lyrics-display__title">Your Lyrics</h3>
-      </div>
+        <span class="lyrics-display__icon"></span>
+      </button>
       
-      <div class="lyrics-display__content custom-scrollbar">
+      <div id="lyrics-content" class="lyrics-display__content custom-scrollbar" aria-hidden="true">
         {% if lyrics_text != blank %}
           <div class="lyrics-text">
             {{ lyrics_text | newline_to_br }}

@@ -120,6 +120,27 @@ class SongPortal {
         this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again or contact support.', 'error');
       }
     });
+    // Lyrics Accordion Logic
+    const accordionHeader = document.querySelector('.lyrics-display__header');
+    const accordionContent = document.getElementById('lyrics-content');
+
+    if (accordionHeader && accordionContent) {
+      accordionHeader.addEventListener('click', () => {
+        const isExpanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+
+        accordionHeader.setAttribute('aria-expanded', !isExpanded);
+        accordionContent.setAttribute('aria-hidden', isExpanded);
+
+        if (!isExpanded) {
+          accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+          accordionContent.style.opacity = "1";
+        } else {
+          accordionContent.style.maxHeight = "0";
+          accordionContent.style.opacity = "0";
+        }
+      });
+    }
+
   }
 
   async submitToWebhook(data) {
