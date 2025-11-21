@@ -359,6 +359,92 @@
         </div>
     </section>
 
+    <!-- Pricing Tiers -->
+    <section id="pricing" class="py-20 px-4 bg-charcoal">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-8 items-center">
+
+                <!-- Standard -->
+                <div
+                    class="order-2 lg:order-1 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
+                    <h3 class="text-xl font-serif text-white mb-2">Standard</h3>
+                    <div class="text-3xl font-bold text-gold mb-4">$399</div>
+                    <p class="text-gray-400 text-sm mb-8">7 Days</p>
+                    <button onclick="openModal()"
+                        class="w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors">Select
+                        Standard</button>
+                </div>
+
+                <!-- Executive (Featured) -->
+                <div id="emergency"
+                    class="order-1 lg:order-2 bg-gradient-to-b from-charcoal-light to-charcoal border-2 border-gold rounded-2xl p-8 transform scale-105 shadow-2xl shadow-gold/20 relative glow-gold">
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gold text-charcoal text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                        Emergency Allocation</div>
+                    <h3 class="text-2xl font-serif text-white mb-2">Executive</h3>
+                    <div class="text-4xl font-bold text-gold mb-4">$2,500</div>
+                    <p class="text-gray-400 text-sm mb-8">6 Hours</p>
+                    <button onclick="openModal()"
+                        class="w-full py-4 bg-gold hover:bg-gold-hover text-charcoal font-bold rounded-lg transition-colors shadow-lg">Start
+                        Commission</button>
+                </div>
+
+                <!-- Priority -->
+                <div
+                    class="order-3 lg:order-3 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
+                    <h3 class="text-xl font-serif text-white mb-2">Priority</h3>
+                    <div class="text-3xl font-bold text-gold mb-4">$1,200</div>
+                    <p class="text-gray-400 text-sm mb-8">24 Hours</p>
+                    <button onclick="openModal()"
+                        class="w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors">Select
+                        Priority</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- The Bespoke Promise (Checkpoint Guarantee) -->
+    <section id="guarantee" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-serif text-white mb-16">The Bespoke Promise</h2>
+
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div
+                    class="hidden md:block absolute top-8 left-1/6 right-1/6 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent -z-10">
+                </div>
+
+                <!-- Step 1 -->
+                <div class="group">
+                    <div
+                        class="text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+                        100%</div>
+                    <h3 class="text-xl font-serif text-white mb-2">Lyric Approval</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Full refund if the lyrics don't move you.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="group">
+                    <div
+                        class="text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+                        50%</div>
+                    <h3 class="text-xl font-serif text-white mb-2">Pre-Production</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Refund before the final rendering begins.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="group">
+                    <div
+                        class="text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+                        25%</div>
+                    <h3 class="text-xl font-serif text-white mb-2">Final Polish</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Refund if the final mix isn't perfect.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Mini FAQ Section -->
     <section id="faq" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
         <div class="max-w-4xl mx-auto">
@@ -454,92 +540,6 @@
                             any misalignment as soon as it appears.
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Tiers -->
-    <section id="pricing" class="py-20 px-4 bg-charcoal">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-3 gap-8 items-center">
-
-                <!-- Standard -->
-                <div
-                    class="order-2 lg:order-1 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
-                    <h3 class="text-xl font-serif text-white mb-2">Standard</h3>
-                    <div class="text-3xl font-bold text-gold mb-4">$399</div>
-                    <p class="text-gray-400 text-sm mb-8">7 Days</p>
-                    <button onclick="openModal()"
-                        class="w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors">Select
-                        Standard</button>
-                </div>
-
-                <!-- Executive (Featured) -->
-                <div id="emergency"
-                    class="order-1 lg:order-2 bg-gradient-to-b from-charcoal-light to-charcoal border-2 border-gold rounded-2xl p-8 transform scale-105 shadow-2xl shadow-gold/20 relative glow-gold">
-                    <div
-                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gold text-charcoal text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg">
-                        Emergency Allocation</div>
-                    <h3 class="text-2xl font-serif text-white mb-2">Executive</h3>
-                    <div class="text-4xl font-bold text-gold mb-4">$2,500</div>
-                    <p class="text-gray-400 text-sm mb-8">6 Hours</p>
-                    <button onclick="openModal()"
-                        class="w-full py-4 bg-gold hover:bg-gold-hover text-charcoal font-bold rounded-lg transition-colors shadow-lg">Start
-                        Commission</button>
-                </div>
-
-                <!-- Priority -->
-                <div
-                    class="order-3 lg:order-3 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
-                    <h3 class="text-xl font-serif text-white mb-2">Priority</h3>
-                    <div class="text-3xl font-bold text-gold mb-4">$1,200</div>
-                    <p class="text-gray-400 text-sm mb-8">24 Hours</p>
-                    <button onclick="openModal()"
-                        class="w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors">Select
-                        Priority</button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- The Bespoke Promise (Checkpoint Guarantee) -->
-    <section id="guarantee" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-serif text-white mb-16">The Bespoke Promise</h2>
-
-            <div class="grid md:grid-cols-3 gap-12 relative">
-                <!-- Connecting Line (Desktop) -->
-                <div
-                    class="hidden md:block absolute top-8 left-1/6 right-1/6 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent -z-10">
-                </div>
-
-                <!-- Step 1 -->
-                <div class="group">
-                    <div
-                        class="text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
-                        100%</div>
-                    <h3 class="text-xl font-serif text-white mb-2">Lyric Approval</h3>
-                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Full refund if the lyrics don't move you.</p>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="group">
-                    <div
-                        class="text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
-                        50%</div>
-                    <h3 class="text-xl font-serif text-white mb-2">Pre-Production</h3>
-                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Refund before the final rendering begins.</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="group">
-                    <div
-                        class="text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
-                        25%</div>
-                    <h3 class="text-xl font-serif text-white mb-2">Final Polish</h3>
-                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Refund if the final mix isn't perfect.</p>
                 </div>
             </div>
         </div>
