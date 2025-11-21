@@ -119,13 +119,32 @@
         .text-glow {
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
+
+        /* Smooth Scroll for Sitelinks */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Offset scroll for better visual alignment */
+        [id] {
+            scroll-margin-top: 30px;
+        }
+
+        /* FAQ Accordion Animation */
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 
 <body class="antialiased">
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
+    <section id="get-started" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
                 alt="Dark Studio Atmosphere" class="w-full h-full object-cover opacity-20">
@@ -153,7 +172,7 @@
     </section>
 
     <!-- Why We Use AI (The Pivot) -->
-    <section class="py-20 px-4 bg-charcoal-light/30">
+    <section id="why-ai" class="py-20 px-4 bg-charcoal-light/30">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Human Artistry. Unconstrained Production.
@@ -203,7 +222,7 @@
     </section>
 
     <!-- Sonic Palette (6-Grid Player) -->
-    <section class="py-20 px-4 relative">
+    <section id="samples" class="py-20 px-4 relative">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-glow">Select Your Sound</h2>
@@ -340,6 +359,106 @@
         </div>
     </section>
 
+    <!-- Mini FAQ Section -->
+    <section id="faq" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif text-white mb-3">Common Questions</h2>
+                <div class="w-20 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            What if I'm not sure how to describe what I want?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            You don't need musical language or a fully formed concept — that's what my process is for.
+                            A short questionnaire and guided chat help me understand the person, story, and emotion behind the song.
+                            From there, I translate your answers into a clear creative direction so you never feel responsible for 'directing' the music.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            How do you make sure the first version is right?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            Most of the work happens before I start composing. The survey, our conversation, and any reference points you share 
+                            give me a strong sense of tone, pacing, and emotional arc. I treat the first version as a finished piece — not a draft — 
+                            so when you hear it, it should feel intentional, polished, and true to what you shared.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            Will the song feel artificial because AI is involved?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            AI is simply the instrument used to perform and render the music — not the author. I write the lyrics, 
+                            shape the melody, define the emotional tone, and guide how the performance should feel. The technology helps 
+                            produce the final delivery, but the meaning, structure, and creative decisions behind the song are fully human. 
+                            The finished piece should feel personal, expressive, and emotionally grounded — not artificial or generic.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            What is your refund policy?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            <strong class="text-white">• Before final lyric approval:</strong> Full refund — no questions asked.<br>
+                            <strong class="text-white">• After lyric approval but before first musical rendering:</strong> 50% refund.<br>
+                            <strong class="text-white">• After first musical rendering:</strong> 25% refund.<br>
+                            <strong class="text-white">• After second musical edit:</strong> Work is complete and non-refundable.<br><br>
+                            These stages protect you without locking you in, and I always encourage early communication so we can address 
+                            any misalignment as soon as it appears.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Tiers -->
     <section id="pricing" class="py-20 px-4 bg-charcoal">
         <div class="max-w-7xl mx-auto">
@@ -357,7 +476,7 @@
                 </div>
 
                 <!-- Executive (Featured) -->
-                <div
+                <div id="emergency"
                     class="order-1 lg:order-2 bg-gradient-to-b from-charcoal-light to-charcoal border-2 border-gold rounded-2xl p-8 transform scale-105 shadow-2xl shadow-gold/20 relative glow-gold">
                     <div
                         class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gold text-charcoal text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg">
@@ -386,7 +505,7 @@
     </section>
 
     <!-- The Bespoke Promise (Checkpoint Guarantee) -->
-    <section class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
+    <section id="guarantee" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
         <div class="max-w-5xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-serif text-white mb-16">The Bespoke Promise</h2>
 
