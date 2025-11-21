@@ -202,38 +202,115 @@
     </div>
   {% endif %}
 
-  <div class="audio-section">
-    <div class="audio-player__wrapper">
-      {% if preview_audio != blank %}
-        <span class="audio-player__label">Preview Mix</span>
-        <audio controls class="audio-player" controlsList="nodownload">
-          <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      {% elsif final_audio != blank %}
-         <span class="audio-player__label">Final Song</span>
-         <audio controls class="audio-player" controlsList="nodownload">
-          <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      {% else %}
-        <span class="audio-player__label">Audio Preview</span>
-        <div style="font-size: 0.9rem; color: rgba(0,0,0,0.5); font-style: italic;">
-          Your preview will appear here when ready.
-        </div>
-      {% endif %}
+  {% comment %} Song Approval Section - Ultra Premium Design {% endcomment %}
+  <div class="song-approval-section lyrics-display-section">
+    <div class="lyrics-display__header" style="cursor: default; border-bottom: none;">
+      <h3 class="lyrics-display__title">Song Preview</h3>
     </div>
 
-    <div class="audio-actions">
-      {% if final_approved == true and final_audio != blank %}
-        <a href="{{ final_audio.url | default: final_audio }}" class="btn-portal" data-download-btn>
-          Download Song
-        </a>
-      {% elsif preview_audio != blank %}
-        <button class="btn-portal btn-portal--outline" disabled style="opacity: 0.5; cursor: default;">
-          Download Locked
-        </button>
-      {% endif %}
+    <div class="audio-section" style="background: transparent; border: none; padding: 0 2rem 2rem;">
+      <div class="audio-player__wrapper">
+        {% if preview_audio != blank %}
+          <span class="audio-player__label">Preview Mix</span>
+          <audio controls class="audio-player" controlsList="nodownload">
+            <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        {% elsif final_audio != blank %}
+           <span class="audio-player__label">Final Song</span>
+           <audio controls class="audio-player" controlsList="nodownload">
+            <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        {% else %}
+          <span class="audio-player__label">Audio Preview</span>
+          <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); font-style: italic; text-align: center; padding: 1rem;">
+            Your preview will appear here when ready.
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="audio-actions">
+        {% if final_approved == true %}
+          {% comment %} APPROVED STATE: Show Download Only {% endcomment %}
+          <div class="approval-success-message" style="text-align: center; margin-top: 1.5rem;">
+            <p style="color: #4ade80; font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 1rem;">
+              ✓ Song Approved
+            </p>
+            {% if final_audio != blank %}
+              <a href="{{ final_audio.url | default: final_audio }}" class="btn-portal" data-download-btn>
+                Download Final Song
+              </a>
+            {% endif %}
+          </div>
+
+        {% elsif preview_audio != blank %}
+          {% comment %} REVIEW STATE: Show Approve / Request Changes {% endcomment %}
+          
+          <div class="approval-actions">
+            <form class="song-approval-form" data-song-approval-form data-order-id="{{ order.id }}">
+              <input type="hidden" name="order_id" value="{{ order.id }}">
+              <input type="hidden" name="order_name" value="{{ order.name }}">
+              <input type="hidden" name="customer_email" value="{{ customer.email }}">
+              <input type="hidden" name="action" value="approve_song">
+              <button type="submit" class="btn-portal btn-approve">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Approve Song
+              </button>
+            </form>
+
+            <button type="button" class="btn-portal btn-portal--outline btn-request-changes" data-show-song-changes>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              Request Revisions
+            </button>
+          </div>
+
+          <div class="change-request-section" data-song-change-section style="display: none;">
+            <form class="song-change-form" data-song-change-form data-order-id="{{ order.id }}">
+              <input type="hidden" name="order_id" value="{{ order.id }}">
+              <input type="hidden" name="order_name" value="{{ order.name }}">
+              <input type="hidden" name="customer_email" value="{{ customer.email }}">
+              <input type="hidden" name="action" value="request_song_changes">
+              
+              <label for="song-change-text-{{ order.id }}" class="change-request__label">
+                What revisions would you like?
+              </label>
+              <textarea 
+                id="song-change-text-{{ order.id }}" 
+                name="change_request" 
+                class="change-request__textarea"
+                rows="5" 
+                placeholder="Please describe the changes you'd like to the mix, arrangement, or vocals..."
+                required
+              ></textarea>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn-portal btn-submit-changes">
+                  Send Revisions
+                </button>
+                <button type="button" class="btn-portal btn-portal--ghost btn-cancel" data-cancel-song-changes>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="approval-feedback" data-song-approval-feedback style="display: none;"></div>
+
+        {% else %}
+          {% comment %} LOCKED STATE {% endcomment %}
+          <div style="text-align: center; margin-top: 1rem;">
+            <button class="btn-portal btn-portal--outline" disabled style="opacity: 0.5; cursor: default;">
+              Download Locked
+            </button>
+          </div>
+        {% endif %}
+      </div>
     </div>
   </div>
 </article>

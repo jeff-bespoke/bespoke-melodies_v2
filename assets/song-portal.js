@@ -141,6 +141,78 @@ class SongPortal {
       });
     }
 
+    // Initialize Song Approval
+    this.initSongApproval(card);
+  }
+
+  initSongApproval(card) {
+    const showChangesBtn = card.querySelector('[data-show-song-changes]');
+    const cancelBtn = card.querySelector('[data-cancel-song-changes]');
+    const changeSection = card.querySelector('[data-song-change-section]');
+    const approvalForm = card.querySelector('[data-song-approval-form]');
+    const changeForm = card.querySelector('[data-song-change-form]');
+    const feedbackDiv = card.querySelector('[data-song-approval-feedback]');
+
+    if (!approvalForm) return; // No song approval section active
+
+    // Toggle change request section
+    if (showChangesBtn) {
+      showChangesBtn.addEventListener('click', () => {
+        changeSection.style.display = 'block';
+        showChangesBtn.style.display = 'none';
+        setTimeout(() => {
+          changeSection.querySelector('textarea').focus();
+        }, 100);
+      });
+    }
+
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => {
+        changeSection.style.display = 'none';
+        showChangesBtn.style.display = 'inline-flex';
+        changeForm.reset();
+      });
+    }
+
+    // Handle Song Approval
+    approvalForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(approvalForm);
+      const data = Object.fromEntries(formData.entries());
+
+      this.showFeedback(feedbackDiv, 'Submitting song approval...', 'loading');
+
+      try {
+        await this.submitToWebhook(data);
+        this.showFeedback(feedbackDiv, '✓ Song approved! We are preparing your final files. Refreshing...', 'success');
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } catch (error) {
+        this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
+      }
+    });
+
+    // Handle Song Change Request
+    if (changeForm) {
+      changeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(changeForm);
+        const data = Object.fromEntries(formData.entries());
+
+        this.showFeedback(feedbackDiv, 'Sending revision request...', 'loading');
+
+        try {
+          await this.submitToWebhook(data);
+          this.showFeedback(feedbackDiv, '✓ Revisions requested! Jeff will review your notes.', 'success');
+          changeForm.reset();
+          changeSection.style.display = 'none';
+          if (showChangesBtn) showChangesBtn.style.display = 'inline-flex';
+        } catch (error) {
+          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
+        }
+      });
+    }
   }
 
   async submitToWebhook(data) {
