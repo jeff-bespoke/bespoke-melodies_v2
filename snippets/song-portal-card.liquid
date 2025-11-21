@@ -93,7 +93,7 @@
   </div>
 
   {% comment %} Lyrics Display Section {% endcomment %}
-  {% assign lyrics_text = order.metafields.custom.lyrics_text %}
+  {% assign lyrics_text = order.metafields.custom.lyrics_text | default: order.metafields.song_portal.lyrics_text %}
   {% assign show_lyrics_display = false %}
   
   {% if current_status_handle == 'writing_lyrics' or current_status_handle == 'lyrics_ready_for_review' or current_status_handle == 'lyrics_approved' or current_status_handle == 'recording_vocals' or current_status_handle == 'mixing_and_mastering' or current_status_handle == 'song_completed' %}
@@ -103,7 +103,7 @@
   {% if show_lyrics_display %}
     <div class="lyrics-display-section">
       <div class="lyrics-display__header">
-        <h3 class="lyrics-display__title">📝 Your Lyrics</h3>
+        <h3 class="lyrics-display__title">Your Lyrics</h3>
       </div>
       
       <div class="lyrics-display__content custom-scrollbar">
@@ -113,12 +113,6 @@
           </div>
         {% else %}
           <div class="lyrics-placeholder">
-            <div class="lyrics-placeholder__icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 20h9"></path>
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-              </svg>
-            </div>
             <p>Your custom lyrics will appear here as soon as they are ready for review.</p>
           </div>
         {% endif %}
