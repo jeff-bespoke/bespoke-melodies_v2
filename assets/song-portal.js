@@ -130,27 +130,6 @@ class SongPortal {
     const cancelBtn = card.querySelector('[data-cancel-changes]');
     const changeSection = card.querySelector('[data-change-request-section]');
     const approvalForm = card.querySelector('[data-lyrics-approval-form]');
-    const changeForm = card.querySelector('[data-change-request-form]');
-    const feedbackDiv = card.querySelector('[data-approval-feedback]');
-
-    if (!showChangesBtn || !approvalForm) return; // No lyrics approval section on this card
-
-    // Toggle change request section
-    showChangesBtn.addEventListener('click', () => {
-      changeSection.style.display = 'block';
-      showChangesBtn.style.display = 'none';
-      setTimeout(() => {
-        changeSection.querySelector('textarea').focus();
-      }, 100);
-    });
-
-    cancelBtn.addEventListener('click', () => {
-      changeSection.style.display = 'none';
-      showChangesBtn.style.display = 'inline-flex';
-      changeForm.reset();
-    });
-
-    // Handle approval submission
     approvalForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(approvalForm);
@@ -223,13 +202,19 @@ class SongPortal {
     if (!approvalForm) return; // No song approval section active
 
     // Toggle change request section
-    if (showChangesBtn) {
+    if (showChangesBtn && changeSection) {
       showChangesBtn.addEventListener('click', () => {
+        console.log('Request Revisions clicked');
         changeSection.style.display = 'block';
         showChangesBtn.style.display = 'none';
-        setTimeout(() => {
-          changeSection.querySelector('textarea').focus();
-        }, 100);
+
+        // Safely try to focus the textarea
+        const textarea = changeSection.querySelector('textarea');
+        if (textarea) {
+          setTimeout(() => {
+            textarea.focus();
+          }, 100);
+        }
       });
     }
 
