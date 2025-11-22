@@ -181,7 +181,7 @@ class SongPortal {
         this.showFeedback(feedbackDiv, 'Submitting approval...', 'loading');
 
         try {
-          await this.submitToWebhook(data);
+          await this.submitToWebhook(data); // Lyrics webhook: uzi3goy (default)
           this.showFeedback(feedbackDiv, '✓ Lyrics approved! Refreshing page...', 'success');
           setTimeout(() => {
             window.location.reload();
@@ -202,7 +202,7 @@ class SongPortal {
         this.showFeedback(feedbackDiv, 'Sending change request...', 'loading');
 
         try {
-          await this.submitToWebhook(data);
+          await this.submitToWebhook(data); // Lyrics webhook: uzi3goy (default)
           this.showFeedback(feedbackDiv, '✓ Change request sent!', 'success');
           changeForm.reset();
           changeSection.style.display = 'none';
@@ -258,7 +258,7 @@ class SongPortal {
         this.showFeedback(feedbackDiv, 'Submitting song approval...', 'loading');
 
         try {
-          await this.submitToWebhook(data);
+          await this.submitToWebhook(data, 'https://hooks.zapier.com/hooks/catch/25433977/uzs34wx/'); // Song webhook
 
           // Hide form
           approvalForm.style.display = 'none';
@@ -283,7 +283,7 @@ class SongPortal {
         this.showFeedback(feedbackDiv, 'Sending revision request...', 'loading');
 
         try {
-          await this.submitToWebhook(data);
+          await this.submitToWebhook(data, 'https://hooks.zapier.com/hooks/catch/25433977/uzs34wx/'); // Song webhook
 
           // Hide form
           changeSection.style.display = 'none';
@@ -299,9 +299,7 @@ class SongPortal {
     }
   }
 
-  async submitToWebhook(data) {
-    const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
-
+  async submitToWebhook(data, webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/') {
     const params = new URLSearchParams({
       ...data,
       timestamp: new Date().toISOString(),
