@@ -215,7 +215,7 @@
         <div class="audio-player__wrapper">
           {% if preview_audio != blank %}
             <div class="player-header">
-              <span class="audio-player__label">Preview Mix</span>
+              <span class="audio-player__label">Preview Mix (Updated)</span>
               <div class="live-indicator">
                 <span class="dot"></span> Live
               </div>
@@ -256,7 +256,7 @@
              </div>
              
              <div class="custom-audio-player" data-audio-url="{{ final_audio.url | default: final_audio }}">
-              <audio class="hidden-audio" preload="metadata">
+              <audio class="hidden-audio" preload="metadata" style="display: none !important; width: 0 !important; height: 0 !important; visibility: hidden !important;">
                 <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
               </audio>
               
