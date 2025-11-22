@@ -1,4 +1,49 @@
 {{ 'section-song-portal.css' | asset_url | stylesheet_tag: preload: true }}
+<style>
+  /* NUCLEAR OPTION: INLINE STYLES TO BYPASS CACHE */
+  .status-tracker__steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+  .status-tracker__steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+  }
+  @media (max-width: 768px) {
+    .status-tracker__steps {
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 1.5rem;
+      gap: 2rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .status-tracker__steps::-webkit-scrollbar { display: none; }
+    .status-tracker__steps::before { width: 100%; left: 0; right: 0; }
+    .status-step { flex: 0 0 auto; width: 100px; }
+  }
+  .approval-feedback--success {
+    background: rgba(212, 175, 55, 0.1) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    color: #d4af37 !important; /* Gold */
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    display: block !important;
+  }
+</style>
 <script src="{{ 'song-portal.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer="defer"></script>
 
 <section class="song-portal-section">
