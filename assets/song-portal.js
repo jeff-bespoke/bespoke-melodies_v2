@@ -281,6 +281,33 @@ class SongPortal {
       });
     }
 
+    // Handle Song Change Request
+    if (changeForm) {
+      changeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(changeForm);
+        const data = Object.fromEntries(formData.entries());
+
+        this.showFeedback(feedbackDiv, 'Sending revision request...', 'loading');
+
+        try {
+          await this.submitToWebhook(data);
+
+          // Hide the form and buttons
+          changeSection.style.display = 'none';
+          if (showChangesBtn) showChangesBtn.style.display = 'none';
+          if (approvalForm) approvalForm.style.display = 'none';
+
+          // Show persistent success message
+          this.showFeedback(feedbackDiv, '✓ Your request has been sent! You will hear from us shortly.', 'success');
+
+          // Do NOT reload automatically
+        } catch (error) {
+          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
+        }
+      });
+    }
+
   async submitToWebhook(data) {
       // Zapier webhook URL for lyrics approval/change requests
       const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
