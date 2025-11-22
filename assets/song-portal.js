@@ -301,32 +301,258 @@ class SongPortal {
           // Show persistent success message
           this.showFeedback(feedbackDiv, '✓ Your request has been sent! You will hear from us shortly.', 'success');
 
-          // Do NOT reload automatically
-        } catch (error) {
-          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
+          const progressBar = card.querySelector('[data-progress-bar]');
+          if (!progressBar) return;
+
+          const targetWidth = progressBar.dataset.width;
+          // Delay to ensure CSS transition catches it after load
+          setTimeout(() => {
+            progressBar.style.width = `${targetWidth}%`;
+          }, 300);
         }
-      });
-    });
-  }
-}
+
+  animateSteps(card) {
+          const steps = card.querySelectorAll('.status-step');
+          steps.forEach((step, index) => {
+            // Staggered entrance
+            setTimeout(() => {
+              step.classList.add('is-visible');
+            }, 100 + (index * 150));
+          });
+        }
+
+        initLyricsApproval(card) {
+          const showChangesBtn = card.querySelector('[data-show-changes]');
+          const cancelBtn = card.querySelector('[data-cancel-changes]');
+          const changeSection = card.querySelector('[data-change-request-section]');
+          const approvalForm = card.querySelector('[data-lyrics-approval-form]');
+          const changeForm = card.querySelector('[data-change-request-form]');
+          const feedbackDiv = card.querySelector('[data-approval-feedback]');
+
+          if (!showChangesBtn || !approvalForm) return; // No lyrics approval section on this card
+
+          // Toggle change request section
+          showChangesBtn.addEventListener('click', () => {
+            changeSection.style.display = 'block';
+            showChangesBtn.style.display = 'none';
+            setTimeout(() => {
+              const textarea = changeSection.querySelector('textarea');
+              if (textarea) textarea.focus();
+            }, 100);
+          });
+
+          cancelBtn.addEventListener('click', () => {
+            changeSection.style.display = 'none';
+            showChangesBtn.style.display = 'inline-flex';
+            if (changeForm) changeForm.reset();
+          });
+
+          // Handle approval submission
+          if (approvalForm) {
+            approvalForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const formData = new FormData(approvalForm);
+              const data = Object.fromEntries(formData.entries());
+
+              this.showFeedback(feedbackDiv, 'Submitting approval...', 'loading');
+
+              try {
+                await this.submitToWebhook(data);
+                this.showFeedback(feedbackDiv, '✓ Lyrics approved! The status will update shortly. Refreshing page...', 'success');
+                setTimeout(() => {
+                  window.location.reload();
+                }, 2000);
+              } catch (error) {
+                this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again or contact support.', 'error');
+              }
+            });
+          }
+
+          // Handle change request submission
+          if (changeForm) {
+            changeForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const formData = new FormData(changeForm);
+              const data = Object.fromEntries(formData.entries());
+
+              this.showFeedback(feedbackDiv, 'Sending change request...', 'loading');
+
+              try {
+                await this.submitToWebhook(data);
+                this.showFeedback(feedbackDiv, '✓ Change request sent! I\'ll review it and get back to you soon.', 'success');
+                changeForm.reset();
+                changeSection.style.display = 'none';
+                showChangesBtn.style.display = 'inline-flex';
+              } catch (error) {
+                this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again or contact support.', 'error');
+              }
+            });
+          }
+          // Lyrics Accordion Logic
+          const accordionHeader = document.querySelector('.lyrics-display__header');
+          const accordionContent = document.getElementById('lyrics-content');
+
+          if (accordionHeader && accordionContent) {
+            accordionHeader.addEventListener('click', () => {
+              const isExpanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+
+              accordionHeader.setAttribute('aria-expanded', !isExpanded);
+              accordionContent.setAttribute('aria-hidden', isExpanded);
+
+              if (!isExpanded) {
+                accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+                accordionContent.style.opacity = "1";
+              } else {
+                accordionContent.style.maxHeight = "0";
+                accordionContent.style.opacity = "0";
+              }
+            });
+          }
+
+          // Initialize Song Approval
+          this.initSongApproval(card);
+        }
+
+        initSongApproval(card) {
+          const showChangesBtn = card.querySelector('[data-show-song-changes]');
+          const cancelBtn = card.querySelector('[data-cancel-song-changes]');
+          const changeSection = card.querySelector('[data-song-change-section]');
+          const approvalForm = card.querySelector('[data-song-approval-form]');
+          const changeForm = card.querySelector('[data-song-change-form]');
+          const feedbackDiv = card.querySelector('[data-song-approval-feedback]');
+
+          // Only return if there's nothing to initialize at all
+          if (!approvalForm && !showChangesBtn) return;
+
+          // Toggle change request section
+          if (showChangesBtn && changeSection) {
+            showChangesBtn.addEventListener('click', () => {
+              console.log('Request Revisions clicked');
+              changeSection.style.display = 'block';
+              showChangesBtn.style.display = 'none';
+
+              // Safely try to focus the textarea
+              const textarea = changeSection.querySelector('textarea');
+              if (textarea) {
+                setTimeout(() => {
+                  textarea.focus();
+                }, 100);
+              }
+            });
+          }
+
+          if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => {
+              changeSection.style.display = 'none';
+              showChangesBtn.style.display = 'inline-flex';
+              if (changeForm) changeForm.reset();
+            });
+          }
+
+          // Handle Song Approval
+          if (approvalForm) {
+            approvalForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const formData = new FormData(approvalForm);
+              const data = Object.fromEntries(formData.entries());
+
+              this.showFeedback(feedbackDiv, 'Submitting song approval...', 'loading');
+
+              try {
+                await this.submitToWebhook(data);
+
+                // Hide the form and buttons to prevent re-submission or confusion
+                approvalForm.style.display = 'none';
+                if (changeSection) changeSection.style.display = 'none';
+                if (showChangesBtn) showChangesBtn.style.display = 'none';
+
+                // Show persistent success message
+                this.showFeedback(feedbackDiv, '✓ Your approval has been sent! You will hear from us shortly.', 'success');
+
+                // Do NOT reload automatically
+              } catch (error) {
+                this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
+              }
+            });
+          }
+
+          // Handle Song Change Request
+          if (changeForm) {
+            changeForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const formData = new FormData(changeForm);
+              const data = Object.fromEntries(formData.entries());
+
+              this.showFeedback(feedbackDiv, 'Sending revision request...', 'loading');
+
+              try {
+                await this.submitToWebhook(data);
+
+                // Hide the form and buttons
+                changeSection.style.display = 'none';
+                if (showChangesBtn) showChangesBtn.style.display = 'none';
+                if (approvalForm) approvalForm.style.display = 'none';
+
+                // Show persistent success message
+                this.showFeedback(feedbackDiv, '✓ Your request has been sent! You will hear from us shortly.', 'success');
+
+                // Do NOT reload automatically
+              } catch (error) {
+                this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
+              }
+            });
+          }
+        }
 
   async submitToWebhook(data) {
-  // Zapier webhook URL for lyrics approval/change requests
-  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
+          // Zapier webhook URL for lyrics approval/change requests
+          const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
-  // Use URLSearchParams to avoid CORS preflight
-  const params = new URLSearchParams({
-    ...data,
-    timestamp: new Date().toISOString(),
-    shop: Shopify.shop || window.location.hostname
-  });
+          // Use URLSearchParams to avoid CORS preflight
+          const params = new URLSearchParams({
+            ...data,
+            timestamp: new Date().toISOString(),
+            shop: Shopify.shop || window.location.hostname
+          });
 
-  const response = await fetch(webhookUrl, {
-    method: 'POST',
-    body: params
-  });
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            body: params
+          });
 
-  if (!response.ok) {
-    throw new Error('Webhook submission failed');
-  }
-});
+          if (!response.ok) {
+            throw new Error('Webhook submission failed');
+          }
+
+          return response.json();
+        }
+
+        showFeedback(feedbackDiv, message, type) {
+          console.log('showFeedback called:', message, type, feedbackDiv);
+          if (!feedbackDiv) {
+            console.error('Feedback div not found!');
+            return;
+          }
+
+          feedbackDiv.textContent = message;
+          feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
+          feedbackDiv.style.display = 'block';
+
+          // FORCE STYLES IN JS (Nuclear Option 2.0)
+          if (type === 'success') {
+            feedbackDiv.style.background = 'rgba(212, 175, 55, 0.1)';
+            feedbackDiv.style.border = '1px solid rgba(212, 175, 55, 0.3)';
+            feedbackDiv.style.color = '#d4af37';
+            feedbackDiv.style.padding = '1.5rem';
+            feedbackDiv.style.marginTop = '2rem';
+            feedbackDiv.style.textAlign = 'center';
+            feedbackDiv.style.display = 'block';
+          }
+
+          if (type === 'error') {
+            setTimeout(() => {
+              feedbackDiv.style.display = 'none';
+            }, 5000);
+          }
+        }
+      }
