@@ -150,7 +150,7 @@
           <input type="hidden" name="order_id" value="{{ order.id }}">
           <input type="hidden" name="order_name" value="{{ order.name }}">
           <input type="hidden" name="customer_email" value="{{ customer.email }}">
-          <input type="hidden" name="action" value="approve">
+          <input type="hidden" name="action" value="approve_lyrics">
           <button type="submit" class="btn-portal btn-approve" data-approve-btn>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
               <polyline points="20 6 9 17 4 12"></polyline>
@@ -173,7 +173,7 @@
           <input type="hidden" name="order_id" value="{{ order.id }}">
           <input type="hidden" name="order_name" value="{{ order.name }}">
           <input type="hidden" name="customer_email" value="{{ customer.email }}">
-          <input type="hidden" name="action" value="request_changes">
+          <input type="hidden" name="action" value="request_lyrics_changes">
           
           <label for="change-text-{{ order.id }}" class="change-request__label">
             What changes would you like to make?
@@ -336,7 +336,7 @@
               <input type="hidden" name="order_id" value="{{ order.id }}">
               <input type="hidden" name="order_name" value="{{ order.name }}">
               <input type="hidden" name="customer_email" value="{{ customer.email }}">
-              <input type="hidden" name="action" value="request_song_changes">
+              <input type="hidden" name="action" value="request_song_revisions">
               
               <label for="song-change-text-{{ order.id }}" class="change-request__label">
                 What revisions would you like?

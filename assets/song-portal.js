@@ -299,7 +299,7 @@ class SongPortal {
     }
   }
 
-  async submitToWebhook(data, webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/') {
+  async submitToWebhook(data, webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzs34wx/') {
     const params = new URLSearchParams({
       ...data,
       timestamp: new Date().toISOString(),
