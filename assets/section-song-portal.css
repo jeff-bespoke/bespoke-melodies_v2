@@ -248,6 +248,65 @@
   box-shadow: 0 0 10px var(--color-gold);
 }
 
+/* Status Tracker - Premium Timeline */
+.status-tracker {
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.status-tracker__steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+/* Progress Bar Background Line */
+.status-tracker__steps::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  /* Center with dots */
+  left: 2rem;
+  right: 2rem;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+
+/* Mobile Timeline - Horizontal Scroll */
+@media (max-width: 768px) {
+  .status-tracker__steps {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 1.5rem;
+    /* Space for scrollbar */
+    gap: 2rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .status-tracker__steps::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+  }
+
+  .status-tracker__steps::before {
+    width: 100%;
+    /* Ensure line stretches */
+    left: 0;
+    right: 0;
+  }
+
+  .status-step {
+    flex: 0 0 auto;
+    /* Don't shrink */
+    width: 100px;
+  }
+}
+
 .status-step.is-active .status-step__label {
   color: #fff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
@@ -1258,12 +1317,14 @@ audio::-webkit-media-controls-play-button {
     height: 20px;
   }
 }
+
 /* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

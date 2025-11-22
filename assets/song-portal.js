@@ -267,26 +267,37 @@ class SongPortal {
           await this.submitToWebhook(data);
 
           // Hide the form and buttons to prevent re-submission or confusion
+          approvalForm.style.display = 'none';
+          if (changeSection) changeSection.style.display = 'none';
+          if (showChangesBtn) showChangesBtn.style.display = 'none';
+
+          // Show persistent success message
+          this.showFeedback(feedbackDiv, '✓ Your approval has been sent! You will hear from us shortly.', 'success');
+
+          // Do NOT reload automatically
+        } catch (error) {
+          this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
         }
-  }
+      });
+    }
 
   async submitToWebhook(data) {
-        // Zapier webhook URL for lyrics approval/change requests
-        const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
+      // Zapier webhook URL for lyrics approval/change requests
+      const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
-        // Use URLSearchParams to avoid CORS preflight
-        const params = new URLSearchParams({
-          ...data,
-          timestamp: new Date().toISOString(),
-          shop: Shopify.shop || window.location.hostname
-        });
+      // Use URLSearchParams to avoid CORS preflight
+      const params = new URLSearchParams({
+        ...data,
+        timestamp: new Date().toISOString(),
+        shop: Shopify.shop || window.location.hostname
+      });
 
-        const response = await fetch(webhookUrl, {
-          method: 'POST',
-          body: params
-        });
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        body: params
+      });
 
-        if(!response.ok) {
+      if (!response.ok) {
         throw new Error('Webhook submission failed');
       }
 
