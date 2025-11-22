@@ -182,10 +182,7 @@ class SongPortal {
 
         try {
           await this.submitToWebhook(data); // Lyrics webhook: uzi3goy (default)
-          this.showFeedback(feedbackDiv, '✓ Lyrics approved! Refreshing page...', 'success');
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          this.showFeedback(feedbackDiv, '✓ Lyrics approved! You will hear from us shortly.', 'success');
         } catch (error) {
           this.showFeedback(feedbackDiv, '✗ Error submitting. Please try again.', 'error');
         }
