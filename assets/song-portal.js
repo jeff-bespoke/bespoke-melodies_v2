@@ -131,6 +131,27 @@ class SongPortal {
     const cancelBtn = card.querySelector('[data-cancel-changes]');
     const changeSection = card.querySelector('[data-change-request-section]');
     const approvalForm = card.querySelector('[data-lyrics-approval-form]');
+    const changeForm = card.querySelector('[data-change-request-form]');
+    const feedbackDiv = card.querySelector('[data-approval-feedback]');
+
+    if (!showChangesBtn || !approvalForm) return; // No lyrics approval section on this card
+
+    // Toggle change request section
+    showChangesBtn.addEventListener('click', () => {
+      changeSection.style.display = 'block';
+      showChangesBtn.style.display = 'none';
+      setTimeout(() => {
+        const textarea = changeSection.querySelector('textarea');
+        if (textarea) textarea.focus();
+      }, 100);
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      changeSection.style.display = 'none';
+      showChangesBtn.style.display = 'inline-flex';
+      changeForm.reset();
+    });
+
     // Handle approval submission
     if (approvalForm) {
       approvalForm.addEventListener('submit', async (e) => {
