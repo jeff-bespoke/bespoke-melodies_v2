@@ -226,7 +226,8 @@ class SongPortal {
     const changeForm = card.querySelector('[data-song-change-form]');
     const feedbackDiv = card.querySelector('[data-song-approval-feedback]');
 
-    if (!approvalForm) return; // No song approval section active
+    // Only return if there's nothing to initialize at all
+    if (!approvalForm && !showChangesBtn) return;
 
     // Toggle change request section
     if (showChangesBtn && changeSection) {
