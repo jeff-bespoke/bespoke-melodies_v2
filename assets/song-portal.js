@@ -267,110 +267,44 @@ class SongPortal {
           await this.submitToWebhook(data);
 
           // Hide the form and buttons to prevent re-submission or confusion
-          approvalForm.style.display = 'none';
-          if (changeSection) changeSection.style.display = 'none';
-          if (showChangesBtn) showChangesBtn.style.display = 'none';
-
-          // Show persistent success message
-          this.showFeedback(feedbackDiv, '✓ Song approved! Preparing final delivery...', 'success');
-
-          // OPTIMISTIC UI: Visually advance the status tracker
-          const statusSteps = document.querySelectorAll('.status-step');
-          const progressBar = document.querySelector('.status-tracker__progress-bar');
-
-          // Find current active step
-          let activeIndex = -1;
-          statusSteps.forEach((step, index) => {
-            if (step.classList.contains('is-active')) {
-              activeIndex = index;
-            }
-          });
-
-          if (activeIndex !== -1 && activeIndex < statusSteps.length - 1) {
-            // Mark current as complete
-            statusSteps[activeIndex].classList.remove('is-active');
-            statusSteps[activeIndex].classList.add('is-complete');
-
-            // Mark next as active (Final Delivery)
-            statusSteps[activeIndex + 1].classList.add('is-active');
-
-            // Update progress bar (assuming equal steps)
-            if (progressBar) {
-              const newWidth = ((activeIndex + 2) / statusSteps.length) * 100;
-              progressBar.style.width = `${newWidth}%`;
-            }
-          }
-
-          // Do NOT reload automatically to avoid reverting to old state
-        } catch (error) {
-          this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
         }
-      });
-    }
-
-    // Handle Song Change Request
-    if (changeForm) {
-      changeForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(changeForm);
-        const data = Object.fromEntries(formData.entries());
-
-        this.showFeedback(feedbackDiv, 'Sending revision request...', 'loading');
-
-        try {
-          await this.submitToWebhook(data);
-
-          // Hide the form and buttons
-          changeSection.style.display = 'none';
-          if (showChangesBtn) showChangesBtn.style.display = 'none';
-          if (approvalForm) approvalForm.style.display = 'none';
-
-          // Show persistent success message
-          this.showFeedback(feedbackDiv, '✓ Revisions requested! Jeff will review your notes. The status is updating...', 'success');
-
-          // Do NOT reload automatically
-        } catch (error) {
-          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
-        }
-      });
-    }
   }
 
   async submitToWebhook(data) {
-    // Zapier webhook URL for lyrics approval/change requests
-    const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
+        // Zapier webhook URL for lyrics approval/change requests
+        const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
-    // Use URLSearchParams to avoid CORS preflight
-    const params = new URLSearchParams({
-      ...data,
-      timestamp: new Date().toISOString(),
-      shop: Shopify.shop || window.location.hostname
-    });
+        // Use URLSearchParams to avoid CORS preflight
+        const params = new URLSearchParams({
+          ...data,
+          timestamp: new Date().toISOString(),
+          shop: Shopify.shop || window.location.hostname
+        });
 
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      body: params
-    });
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          body: params
+        });
 
-    if (!response.ok) {
-      throw new Error('Webhook submission failed');
+        if(!response.ok) {
+        throw new Error('Webhook submission failed');
+      }
+
+      return response.json();
     }
 
-    return response.json();
-  }
+    showFeedback(feedbackDiv, message, type) {
+      feedbackDiv.textContent = message;
+      feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
+      feedbackDiv.style.display = 'block';
 
-  showFeedback(feedbackDiv, message, type) {
-    feedbackDiv.textContent = message;
-    feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
-    feedbackDiv.style.display = 'block';
-
-    if (type === 'error') {
-      setTimeout(() => {
-        feedbackDiv.style.display = 'none';
-      }, 5000);
+      if (type === 'error') {
+        setTimeout(() => {
+          feedbackDiv.style.display = 'none';
+        }, 5000);
+      }
     }
   }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   const portalContainer = document.querySelector('.song-portal-section');
