@@ -272,7 +272,34 @@ class SongPortal {
           if (showChangesBtn) showChangesBtn.style.display = 'none';
 
           // Show persistent success message
-          this.showFeedback(feedbackDiv, '✓ Song approved! The status is updating in the background. You can close this page.', 'success');
+          this.showFeedback(feedbackDiv, '✓ Song approved! Preparing final delivery...', 'success');
+
+          // OPTIMISTIC UI: Visually advance the status tracker
+          const statusSteps = document.querySelectorAll('.status-step');
+          const progressBar = document.querySelector('.status-tracker__progress-bar');
+
+          // Find current active step
+          let activeIndex = -1;
+          statusSteps.forEach((step, index) => {
+            if (step.classList.contains('is-active')) {
+              activeIndex = index;
+            }
+          });
+
+          if (activeIndex !== -1 && activeIndex < statusSteps.length - 1) {
+            // Mark current as complete
+            statusSteps[activeIndex].classList.remove('is-active');
+            statusSteps[activeIndex].classList.add('is-complete');
+
+            // Mark next as active (Final Delivery)
+            statusSteps[activeIndex + 1].classList.add('is-active');
+
+            // Update progress bar (assuming equal steps)
+            if (progressBar) {
+              const newWidth = ((activeIndex + 2) / statusSteps.length) * 100;
+              progressBar.style.width = `${newWidth}%`;
+            }
+          }
 
           // Do NOT reload automatically to avoid reverting to old state
         } catch (error) {
