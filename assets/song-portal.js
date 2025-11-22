@@ -306,42 +306,44 @@ class SongPortal {
           this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
         }
       });
-    }
+    });
+  }
+}
 
   async submitToWebhook(data) {
-      // Zapier webhook URL for lyrics approval/change requests
-      const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
+  // Zapier webhook URL for lyrics approval/change requests
+  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
-      // Use URLSearchParams to avoid CORS preflight
-      const params = new URLSearchParams({
-        ...data,
-        timestamp: new Date().toISOString(),
-        shop: Shopify.shop || window.location.hostname
-      });
+  // Use URLSearchParams to avoid CORS preflight
+  const params = new URLSearchParams({
+    ...data,
+    timestamp: new Date().toISOString(),
+    shop: Shopify.shop || window.location.hostname
+  });
 
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        body: params
-      });
+  const response = await fetch(webhookUrl, {
+    method: 'POST',
+    body: params
+  });
 
-      if (!response.ok) {
-        throw new Error('Webhook submission failed');
-      }
+  if (!response.ok) {
+    throw new Error('Webhook submission failed');
+  }
 
-      return response.json();
-    }
+  return response.json();
+}
 
-    showFeedback(feedbackDiv, message, type) {
-      feedbackDiv.textContent = message;
-      feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
-      feedbackDiv.style.display = 'block';
+showFeedback(feedbackDiv, message, type) {
+  feedbackDiv.textContent = message;
+  feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
+  feedbackDiv.style.display = 'block';
 
-      if (type === 'error') {
-        setTimeout(() => {
-          feedbackDiv.style.display = 'none';
-        }, 5000);
-      }
-    }
+  if (type === 'error') {
+    setTimeout(() => {
+      feedbackDiv.style.display = 'none';
+    }, 5000);
+  }
+}
   }
 
 document.addEventListener('DOMContentLoaded', () => {
