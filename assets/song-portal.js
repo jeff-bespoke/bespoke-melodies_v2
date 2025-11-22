@@ -13,6 +13,7 @@ class SongPortal {
       this.animateProgress(card);
       this.animateSteps(card);
       this.initLyricsApproval(card);
+      this.initSongApproval(card); // ← CRITICAL FIX: Call independently
     });
   }
 
@@ -101,7 +102,6 @@ class SongPortal {
 
     downloadBtn.addEventListener('click', (e) => {
       // Allow default behavior (download) but track if needed
-      // e.preventDefault(); // Removed to allow native download attribute to work if present
     });
   }
 
@@ -110,7 +110,6 @@ class SongPortal {
     if (!progressBar) return;
 
     const targetWidth = progressBar.dataset.width;
-    // Delay to ensure CSS transition catches it after load
     setTimeout(() => {
       progressBar.style.width = `${targetWidth}%`;
     }, 300);
@@ -119,7 +118,6 @@ class SongPortal {
   animateSteps(card) {
     const steps = card.querySelectorAll('.status-step');
     steps.forEach((step, index) => {
-      // Staggered entrance
       setTimeout(() => {
         step.classList.add('is-visible');
       }, 100 + (index * 150));
@@ -155,7 +153,7 @@ class SongPortal {
       });
     }
 
-    if (!showChangesBtn || !approvalForm) return; // No lyrics approval section on this card
+    if (!showChangesBtn || !approvalForm) return;
 
     // Toggle change request section
     showChangesBtn.addEventListener('click', () => {
@@ -184,12 +182,12 @@ class SongPortal {
 
         try {
           await this.submitToWebhook(data);
-          this.showFeedback(feedbackDiv, '✓ Lyrics approved! The status will update shortly. Refreshing page...', 'success');
+          this.showFeedback(feedbackDiv, '✓ Lyrics approved! Refreshing page...', 'success');
           setTimeout(() => {
             window.location.reload();
           }, 2000);
         } catch (error) {
-          this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again or contact support.', 'error');
+          this.showFeedback(feedbackDiv, '✗ Error submitting. Please try again.', 'error');
         }
       });
     }
@@ -205,18 +203,15 @@ class SongPortal {
 
         try {
           await this.submitToWebhook(data);
-          this.showFeedback(feedbackDiv, '✓ Change request sent! I\'ll review it and get back to you soon.', 'success');
+          this.showFeedback(feedbackDiv, '✓ Change request sent!', 'success');
           changeForm.reset();
           changeSection.style.display = 'none';
           showChangesBtn.style.display = 'inline-flex';
         } catch (error) {
-          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again or contact support.', 'error');
+          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
         }
       });
     }
-
-    // Also initialize Song Approval (separate section)
-    this.initSongApproval(card);
   }
 
   initSongApproval(card) {
@@ -227,17 +222,15 @@ class SongPortal {
     const changeForm = card.querySelector('[data-song-change-form]');
     const feedbackDiv = card.querySelector('[data-song-approval-feedback]');
 
-    // Only return if there's nothing to initialize at all
     if (!approvalForm && !showChangesBtn) return;
 
     // Toggle change request section
     if (showChangesBtn && changeSection) {
       showChangesBtn.addEventListener('click', () => {
-        console.log('Request Revisions clicked');
+        console.log('Request Revisions clicked'); // ← This should appear in console
         changeSection.style.display = 'block';
         showChangesBtn.style.display = 'none';
 
-        // Safely try to focus the textarea
         const textarea = changeSection.querySelector('textarea');
         if (textarea) {
           setTimeout(() => {
@@ -267,15 +260,13 @@ class SongPortal {
         try {
           await this.submitToWebhook(data);
 
-          // Hide the form and buttons to prevent re-submission or confusion
+          // Hide form
           approvalForm.style.display = 'none';
           if (changeSection) changeSection.style.display = 'none';
           if (showChangesBtn) showChangesBtn.style.display = 'none';
 
-          // Show persistent success message
+          // Show success
           this.showFeedback(feedbackDiv, '✓ Your approval has been sent! You will hear from us shortly.', 'success');
-
-          // Do NOT reload automatically
         } catch (error) {
           this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
         }
@@ -294,15 +285,13 @@ class SongPortal {
         try {
           await this.submitToWebhook(data);
 
-          // Hide the form and buttons
+          // Hide form
           changeSection.style.display = 'none';
           if (showChangesBtn) showChangesBtn.style.display = 'none';
           if (approvalForm) approvalForm.style.display = 'none';
 
-          // Show persistent success message
+          // Show success
           this.showFeedback(feedbackDiv, '✓ Your request has been sent! You will hear from us shortly.', 'success');
-
-          // Do NOT reload automatically
         } catch (error) {
           this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
         }
@@ -311,10 +300,8 @@ class SongPortal {
   }
 
   async submitToWebhook(data) {
-    // Zapier webhook URL for lyrics approval/change requests
     const webhookUrl = 'https://hooks.zapier.com/hooks/catch/25433977/uzi3goy/';
 
-    // Use URLSearchParams to avoid CORS preflight
     const params = new URLSearchParams({
       ...data,
       timestamp: new Date().toISOString(),
@@ -344,7 +331,7 @@ class SongPortal {
     feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
     feedbackDiv.style.display = 'block';
 
-    // FORCE STYLES IN JS (Nuclear Option 2.0)
+    // FORCE GOLD STYLES
     if (type === 'success') {
       feedbackDiv.style.background = 'rgba(212, 175, 55, 0.1)';
       feedbackDiv.style.border = '1px solid rgba(212, 175, 55, 0.3)';
@@ -352,6 +339,7 @@ class SongPortal {
       feedbackDiv.style.padding = '1.5rem';
       feedbackDiv.style.marginTop = '2rem';
       feedbackDiv.style.textAlign = 'center';
+      feedbackDiv.style.fontSize = '1.1rem';
       feedbackDiv.style.display = 'block';
     }
 
