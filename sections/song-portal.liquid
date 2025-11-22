@@ -1,10 +1,10 @@
-{{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'song-portal.js' | asset_url }}" defer="defer"></script>
+{{ 'section-song-portal.css' | asset_url | stylesheet_tag: preload: true }}
+<script src="{{ 'song-portal.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer="defer"></script>
 
 <section class="song-portal-section">
   <div class="song-portal__container">
     <header class="song-portal__header">
-      <h1 class="song-portal__title">{{ section.settings.heading }} - TEST MODE</h1>
+      <h1 class="song-portal__title">{{ section.settings.heading }}</h1>
       {% if section.settings.subheading != blank %}
         <p class="song-portal__subtitle">{{ section.settings.subheading }}</p>
       {% endif %}

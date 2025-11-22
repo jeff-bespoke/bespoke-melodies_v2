@@ -307,6 +307,7 @@
 
         {% elsif preview_audio != blank %}
           {% comment %} REVIEW STATE: Show Approve / Request Changes {% endcomment %}
+          <!-- DEBUG: Preview Audio Found: {{ preview_audio }} -->
           
           <div class="approval-actions">
             <form class="song-approval-form" data-song-approval-form data-order-id="{{ order.id }}">
