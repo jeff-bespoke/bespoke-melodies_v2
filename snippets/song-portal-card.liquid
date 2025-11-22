@@ -208,26 +208,40 @@
       <h3 class="lyrics-display__title">Song Preview</h3>
     </div>
 
-    <div class="audio-section" style="background: transparent; border: none; padding: 0 2rem 2rem;">
-      <div class="audio-player__wrapper">
-        {% if preview_audio != blank %}
-          <span class="audio-player__label">Preview Mix</span>
-          <audio controls class="audio-player" controlsList="nodownload">
-            <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        {% elsif final_audio != blank %}
-           <span class="audio-player__label">Final Song</span>
-           <audio controls class="audio-player" controlsList="nodownload">
-            <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
-            Your browser does not support the audio element.
-          </audio>
-        {% else %}
-          <span class="audio-player__label">Audio Preview</span>
-          <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); font-style: italic; text-align: center; padding: 1rem;">
-            Your preview will appear here when ready.
-          </div>
-        {% endif %}
+    <div class="audio-section" style="background: transparent; border: none; padding: 0 2rem 2rem; display: flex; flex-direction: column; align-items: center; gap: 2.5rem;">
+      
+      <!-- Premium Player Card -->
+      <div class="premium-player-card">
+        <div class="audio-player__wrapper">
+          {% if preview_audio != blank %}
+            <div class="player-header">
+              <span class="audio-player__label">Preview Mix</span>
+              <div class="live-indicator">
+                <span class="dot"></span> Live
+              </div>
+            </div>
+            <audio controls class="audio-player" controlsList="nodownload">
+              <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          {% elsif final_audio != blank %}
+             <div class="player-header">
+               <span class="audio-player__label">Final Song</span>
+               <div class="live-indicator">
+                 <span class="dot"></span> Ready
+               </div>
+             </div>
+             <audio controls class="audio-player" controlsList="nodownload">
+              <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          {% else %}
+            <span class="audio-player__label">Audio Preview</span>
+            <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); font-style: italic; text-align: center; padding: 1rem;">
+              Your preview will appear here when ready.
+            </div>
+          {% endif %}
+        </div>
       </div>
 
       <div class="audio-actions">
