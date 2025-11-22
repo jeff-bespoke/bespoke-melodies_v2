@@ -220,10 +220,33 @@
                 <span class="dot"></span> Live
               </div>
             </div>
-            <audio controls class="audio-player" controlsList="nodownload">
-              <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
+            
+            <div class="custom-audio-player" data-audio-url="{{ preview_audio.url | default: preview_audio }}">
+              <audio class="hidden-audio" preload="metadata">
+                <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
+              </audio>
+              
+              <div class="player-controls">
+                <button class="play-pause-btn" aria-label="Play">
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                </button>
+                
+                <div class="progress-container">
+                  <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                  </div>
+                  <div class="time-display">
+                    <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           {% elsif final_audio != blank %}
              <div class="player-header">
                <span class="audio-player__label">Final Song</span>
@@ -231,10 +254,33 @@
                  <span class="dot"></span> Ready
                </div>
              </div>
-             <audio controls class="audio-player" controlsList="nodownload">
-              <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
+             
+             <div class="custom-audio-player" data-audio-url="{{ final_audio.url | default: final_audio }}">
+              <audio class="hidden-audio" preload="metadata">
+                <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
+              </audio>
+              
+              <div class="player-controls">
+                <button class="play-pause-btn" aria-label="Play">
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                </button>
+                
+                <div class="progress-container">
+                  <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                  </div>
+                  <div class="time-display">
+                    <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           {% else %}
             <span class="audio-player__label">Audio Preview</span>
             <div style="font-size: 0.9rem; color: rgba(255,255,255,0.5); font-style: italic; text-align: center; padding: 1rem;">
@@ -243,6 +289,7 @@
           {% endif %}
         </div>
       </div>
+
 
       <div class="audio-actions">
         {% if final_approved == true and current_status_handle != 'music_ready' %}

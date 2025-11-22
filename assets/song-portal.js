@@ -16,15 +16,82 @@ class SongPortal {
   }
 
   initAudio(card) {
-    const players = card.querySelectorAll('audio');
-    players.forEach(player => {
-      player.addEventListener('play', () => {
-        // Pause other players when one starts
-        players.forEach(p => {
-          if (p !== player) p.pause();
-        });
+    const customPlayers = card.querySelectorAll('.custom-audio-player');
+
+    customPlayers.forEach(playerContainer => {
+      const audio = playerContainer.querySelector('.hidden-audio');
+      const playBtn = playerContainer.querySelector('.play-pause-btn');
+      const playIcon = playBtn.querySelector('.icon-play');
+      const pauseIcon = playBtn.querySelector('.icon-pause');
+      const progressBar = playerContainer.querySelector('.progress-bar');
+      const progressFill = playerContainer.querySelector('.progress-fill');
+      const currentTimeEl = playerContainer.querySelector('.current-time');
+      const durationEl = playerContainer.querySelector('.duration');
+
+      if (!audio || !playBtn) return;
+
+      // Play/Pause Toggle
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          // Pause all other audios first
+          document.querySelectorAll('audio').forEach(a => {
+            if (a !== audio) {
+              a.pause();
+              // Reset other players UI
+              const otherContainer = a.closest('.custom-audio-player');
+              if (otherContainer) {
+                otherContainer.querySelector('.icon-play').style.display = 'block';
+                otherContainer.querySelector('.icon-pause').style.display = 'none';
+              }
+            }
+          });
+
+          audio.play();
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+          playerContainer.classList.add('is-playing');
+        } else {
+          audio.pause();
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+          playerContainer.classList.remove('is-playing');
+        }
+      });
+
+      // Update Progress
+      audio.addEventListener('timeupdate', () => {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${percent}%`;
+        currentTimeEl.textContent = this.formatTime(audio.currentTime);
+      });
+
+      // Load Duration
+      audio.addEventListener('loadedmetadata', () => {
+        durationEl.textContent = this.formatTime(audio.duration);
+      });
+
+      // Seek
+      progressBar.parentElement.addEventListener('click', (e) => {
+        const rect = progressBar.parentElement.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+      });
+
+      // Reset on End
+      audio.addEventListener('ended', () => {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        progressFill.style.width = '0%';
+        playerContainer.classList.remove('is-playing');
       });
     });
+  }
+
+  formatTime(seconds) {
+    if (!seconds) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
   initDownloads(card) {
