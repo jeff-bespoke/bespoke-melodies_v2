@@ -457,33 +457,6 @@
 
 .lyrics-display-section:hover::before {
   left: 0;
-  right: 0;
-  opacity: 1;
-  box-shadow: 0 0 25px var(--color-gold);
-}
-
-.lyrics-display__header {
-  width: 100%;
-  padding: 2.5rem 2rem;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: all 0.4s ease;
-  z-index: 3;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  box-shadow: none;
-}
-
-.lyrics-display__header:focus {
-  outline: none;
-  background: rgba(212, 175, 55, 0.03);
 }
 
 .lyrics-display__title {
@@ -1216,6 +1189,30 @@
     .current-time {
       color: #fff;
       font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .play-pause-btn {
+        width: 50px;
+        height: 50px;
+      }
+
+      .play-pause-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .play-pause-btn {
+        width: 50px;
+        height: 50px;
+      }
+
+      .play-pause-btn svg {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     @media (max-width: 640px) {
