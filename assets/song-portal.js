@@ -149,7 +149,7 @@ class SongPortal {
     cancelBtn.addEventListener('click', () => {
       changeSection.style.display = 'none';
       showChangesBtn.style.display = 'inline-flex';
-      changeForm.reset();
+      if (changeForm) changeForm.reset();
     });
 
     // Handle approval submission
@@ -250,7 +250,7 @@ class SongPortal {
       cancelBtn.addEventListener('click', () => {
         changeSection.style.display = 'none';
         showChangesBtn.style.display = 'inline-flex';
-        changeForm.reset();
+        if (changeForm) changeForm.reset();
       });
     }
 
