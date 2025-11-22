@@ -329,26 +329,4 @@ class SongPortal {
   if (!response.ok) {
     throw new Error('Webhook submission failed');
   }
-
-  return response.json();
-}
-
-showFeedback(feedbackDiv, message, type) {
-  feedbackDiv.textContent = message;
-  feedbackDiv.className = `approval-feedback approval-feedback--${type}`;
-  feedbackDiv.style.display = 'block';
-
-  if (type === 'error') {
-    setTimeout(() => {
-      feedbackDiv.style.display = 'none';
-    }, 5000);
-  }
-}
-  }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const portalContainer = document.querySelector('.song-portal-section');
-  if (portalContainer) {
-    new SongPortal(portalContainer);
-  }
 });
