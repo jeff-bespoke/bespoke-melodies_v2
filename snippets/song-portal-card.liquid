@@ -222,7 +222,7 @@
             </div>
             
             <div class="custom-audio-player" data-audio-url="{{ preview_audio.url | default: preview_audio }}">
-              <audio class="hidden-audio" preload="metadata" style="display: none !important; width: 0 !important; height: 0 !important; visibility: hidden !important;">
+              <audio class="hidden-audio" preload="metadata">
                 <source src="{{ preview_audio.url | default: preview_audio }}" type="audio/mpeg">
               </audio>
               
@@ -256,7 +256,7 @@
              </div>
              
              <div class="custom-audio-player" data-audio-url="{{ final_audio.url | default: final_audio }}">
-              <audio class="hidden-audio" preload="metadata" style="display: none !important; width: 0 !important; height: 0 !important; visibility: hidden !important;">
+              <audio class="hidden-audio" preload="metadata">
                 <source src="{{ final_audio.url | default: final_audio }}" type="audio/mpeg">
               </audio>
               
