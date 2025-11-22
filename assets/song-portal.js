@@ -251,10 +251,16 @@ class SongPortal {
 
       try {
         await this.submitToWebhook(data);
-        this.showFeedback(feedbackDiv, '✓ Song approved! We are preparing your final files. Refreshing...', 'success');
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+
+        // Hide the form and buttons to prevent re-submission or confusion
+        approvalForm.style.display = 'none';
+        if (changeSection) changeSection.style.display = 'none';
+        if (showChangesBtn) showChangesBtn.style.display = 'none';
+
+        // Show persistent success message
+        this.showFeedback(feedbackDiv, '✓ Song approved! The status is updating in the background. You can close this page.', 'success');
+
+        // Do NOT reload automatically to avoid reverting to old state
       } catch (error) {
         this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
       }
@@ -271,10 +277,16 @@ class SongPortal {
 
         try {
           await this.submitToWebhook(data);
-          this.showFeedback(feedbackDiv, '✓ Revisions requested! Jeff will review your notes.', 'success');
-          changeForm.reset();
+
+          // Hide the form and buttons
           changeSection.style.display = 'none';
-          if (showChangesBtn) showChangesBtn.style.display = 'inline-flex';
+          if (showChangesBtn) showChangesBtn.style.display = 'none';
+          if (approvalForm) approvalForm.style.display = 'none';
+
+          // Show persistent success message
+          this.showFeedback(feedbackDiv, '✓ Revisions requested! Jeff will review your notes. The status is updating...', 'success');
+
+          // Do NOT reload automatically
         } catch (error) {
           this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again.', 'error');
         }
