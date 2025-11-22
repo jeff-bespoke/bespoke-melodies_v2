@@ -6,6 +6,7 @@ class SongPortal {
   }
 
   init() {
+    console.log('SongPortal init started');
     this.cards.forEach(card => {
       this.initAudio(card);
       this.initDownloads(card);
@@ -130,42 +131,47 @@ class SongPortal {
     const cancelBtn = card.querySelector('[data-cancel-changes]');
     const changeSection = card.querySelector('[data-change-request-section]');
     const approvalForm = card.querySelector('[data-lyrics-approval-form]');
-    approvalForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(approvalForm);
-      const data = Object.fromEntries(formData.entries());
+    // Handle approval submission
+    if (approvalForm) {
+      approvalForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(approvalForm);
+        const data = Object.fromEntries(formData.entries());
 
-      this.showFeedback(feedbackDiv, 'Submitting approval...', 'loading');
+        this.showFeedback(feedbackDiv, 'Submitting approval...', 'loading');
 
-      try {
-        await this.submitToWebhook(data);
-        this.showFeedback(feedbackDiv, '✓ Lyrics approved! The status will update shortly. Refreshing page...', 'success');
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      } catch (error) {
-        this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again or contact support.', 'error');
-      }
-    });
+        try {
+          await this.submitToWebhook(data);
+          this.showFeedback(feedbackDiv, '✓ Lyrics approved! The status will update shortly. Refreshing page...', 'success');
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } catch (error) {
+          this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again or contact support.', 'error');
+        }
+      });
+    }
 
     // Handle change request submission
-    changeForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(changeForm);
-      const data = Object.fromEntries(formData.entries());
+    if (changeForm) {
+      changeForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(changeForm);
+        const data = Object.fromEntries(formData.entries());
 
-      this.showFeedback(feedbackDiv, 'Sending change request...', 'loading');
+        this.showFeedback(feedbackDiv, 'Sending change request...', 'loading');
 
-      try {
-        await this.submitToWebhook(data);
-        this.showFeedback(feedbackDiv, '✓ Change request sent! I\'ll review it and get back to you soon.', 'success');
-        changeForm.reset();
-        changeSection.style.display = 'none';
-        showChangesBtn.style.display = 'inline-flex';
-      } catch (error) {
-        this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again or contact support.', 'error');
-      }
-    });
+        try {
+          await this.submitToWebhook(data);
+          this.showFeedback(feedbackDiv, '✓ Change request sent! I\'ll review it and get back to you soon.', 'success');
+          changeForm.reset();
+          changeSection.style.display = 'none';
+          showChangesBtn.style.display = 'inline-flex';
+        } catch (error) {
+          this.showFeedback(feedbackDiv, '✗ Error sending request. Please try again or contact support.', 'error');
+        }
+      });
+    }
     // Lyrics Accordion Logic
     const accordionHeader = document.querySelector('.lyrics-display__header');
     const accordionContent = document.getElementById('lyrics-content');
@@ -227,29 +233,31 @@ class SongPortal {
     }
 
     // Handle Song Approval
-    approvalForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(approvalForm);
-      const data = Object.fromEntries(formData.entries());
+    if (approvalForm) {
+      approvalForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(approvalForm);
+        const data = Object.fromEntries(formData.entries());
 
-      this.showFeedback(feedbackDiv, 'Submitting song approval...', 'loading');
+        this.showFeedback(feedbackDiv, 'Submitting song approval...', 'loading');
 
-      try {
-        await this.submitToWebhook(data);
+        try {
+          await this.submitToWebhook(data);
 
-        // Hide the form and buttons to prevent re-submission or confusion
-        approvalForm.style.display = 'none';
-        if (changeSection) changeSection.style.display = 'none';
-        if (showChangesBtn) showChangesBtn.style.display = 'none';
+          // Hide the form and buttons to prevent re-submission or confusion
+          approvalForm.style.display = 'none';
+          if (changeSection) changeSection.style.display = 'none';
+          if (showChangesBtn) showChangesBtn.style.display = 'none';
 
-        // Show persistent success message
-        this.showFeedback(feedbackDiv, '✓ Song approved! The status is updating in the background. You can close this page.', 'success');
+          // Show persistent success message
+          this.showFeedback(feedbackDiv, '✓ Song approved! The status is updating in the background. You can close this page.', 'success');
 
-        // Do NOT reload automatically to avoid reverting to old state
-      } catch (error) {
-        this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
-      }
-    });
+          // Do NOT reload automatically to avoid reverting to old state
+        } catch (error) {
+          this.showFeedback(feedbackDiv, '✗ Error submitting approval. Please try again.', 'error');
+        }
+      });
+    }
 
     // Handle Song Change Request
     if (changeForm) {
