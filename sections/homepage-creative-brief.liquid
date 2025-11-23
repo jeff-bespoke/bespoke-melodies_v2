@@ -131,38 +131,53 @@
       d.body.appendChild(s);
     }
 
-    // Handle URL Hash Parameters for Pre-filling
-    function updateTallySrc() {
+    // Handle URL Hash Parameters for Pre-filling and Scrolling
+    function handleHashChange() {
       var hash = window.location.hash;
-      if (hash.includes('?')) {
-        var queryPart = hash.split('?')[1];
-        var urlParams = new URLSearchParams(queryPart);
-        var turnaround = urlParams.get('turnaround');
-        var price = urlParams.get('price');
+      
+      // Check if hash targets this section (with or without params)
+      if (hash.startsWith('#creative-brief')) {
         
-        var tallyIframe = document.querySelector('iframe[data-tally-src]');
-        if (tallyIframe && (turnaround || price)) {
-          var currentSrc = tallyIframe.getAttribute('data-tally-src');
-          // Avoid appending duplicates if function runs multiple times
-          var baseSrc = currentSrc.split('&turnaround=')[0].split('&price=')[0];
+        // 1. Handle Scrolling (Browser won't auto-scroll if params exist)
+        var section = document.getElementById('creative-brief');
+        if (section) {
+          // Small timeout to ensure layout is ready
+          setTimeout(function(){
+            section.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+
+        // 2. Handle Tally Pre-filling
+        if (hash.includes('?')) {
+          var queryPart = hash.split('?')[1];
+          var urlParams = new URLSearchParams(queryPart);
+          var turnaround = urlParams.get('turnaround');
+          var price = urlParams.get('price');
           
-          var newSrc = baseSrc;
-          if (turnaround) newSrc += '&turnaround=' + encodeURIComponent(turnaround);
-          if (price) newSrc += '&price=' + encodeURIComponent(price);
-          
-          if (currentSrc !== newSrc) {
-            tallyIframe.setAttribute('data-tally-src', newSrc);
-            tallyIframe.src = newSrc;
+          var tallyIframe = document.querySelector('iframe[data-tally-src]');
+          if (tallyIframe && (turnaround || price)) {
+            var currentSrc = tallyIframe.getAttribute('data-tally-src');
+            // Avoid appending duplicates if function runs multiple times
+            var baseSrc = currentSrc.split('&turnaround=')[0].split('&price=')[0];
+            
+            var newSrc = baseSrc;
+            if (turnaround) newSrc += '&turnaround=' + encodeURIComponent(turnaround);
+            if (price) newSrc += '&price=' + encodeURIComponent(price);
+            
+            if (currentSrc !== newSrc) {
+              tallyIframe.setAttribute('data-tally-src', newSrc);
+              tallyIframe.src = newSrc;
+            }
           }
         }
       }
     }
 
     // Run on load and hash change
-    window.addEventListener('DOMContentLoaded', updateTallySrc);
-    window.addEventListener('hashchange', updateTallySrc);
+    window.addEventListener('DOMContentLoaded', handleHashChange);
+    window.addEventListener('hashchange', handleHashChange);
     // Also run immediately in case DOMContentLoaded already fired
-    updateTallySrc();
+    handleHashChange();
   })();
 </script>
 
