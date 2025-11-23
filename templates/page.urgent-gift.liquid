@@ -14,10 +14,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bespoke Melodies - Urgent Gift</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Bespoke Melodies - Urgent Gift</title>
+    {{ 'landing-page.css' | asset_url | stylesheet_tag }}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
     {{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
@@ -34,120 +34,7 @@
                 country: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/long_long_road.mp3?v=1763008066"
             }
         };
-
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'charcoal': '#1a1a1a',
-                        'charcoal-light': '#2d2d2d',
-                        'gold': '#D4AF37',
-                        'gold-hover': '#b5952f',
-                        'off-white': '#f5f5f5',
-                    },
-                    fontFamily: {
-                        'serif': ['"Playfair Display"', 'serif'],
-                        'sans': ['"Inter"', 'sans-serif'],
-                    }
-                }
-            }
-        }
     </script>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #f5f5f5;
-            font-family: 'Inter', sans-serif;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .gold-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #F2D06B 50%, #D4AF37 100%);
-        }
-
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
-        }
-
-        /* Audio Player Grid Styles */
-        .audio-card.active {
-            border-color: #D4AF37;
-            background-color: rgba(212, 175, 55, 0.1);
-        }
-
-        .playing-indicator {
-            display: none;
-        }
-
-        .audio-card.active .playing-indicator {
-            display: block;
-        }
-
-        .audio-card.active .play-icon {
-            display: none;
-        }
-
-        /* Modal Animation */
-        .modal {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .modal.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal.open .modal-content {
-            transform: scale(1);
-        }
-
-        /* Visual Pop */
-        .glow-gold {
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .glow-gold:hover {
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-        }
-
-        .text-glow {
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Smooth Scroll for Sitelinks */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Offset scroll for better visual alignment */
-        [id] {
-            scroll-margin-top: 30px;
-        }
-
-        /* FAQ Accordion Animation */
-        .faq-item.open .faq-answer {
-            max-height: 500px;
-        }
-
-        .faq-item.open .faq-icon {
-            transform: rotate(180deg);
-        }
-    </style>
 </head>
 
 <body class="antialiased">
@@ -155,7 +42,11 @@
     <!-- Hero Section -->
     <section id="get-started" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80&fm=webp"
+            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75&fm=webp"
+                srcset="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=75&fm=webp 400w,
+                        https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75&fm=webp 800w,
+                        https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=75&fm=webp 1200w"
+                sizes="100vw"
                 alt="Dark Studio Atmosphere" class="w-full h-full object-cover opacity-20"
                 fetchpriority="high" loading="eager">
             <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/90 to-charcoal"></div>
@@ -652,7 +543,7 @@
     </div>
 
     <!-- Audio Player Logic -->
-    <audio id="audioPlayer"></audio>
+    <audio id="audioPlayer" preload="none"></audio>
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
         let currentCard = null;
@@ -761,15 +652,18 @@
         });
 
         // Exit Intent: Show modal when user tries to leave
-        let exitIntentShown = false;
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY < 10 && !exitIntentShown) {
-                exitIntentShown = true;
-                const modal = document.getElementById('exit-intent-modal');
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            }
-        });
+        // Defer listener to avoid immediate overhead
+        setTimeout(() => {
+            let exitIntentShown = false;
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    exitIntentShown = true;
+                    const modal = document.getElementById('exit-intent-modal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }
+            });
+        }, 3000);
 
         // Form Pre-Fill: Pass pricing tier parameters to Tally
         const updateTallySrc = () => {
