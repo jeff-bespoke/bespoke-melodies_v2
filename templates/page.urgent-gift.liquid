@@ -341,7 +341,6 @@
                     data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1" 
                     loading="lazy" 
                     width="100%" 
-                    height="800" 
                     frameborder="0" 
                     marginheight="0" 
                     marginwidth="0" 
@@ -665,25 +664,47 @@
             });
         }, 3000);
 
-        // Form Pre-Fill: Pass pricing tier parameters to Tally
-        const updateTallySrc = () => {
-            const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
-            const tier = urlParams.get('tier');
-            const price = urlParams.get('price');
-            const turnaround = urlParams.get('turnaround');
-            
-            const tallyIframe = document.querySelector('iframe[data-tally-src]');
-            if (tallyIframe && tier) {
-                const baseSrc = tallyIframe.getAttribute('data-tally-src').split('&tier=')[0]; // Clean base URL
-                const newSrc = `${baseSrc}&tier=${tier}&price=${price}&turnaround=${turnaround}`;
-                tallyIframe.setAttribute('data-tally-src', newSrc);
-                tallyIframe.src = newSrc; // Force reload iframe with new params
+        // Form Pre-Fill and Scroll Logic
+        const handleHashChange = () => {
+            const hash = window.location.hash;
+
+            // Check if hash targets this section (with or without params)
+            if (hash.startsWith('#creative-brief')) {
+                
+                // 1. Handle Scrolling (Browser won't auto-scroll if params exist)
+                const section = document.getElementById('creative-brief');
+                if (section) {
+                    // Small timeout to ensure layout is ready
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+
+                // 2. Handle Tally Pre-filling
+                if (hash.includes('?')) {
+                    const urlParams = new URLSearchParams(hash.split('?')[1]);
+                    const tier = urlParams.get('tier');
+                    const price = urlParams.get('price');
+                    const turnaround = urlParams.get('turnaround');
+                    
+                    const tallyIframe = document.querySelector('iframe[data-tally-src]');
+                    if (tallyIframe && tier) {
+                        const baseSrc = tallyIframe.getAttribute('data-tally-src').split('&tier=')[0]; // Clean base URL
+                        const newSrc = `${baseSrc}&tier=${tier}&price=${price}&turnaround=${turnaround}`;
+                        
+                        // Only update if changed to avoid reloading loop
+                        if (tallyIframe.src !== newSrc) {
+                            tallyIframe.setAttribute('data-tally-src', newSrc);
+                            tallyIframe.src = newSrc;
+                        }
+                    }
+                }
             }
         };
 
         // Run on load and on hash change
-        window.addEventListener('DOMContentLoaded', updateTallySrc);
-        window.addEventListener('hashchange', updateTallySrc);
+        window.addEventListener('DOMContentLoaded', handleHashChange);
+        window.addEventListener('hashchange', handleHashChange);
     </script>
 
     <!-- Tally Embed Script -->
