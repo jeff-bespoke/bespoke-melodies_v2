@@ -3,47 +3,53 @@
   Displays the creative brief form inline with dark luxury styling
 {% endcomment %}
 
-<section id="creative-brief" class="py-20 px-4 bg-gradient-to-b from-charcoal to-charcoal-light" style="background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);">
-    <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" style="font-family: var(--font-heading);">
-                {{ section.settings.heading }}
-            </h2>
-            <div class="w-24 h-1 bg-gold mx-auto rounded-full shadow-[0_0_10px_#D4AF37] mb-6" style="background: #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);"></div>
-            <p class="text-gray-300 text-lg" style="color: #a3a3a3;">
-                {{ section.settings.description }}
-            </p>
-        </div>
-        
-        <!-- Tally inline embed -->
-        <div class="border border-gold/20 rounded-xl p-8 shadow-2xl" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 2rem; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);">
-            <iframe 
-                data-tally-src="{{ section.settings.tally_form_url }}" 
-                loading="lazy" 
-                width="100%" 
-                height="{{ section.settings.form_height }}" 
-                frameborder="0" 
-                marginheight="0" 
-                marginwidth="0" 
-                title="Bespoke Melodies Creative Brief"
-                style="border: none;">
-            </iframe>
-        </div>
+<section id="creative-brief" style="background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%); padding: 80px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    <div style="margin-bottom: 48px;">
+      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 34px; color: #f5f5f5; margin-bottom: 16px;">
+        {{ section.settings.heading }}
+      </h2>
+      <div style="width: 96px; height: 3px; background: #D4AF37; margin: 16px auto 24px; border-radius: 2px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);"></div>
+      <p style="color: #a3a3a3; font-size: 18px;">
+        {{ section.settings.description }}
+      </p>
     </div>
+    
+    <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);">
+      <iframe 
+        data-tally-src="{{ section.settings.tally_form_url }}" 
+        loading="lazy" 
+        width="100%" 
+        height="{{ section.settings.form_height }}" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0" 
+        title="Bespoke Melodies Creative Brief"
+        style="border: none;">
+      </iframe>
+    </div>
+  </div>
 </section>
 
-<!-- Tally Embed Script -->
 <script>
-    var d=document,w="https://tally.so/widgets/embed.js",v=function(){
-        "undefined"!=typeof Tally?Tally.loadEmbeds():
-        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){
-            e.src=e.dataset.tallySrc
-        }))
-    };
-    if("undefined"!=typeof Tally)v();
-    else if(d.querySelector('script[src="'+w+'"]')==null){
-        var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);
+  var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+    if(typeof Tally!=="undefined"){
+      Tally.loadEmbeds();
+    } else {
+      d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){
+        e.src=e.dataset.tallySrc;
+      });
     }
+  };
+  if(typeof Tally!=="undefined"){
+    v();
+  } else if(d.querySelector('script[src="'+w+'"]')==null){
+    var s=d.createElement("script");
+    s.src=w;
+    s.onload=v;
+    s.onerror=v;
+    d.body.appendChild(s);
+  }
 </script>
 
 {% schema %}
@@ -63,7 +69,7 @@
       "default": "This quick 2-minute form helps us understand your vision"
     },
     {
-      "type": "url",
+      "type": "text",
       "id": "tally_form_url",
       "label": "Tally Form URL",
       "default": "https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1",
