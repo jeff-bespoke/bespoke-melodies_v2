@@ -418,12 +418,7 @@
     },
     "homepage_creative_brief_v2": {
       "type": "homepage-creative-brief",
-      "settings": {
-        "heading": "Let's Create Your Bespoke Song",
-        "description": "This quick 2-minute form helps us understand your vision",
-        "tally_form_url": "https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1",
-        "form_height": 800
-      }
+      "settings": {}
     }
   },
   "order": [
