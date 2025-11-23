@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero_p9CmMG": {
@@ -425,7 +416,7 @@
         "padding-block-end": 48
       }
     },
-    "homepage_creative_brief_inline": {
+    "homepage_creative_brief_v2": {
       "type": "homepage-creative-brief",
       "settings": {
         "heading": "Let's Create Your Bespoke Song",
@@ -442,7 +433,7 @@
     "custom_liquid_d6QcYW",
     "homepage_ai_advantage",
     "custom_liquid_cnkfKJ",
-    "homepage_creative_brief_inline",
+    "homepage_creative_brief_v2",
     "custom_liquid_bmtpKP",
     "custom_liquid_YmwRNH",
     "custom_liquid_aXfTPT",
