@@ -272,29 +272,6 @@
                         </div>
                     </div>
                     <p class="text-sm text-gray-400">Heartfelt, acoustic, and storytelling.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Tiers -->
-    <section id="pricing" class="py-20 px-4 bg-charcoal">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-3 gap-8 items-center">
-
-                <!-- Standard -->
-                <div
-                    class="order-2 lg:order-1 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
-                    <h3 class="text-xl font-serif text-white mb-2">Standard</h3>
-                    <div class="text-3xl font-bold text-gold mb-4">$399</div>
-                    <p class="text-gray-400 text-sm mb-8">7 Days</p>
-                    <a href="#creative-brief"
-                        class="block w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors text-center">Select
-                        Standard</a>
-                </div>
-
-                <!-- Executive (Featured) -->
-                <div id="emergency"
                     class="order-1 lg:order-2 bg-gradient-to-b from-charcoal-light to-charcoal border-2 border-gold rounded-2xl p-8 transform scale-105 shadow-2xl shadow-gold/20 relative glow-gold">
                     <div
                         class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gold text-charcoal text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg">
@@ -675,50 +652,265 @@
                 const section = document.getElementById('creative-brief');
                 if (section) {
                     // Small timeout to ensure layout is ready
-                    setTimeout(() => {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                }
+                            <strong class="text-white">• After lyric approval but before first musical rendering:</strong> 50% refund.<br>
+                            <strong class="text-white">• After first musical rendering:</strong> 25% refund.<br>
+                            <strong class="text-white">• After second musical edit:</strong> Work is complete and non-refundable.<br><br>
+                            These stages protect you without locking you in, and I always encourage early communication so we can address 
+                            any misalignment as soon as it appears.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                // 2. Handle Tally Pre-filling
-                if (hash.includes('?')) {
-                    const urlParams = new URLSearchParams(hash.split('?')[1]);
-                    const tier = urlParams.get('tier');
-                    const price = urlParams.get('price');
-                    const turnaround = urlParams.get('turnaround');
+    <!-- Footer -->
+    <footer class="py-8 px-4 text-center border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-4 text-sm">
+                <a href="/policies/privacy-policy" class="text-gray-400 hover:text-gold transition-colors">Privacy Policy</a>
+                <span class="hidden md:inline text-gray-600">•</span>
+                <a href="/policies/terms-of-service" class="text-gray-400 hover:text-gold transition-colors">Terms of Service</a>
+                <span class="hidden md:inline text-gray-600">•</span>
+                <a href="/policies/refund-policy" class="text-gray-400 hover:text-gold transition-colors">Refund Policy</a>
+            </div>
+            <p class="text-gray-600 text-sm">&copy; 2025 Bespoke Melodies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Popup -->
+    <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div
+            class="modal-content bg-charcoal border border-gold/20 rounded-2xl p-8 md:p-12 max-w-lg w-full relative z-10 shadow-2xl shadow-gold/10">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <div class="text-center space-y-6">
+                <div class="w-16 h-16 mx-auto bg-gold/10 rounded-full flex items-center justify-center text-gold">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                        </path>
+                    </svg>
+                </div>
+
+                <h3 class="text-3xl font-serif text-white">First, The Story.</h3>
+
+                <p class="text-gray-300 leading-relaxed">
+                    We need to ensure we can capture your vision before we accept payment.
+                </p>
+
+                <a href="#" onclick="window.location.href = config.surveyUrl; return false;"
+                    class="block w-full py-4 bg-gold hover:bg-gold-hover text-charcoal font-bold rounded-lg transition-colors shadow-lg">
+                    Continue to Creative Brief
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Player Logic -->
+    <audio id="audioPlayer" preload="none"></audio>
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        let currentCard = null;
+
+        function playTrack(genre, cardElement) {
+            const trackUrl = config.playlist[genre];
+
+            // If clicking the same card that is currently playing
+            if (currentCard === cardElement && !audioPlayer.paused) {
+                audioPlayer.pause();
+                cardElement.classList.remove('active');
+                currentCard = null;
+                return;
+            }
+
+            // Reset previous card
+            if (currentCard) {
+                currentCard.classList.remove('active');
+            }
+
+            // Play new track
+            audioPlayer.src = trackUrl;
+            audioPlayer.play();
+
+            // Update UI
+            cardElement.classList.add('active');
+            currentCard = cardElement;
+        }
+
+        // Reset UI when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            if (currentCard) {
+                currentCard.classList.remove('active');
+                currentCard = null;
+            }
+        });
+
+        // Modal Logic (Old Modal - keeping for safety if used elsewhere)
+        function openModal() {
+            document.getElementById('modal').classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('open');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    </script>
+
+    <!-- Sticky Floating CTA Button -->
+    <button id="sticky-cta" 
+            onclick="window.location.href='#creative-brief'"
+            class="fixed bottom-6 right-6 bg-gold hover:bg-gold-dark text-charcoal font-bold px-8 py-4 rounded-full shadow-2xl transition-all transform hover:scale-105 z-50 hidden"
+            style="box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);">
+        Start Commission →
+    </button>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-gradient-to-b from-charcoal to-charcoal-light border-2 border-gold rounded-2xl p-8 max-w-md relative shadow-2xl">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" 
+                    class="absolute top-4 right-4 text-white/60 hover:text-white text-2xl">×</button>
+            <h3 class="text-2xl font-bold text-white mb-4">Wait! Don't Miss Out 🎵</h3>
+            <p class="text-gray-300 mb-6">
+                You're one step away from creating an unforgettable bespoke song. Let's make something magical together!
+            </p>
+            <button onclick="window.location.href='#creative-brief'; document.getElementById('exit-intent-modal').classList.add('hidden');" 
+                    class="w-full bg-gold hover:bg-gold-dark text-charcoal font-bold py-4 px-6 rounded-full transition-all">
+                Create My Song Now →
+            </button>
+        </div>
+    </div>
+
+    <style>
+        /* Micro-Animation: Pulse effect on gold CTAs */
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3); }
+        }
+        .glow-gold {
+            animation: pulse-gold 2s ease-in-out infinite;
+        }
+        
+        /* Sticky CTA Fade-in Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #sticky-cta:not(.hidden) {
+            animation: fadeInUp 0.3s ease-out;
+        }
+    </style>
+
+    <script>
+        // Sticky CTA: Show after scrolling past hero
+        let stickyCTAShown = false;
+        window.addEventListener('scroll', () => {
+            const stickyBtn = document.getElementById('sticky-cta');
+            if (window.scrollY > 800 && !stickyCTAShown) {
+                stickyBtn.classList.remove('hidden');
+                stickyCTAShown = true;
+            } else if (window.scrollY <= 800 && stickyCTAShown) {
+                stickyBtn.classList.add('hidden');
+                stickyCTAShown = false;
+            }
+        });
+
+        // Exit Intent: Show modal when user tries to leave
+        // Defer listener to avoid immediate overhead
+        setTimeout(() => {
+            let exitIntentShown = false;
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    exitIntentShown = true;
+                    const modal = document.getElementById('exit-intent-modal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }
+            });
+        }, 3000);
+
+
+    </script>
+
+    <script>
+        (function(){
+            // Tally Embed Script
+            var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+                if(typeof Tally!=="undefined"){
+                    Tally.loadEmbeds();
+                } else {
+                    d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){
+                        e.src=e.dataset.tallySrc;
+                    });
+                }
+            };
+            if(typeof Tally!=="undefined"){
+                v();
+            } else if(d.querySelector('script[src="'+w+'"]')==null){
+                var s=d.createElement("script");
+                s.src=w;
+                s.onload=v;
+                s.onerror=v;
+                d.body.appendChild(s);
+            }
+
+            // Handle URL Hash Parameters for Pre-filling and Scrolling
+            function handleHashChange() {
+                var hash = window.location.hash;
+                
+                // Check if hash targets this section (with or without params)
+                if (hash.startsWith('#creative-brief')) {
                     
-                    const tallyIframe = document.querySelector('iframe[data-tally-src]');
-                    if (tallyIframe && tier) {
-                        const baseSrc = tallyIframe.getAttribute('data-tally-src').split('&tier=')[0]; // Clean base URL
-                        const newSrc = `${baseSrc}&tier=${tier}&price=${price}&turnaround=${turnaround}`;
+                    // 1. Handle Scrolling (Browser won't auto-scroll if params exist)
+                    var section = document.getElementById('creative-brief');
+                    if (section) {
+                        // Small timeout to ensure layout is ready
+                        setTimeout(function(){
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }
+
+                    // 2. Handle Tally Pre-filling
+                    if (hash.includes('?')) {
+                        var queryPart = hash.split('?')[1];
+                        var urlParams = new URLSearchParams(queryPart);
+                        var tier = urlParams.get('tier');
+                        var turnaround = urlParams.get('turnaround');
+                        var price = urlParams.get('price');
                         
-                        // Only update if changed to avoid reloading loop
-                        if (tallyIframe.src !== newSrc) {
-                            tallyIframe.setAttribute('data-tally-src', newSrc);
-                            tallyIframe.src = newSrc;
+                        var tallyIframe = document.querySelector('iframe[data-tally-src]');
+                        if (tallyIframe && (tier || turnaround || price)) {
+                            var currentSrc = tallyIframe.getAttribute('data-tally-src');
+                            // Clean base URL from any previous params
+                            var baseSrc = currentSrc.split('&tier=')[0].split('&turnaround=')[0].split('&price=')[0];
+                            
+                            var newSrc = baseSrc;
+                            if (tier) newSrc += '&tier=' + encodeURIComponent(tier);
+                            if (turnaround) newSrc += '&turnaround=' + encodeURIComponent(turnaround);
+                            if (price) newSrc += '&price=' + encodeURIComponent(price);
+                            
+                            if (currentSrc !== newSrc) {
+                                tallyIframe.setAttribute('data-tally-src', newSrc);
+                                tallyIframe.src = newSrc;
+                            }
                         }
                     }
                 }
             }
-        };
 
-        // Run on load and on hash change
-        window.addEventListener('DOMContentLoaded', handleHashChange);
-        window.addEventListener('hashchange', handleHashChange);
-    </script>
-
-    <!-- Tally Embed Script -->
-    <script>
-        var d=document,w="https://tally.so/widgets/embed.js",v=function(){
-            "undefined"!=typeof Tally?Tally.loadEmbeds():
-            d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){
-                e.src=e.dataset.tallySrc
-            }))
-        };
-        if("undefined"!=typeof Tally)v();
-        else if(d.querySelector('script[src="'+w+'"]')==null){
-            var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);
-        }
+            // Run on load and hash change
+            window.addEventListener('DOMContentLoaded', handleHashChange);
+            window.addEventListener('hashchange', handleHashChange);
+            // Also run immediately in case DOMContentLoaded already fired
+            handleHashChange();
+        })();
     </script>
 
 </body>

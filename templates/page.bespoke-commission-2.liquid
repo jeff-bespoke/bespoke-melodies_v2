@@ -42,13 +42,6 @@
     <!-- Hero Section -->
     <section id="get-started" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75&fm=webp"
-                srcset="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=75&fm=webp 400w,
-                        https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=75&fm=webp 800w,
-                        https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=75&fm=webp 1200w"
-                sizes="100vw"
-                alt="Dark Studio Atmosphere" class="w-full h-full object-cover opacity-20"
-                fetchpriority="high" loading="eager">
             <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/90 to-charcoal"></div>
         </div>
 
@@ -604,61 +597,79 @@
             });
         }, 3000);
 
-        // Form Pre-Fill and Scroll Logic
-        const handleHashChange = () => {
-            const hash = window.location.hash;
-
-            // Check if hash targets this section (with or without params)
-            if (hash.startsWith('#creative-brief')) {
-                
-                // 1. Handle Scrolling (Browser won't auto-scroll if params exist)
-                const section = document.getElementById('creative-brief');
-                if (section) {
-                    // Small timeout to ensure layout is ready
-                    setTimeout(() => {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
+    </script>
+    <script>
+        (function(){
+            // Tally Embed Script
+            var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+                if(typeof Tally!=="undefined"){
+                    Tally.loadEmbeds();
+                } else {
+                    d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){
+                        e.src=e.dataset.tallySrc;
+                    });
                 }
+            };
+            if(typeof Tally!=="undefined"){
+                v();
+            } else if(d.querySelector('script[src="'+w+'"]')==null){
+                var s=d.createElement("script");
+                s.src=w;
+                s.onload=v;
+                s.onerror=v;
+                d.body.appendChild(s);
+            }
 
-                // 2. Handle Tally Pre-filling
-                if (hash.includes('?')) {
-                    const urlParams = new URLSearchParams(hash.split('?')[1]);
-                    const tier = urlParams.get('tier');
-                    const price = urlParams.get('price');
-                    const turnaround = urlParams.get('turnaround');
+            // Handle URL Hash Parameters for Pre-filling and Scrolling
+            function handleHashChange() {
+                var hash = window.location.hash;
+                
+                // Check if hash targets this section (with or without params)
+                if (hash.startsWith('#creative-brief')) {
                     
-                    const tallyIframe = document.querySelector('iframe[data-tally-src]');
-                    if (tallyIframe && tier) {
-                        const baseSrc = tallyIframe.getAttribute('data-tally-src').split('&tier=')[0]; // Clean base URL
-                        const newSrc = `${baseSrc}&tier=${tier}&price=${price}&turnaround=${turnaround}`;
+                    // 1. Handle Scrolling (Browser won't auto-scroll if params exist)
+                    var section = document.getElementById('creative-brief');
+                    if (section) {
+                        // Small timeout to ensure layout is ready
+                        setTimeout(function(){
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }
+
+                    // 2. Handle Tally Pre-filling
+                    if (hash.includes('?')) {
+                        var queryPart = hash.split('?')[1];
+                        var urlParams = new URLSearchParams(queryPart);
+                        var tier = urlParams.get('tier');
+                        var turnaround = urlParams.get('turnaround');
+                        var price = urlParams.get('price');
                         
-                        // Only update if changed to avoid reloading loop
-                        if (tallyIframe.src !== newSrc) {
-                            tallyIframe.setAttribute('data-tally-src', newSrc);
-                            tallyIframe.src = newSrc;
+                        var tallyIframe = document.querySelector('iframe[data-tally-src]');
+                        if (tallyIframe && (tier || turnaround || price)) {
+                            var currentSrc = tallyIframe.getAttribute('data-tally-src');
+                            // Clean base URL from any previous params
+                            var baseSrc = currentSrc.split('&tier=')[0].split('&turnaround=')[0].split('&price=')[0];
+                            
+                            var newSrc = baseSrc;
+                            if (tier) newSrc += '&tier=' + encodeURIComponent(tier);
+                            if (turnaround) newSrc += '&turnaround=' + encodeURIComponent(turnaround);
+                            if (price) newSrc += '&price=' + encodeURIComponent(price);
+                            
+                            if (currentSrc !== newSrc) {
+                                tallyIframe.setAttribute('data-tally-src', newSrc);
+                                tallyIframe.src = newSrc;
+                            }
                         }
                     }
                 }
             }
-        };
 
-        // Run on load and on hash change
-        window.addEventListener('DOMContentLoaded', handleHashChange);
-        window.addEventListener('hashchange', handleHashChange);
-    </script>
-
-    <!-- Tally Embed Script -->
-    <script>
-        var d=document,w="https://tally.so/widgets/embed.js",v=function(){
-            "undefined"!=typeof Tally?Tally.loadEmbeds():
-            d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){
-                e.src=e.dataset.tallySrc
-            }))
-        };
-        if("undefined"!=typeof Tally)v();
-        else if(d.querySelector('script[src="'+w+'"]')==null){
-            var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);
-        }
+            // Run on load and hash change
+            window.addEventListener('DOMContentLoaded', handleHashChange);
+            window.addEventListener('hashchange', handleHashChange);
+            // Also run immediately in case DOMContentLoaded already fired
+            handleHashChange();
+        })();
     </script>
 
 </body>
