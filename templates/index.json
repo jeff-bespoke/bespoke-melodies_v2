@@ -424,6 +424,15 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "homepage_creative_brief_inline": {
+      "type": "homepage-creative-brief",
+      "settings": {
+        "heading": "Let's Create Your Bespoke Song",
+        "description": "This quick 2-minute form helps us understand your vision",
+        "tally_form_url": "https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1",
+        "form_height": 800
+      }
     }
   },
   "order": [
@@ -433,6 +442,7 @@
     "custom_liquid_d6QcYW",
     "homepage_ai_advantage",
     "custom_liquid_cnkfKJ",
+    "homepage_creative_brief_inline",
     "custom_liquid_bmtpKP",
     "custom_liquid_YmwRNH",
     "custom_liquid_aXfTPT",
