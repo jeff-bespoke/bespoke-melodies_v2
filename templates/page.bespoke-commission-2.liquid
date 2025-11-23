@@ -712,7 +712,7 @@
         });
 
         // Form Pre-Fill: Pass pricing tier parameters to Tally
-        window.addEventListener('DOMContentLoaded', () => {
+        const updateTallySrc = () => {
             const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
             const tier = urlParams.get('tier');
             const price = urlParams.get('price');
@@ -720,11 +720,16 @@
             
             const tallyIframe = document.querySelector('iframe[data-tally-src]');
             if (tallyIframe && tier) {
-                const baseSrc = tallyIframe.getAttribute('data-tally-src');
+                const baseSrc = tallyIframe.getAttribute('data-tally-src').split('&tier=')[0]; // Clean base URL
                 const newSrc = `${baseSrc}&tier=${tier}&price=${price}&turnaround=${turnaround}`;
                 tallyIframe.setAttribute('data-tally-src', newSrc);
+                tallyIframe.src = newSrc; // Force reload iframe with new params
             }
-        });
+        };
+
+        // Run on load and on hash change
+        window.addEventListener('DOMContentLoaded', updateTallySrc);
+        window.addEventListener('hashchange', updateTallySrc);
     </script>
 
     <!-- Tally Embed Script -->

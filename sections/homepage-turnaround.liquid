@@ -186,7 +186,7 @@
     var priceEl = document.getElementById('bm-price');
     var beginEl = document.getElementById('bm-begin');
     var pills = document.querySelectorAll('#bm-pills input[type="radio"]');
-    var baseUrl = 'https://tally.so/r/OD1kzg';
+    var baseUrl = '#creative-brief';
 
     function update(){
       var chosen = document.querySelector('#bm-pills input[type="radio"]:checked');
@@ -195,7 +195,8 @@
       var label = chosen.value || '';
       priceEl.textContent = '$' + Number(p).toLocaleString();
       // Pass selection to Tally as a query param so it can prefill
-      var url = baseUrl + '?turnaround=' + encodeURIComponent(label) + '&price=' + encodeURIComponent('$' + p);
+      // Format: #creative-brief?turnaround=2%20Weeks&price=$299
+      var url = baseUrl + '?turnaround=' + encodeURIComponent(label) + '&price=' + encodeURIComponent(p);
       beginEl.setAttribute('href', url);
     }
     pills.forEach(function(r){ r.addEventListener('change', update); });
