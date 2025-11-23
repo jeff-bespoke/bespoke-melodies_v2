@@ -138,6 +138,21 @@
 
     <!-- Sonic Palette (6-Grid Player) -->
     <section id="samples" class="py-20 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Select Your Sound</h2>
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full shadow-[0_0_10px_#D4AF37]"></div>
+            </div>
+
+            <!-- Audio Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Pop / Romance -->
+                <div class="audio-card genre-pop-romance p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
+                    onclick="playTrack('popDance', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z"></path>
                             </svg>
                             <div class="playing-indicator">
@@ -150,6 +165,106 @@
                         </div>
                     </div>
                     <p class="text-sm text-gray-400">Heartfelt, acoustic, and storytelling.</p>
+                </div>
+
+                <!-- Card 2: Adult Contemporary -->
+                <div class="audio-card genre-adult-contemporary p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
+                    onclick="playTrack('adultContemporary', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400">Sophisticated, smooth, and timeless.</p>
+                </div>
+
+                <!-- Card 3: Power Ballad -->
+                <div class="audio-card genre-power-ballad p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
+                    onclick="playTrack('powerBallad', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400">Emotional, grand, and sweeping.</p>
+                </div>
+
+                <!-- Card 4: Progressive Funk -->
+                <div class="audio-card genre-progressive-funk p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
+                    onclick="playTrack('progressiveFunk', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400">Groovy, upbeat, and energetic.</p>
+                </div>
+
+                <!-- Card 5: Country -->
+                <div class="audio-card genre-country p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
+                    onclick="playTrack('country', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400">Authentic, warm, and narrative.</p>
+                </div>
+
+                <!-- Card 6: Cinematic Romance -->
+                <div class="audio-card genre-pop-romance p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
+                    onclick="playTrack('cinematicRomance', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400">Orchestral, magical, and movie-like.</p>
                 </div>
             </div>
         </div>
@@ -214,7 +329,7 @@
             </div>
             
             <!-- Tally inline embed -->
-            <div class="border border-gold/20 rounded-xl p-8 shadow-2xl" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05);">
+            <div class="border border-gold/20 rounded-xl p-8 shadow-2xl relative z-10" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05);">
                 <iframe 
                     data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1" 
                     loading="lazy" 
