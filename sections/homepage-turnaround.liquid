@@ -119,6 +119,19 @@
   .bmx-speed .card.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
+    .bmx-speed .card { opacity: 1; transform: none; }
+  }
+</style>
+
+<section class="bmx-speed">
+  <div class="wrap" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+    <h2>Choose Your Turnaround</h2>
+    <div class="divider"></div>
+    <p class="sub">Same composition and production quality — only the timeline you actually need.</p>
+    
+    <div class="card">
+      <div class="price" id="bm-price">$299</div>
+      <div class="note">Starting price · Expedited options available</div>
 
       <div class="pills" id="bm-pills">
         <!-- Radios keep it accessible; labels are the pills -->
