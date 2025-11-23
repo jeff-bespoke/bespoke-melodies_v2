@@ -95,15 +95,15 @@
     
     <div class="form-container">
       <iframe 
-        data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1" 
+        data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1" 
         loading="lazy" 
         width="100%" 
-        height="800" 
+        height="200" 
         frameborder="0" 
         marginheight="0" 
         marginwidth="0" 
         title="Bespoke Melodies Creative Brief"
-        style="border: none; min-height: 800px;">
+        style="border: none;">
       </iframe>
     </div>
   </div>
@@ -111,6 +111,7 @@
 
 <script>
   (function(){
+    // Tally Embed Script
     var d=document,w="https://tally.so/widgets/embed.js",v=function(){
       if(typeof Tally!=="undefined"){
         Tally.loadEmbeds();
@@ -129,6 +130,39 @@
       s.onerror=v;
       d.body.appendChild(s);
     }
+
+    // Handle URL Hash Parameters for Pre-filling
+    function updateTallySrc() {
+      var hash = window.location.hash;
+      if (hash.includes('?')) {
+        var queryPart = hash.split('?')[1];
+        var urlParams = new URLSearchParams(queryPart);
+        var turnaround = urlParams.get('turnaround');
+        var price = urlParams.get('price');
+        
+        var tallyIframe = document.querySelector('iframe[data-tally-src]');
+        if (tallyIframe && (turnaround || price)) {
+          var currentSrc = tallyIframe.getAttribute('data-tally-src');
+          // Avoid appending duplicates if function runs multiple times
+          var baseSrc = currentSrc.split('&turnaround=')[0].split('&price=')[0];
+          
+          var newSrc = baseSrc;
+          if (turnaround) newSrc += '&turnaround=' + encodeURIComponent(turnaround);
+          if (price) newSrc += '&price=' + encodeURIComponent(price);
+          
+          if (currentSrc !== newSrc) {
+            tallyIframe.setAttribute('data-tally-src', newSrc);
+            tallyIframe.src = newSrc;
+          }
+        }
+      }
+    }
+
+    // Run on load and hash change
+    window.addEventListener('DOMContentLoaded', updateTallySrc);
+    window.addEventListener('hashchange', updateTallySrc);
+    // Also run immediately in case DOMContentLoaded already fired
+    updateTallySrc();
   })();
 </script>
 
