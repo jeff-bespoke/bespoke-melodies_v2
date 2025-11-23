@@ -1,26 +1,68 @@
-{% comment %}
-  Inline Tally Form Section
-  Displays the creative brief form inline with dark luxury styling
-{% endcomment %}
+<style>
+  .bmx-creative-brief {
+    --ink: #f5f5f5;
+    --muted: #a0a0a0;
+    --accent: #D4AF37;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 80px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+  }
 
-<section id="creative-brief" style="background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%); padding: 80px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
-  <div style="max-width: 1000px; margin: 0 auto;">
-    <div style="margin-bottom: 48px;">
-      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 34px; color: #f5f5f5; margin-bottom: 16px;">
-        {{ section.settings.heading }}
-      </h2>
-      <div style="width: 96px; height: 3px; background: #D4AF37; margin: 16px auto 24px; border-radius: 2px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);"></div>
-      <p style="color: #a3a3a3; font-size: 18px;">
-        {{ section.settings.description }}
-      </p>
-    </div>
+  .bmx-creative-brief .wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .bmx-creative-brief h2 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 34px;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .bmx-creative-brief .divider {
+    width: 96px;
+    height: 3px;
+    background: var(--accent);
+    margin: 16px auto 24px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+
+  .bmx-creative-brief .description {
+    color: var(--muted);
+    font-size: 18px;
+    margin-bottom: 48px;
+  }
+
+  .bmx-creative-brief .form-container {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 480px) {
+    .bmx-creative-brief h2 { font-size: 28px; }
+    .bmx-creative-brief .description { font-size: 16px; }
+    .bmx-creative-brief .form-container { padding: 20px; }
+  }
+</style>
+
+<section id="creative-brief" class="bmx-creative-brief" aria-labelledby="bm-brief-title">
+  <div class="wrap">
+    <h2 id="bm-brief-title">Let's Create Your Bespoke Song</h2>
+    <div class="divider"></div>
+    <p class="description">This quick 2-minute form helps us understand your vision</p>
     
-    <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 32px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);">
+    <div class="form-container">
       <iframe 
-        data-tally-src="{{ section.settings.tally_form_url }}" 
+        data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1" 
         loading="lazy" 
         width="100%" 
-        height="{{ section.settings.form_height }}" 
+        height="800" 
         frameborder="0" 
         marginheight="0" 
         marginwidth="0" 
@@ -32,63 +74,35 @@
 </section>
 
 <script>
-  var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+  (function(){
+    var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+      if(typeof Tally!=="undefined"){
+        Tally.loadEmbeds();
+      } else {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){
+          e.src=e.dataset.tallySrc;
+        });
+      }
+    };
     if(typeof Tally!=="undefined"){
-      Tally.loadEmbeds();
-    } else {
-      d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){
-        e.src=e.dataset.tallySrc;
-      });
+      v();
+    } else if(d.querySelector('script[src="'+w+'"]')==null){
+      var s=d.createElement("script");
+      s.src=w;
+      s.onload=v;
+      s.onerror=v;
+      d.body.appendChild(s);
     }
-  };
-  if(typeof Tally!=="undefined"){
-    v();
-  } else if(d.querySelector('script[src="'+w+'"]')==null){
-    var s=d.createElement("script");
-    s.src=w;
-    s.onload=v;
-    s.onerror=v;
-    d.body.appendChild(s);
-  }
+  })();
 </script>
 
 {% schema %}
 {
-  "name": "Creative Brief Form",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Let's Create Your Bespoke Song"
-    },
-    {
-      "type": "text",
-      "id": "description",
-      "label": "Description",
-      "default": "This quick 2-minute form helps us understand your vision"
-    },
-    {
-      "type": "text",
-      "id": "tally_form_url",
-      "label": "Tally Form URL",
-      "default": "https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1",
-      "info": "Full Tally embed URL with parameters"
-    },
-    {
-      "type": "range",
-      "id": "form_height",
-      "min": 400,
-      "max": 1200,
-      "step": 50,
-      "unit": "px",
-      "label": "Form Height",
-      "default": 800
-    }
-  ],
+  "name": "Creative Brief Section",
+  "settings": [],
   "presets": [
     {
-      "name": "Creative Brief Form"
+      "name": "Creative Brief Section"
     }
   ]
 }
