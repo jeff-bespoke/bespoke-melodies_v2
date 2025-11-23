@@ -53,16 +53,16 @@
 
 <section id="creative-brief" class="bmx-creative-brief" aria-labelledby="bm-brief-title">
   <div class="wrap">
-    <h2 id="bm-brief-title">{{ section.settings.heading }}</h2>
+    <h2 id="bm-brief-title">Let's Create Your Bespoke Song</h2>
     <div class="divider"></div>
-    <p class="description">{{ section.settings.description }}</p>
+    <p class="description">This quick 2-minute form helps us understand your vision</p>
     
     <div class="form-container">
       <iframe 
-        data-tally-src="{{ section.settings.tally_form_url }}" 
+        data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1" 
         loading="lazy" 
         width="100%" 
-        height="{{ section.settings.form_height }}" 
+        height="800" 
         frameborder="0" 
         marginheight="0" 
         marginwidth="0" 
@@ -99,36 +99,7 @@
 {% schema %}
 {
   "name": "Creative Brief Section",
-  "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Let's Create Your Bespoke Song"
-    },
-    {
-      "type": "text",
-      "id": "description",
-      "label": "Description",
-      "default": "This quick 2-minute form helps us understand your vision"
-    },
-    {
-      "type": "text",
-      "id": "tally_form_url",
-      "label": "Tally Form URL",
-      "default": "https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1"
-    },
-    {
-      "type": "range",
-      "id": "form_height",
-      "min": 400,
-      "max": 1200,
-      "step": 50,
-      "unit": "px",
-      "label": "Form Height",
-      "default": 800
-    }
-  ],
+  "settings": [],
   "presets": [
     {
       "name": "Creative Brief Section"
