@@ -1,6 +1,6 @@
 {% liquid
-  assign client_portal_url = settings.client_portal_url | default: '/pages/your-song-portal'
-  assign client_portal_label = settings.client_portal_label | default: 'Your Song Portal'
+  assign client_portal_url = '/pages/song-portal'
+  assign client_portal_label = 'Your Song Portal'
 %}
 
 {%comment%}
@@ -15,8 +15,8 @@
   Fallback content in case JavaScript is disabled - show link to portal
 {%endcomment%}
 <noscript>
-  <div style="padding: 40px; text-align: center;">
+  <div style="padding: 40px; text-align: center; font-family: sans-serif;">
     <h1>Redirecting to Your Song Portal...</h1>
-    <p>If you are not redirected automatically, <a href="{{ client_portal_url }}">click here</a>.</p>
+    <p>If you are not redirected automatically, <a href="{{ client_portal_url }}" style="color: #D4AF37; text-decoration: underline;">click here</a>.</p>
   </div>
 </noscript>
