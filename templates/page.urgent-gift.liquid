@@ -514,6 +514,7 @@
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
         let currentCard = null;
+        let currentTrackInfo = { title: '', genre: '' }; // Track current song for analytics
 
         function playTrack(genre, cardElement) {
             const trackUrl = config.playlist[genre];
@@ -522,6 +523,17 @@
             if (currentCard === cardElement && !audioPlayer.paused) {
                 audioPlayer.pause();
                 cardElement.classList.remove('active');
+                
+                // 🎯 Track pause event
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_pause', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'duration_seconds': Math.round(audioPlayer.currentTime),
+                        'page_location': window.location.pathname
+                    });
+                }
+                
                 currentCard = null;
                 return;
             }
@@ -531,6 +543,11 @@
                 currentCard.classList.remove('active');
             }
 
+            // Get song info for tracking
+            const title = cardElement.querySelector('h4')?.textContent || cardElement.querySelector('h3')?.textContent || 'Unknown';
+            const genreText = genre; // Use genre parameter as identifier
+            currentTrackInfo = { title, genre: genreText };
+
             // Play new track
             audioPlayer.src = trackUrl;
             audioPlayer.play();
@@ -538,12 +555,31 @@
             // Update UI
             cardElement.classList.add('active');
             currentCard = cardElement;
+
+            // 🎯 Track audio play event in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'audio_play', {
+                    'song_title': title,
+                    'genre': genreText,
+                    'page_location': window.location.pathname
+                });
+            }
         }
 
         // Reset UI when audio ends
         audioPlayer.addEventListener('ended', () => {
             if (currentCard) {
                 currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                
                 currentCard = null;
             }
         });

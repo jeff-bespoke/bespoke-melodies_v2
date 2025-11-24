@@ -143,11 +143,12 @@
             </div>
 
             <!-- Audio Cards Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 overflow-x-auto md:overflow-visible flex md:grid snap-x snap-mandatory md:snap-none scrollbar-hide pb-4">
+
                 
                 <!-- Card 1: Pop / Romance -->
                 <div class="audio-card genre-pop-romance p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
-                    onclick="playTrack('popDance', this)">
+                    onclick="playTrack('cinematicRomance', this)">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
                             <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
@@ -247,7 +248,7 @@
 
                 <!-- Card 6: Cinematic Romance -->
                 <div class="audio-card genre-pop-romance p-6 rounded-xl relative group cursor-pointer transition-all duration-300"
-                    onclick="playTrack('cinematicRomance', this)">
+                    onclick="playTrack('popDance', this)">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
                             <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
@@ -506,6 +507,7 @@
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
         let currentCard = null;
+        let currentTrackInfo = { title: '', genre: '' }; // Track current song for analytics
 
         function playTrack(genre, cardElement) {
             const trackUrl = config.playlist[genre];
@@ -514,6 +516,17 @@
             if (currentCard === cardElement && !audioPlayer.paused) {
                 audioPlayer.pause();
                 cardElement.classList.remove('active');
+                
+                // 🎯 Track pause event
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_pause', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'duration_seconds': Math.round(audioPlayer.currentTime),
+                        'page_location': window.location.pathname
+                    });
+                }
+                
                 currentCard = null;
                 return;
             }
@@ -523,6 +536,11 @@
                 currentCard.classList.remove('active');
             }
 
+            // Get song info for tracking
+            const title = cardElement.querySelector('h3')?.textContent || 'Unknown';
+            const genreText = genre; // Use genre parameter as identifier
+            currentTrackInfo = { title, genre: genreText };
+
             // Play new track
             audioPlayer.src = trackUrl;
             audioPlayer.play();
@@ -530,12 +548,31 @@
             // Update UI
             cardElement.classList.add('active');
             currentCard = cardElement;
+
+            // 🎯 Track audio play event in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'audio_play', {
+                    'song_title': title,
+                    'genre': genreText,
+                    'page_location': window.location.pathname
+                });
+            }
         }
 
         // Reset UI when audio ends
         audioPlayer.addEventListener('ended', () => {
             if (currentCard) {
                 currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                
                 currentCard = null;
             }
         });
