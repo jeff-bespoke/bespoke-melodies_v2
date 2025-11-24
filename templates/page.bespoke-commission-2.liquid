@@ -54,6 +54,7 @@
             }
         };
     </script>
+    {% render 'dsi-logic' %}
 </head>
 
 <body class="antialiased">
@@ -65,14 +66,16 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white mb-6">
+            <h1 id="lp-headline" class="text-4xl md:text-6xl font-bold leading-tight tracking-tight text-white mb-6">
                 A Melody Lasts Longer Than A Diamond.
             </h1>
 
-            <p class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
-                Written by a human composer. Orchestrated by AI technology.<br>
-                The intimacy of a letter, with the scale of a symphony.
-            </p>
+            <div id="lp-subhead">
+                <p class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+                    Written by a human composer. Orchestrated by AI technology.<br>
+                    The intimacy of a letter, with the scale of a symphony.
+                </p>
+            </div>
 
 
 

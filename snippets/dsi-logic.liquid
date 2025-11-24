@@ -1,0 +1,171 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // --- CONFIGURATION ---
+        const urlParams = new URLSearchParams(window.location.search);
+        // Get user_intent, decode it, and convert to lowercase for case-insensitive matching
+        const rawIntent = urlParams.get('user_intent');
+        
+        // If no intent, do nothing (Default HTML is already set)
+        if (!rawIntent) return;
+
+        const intent = decodeURIComponent(rawIntent).toLowerCase();
+        
+        const headlineEl = document.getElementById('lp-headline');
+        const subheadEl = document.getElementById('lp-subhead');
+
+        // Helper function to update text
+        function updateContent(h1, h2) {
+            if (headlineEl) headlineEl.innerHTML = h1;
+            if (subheadEl) subheadEl.innerHTML = h2;
+        }
+
+        // --- LOGIC HIERARCHY ---
+
+        // Priority 1: URGENCY (The "Panic" Buckets)
+        const urgencyKeywords = ["rush", "minute", "urgent", "fast", "overnight", "emergency", "tomorrow", "tonight", "forgot"];
+        if (urgencyKeywords.some(keyword => intent.includes(keyword))) {
+            if (intent.includes("anniversary")) {
+                // Sub-Condition A
+                updateContent(
+                    "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for a Masterpiece.</span>",
+                    "The ultimate anniversary rescue. Composed, recorded, and delivered tonight."
+                );
+            } else {
+                // Sub-Condition B
+                updateContent(
+                    "The Impossible Gift. <br><span class='text-gold italic'>Delivered Tonight.</span>",
+                    "Don't just fill her hands with flowers. Fill her heart with a symphony. In your inbox by 8 PM."
+                );
+            }
+            return; // Stop processing
+        }
+
+        // Priority 2: APOLOGY (The "Repair" Buckets)
+        const apologyKeywords = ["sorry", "apology", "doghouse"];
+        if (apologyKeywords.some(keyword => intent.includes(keyword))) {
+            if (intent.includes("wife")) {
+                // Sub-Condition A
+                updateContent(
+                    "When \"Sorry\" Isn't Enough. <br><span class='text-gold italic'>Give Her a Symphony.</span>",
+                    "Words failed you. Music won't. The only apology grand enough to bridge the silence."
+                );
+            } else {
+                // Sub-Condition B
+                updateContent(
+                    "Don't Just Apologize. <br><span class='text-gold italic'>Sweep Her Off Her Feet.</span>",
+                    "Turn a mistake into a memory. The ultimate romantic gesture, delivered tonight."
+                );
+            }
+            return;
+        }
+
+        // Priority 3: COMPETITOR COMPARISON
+        if (intent.includes("songfinch")) {
+            updateContent(
+                "Don't Buy a Jingle. <br><span class='text-gold italic'>Commission a Legacy.</span>",
+                "Novelty gifts are for laughs. Broadcast-quality music is for love."
+            );
+            return;
+        }
+
+        // Priority 4: STATUS & SPECIFICS (The "Hard to Buy For")
+        if (intent.includes("parent") || intent.includes("parents")) {
+            updateContent(
+                "Honor Their Legacy. <br><span class='text-gold italic'>In Song.</span>",
+                "They have a lifetime of \"things.\" Give them a moment of pure emotion."
+            );
+            return;
+        }
+
+        if (intent.includes("birthday")) {
+            updateContent(
+                "The Birthday Gift She’ll Remember <br><span class='text-gold italic'>When She’s 80.</span>",
+                "Perfume runs dry. Flowers wilt. A custom song is forever."
+            );
+            return;
+        }
+
+        const luxuryKeywords = ["luxury", "everything", "nothing", "sentimental"];
+        if (luxuryKeywords.some(keyword => intent.includes(keyword))) {
+            updateContent(
+                "She Has Everything. <br><span class='text-gold italic'>Except a Song Written Just For Her.</span>",
+                "Bespoke art, commissioned for her story. The only luxury that doesn't collect dust."
+            );
+            return;
+        }
+
+        // Priority 5: MILESTONES (Dynamic Years)
+        // Regex to match numbers followed by "year" or "th" (e.g. "1st", "10 year", "25th")
+        // We look for patterns like "1st", "1 year", "5th", "5 year", etc.
+        
+        // Trigger: "1st" or "1 year"
+        if (intent.includes("1st") || intent.includes("1 year")) {
+            updateContent(
+                "One Year Down. <br><span class='text-gold italic'>A Lifetime to Go.</span>",
+                "Paper is traditional. This is eternal. A custom song for your first anniversary."
+            );
+            return;
+        }
+
+        // Trigger: "5 year" or "5th"
+        if (intent.includes("5 year") || intent.includes("5th")) {
+            updateContent(
+                "Five Years. Countless Memories. <br><span class='text-gold italic'>One Song.</span>",
+                "Tradition says 'Wood.' Love demands a Masterpiece."
+            );
+            return;
+        }
+
+        // Trigger: "10 year" or "10th"
+        if (intent.includes("10 year") || intent.includes("10th")) {
+            updateContent(
+                "A Decade of Love. <br><span class='text-gold italic'>One Defining Anthem.</span>",
+                "Ten years deserves more than tin. It deserves a legacy."
+            );
+            return;
+        }
+
+        // Trigger: "25 year", "25th", "50th", "50 year"
+        if (intent.includes("25 year") || intent.includes("25th")) {
+            updateContent(
+                "A Quarter Century. <br><span class='text-gold italic'>Immortalized.</span>",
+                "Diamonds sit in a drawer. This melody lives in the air between you."
+            );
+            return;
+        }
+
+        if (intent.includes("50 year") || intent.includes("50th")) {
+            updateContent(
+                "A Quarter Century. <br><span class='text-gold italic'>Golden Era.</span>", // Note: Brief said "If 50th, swap 'Quarter Century' for 'Golden Era'" but the H1 structure implies "Golden Era. Immortalized." or just "Golden Era."? 
+                // Brief: H1: A Quarter Century. Immortalized. (If 50th, swap "Quarter Century" for "Golden Era")
+                // So: "Golden Era. Immortalized."
+                "Golden Era. <br><span class='text-gold italic'>Immortalized.</span>",
+                "Diamonds sit in a drawer. This melody lives in the air between you."
+            );
+            return;
+        }
+
+        // Fallback (Any other number + year/th)
+        // Regex to check if it looks like a milestone intent but wasn't caught above
+        const milestoneRegex = /(\d+)\s*(year|th|nd|rd|st)/;
+        if (milestoneRegex.test(intent)) {
+             updateContent(
+                "A Lifetime of Love. <br><span class='text-gold italic'>Captured in Song.</span>",
+                "Tradition suggests a gift. Love demands a Masterpiece."
+            );
+            return;
+        }
+
+        // Priority 6: DEFAULT (The Catch-All)
+        // If we reached here, intent was present but didn't match any specific buckets.
+        // We can either leave the HTML as is (which is the default) or force update it.
+        // The brief says: "If user_intent is empty, missing, or matches none of the above."
+        // Since we checked for empty at the start, this handles "matches none of the above".
+        
+        updateContent(
+            "Your Love Story. <br><span class='text-gold italic'>In Song.</span>",
+            "The intimacy of a love letter. The emotional scale of a movie soundtrack. Composed exclusively for her."
+        );
+
+    });
+</script>
