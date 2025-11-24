@@ -110,8 +110,8 @@
       <script>
         (function() {
           const currentPath = window.location.pathname;
-          const songPortalPath = '/pages/song-portal';
-          const isOnSongPortal = currentPath.includes('/song-portal');
+          const songPortalPath = '/pages/your-song-portal';
+          const isOnSongPortal = currentPath.includes('/your-song-portal');
           
           // Redirect any customer account page to song portal (except logout)
           if (!isOnSongPortal && !currentPath.includes('/logout')) {
