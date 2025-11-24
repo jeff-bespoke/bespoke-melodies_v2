@@ -591,10 +591,24 @@
         const stickyBtn = document.getElementById('sticky-cta');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 800 && !stickyCTAShown) {
+            const formSection = document.getElementById('creative-brief');
+            const formRect = formSection?.getBoundingClientRect();
+            
+            // Hide button if form is visible in viewport
+            const formIsVisible = formRect && formRect.top < window.innerHeight && formRect.bottom > 0;
+            
+            if (formIsVisible) {
+                // User has scrolled to form - hide sticky button
+                if (stickyBtn) {
+                    stickyBtn.classList.add('hidden');
+                    stickyCTAShown = false;
+                }
+            } else if (window.scrollY > 800 && !stickyCTAShown && !formIsVisible) {
+                // Show button after 800px but not if form is visible
                 stickyBtn.classList.remove('hidden');
                 stickyCTAShown = true;
             } else if (window.scrollY <= 800 && stickyCTAShown) {
+                // Hide if scrolled back up
                 stickyBtn.classList.add('hidden');
                 stickyCTAShown = false;
             }

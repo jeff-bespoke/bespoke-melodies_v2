@@ -599,10 +599,24 @@
         const stickyBtn = document.getElementById('sticky-cta');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 800 && !stickyCTAShown) {
+            const formSection = document.getElementById('creative-brief');
+            const formRect = formSection?.getBoundingClientRect();
+            
+            // Hide button if form is visible in viewport
+            const formIsVisible = formRect && formRect.top < window.innerHeight && formRect.bottom > 0;
+            
+            if (formIsVisible) {
+                // User has scrolled to form - hide sticky button
+                if (stickyBtn) {
+                    stickyBtn.classList.add('hidden');
+                    stickyCTAShown = false;
+                }
+            } else if (window.scrollY > 800 && !stickyCTAShown && !formIsVisible) {
+                // Show button after 800px but not if form is visible
                 stickyBtn.classList.remove('hidden');
                 stickyCTAShown = true;
             } else if (window.scrollY <= 800 && stickyCTAShown) {
+                // Hide if scrolled back up
                 stickyBtn.classList.add('hidden');
                 stickyCTAShown = false;
             }
@@ -610,10 +624,22 @@
 
         // Listen for Tally form events to hide sticky button
         window.addEventListener('message', function(event) {
-            // Check if message is from Tally
-            if (event.data.event === 'Tally.FormStarted' || 
-                event.data.event === 'Tally.FormPageView' ||
-                event.data.event === 'Tally.FormSubmitted') {
+            // Debug: log all Tally messages
+            if (event.data && typeof event.data === 'object') {
+                console.log('Tally Event:', event.data);
+            }
+            
+            // Check if message is from Tally (multiple possible formats)
+            const eventType = event.data?.event || event.data?.type;
+            
+            if (eventType && (
+                eventType === 'Tally.FormStarted' || 
+                eventType === 'Tally.PageView' ||
+                eventType === 'Tally.FormPageView' ||
+                eventType === 'Tally.FormSubmitted' ||
+                eventType.includes('Tally')
+            )) {
+                console.log('Hiding sticky button due to Tally event:', eventType);
                 // Hide sticky button when user starts/interacts with form
                 if (stickyBtn) {
                     stickyBtn.classList.add('hidden');
