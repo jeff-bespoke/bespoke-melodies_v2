@@ -59,6 +59,9 @@
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+    <div style="position:fixed; top:0; left:0; width:100%; background:red; color:white; z-index:99999; text-align:center; padding:10px; font-weight:bold; font-size:20px;">
+      TEST MODE ACTIVE - IF YOU SEE THIS, CODE IS UPDATING
+    </div>
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
     <div id="header-group">
       {% sections 'header-group' %}
