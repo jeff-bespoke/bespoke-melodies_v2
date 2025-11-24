@@ -588,14 +588,29 @@
     <script>
         // Sticky CTA: Show after scrolling past hero
         let stickyCTAShown = false;
+        const stickyBtn = document.getElementById('sticky-cta');
+        
         window.addEventListener('scroll', () => {
-            const stickyBtn = document.getElementById('sticky-cta');
             if (window.scrollY > 800 && !stickyCTAShown) {
                 stickyBtn.classList.remove('hidden');
                 stickyCTAShown = true;
             } else if (window.scrollY <= 800 && stickyCTAShown) {
                 stickyBtn.classList.add('hidden');
                 stickyCTAShown = false;
+            }
+        });
+
+        // Listen for Tally form events to hide sticky button
+        window.addEventListener('message', function(event) {
+            // Check if message is from Tally
+            if (event.data.event === 'Tally.FormStarted' || 
+                event.data.event === 'Tally.FormPageView' ||
+                event.data.event === 'Tally.FormSubmitted') {
+                // Hide sticky button when user starts/interacts with form
+                if (stickyBtn) {
+                    stickyBtn.classList.add('hidden');
+                    stickyCTAShown = false;
+                }
             }
         });
 
