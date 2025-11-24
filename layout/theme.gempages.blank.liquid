@@ -4,6 +4,19 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+  <head>
+    {%- render 'meta-tags' -%}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LF2MB2YSM2');
+    </script>
+
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
@@ -19,8 +32,6 @@
       blocking="render"
       id="view-transition-render-blocker"
     >
-
-    {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
