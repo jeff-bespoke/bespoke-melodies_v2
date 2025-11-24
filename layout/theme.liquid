@@ -102,5 +102,24 @@
       </style>
     {% endunless %}
     {% section 'cookie-banner' %}
+    
+    {%- comment -%}
+      Auto-redirect logged-in customers from ANY account page to song portal
+    {%- endcomment -%}
+    {% if customer and template contains 'customers' %}
+      <script>
+        (function() {
+          const currentPath = window.location.pathname;
+          const songPortalPath = '/pages/song-portal';
+          const isOnSongPortal = currentPath.includes('/song-portal');
+          
+          // Redirect any customer account page to song portal (except logout)
+          if (!isOnSongPortal && !currentPath.includes('/logout')) {
+            console.log('Redirecting customer from', currentPath, 'to song portal');
+            window.location.replace(songPortalPath);
+          }
+        })();
+      </script>
+    {% endif %}
   </body>
 </html>
