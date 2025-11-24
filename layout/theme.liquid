@@ -4,6 +4,8 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+    {%- render 'meta-tags' -%}
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
     <script>
@@ -43,7 +45,6 @@
       id="view-transition-render-blocker"
     >
 
-    {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}

@@ -3,6 +3,24 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
+    <meta charset="utf-8">
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    >
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    >
+    <meta
+      name="theme-color"
+      content="{{ settings.color_schemes.scheme-1.settings.background }}"
+    >
+    <link
+      rel="canonical"
+      href="{{ canonical_url }}"
+    >
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
     <script>
@@ -22,6 +40,7 @@
 
       gtag('config', 'AW-17741514624');
     </script>
+    
     <script type="importmap">
       {
         "imports": {
@@ -42,23 +61,6 @@
       src="{{ 'copy-to-clipboard.js' | asset_url }}"
       type="module"
     ></script>
-    <meta charset="utf-8">
-    <meta
-      http-equiv="X-UA-Compatible"
-      content="IE=edge"
-    >
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    >
-    <meta
-      name="theme-color"
-      content="{{ settings.color_schemes.scheme-1.settings.background }}"
-    >
-    <link
-      rel="canonical"
-      href="{{ canonical_url }}"
-    >
 
     {%- if settings.favicon != blank -%}
       <link
