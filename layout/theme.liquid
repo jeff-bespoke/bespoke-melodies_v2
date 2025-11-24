@@ -106,15 +106,20 @@
     {%- comment -%}
       Auto-redirect logged-in customers from ANY account page to song portal
     {%- endcomment -%}
-    {% if customer and template contains 'customers' %}
+    {% if customer %}
       <script>
         (function() {
           const currentPath = window.location.pathname;
           const songPortalPath = '/pages/your-song-portal';
           const isOnSongPortal = currentPath.includes('/your-song-portal');
           
-          // Redirect any customer account page to song portal (except logout)
-          if (!isOnSongPortal && !currentPath.includes('/logout')) {
+          // Redirect from account, orders, or any customer page (except logout)
+          const isAccountPage = currentPath.includes('/account') || 
+                                currentPath.includes('/orders') ||
+                                (currentPath === '/account') ||
+                                currentPath.match(/\/customers?\//);
+          
+          if (isAccountPage && !isOnSongPortal && !currentPath.includes('/logout')) {
             console.log('Redirecting customer from', currentPath, 'to song portal');
             window.location.replace(songPortalPath);
           }
