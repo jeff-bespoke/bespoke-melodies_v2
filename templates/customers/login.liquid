@@ -5,7 +5,7 @@
 
 <div class="customer login">
   <div class="container">
-    <h1>{{ 'customer.login.title' | t }}</h1>
+    <h1>Customer Login</h1>
     
     {%- form 'customer_login', novalidate: 'novalidate' -%}
       {%- comment -%}
@@ -20,48 +20,48 @@
       {% endif %}
 
       <div class="field">
+        <label for="CustomerEmail">
+          Email
+        </label>
         <input
           type="email"
           name="customer[email]"
           id="CustomerEmail"
           autocomplete="email"
           autocapitalize="off"
-          placeholder="{{ 'customer.login.email' | t }}"
+          placeholder="Email"
           {% if form.errors %}
             aria-invalid="true"
             aria-describedby="CustomerEmail-error"
           {% endif %}
         >
-        <label for="CustomerEmail">
-          {{ 'customer.login.email' | t }}
-        </label>
       </div>
 
       <div class="field">
+        <label for="CustomerPassword">
+          Password
+        </label>
         <input
           type="password"
           value=""
           name="customer[password]"
           id="CustomerPassword"
           autocomplete="current-password"
-          placeholder="{{ 'customer.login.password' | t }}"
+          placeholder="Password"
           {% if form.errors %}
             aria-invalid="true"
             aria-describedby="CustomerPassword-error"
           {% endif %}
         >
-        <label for="CustomerPassword">
-          {{ 'customer.login.password' | t }}
-        </label>
       </div>
 
       <div class="login__actions">
         <button type="submit" class="button">
-          {{ 'customer.login.sign_in' | t }}
+          Sign In
         </button>
         
         <a href="{{ routes.account_recover_url }}">
-          {{ 'customer.login.forgot_password' | t }}
+          Forgot your password?
         </a>
       </div>
     {%- endform -%}
@@ -69,10 +69,10 @@
     {% if shop.checkout.guest_login %}
       <hr>
       <div class="guest-login">
-        <h2>{{ 'customer.login.guest_title' | t }}</h2>
+        <h2>New Customer?</h2>
         {%- form 'guest_login' -%}
           <button type="submit" class="button button--secondary">
-            {{ 'customer.login.guest_continue' | t }}
+            Continue as Guest
           </button>
         {%- endform -%}
       </div>
@@ -80,7 +80,7 @@
 
     <div class="create-account">
       <a href="{{ routes.account_register_url }}" class="button button--secondary">
-        {{ 'customer.login.create_account' | t }}
+        Create Account
       </a>
     </div>
   </div>
