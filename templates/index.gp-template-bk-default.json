@@ -15,6 +15,7 @@
     "custom_liquid_d6QcYW",
     "homepage_ai_advantage",
     "custom_liquid_cnkfKJ",
+    "homepage_creative_brief_v2",
     "custom_liquid_bmtpKP",
     "custom_liquid_YmwRNH",
     "custom_liquid_aXfTPT",
@@ -208,6 +209,10 @@
     "homepage_ai_advantage": {
       "settings": {},
       "type": "homepage-ai-advantage"
+    },
+    "homepage_creative_brief_v2": {
+      "settings": {},
+      "type": "homepage-creative-brief"
     },
     "product_list_themegen": {
       "blocks": {
