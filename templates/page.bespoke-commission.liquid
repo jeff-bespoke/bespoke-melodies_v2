@@ -758,6 +758,7 @@
                 // Tally sends "FormPageView" when user views any page in the form
                 // First page view = form begin (true engagement)
                 if (event.data && event.data.event === 'Tally.FormPageView') {
+                    console.log('👀 Tally.FormPageView TRIGGERED at:', new Date().toLocaleTimeString());
                     if (!formBeginFired) {
                         formBeginFired = true;
                         console.log('🎯 GA4 Event: form_begin (User started Tally form)');
