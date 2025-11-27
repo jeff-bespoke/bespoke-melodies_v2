@@ -744,9 +744,9 @@
                 }
 
                 // Tally sends "FormPageView" when user views any page in the form
-                // First page view = form begin (true engagement)
-                if (data && data.event === 'Tally.FormPageView') {
-                    console.log('👀 Tally.FormPageView TRIGGERED at:', new Date().toLocaleTimeString());
+                // We want to track when they click "Start" (which moves them to Page 2)
+                if (data && data.event === 'Tally.FormPageView' && data.payload && data.payload.page === 2) {
+                    console.log('👀 Tally Page 2 Reached (User clicked Start) at:', new Date().toLocaleTimeString());
                     if (!formBeginFired) {
                         formBeginFired = true;
                         console.log('🎯 GA4 Event: form_begin (User started Tally form)');
