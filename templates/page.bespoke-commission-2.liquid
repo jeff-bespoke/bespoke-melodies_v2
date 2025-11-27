@@ -706,6 +706,32 @@
                 d.body.appendChild(s);
             }
 
+            // Track when user ACTUALLY starts the Tally form
+            // Requires: Tally GA4 integration enabled in Tally dashboard
+            let formBeginFired = false;
+            
+            window.addEventListener('message', function(event) {
+                // Tally sends "FormPageView" when user views any page in the form
+                // First page view = form begin (true engagement)
+                if (event.data && event.data.event === 'Tally.FormPageView') {
+                    if (!formBeginFired) {
+                        formBeginFired = true;
+                        console.log('🎯 GA4 Event: form_begin (User started Tally form)');
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'form_begin', {
+                                form_name: 'Creative Brief',
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+                
+                // Debug: Log all Tally events to verify integration
+                if (event.data && event.data.event && event.data.event.includes('Tally')) {
+                    console.log('📊 Tally Event:', event.data.event);
+                }
+            });
+
             // Handle URL Hash Parameters for Pre-filling and Scrolling
             function handleHashChange() {
                 var hash = window.location.hash;

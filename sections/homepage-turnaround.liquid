@@ -199,6 +199,23 @@
       var url = baseUrl + '?turnaround=' + encodeURIComponent(label) + '&price=' + encodeURIComponent(p);
       beginEl.setAttribute('href', url);
     }
+    
+    // Track tier selection when Begin button is clicked
+    beginEl.addEventListener('click', function() {
+      var chosen = document.querySelector('#bm-pills input[type="radio"]:checked');
+      if (chosen && typeof gtag === 'function') {
+        var turnaround = chosen.value || 'Unknown';
+        var price = Number(chosen.getAttribute('data-price'));
+        gtag('event', 'tier_selected', {
+          tier: turnaround,
+          price: price,
+          turnaround: turnaround,
+          page_location: window.location.pathname
+        });
+        console.log('🎯 GA4 Event: tier_selected', {tier: turnaround, price: price});
+      }
+    });
+    
     pills.forEach(function(r){ r.addEventListener('change', update); });
     update();
   })();

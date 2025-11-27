@@ -734,51 +734,31 @@
                 d.body.appendChild(s);
             }
 
-            // Track when user starts the Tally form (more reliable than postMessage)
+            // Track when user ACTUALLY starts the Tally form
+            // Requires: Tally GA4 integration enabled in Tally dashboard
             let formBeginFired = false;
             
-            // Method 1: Listen for Tally postMessage events (if available)
             window.addEventListener('message', function(event) {
-                if (event.data && typeof event.data === 'object') {
-                    if (event.data.event && event.data.event.includes('Tally')) {
-                        console.log('📊 Tally Event:', event.data.event);
-                        
-                        if (!formBeginFired) {
-                            formBeginFired = true;
-                            console.log('🎯 GA4 Event: form_begin');
-                            if (typeof gtag === 'function') {
-                                gtag('event', 'form_begin', {
-                                    form_name: 'Creative Brief',
-                                    page_location: window.location.pathname
-                                });
-                            }
+                // Tally sends "FormPageView" when user views any page in the form
+                // First page view = form begin (true engagement)
+                if (event.data && event.data.event === 'Tally.FormPageView') {
+                    if (!formBeginFired) {
+                        formBeginFired = true;
+                        console.log('🎯 GA4 Event: form_begin (User started Tally form)');
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'form_begin', {
+                                form_name: 'Creative Brief',
+                                page_location: window.location.pathname
+                            });
                         }
                     }
                 }
-            });
-            
-            // Method 2: Detect when Tally iframe receives focus (fallback)
-            setTimeout(function() {
-                const tallyIframe = document.querySelector('iframe[data-tally-src], iframe[src*="tally.so"]');
-                if (tallyIframe) {
-                    // Track clicks near the iframe
-                    const iframeContainer = tallyIframe.parentElement;
-                    if (iframeContainer) {
-                        iframeContainer.addEventListener('click', function() {
-                            if (!formBeginFired) {
-                                formBeginFired = true;
-                                console.log('🎯 GA4 Event: form_begin (iframe click)');
-                                if (typeof gtag === 'function') {
-                                    gtag('event', 'form_begin', {
-                                        form_name: 'Creative Brief',
-                                        page_location: window.location.pathname
-                                    });
-                                }
-                            }
-                        });
-                    }
+                
+                // Debug: Log all Tally events to verify integration
+                if (event.data && event.data.event && event.data.event.includes('Tally')) {
+                    console.log('📊 Tally Event:', event.data.event);
                 }
-            }, 2000);
+            });
 
             // Handle URL Hash Parameters for Pre-filling and Scrolling
             function handleHashChange() {

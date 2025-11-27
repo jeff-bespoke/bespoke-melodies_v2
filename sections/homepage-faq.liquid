@@ -194,6 +194,26 @@
   }
 </style>
 
+<script>
+  // FAQ Click Tracking
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqButtons = document.querySelectorAll('.bm-faq-question');
+    faqButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        // Get the question text (everything except the icon)
+        const questionText = this.textContent.replace(/𝄞/g, '').trim();
+        if (typeof gtag === 'function') {
+          gtag('event', 'faq_click', {
+            question: questionText.substring(0, 100),
+            page_location: window.location.pathname
+          });
+          console.log('🎯 GA4 Event: faq_click', {question: questionText.substring(0, 100)});
+        }
+      });
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "FAQ Section",

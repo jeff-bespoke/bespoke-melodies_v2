@@ -141,5 +141,34 @@
         })();
       </script>
     {% endif %}
+    
+    <!-- Global Scroll Depth Tracking -->
+    <script>
+      (function() {
+        const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+        
+        function checkScrollDepth() {
+          const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+          
+          for (let depth in scrollDepths) {
+            if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+              scrollDepths[depth] = true;
+              if (typeof gtag === 'function') {
+                gtag('event', 'scroll', {
+                  percent_scrolled: parseInt(depth),
+                  page_location: window.location.pathname
+                });
+              }
+            }
+          }
+        }
+        
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(checkScrollDepth, 100);
+        }, {passive: true});
+      })();
+    </script>
   </body>
 </html>
