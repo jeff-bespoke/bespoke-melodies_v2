@@ -94,21 +94,6 @@
             <!-- Trust Signal Removed -->
 
             <div class="pt-6">
-                <p class="text-sm text-gray-400 mb-3">
-                    <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    Complete a quick 2-minute creative brief, then checkout securely
-                </p>
-                <a href="#creative-brief"
-                    class="inline-block bg-gold hover:bg-gold-hover text-charcoal font-bold py-4 px-10 rounded-full text-lg transition-all transform hover:-translate-y-1 shadow-lg glow-gold scroll-smooth">
-                    Start Your Commission
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why We Use AI (The Pivot) -->
     <section id="why-ai" class="py-20 px-4 bg-charcoal-light/30">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
@@ -304,6 +289,7 @@
                     <div class="text-3xl font-bold text-gold mb-4">$399</div>
                     <p class="text-gray-400 text-sm mb-8">7 Days</p>
                     <a href="#creative-brief?tier=standard&price=399&turnaround=7days"
+                        onclick="typeof gtag === 'function' && gtag('event', 'tier_selected', {tier: 'Standard', price: 399, turnaround: '7days', page_location: window.location.pathname});"
                         class="block w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors text-center">Select
                         Standard</a>
                 </div>
@@ -318,6 +304,7 @@
                     <div class="text-4xl font-bold text-gold mb-4">$2,500</div>
                     <p class="text-gray-400 text-sm mb-8">6 Hours</p>
                     <a id="executive-tier-button" href="#creative-brief?tier=executive&price=2500&turnaround=6hours"
+                        onclick="typeof gtag === 'function' && gtag('event', 'tier_selected', {tier: 'Executive', price: 2500, turnaround: '6hours', page_location: window.location.pathname});"
                         class="block w-full py-4 bg-gold hover:bg-gold-dark text-charcoal rounded-lg font-bold transition-all transform hover:-translate-y-0.5 text-center shadow-lg glow-gold">Start
                         Commission</a>
                     <!-- Overnight Warning Container -->
@@ -331,6 +318,7 @@
                     <div class="text-3xl font-bold text-gold mb-4">$1,200</div>
                     <p class="text-gray-400 text-sm mb-8">24 Hours</p>
                     <a href="#creative-brief?tier=priority&price=1200&turnaround=24hours"
+                        onclick="typeof gtag === 'function' && gtag('event', 'tier_selected', {tier: 'Priority', price: 1200, turnaround: '24hours', page_location: window.location.pathname});"
                         class="block w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors text-center">Select
                         Priority</a>
                 </div>
@@ -692,6 +680,15 @@
                 eventType.includes('Tally')
             )) {
                 console.log('Hiding sticky button due to Tally event:', eventType);
+                
+                // 🎯 Track form begin event in Google Analytics
+                if (eventType === 'Tally.FormStarted' && typeof gtag === 'function') {
+                    gtag('event', 'form_begin', {
+                        'form_name': 'Creative Brief',
+                        'page_location': window.location.pathname
+                    });
+                }
+                
                 // Hide sticky button when user starts/interacts with form
                 if (stickyBtn) {
                     stickyBtn.classList.add('hidden');
@@ -865,11 +862,25 @@
                             "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for a Masterpiece.</span>",
                             "The ultimate anniversary rescue. Composed, recorded, and delivered tonight."
                         );
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'headline_view', {
+                                headline_category: 'Urgency - Anniversary',
+                                user_intent_raw: rawIntent,
+                                page_location: window.location.pathname
+                            });
+                        }
                     } else {
                         updateContent(
                             "The Impossible Gift. <br><span class='text-gold italic'>Delivered Tonight.</span>",
                             "Don't just fill her hands with flowers. Fill her heart with a symphony. In your inbox by 8 PM."
                         );
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'headline_view', {
+                                headline_category: 'Urgency - General',
+                                user_intent_raw: rawIntent,
+                                page_location: window.location.pathname
+                            });
+                        }
                     }
                     return;
                 }
@@ -877,6 +888,7 @@
                 // Priority 2: APOLOGY
                 const apologyKeywords = ["sorry", "apology", "doghouse"];
                 if (apologyKeywords.some(keyword => intent.includes(keyword))) {
+                    const category = intent.includes("wife") ? 'Apology - Wife' : 'Apology - General';
                     if (intent.includes("wife")) {
                         updateContent(
                             "When \"Sorry\" Isn't Enough. <br><span class='text-gold italic'>Give Her a Symphony.</span>",
@@ -888,6 +900,13 @@
                             "Turn a mistake into a memory. The ultimate romantic gesture, delivered tonight."
                         );
                     }
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {
+                            headline_category: category,
+                            user_intent_raw: rawIntent,
+                            page_location: window.location.pathname
+                        });
+                    }
                     return;
                 }
 
@@ -897,6 +916,13 @@
                         "Don't Buy a Jingle. <br><span class='text-gold italic'>Commission a Legacy.</span>",
                         "Novelty gifts are for laughs. Broadcast-quality music is for love."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {
+                            headline_category: 'Competitor - Songfinch',
+                            user_intent_raw: rawIntent,
+                            page_location: window.location.pathname
+                        });
+                    }
                     return;
                 }
 
@@ -906,14 +932,20 @@
                         "Honor Their Legacy. <br><span class='text-gold italic'>In Song.</span>",
                         "They have a lifetime of \"things.\" Give them a moment of pure emotion."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Parents', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
                 if (intent.includes("birthday")) {
                     updateContent(
-                        "The Birthday Gift She’ll Remember <br><span class='text-gold italic'>When She’s 80.</span>",
+                        "The Birthday Gift She'll Remember <br><span class='text-gold italic'>When She's 80.</span>",
                         "Perfume runs dry. Flowers wilt. A custom song is forever."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Birthday', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -923,6 +955,9 @@
                         "She Has Everything. <br><span class='text-gold italic'>Except a Song Written Just For Her.</span>",
                         "Bespoke art, commissioned for her story. The only luxury that doesn't collect dust."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Luxury', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -932,6 +967,9 @@
                         "One Year Down. <br><span class='text-gold italic'>A Lifetime to Go.</span>",
                         "Paper is traditional. This is eternal. A custom song for your first anniversary."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 1st', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -940,6 +978,9 @@
                         "Five Years. Countless Memories. <br><span class='text-gold italic'>One Song.</span>",
                         "Tradition says 'Wood.' Love demands a Masterpiece."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 5th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -948,6 +989,9 @@
                         "A Decade of Love. <br><span class='text-gold italic'>One Defining Anthem.</span>",
                         "Ten years deserves more than tin. It deserves a legacy."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 10th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -956,6 +1000,9 @@
                         "A Quarter Century. <br><span class='text-gold italic'>Immortalized.</span>",
                         "Diamonds sit in a drawer. This melody lives in the air between you."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 25th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -964,6 +1011,9 @@
                         "Golden Era. <br><span class='text-gold italic'>Immortalized.</span>",
                         "Diamonds sit in a drawer. This melody lives in the air between you."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 50th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -973,6 +1023,9 @@
                         "A Lifetime of Love. <br><span class='text-gold italic'>Captured in Song.</span>",
                         "Tradition suggests a gift. Love demands a Masterpiece."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - Other', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -981,6 +1034,9 @@
                     "Your Love Story. <br><span class='text-gold italic'>In Song.</span>",
                     "The intimacy of a love letter. The emotional scale of a movie soundtrack. Composed exclusively for her."
                 );
+                if (typeof gtag === 'function') {
+                    gtag('event', 'headline_view', {headline_category: 'Default', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                }
             }
 
             if (document.readyState === "loading") {
@@ -989,6 +1045,53 @@
                 initDSI();
             }
         })();
+    </script>
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+        (function() {
+            const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+            
+            function checkScrollDepth() {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                
+                for (let depth in scrollDepths) {
+                    if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+                        scrollDepths[depth] = true;
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll', {
+                                percent_scrolled: parseInt(depth),
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+            }
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScrollDepth, 100);
+            }, {passive: true});
+        })();
+    </script>
+
+    <!-- FAQ Click Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-question');
+            faqButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const questionText = this.querySelector('span').textContent.trim();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_click', {
+                            question: questionText.substring(0, 100),
+                            page_location: window.location.pathname
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 
