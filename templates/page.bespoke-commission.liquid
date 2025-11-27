@@ -784,8 +784,8 @@
                         }
                     }
 
-                    // Track progress for ALL pages > 1 (including Page 2)
-                    if (pageNum > 1) {
+                    // Track progress for pages AFTER Page 2 (Start)
+                    if (pageNum > 2) {
                         if (typeof gtag === 'function') {
                             gtag('event', 'form_progress', {
                                 form_name: 'Creative Brief',
