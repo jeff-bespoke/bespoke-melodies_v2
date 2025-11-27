@@ -834,11 +834,17 @@
                             "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for a Masterpiece.</span>",
                             "The ultimate anniversary rescue. Composed, recorded, and delivered tonight."
                         );
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'headline_view', {headline_category: 'Urgency - Anniversary', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                        }
                     } else {
                         updateContent(
                             "The Impossible Gift. <br><span class='text-gold italic'>Delivered Tonight.</span>",
                             "Don't just fill her hands with flowers. Fill her heart with a symphony. In your inbox by 8 PM."
                         );
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'headline_view', {headline_category: 'Urgency - General', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                        }
                     }
                     return;
                 }
@@ -846,6 +852,7 @@
                 // Priority 2: APOLOGY
                 const apologyKeywords = ["sorry", "apology", "doghouse"];
                 if (apologyKeywords.some(keyword => intent.includes(keyword))) {
+                    const category = intent.includes("wife") ? 'Apology - Wife' : 'Apology - General';
                     if (intent.includes("wife")) {
                         updateContent(
                             "When \"Sorry\" Isn't Enough. <br><span class='text-gold italic'>Give Her a Symphony.</span>",
@@ -857,6 +864,9 @@
                             "Turn a mistake into a memory. The ultimate romantic gesture, delivered tonight."
                         );
                     }
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: category, user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -866,6 +876,9 @@
                         "Don't Buy a Jingle. <br><span class='text-gold italic'>Commission a Legacy.</span>",
                         "Novelty gifts are for laughs. Broadcast-quality music is for love."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Competitor - Songfinch', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -875,14 +888,20 @@
                         "Honor Their Legacy. <br><span class='text-gold italic'>In Song.</span>",
                         "They have a lifetime of \"things.\" Give them a moment of pure emotion."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Parents', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
                 if (intent.includes("birthday")) {
                     updateContent(
-                        "The Birthday Gift She’ll Remember <br><span class='text-gold italic'>When She’s 80.</span>",
+                        "The Birthday Gift She'll Remember <br><span class='text-gold italic'>When She's 80.</span>",
                         "Perfume runs dry. Flowers wilt. A custom song is forever."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Birthday', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -892,6 +911,9 @@
                         "She Has Everything. <br><span class='text-gold italic'>Except a Song Written Just For Her.</span>",
                         "Bespoke art, commissioned for her story. The only luxury that doesn't collect dust."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Luxury', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -901,6 +923,9 @@
                         "One Year Down. <br><span class='text-gold italic'>A Lifetime to Go.</span>",
                         "Paper is traditional. This is eternal. A custom song for your first anniversary."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 1st', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -909,6 +934,9 @@
                         "Five Years. Countless Memories. <br><span class='text-gold italic'>One Song.</span>",
                         "Tradition says 'Wood.' Love demands a Masterpiece."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 5th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -917,6 +945,9 @@
                         "A Decade of Love. <br><span class='text-gold italic'>One Defining Anthem.</span>",
                         "Ten years deserves more than tin. It deserves a legacy."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 10th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -925,6 +956,9 @@
                         "A Quarter Century. <br><span class='text-gold italic'>Immortalized.</span>",
                         "Diamonds sit in a drawer. This melody lives in the air between you."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 25th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -933,6 +967,9 @@
                         "Golden Era. <br><span class='text-gold italic'>Immortalized.</span>",
                         "Diamonds sit in a drawer. This melody lives in the air between you."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - 50th', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -942,6 +979,9 @@
                         "A Lifetime of Love. <br><span class='text-gold italic'>Captured in Song.</span>",
                         "Tradition suggests a gift. Love demands a Masterpiece."
                     );
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'headline_view', {headline_category: 'Milestone - Other', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                    }
                     return;
                 }
 
@@ -950,6 +990,9 @@
                     "Your Love Story. <br><span class='text-gold italic'>In Song.</span>",
                     "The intimacy of a love letter. The emotional scale of a movie soundtrack. Composed exclusively for her."
                 );
+                if (typeof gtag === 'function') {
+                    gtag('event', 'headline_view', {headline_category: 'Default', user_intent_raw: rawIntent, page_location: window.location.pathname});
+                }
             }
 
             if (document.readyState === "loading") {
