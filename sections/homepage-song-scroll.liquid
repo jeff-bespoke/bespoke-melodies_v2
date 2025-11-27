@@ -321,6 +321,7 @@
     cards.forEach(function (card) {
       var audio = card.querySelector('.song-audio');
       var button = card.querySelector('.song-play-btn');
+      var genre = card.querySelector('.song-genre').textContent.trim();
 
       button.addEventListener('click', function (e) {
         e.stopPropagation(); // Prevent card click if we want that separately
@@ -338,8 +339,26 @@
           button.classList.add('playing');
           currentAudio = audio;
           currentButton = button;
+          
+          // GA4: Audio Play
+          if (typeof gtag === 'function') {
+            gtag('event', 'audio_play', {
+              song_title: genre,
+              page_location: window.location.pathname
+            });
+            console.log('🎯 GA4 Event: audio_play', {song_title: genre});
+          }
         } else {
           audio.pause();
+          // GA4: Audio Pause
+          if (typeof gtag === 'function') {
+            gtag('event', 'audio_pause', {
+              song_title: genre,
+              page_location: window.location.pathname
+            });
+            console.log('🎯 GA4 Event: audio_pause', {song_title: genre});
+          }
+          
           audio.currentTime = 0;
           button.classList.remove('playing');
           currentAudio = null;
@@ -350,6 +369,16 @@
       // If audio ends naturally, reset button state
       audio.addEventListener('ended', function () {
         button.classList.remove('playing');
+        
+        // GA4: Audio Complete
+        if (typeof gtag === 'function') {
+          gtag('event', 'audio_complete', {
+            song_title: genre,
+            page_location: window.location.pathname
+          });
+          console.log('🎯 GA4 Event: audio_complete', {song_title: genre});
+        }
+
         if (currentAudio === audio) {
           currentAudio = null;
           currentButton = null;

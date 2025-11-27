@@ -766,21 +766,32 @@
                     return;
                 }
 
-                // Debug: Log parsed Tally events
-                if (data && data.event && data.event.includes('Tally')) {
-                    console.log('📨 Parsed Tally Event:', data.event, data.payload);
-                }
-
                 // Tally sends "FormPageView" when user views any page in the form
                 // We want to track when they click "Start" (which moves them to Page 2)
-                if (data && data.event === 'Tally.FormPageView' && data.payload && data.payload.page === 2) {
-                    console.log('👀 Tally Page 2 Reached (User clicked Start) at:', new Date().toLocaleTimeString());
-                    if (!formBeginFired) {
-                        formBeginFired = true;
-                        console.log('🎯 GA4 Event: form_begin (User started Tally form)');
+                if (data && data.event === 'Tally.FormPageView' && data.payload && data.payload.page) {
+                    const pageNum = data.payload.page;
+                    
+                    // Page 2 = "Start" button clicked -> form_begin
+                    if (pageNum === 2) {
+                        if (!formBeginFired) {
+                            formBeginFired = true;
+                            console.log('🎯 GA4 Event: form_begin (User started Tally form)');
+                            if (typeof gtag === 'function') {
+                                gtag('event', 'form_begin', {
+                                    form_name: 'Creative Brief',
+                                    page_location: window.location.pathname
+                                });
+                            }
+                        }
+                    }
+
+                    // Track progress for ALL pages > 1 (including Page 2)
+                    if (pageNum > 1) {
+                        console.log(`🎯 GA4 Event: form_progress (Page ${pageNum})`);
                         if (typeof gtag === 'function') {
-                            gtag('event', 'form_begin', {
+                            gtag('event', 'form_progress', {
                                 form_name: 'Creative Brief',
+                                page_number: pageNum,
                                 page_location: window.location.pathname
                             });
                         }
@@ -881,27 +892,27 @@
     <script>
         (function() {
             function initDSI() {
-                console.error("DSI: Initializing (Inline)..."); // Error level to force visibility
+                // console.log("DSI: Initializing (Inline)..."); 
                 // --- CONFIGURATION ---
                 const urlParams = new URLSearchParams(window.location.search);
                 const rawIntent = urlParams.get('user_intent');
                 
-                console.error("DSI: Raw Intent:", rawIntent);
+                // console.log("DSI: Raw Intent:", rawIntent);
 
                 // If no intent, do nothing
                 if (!rawIntent) return;
 
                 const intent = decodeURIComponent(rawIntent).toLowerCase();
-                console.error("DSI: Parsed Intent:", intent);
+                // console.log("DSI: Parsed Intent:", intent);
                 
                 const headlineEl = document.getElementById('lp-headline');
                 const subheadEl = document.getElementById('lp-subhead');
 
-                console.error("DSI: Elements found?", { headline: !!headlineEl, subhead: !!subheadEl });
+                // console.log("DSI: Elements found?", { headline: !!headlineEl, subhead: !!subheadEl });
 
                 // Helper function to update text
                 function updateContent(h1, h2) {
-                    console.error("DSI: Updating content...", { h1, h2 });
+                    // console.log("DSI: Updating content...", { h1, h2 });
                     if (headlineEl) headlineEl.innerHTML = h1;
                     if (subheadEl) subheadEl.innerHTML = h2;
                 }
