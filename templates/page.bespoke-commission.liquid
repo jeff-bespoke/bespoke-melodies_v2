@@ -737,12 +737,31 @@
             // Listen for Tally form events
             window.addEventListener('message', function(event) {
                 if (event.data && typeof event.data === 'object') {
+                    // Debug: Log all Tally events to see what's being sent
+                    if (event.data.event && event.data.event.includes('Tally')) {
+                        console.log('📊 Tally Event Received:', event.data.event, event.data);
+                    }
+                    
                     // Check for Tally.FormStarted event
                     if (event.data.event === 'Tally.FormStarted') {
                         console.log('🎯 GA4 Event: form_begin', {form_name: 'Creative Brief', page_location: window.location.pathname});
                         if (typeof gtag === 'function') {
                             gtag('event', 'form_begin', {
                                 form_name: 'Creative Brief',
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                    
+                    // Also try alternative Tally event names
+                    if (event.data.event === 'Tally.PageView' || 
+                        event.data.event === 'Tally.PopupOpened' ||
+                        event.data.event === 'Tally.FormPageView') {
+                        console.log('🎯 GA4 Event: form_begin (from ' + event.data.event + ')');
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'form_begin', {
+                                form_name: 'Creative Brief',
+                                tally_event: event.data.event,
                                 page_location: window.location.pathname
                             });
                         }
