@@ -74,6 +74,21 @@
 
 <body class="antialiased">
 
+    <!-- Global GA4 Event Logger -->
+    <script>
+        // Wrap gtag to log all events to console
+        if (typeof gtag !== 'undefined') {
+            const originalGtag = gtag;
+            window.gtag = function() {
+                const args = Array.from(arguments);
+                if (args[0] === 'event') {
+                    console.log('🎯 GA4 Event:', args[1], args[2] || {});
+                }
+                return originalGtag.apply(this, args);
+            };
+        }
+    </script>
+
     <!-- Hero Section -->
     <section id="get-started" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
         <div class="absolute inset-0 z-0">
@@ -334,17 +349,6 @@
             </div>
             
             <!-- Tally inline embed -->
-            <div class="border border-gold/20 rounded-xl p-8 shadow-2xl relative z-10" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05);">
-                <iframe 
-                    data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&dynamicHeight=1" 
-                    loading="lazy" 
-                    width="100%" 
-                    frameborder="0" 
-                    marginheight="0" 
-                    marginwidth="0" 
-                    title="Bespoke Melodies Creative Brief"
-                    style="border: none;">
-                </iframe>
             </div>
         </div>
     </section>

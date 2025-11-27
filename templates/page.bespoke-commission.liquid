@@ -74,6 +74,21 @@
 
 <body class="antialiased bg-charcoal text-white font-sans selection:bg-gold selection:text-charcoal">
 
+    <!-- Global GA4 Event Logger -->
+    <script>
+        // Wrap gtag to log all events to console
+        if (typeof gtag !== 'undefined') {
+            const originalGtag = gtag;
+            window.gtag = function() {
+                const args = Array.from(arguments);
+                if (args[0] === 'event') {
+                    console.log('🎯 GA4 Event:', args[1], args[2] || {});
+                }
+                return originalGtag.apply(this, args);
+            };
+        }
+    </script>
+
     <!-- Hero Section -->
     <section id="get-started" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
         <div class="absolute inset-0 z-0">
