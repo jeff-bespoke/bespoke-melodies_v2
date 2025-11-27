@@ -755,17 +755,25 @@
             let formBeginFired = false;
             
             window.addEventListener('message', function(event) {
-                // Debug: Log ANY message that looks like it's from Tally
-                if (event.data && (typeof event.data === 'object' || typeof event.data === 'string')) {
-                    const dataStr = typeof event.data === 'object' ? JSON.stringify(event.data) : event.data;
-                    if (dataStr.includes('Tally')) {
-                        console.log('📨 Raw Tally Message:', event.data);
+                // Parse data if it's a string (which it is, based on your logs)
+                let data = event.data;
+                try {
+                    if (typeof data === 'string') {
+                        data = JSON.parse(data);
                     }
+                } catch (e) {
+                    // Not valid JSON, ignore
+                    return;
+                }
+
+                // Debug: Log parsed Tally events
+                if (data && data.event && data.event.includes('Tally')) {
+                    console.log('📨 Parsed Tally Event:', data.event, data.payload);
                 }
 
                 // Tally sends "FormPageView" when user views any page in the form
                 // First page view = form begin (true engagement)
-                if (event.data && event.data.event === 'Tally.FormPageView') {
+                if (data && data.event === 'Tally.FormPageView') {
                     console.log('👀 Tally.FormPageView TRIGGERED at:', new Date().toLocaleTimeString());
                     if (!formBeginFired) {
                         formBeginFired = true;
@@ -777,11 +785,6 @@
                             });
                         }
                     }
-                }
-                
-                // Debug: Log all Tally events to verify integration
-                if (event.data && event.data.event && event.data.event.includes('Tally')) {
-                    console.log('📊 Tally Event:', event.data.event);
                 }
             });
 
