@@ -775,7 +775,6 @@
                     if (pageNum === 2) {
                         if (!formBeginFired) {
                             formBeginFired = true;
-                            console.log('🎯 GA4 Event: form_begin (User started Tally form)');
                             if (typeof gtag === 'function') {
                                 gtag('event', 'form_begin', {
                                     form_name: 'Creative Brief',
@@ -787,7 +786,6 @@
 
                     // Track progress for ALL pages > 1 (including Page 2)
                     if (pageNum > 1) {
-                        console.log(`🎯 GA4 Event: form_progress (Page ${pageNum})`);
                         if (typeof gtag === 'function') {
                             gtag('event', 'form_progress', {
                                 form_name: 'Creative Brief',
