@@ -8,6 +8,8 @@
     <title>Bespoke Melodies - Urgent Gift</title>
     {% if settings.favicon != blank %}
         <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% else %}
+        <link rel="icon" href="data:,">
     {% endif %}
 
     <!-- Consolidated Google Tracking (GA4 + Ads) -->
