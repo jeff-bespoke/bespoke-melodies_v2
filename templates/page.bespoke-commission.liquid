@@ -339,35 +339,8 @@
         </div>
     </section>
 
-    <!-- Creative Brief Form (Inline Tally) -->
-    <section id="creative-brief" class="py-20 px-4 bg-gradient-to-b from-charcoal to-charcoal-light">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    Let's Create Your Bespoke Song
-                </h2>
-                <div class="w-24 h-1 bg-gold mx-auto rounded-full shadow-[0_0_10px_#D4AF37] mb-6"></div>
-                <p class="text-gray-300 text-lg">
-                    This quick 2-minute form helps us understand your vision
-                </p>
-            </div>
-            
-            <!-- Tally inline embed -->
-            <div class="border border-gold/20 rounded-xl p-8 shadow-2xl relative z-10" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05);">
-                <iframe 
-                    data-tally-src="https://tally.so/embed/OD1kzg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&formEventsForwarding=1" 
-                    loading="lazy" 
-                    width="100%" 
-                    height="215" 
-                    frameborder="0" 
-                    marginheight="0" 
-                    marginwidth="0" 
-                    title="Create your melody"
-                    style="border: none;">
-                </iframe>
-            </div>
-        </div>
-    </section>
+    <!-- REMOVED: Creative Brief Form (Tally) - Now using direct checkout -->
+    <!-- Users select pricing tier and go directly to cart -->
 
     <!-- The Bespoke Promise (Checkpoint Guarantee) -->
     <section id="guarantee" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
@@ -595,77 +568,10 @@
                         'genre': currentTrackInfo.genre,
                         'page_location': window.location.pathname
                     });
-                }
-                
-                currentCard = null;
-            }
-        });
-    </script>
-
-    <!-- Sticky Floating CTA Button -->
-    <button id="sticky-cta" 
-            onclick="window.location.href='/cart/51587919610132:1'"
-            class="fixed bottom-6 right-6 bg-gold hover:bg-gold-dark text-charcoal font-bold px-8 py-4 rounded-full shadow-2xl transition-all transform hover:scale-105 z-50 hidden"
-            style="box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);">
-        Start Commission →
-    </button>
-
-    <!-- Exit Intent Modal -->
-    <div id="exit-intent-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-gradient-to-b from-charcoal to-charcoal-light border-2 border-gold rounded-2xl p-8 max-w-md relative shadow-2xl">
-            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" 
-                    class="absolute top-4 right-4 text-white/60 hover:text-white text-2xl">×</button>
-            <h3 class="text-2xl font-bold text-white mb-4">Wait! Don't Miss Out 🎵</h3>
-            <p class="text-gray-300 mb-6">
-                You're one step away from creating an unforgettable bespoke song. Let's make something magical together!
-            </p>
-            <button onclick="window.location.href='#creative-brief'; document.getElementById('exit-intent-modal').classList.add('hidden');" 
-                    class="w-full bg-gold hover:bg-gold-dark text-charcoal font-bold py-4 px-6 rounded-full transition-all">
-                Create My Song Now →
-            </button>
-        </div>
-    </div>
-
-    <style>
-        /* Micro-Animation: Pulse effect on gold CTAs */
-        @keyframes pulse-gold {
-            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3); }
-        }
-        .glow-gold {
-            animation: pulse-gold 2s ease-in-out infinite;
-        }
-        
-        /* Sticky CTA Fade-in Animation */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        #sticky-cta:not(.hidden) {
-            animation: fadeInUp 0.3s ease-out;
-        }
-    </style>
-
-    <script>
-        // Sticky CTA: Show after scrolling past hero
-        let stickyCTAShown = false;
-        const stickyBtn = document.getElementById('sticky-cta');
         
         window.addEventListener('scroll', () => {
-            const formSection = document.getElementById('creative-brief');
-            const formRect = formSection?.getBoundingClientRect();
-            
-            // Hide button if form is visible in viewport
-            const formIsVisible = formRect && formRect.top < window.innerHeight && formRect.bottom > 0;
-            
-            if (formIsVisible) {
-                // User has scrolled to form - hide sticky button
-                if (stickyBtn) {
-                    stickyBtn.classList.add('hidden');
-                    stickyCTAShown = false;
-                }
-            } else if (window.scrollY > 800 && !stickyCTAShown && !formIsVisible) {
-                // Show button after 800px but not if form is visible
+            // Show sticky CTA after scrolling past hero section
+            if (window.scrollY > 800 && !stickyCTAShown) {
                 stickyBtn.classList.remove('hidden');
                 stickyCTAShown = true;
             } else if (window.scrollY <= 800 && stickyCTAShown) {
@@ -675,7 +581,8 @@
             }
         });
 
-        // Listen for Tally form events to hide sticky button
+        // REMOVED: Tally form event listeners - No longer using Tally form
+        /*
         window.addEventListener('message', function(event) {
             // Debug: log all Tally messages
             if (event.data && typeof event.data === 'object') {
@@ -709,6 +616,7 @@
                 }
             }
         });
+        */
 
         // Exit Intent: Show modal when user tries to leave
         // Defer listener to avoid immediate overhead
@@ -725,6 +633,8 @@
         }, 3000);
 
     </script>
+    <!-- REMOVED: Tally Embed & Form Tracking Scripts - Now using direct checkout -->
+    <!--
     <script>
         (function(){
             // Tally Embed Script
@@ -796,7 +706,6 @@
 
             // COMMENTED OUT: No longer using URL parameters to pre-fill form
             // Buttons now redirect directly to cart with variant IDs
-            /*
             function handleHashChange() {
                 var hash = window.location.hash;
                 
@@ -845,8 +754,9 @@
             window.addEventListener('hashchange', handleHashChange);
             // Also run immediately in case DOMContentLoaded already fired
             handleHashChange();
-            */
         })();
+    </script>
+    -->
     </script>
 
     <!-- Business Hours Warning Script -->
