@@ -10,7 +10,7 @@
         <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {% endif %}
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Consolidated Google Tracking (GA4 + Ads) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -18,16 +18,21 @@
       gtag('js', new Date());
 
       gtag('config', 'G-LF2MB2YSM2');
+      gtag('config', 'AW-17741514624');
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17741514624"></script>
+    <!-- Global GA4 Event Logger (Moved to Head for Early Capture) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-17741514624');
+        if (typeof gtag !== 'undefined') {
+            const originalGtag = gtag;
+            window.gtag = function() {
+                const args = Array.from(arguments);
+                if (args[0] === 'event') {
+                    console.log('🎯 GA4 Event:', args[1], args[2] || {});
+                }
+                return originalGtag.apply(this, args);
+            };
+        }
     </script>
 
     <!-- Contentsquare -->
@@ -76,21 +81,6 @@
 </head>
 
 <body class="antialiased bg-charcoal text-white font-sans selection:bg-gold selection:text-charcoal">
-
-    <!-- Global GA4 Event Logger -->
-    <script>
-        // Wrap gtag to log all events to console
-        if (typeof gtag !== 'undefined') {
-            const originalGtag = gtag;
-            window.gtag = function() {
-                const args = Array.from(arguments);
-                if (args[0] === 'event') {
-                    console.log('🎯 GA4 Event:', args[1], args[2] || {});
-                }
-                return originalGtag.apply(this, args);
-            };
-        }
-    </script>
 
     <!-- Hero Section -->
     <section id="get-started" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-4">
@@ -722,228 +712,7 @@
         setInterval(checkBusinessHours, 60000);
     </script>
 
-    <script>
-        (function() {
-            function initDSI() {
-                // console.log("DSI: Initializing (Inline)..."); 
-                // --- CONFIGURATION ---
-                const urlParams = new URLSearchParams(window.location.search);
-                const rawIntent = urlParams.get('user_intent');
-                
-                // console.log("DSI: Raw Intent:", rawIntent);
-
-                // If no intent, do nothing
-                if (!rawIntent) return;
-
-                const intent = decodeURIComponent(rawIntent).toLowerCase();
-                // console.log("DSI: Parsed Intent:", intent);
-                
-                const headlineEl = document.getElementById('lp-headline');
-                const subheadEl = document.getElementById('lp-subhead');
-
-                // console.log("DSI: Elements found?", { headline: !!headlineEl, subhead: !!subheadEl });
-
-                // Helper function to update text
-                function updateContent(h1, h2) {
-                    // console.log("DSI: Updating content...", { h1, h2 });
-                    if (headlineEl) headlineEl.innerHTML = h1;
-                    if (subheadEl) subheadEl.innerHTML = h2;
-                }
-
-                // --- LOGIC HIERARCHY ---
-
-                // Priority 1: URGENCY
-                const urgencyKeywords = ["rush", "minute", "urgent", "fast", "overnight", "emergency", "tomorrow", "tonight", "forgot"];
-                if (urgencyKeywords.some(keyword => intent.includes(keyword))) {
-                    if (intent.includes("anniversary")) {
-                        updateContent(
-                            "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for a Masterpiece.</span>",
-                            "The ultimate anniversary rescue. Composed, recorded, and delivered tonight."
-                        );
-                        if (typeof gtag === 'function') {
-                            gtag('event', 'headline_view', {
-                                headline_category: 'Urgency - Anniversary',
-                                user_intent_raw: rawIntent,
-                                page_location: window.location.pathname
-                            });
-                        }
-                    } else {
-                        updateContent(
-                            "The Impossible Gift. <br><span class='text-gold italic'>Delivered Tonight.</span>",
-                            "Don't just fill her hands with flowers. Fill her heart with a symphony. In your inbox by 8 PM."
-                        );
-                        if (typeof gtag === 'function') {
-                            gtag('event', 'headline_view', {
-                                headline_category: 'Urgency - General',
-                                user_intent_raw: rawIntent,
-                                page_location: window.location.pathname
-                            });
-                        }
-                    }
-                    return;
-                }
-
-                // Priority 2: APOLOGY
-                const apologyKeywords = ["sorry", "apology", "doghouse"];
-                if (apologyKeywords.some(keyword => intent.includes(keyword))) {
-                    const category = intent.includes("wife") ? 'Apology - Wife' : 'Apology - General';
-                    if (intent.includes("wife")) {
-                        updateContent(
-                            "When \"Sorry\" Isn't Enough. <br><span class='text-gold italic'>Give Her a Symphony.</span>",
-                            "Words failed you. Music won't. The only apology grand enough to bridge the silence."
-                        );
-                    } else {
-                        updateContent(
-                            "Don't Just Apologize. <br><span class='text-gold italic'>Sweep Her Off Her Feet.</span>",
-                            "Turn a mistake into a memory. The ultimate romantic gesture, delivered tonight."
-                        );
-                    }
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {
-                            headline_category: category,
-                            user_intent_raw: rawIntent,
-                            page_location: window.location.pathname
-                        });
-                    }
-                    return;
-                }
-
-                // Priority 3: COMPETITOR COMPARISON
-                if (intent.includes("songfinch")) {
-                    updateContent(
-                        "Don't Buy a Jingle. <br><span class='text-gold italic'>Commission a Legacy.</span>",
-                        "Novelty gifts are for laughs. Broadcast-quality music is for love."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {
-                            headline_category: 'Competitor - Songfinch',
-                            user_intent_raw: rawIntent,
-                            page_location: window.location.pathname
-                        });
-                    }
-                    return;
-                }
-
-                // Priority 4: STATUS & SPECIFICS
-                if (intent.includes("parent") || intent.includes("parents")) {
-                    updateContent(
-                        "Honor Their Legacy. <br><span class='text-gold italic'>In Song.</span>",
-                        "They have a lifetime of \"things.\" Give them a moment of pure emotion."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Parents', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                if (intent.includes("birthday")) {
-                    updateContent(
-                        "The Birthday Gift She'll Remember <br><span class='text-gold italic'>When She's 80.</span>",
-                        "Perfume runs dry. Flowers wilt. A custom song is forever."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Birthday', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                const luxuryKeywords = ["luxury", "everything", "nothing", "sentimental"];
-                if (luxuryKeywords.some(keyword => intent.includes(keyword))) {
-                    updateContent(
-                        "She Has Everything. <br><span class='text-gold italic'>Except a Song Written Just For Her.</span>",
-                        "Bespoke art, commissioned for her story. The only luxury that doesn't collect dust."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Luxury', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                // Priority 5: MILESTONES
-                if (intent.includes("1st") || intent.includes("1 year")) {
-                    updateContent(
-                        "One Year Down. <br><span class='text-gold italic'>A Lifetime to Go.</span>",
-                        "Paper is traditional. This is eternal. A custom song for your first anniversary."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Milestone - 1st', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                if (intent.includes("5 year") || intent.includes("5th")) {
-                    updateContent(
-                        "Five Years. Countless Memories. <br><span class='text-gold italic'>One Song.</span>",
-                        "Tradition says 'Wood.' Love demands a Masterpiece."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Milestone - 5th', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                if (intent.includes("10 year") || intent.includes("10th")) {
-                    updateContent(
-                        "A Decade of Love. <br><span class='text-gold italic'>One Defining Anthem.</span>",
-                        "Ten years deserves more than tin. It deserves a legacy."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Milestone - 10th', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                if (intent.includes("25 year") || intent.includes("25th")) {
-                    updateContent(
-                        "A Quarter Century. <br><span class='text-gold italic'>Immortalized.</span>",
-                        "Diamonds sit in a drawer. This melody lives in the air between you."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Milestone - 25th', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                if (intent.includes("50 year") || intent.includes("50th")) {
-                    updateContent(
-                        "Golden Era. <br><span class='text-gold italic'>Immortalized.</span>",
-                        "Diamonds sit in a drawer. This melody lives in the air between you."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Milestone - 50th', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                const milestoneRegex = /(\d+)\s*(year|th|nd|rd|st)/;
-                if (milestoneRegex.test(intent)) {
-                     updateContent(
-                        "A Lifetime of Love. <br><span class='text-gold italic'>Captured in Song.</span>",
-                        "Tradition suggests a gift. Love demands a Masterpiece."
-                    );
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'headline_view', {headline_category: 'Milestone - Other', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                    }
-                    return;
-                }
-
-                // Priority 6: DEFAULT
-                updateContent(
-                    "Your Love Story. <br><span class='text-gold italic'>In Song.</span>",
-                    "The intimacy of a love letter. The emotional scale of a movie soundtrack. Composed exclusively for her."
-                );
-                if (typeof gtag === 'function') {
-                    gtag('event', 'headline_view', {headline_category: 'Default', user_intent_raw: rawIntent, page_location: window.location.pathname});
-                }
-            }
-
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", initDSI);
-            } else {
-                initDSI();
-            }
-        })();
-    </script>
+    {% render 'dsi-logic' %}
 
     <!-- Scroll Depth Tracking -->
     <script>
