@@ -104,52 +104,59 @@
             <!-- Trust Signal Removed -->
 
             <div class="pt-6">
-    <section id="why-ai" class="py-20 px-4 bg-charcoal-light/30">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Human Artistry. Unconstrained Production.
-                </h2>
-                <div class="w-24 h-1 bg-gold mx-auto rounded-full shadow-[0_0_10px_#D4AF37]"></div>
+    <section id="composer" class="py-20 px-4 bg-charcoal-light/30">
+        <div class="max-w-6xl mx-auto space-y-16">
+            
+            <!-- Row 1: Video Player -->
+            <div class="max-w-4xl mx-auto">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gold/30 group">
+                    <video 
+                        controls 
+                        playsinline
+                        class="w-full h-auto bg-black"
+                        poster=""
+                    >
+                        <source src="https://cdn.shopify.com/videos/c/o/v/b789265a5bc14386bc758db24eec9d66.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             </div>
 
+            <!-- Row 2: Bio Grid -->
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Column 1: The Human Element -->
-                <div class="space-y-6 p-8 rounded-2xl bg-white/5 border border-white/5">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-gold/10 rounded-full text-gold">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-serif text-white">The Human Element</h3>
-                    </div>
-                    <p class="text-gray-400 leading-relaxed">
-                        I write every lyric and melody personally. A machine cannot understand your partner's inside
-                        jokes, the specific ache of a memory, or the story of how you met. That part remains 100% human.
-                    </p>
+                <!-- Left Column: Portrait -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gold/10 transform translate-x-4 translate-y-4 rounded-xl"></div>
+                    <img 
+                        src="https://cdn.shopify.com/s/files/1/0977/4900/8660/files/bioshot.png?v=1764464414" 
+                        alt="Jeff Holste - Composer" 
+                        class="relative z-10 w-full h-auto rounded-xl shadow-xl grayscale hover:grayscale-0 transition-all duration-500 object-cover"
+                    >
                 </div>
 
-                <!-- Column 2: The AI Advantage -->
-                <div class="space-y-6 p-8 rounded-2xl bg-white/5 border border-white/5">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-gold/10 rounded-full text-gold">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-serif text-white">The AI Advantage</h3>
+                <!-- Right Column: Bio Text -->
+                <div class="space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-serif text-white">The Composer</h2>
+                    <div class="w-20 h-1 bg-gold rounded-full"></div>
+                    
+                    <div class="text-gray-300 leading-relaxed space-y-4 text-lg font-light">
+                        <p>
+                            My name is Jeff Holste. My background—from the stages of Lincoln Center to a teaching lineage tracing back to Beethoven—taught me more than just mastery of the piano. It taught me how to listen.
+                        </p>
+                        <p>
+                            To hear the emotion inside a story and translate it into sound. That truth transcends genre. Whether your vision calls for a cinematic orchestra, a modern pop arrangement, or a soulful acoustic track, the foundation is always the same.
+                        </p>
+                        <p>
+                            It starts with a human heartbeat, not a computer prompt. I write the melody and structure by hand, ensuring the soul of the song is real before technology ever touches it.
+                        </p>
                     </div>
-                    <p class="text-gray-400 leading-relaxed">
-                        Traditional orchestral production requires booking musicians, engineers, and studio space—a
-                        process that takes weeks of coordination. By utilizing advanced AI instrumentation, I can
-                        orchestrate your song immediately after writing it. We eliminate the logistical delays of the
-                        studio, delivering a full symphonic arrangement on the timeline you actually need.
-                    </p>
+
+                    <div class="pt-4">
+                        <p class="font-serif text-gold text-xl italic">Jeff Holste, Owner & Composer</p>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 
