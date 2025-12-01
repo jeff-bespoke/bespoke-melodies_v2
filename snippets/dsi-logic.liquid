@@ -2,103 +2,41 @@
     (function() {
         function initDSI() {
             console.log("DSI: Initializing...");
-            // --- CONFIGURATION ---
+            
+            // Get user_intent from URL
             const urlParams = new URLSearchParams(window.location.search);
             const rawIntent = urlParams.get('user_intent');
             
             console.log("DSI: Raw Intent:", rawIntent);
 
-            // If no intent, do nothing
-            if (!rawIntent) return;
+            // Get elements
+            const headlineEl = document.getElementById('lp-headline');
+            const subheadEl = document.getElementById('lp-subhead');
+            
+            console.log("DSI: Elements found?", { headline: !!headlineEl, subhead: !!subheadEl });
+
+            // If no intent, use default
+            if (!rawIntent) {
+                console.log("DSI: No intent detected, using default");
+                updateContent(
+                    "The Only Custom Gift Delivered Tomorrow.",
+                    "Commission a custom song for your anniversary. Written by a professional composer. Ready in 24 hours."
+                );
+                return;
+            }
 
             const intent = decodeURIComponent(rawIntent).toLowerCase();
             console.log("DSI: Parsed Intent:", intent);
-            
-            const headlineEl = document.getElementById('lp-headline');
-            const subheadEl = document.getElementById('lp-subhead');
 
-            console.log("DSI: Elements found?", { headline: !!headlineEl, subhead: !!subheadEl });
-
-            // Helper function to update text
+            // Helper function to update content
             function updateContent(h1, h2) {
                 console.log("DSI: Updating content...", { h1, h2 });
                 if (headlineEl) headlineEl.innerHTML = h1;
                 if (subheadEl) subheadEl.innerHTML = h2;
             }
 
-            // --- LOGIC HIERARCHY ---
-
-            // Priority 1: URGENCY
-            const urgencyKeywords = ["rush", "minute", "urgent", "fast", "overnight", "emergency", "tomorrow", "tonight", "forgot"];
-            if (urgencyKeywords.some(keyword => intent.includes(keyword))) {
-                if (intent.includes("anniversary")) {
-                    updateContent(
-                        "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for a Masterpiece.</span>",
-                        "The ultimate anniversary rescue. Composed, recorded, and delivered tonight."
-                    );
-                } else {
-                    updateContent(
-                        "The Impossible Gift. <br><span class='text-gold italic'>Delivered Tonight.</span>",
-                        "Don't just fill her hands with flowers. Fill her heart with a symphony. In your inbox by 8 PM."
-                    );
-                }
-                return;
-            }
-
-            // Priority 2: APOLOGY
-            const apologyKeywords = ["sorry", "apology", "doghouse"];
-            if (apologyKeywords.some(keyword => intent.includes(keyword))) {
-                if (intent.includes("wife")) {
-                    updateContent(
-                        "When \"Sorry\" Isn't Enough. <br><span class='text-gold italic'>Give Her a Symphony.</span>",
-                        "Words failed you. Music won't. The only apology grand enough to bridge the silence."
-                    );
-                } else {
-                    updateContent(
-                        "Don't Just Apologize. <br><span class='text-gold italic'>Sweep Her Off Her Feet.</span>",
-                        "Turn a mistake into a memory. The ultimate romantic gesture, delivered tonight."
-                    );
-                }
-                return;
-            }
-
-            // Priority 3: COMPETITOR COMPARISON
-            if (intent.includes("songfinch")) {
-                updateContent(
-                    "Don't Buy a Jingle. <br><span class='text-gold italic'>Commission a Legacy.</span>",
-                    "Novelty gifts are for laughs. Broadcast-quality music is for love."
-                );
-                return;
-            }
-
-            // Priority 4: STATUS & SPECIFICS
-            if (intent.includes("parent") || intent.includes("parents")) {
-                updateContent(
-                    "Honor Their Legacy. <br><span class='text-gold italic'>In Song.</span>",
-                    "They have a lifetime of \"things.\" Give them a moment of pure emotion."
-                );
-                return;
-            }
-
-            if (intent.includes("birthday")) {
-                updateContent(
-                    "The Birthday Gift She’ll Remember <br><span class='text-gold italic'>When She’s 80.</span>",
-                    "Perfume runs dry. Flowers wilt. A custom song is forever."
-                );
-                return;
-            }
-
-            const luxuryKeywords = ["luxury", "everything", "nothing", "sentimental"];
-            if (luxuryKeywords.some(keyword => intent.includes(keyword))) {
-                updateContent(
-                    "She Has Everything. <br><span class='text-gold italic'>Except a Song Written Just For Her.</span>",
-                    "Bespoke art, commissioned for her story. The only luxury that doesn't collect dust."
-                );
-                return;
-            }
-
-            // Priority 5: MILESTONES
-            if (intent.includes("1st") || intent.includes("1 year")) {
+            // PRIORITY 1: MILESTONE ANNIVERSARIES
+            if (intent.includes("1st") || intent.includes("paper")) {
                 updateContent(
                     "One Year Down. <br><span class='text-gold italic'>A Lifetime to Go.</span>",
                     "Paper is traditional. This is eternal. A custom song for your first anniversary."
@@ -106,15 +44,7 @@
                 return;
             }
 
-            if (intent.includes("5 year") || intent.includes("5th")) {
-                updateContent(
-                    "Five Years. Countless Memories. <br><span class='text-gold italic'>One Song.</span>",
-                    "Tradition says 'Wood.' Love demands a Masterpiece."
-                );
-                return;
-            }
-
-            if (intent.includes("10 year") || intent.includes("10th")) {
+            if (intent.includes("10th") || intent.includes("tin")) {
                 updateContent(
                     "A Decade of Love. <br><span class='text-gold italic'>One Defining Anthem.</span>",
                     "Ten years deserves more than tin. It deserves a legacy."
@@ -122,38 +52,70 @@
                 return;
             }
 
-            if (intent.includes("25 year") || intent.includes("25th")) {
+            if (intent.includes("25th") || intent.includes("silver")) {
                 updateContent(
                     "A Quarter Century. <br><span class='text-gold italic'>Immortalized.</span>",
-                    "Diamonds sit in a drawer. This melody lives in the air between you."
+                    "Silver sits in a drawer. This melody lives in the air between you."
                 );
                 return;
             }
 
-            if (intent.includes("50 year") || intent.includes("50th")) {
+            if (intent.includes("50th") || intent.includes("gold")) {
                 updateContent(
                     "Golden Era. <br><span class='text-gold italic'>Immortalized.</span>",
-                    "Diamonds sit in a drawer. This melody lives in the air between you."
+                    "Gold sits in a drawer. This melody lives in the air between you."
                 );
                 return;
             }
 
-            const milestoneRegex = /(\d+)\s*(year|th|nd|rd|st)/;
-            if (milestoneRegex.test(intent)) {
-                 updateContent(
-                    "A Lifetime of Love. <br><span class='text-gold italic'>Captured in Song.</span>",
-                    "Tradition suggests a gift. Love demands a Masterpiece."
+            // PRIORITY 2: JEWELRY KILLER
+            const jewelryKeywords = ["jewelry", "necklace", "ring", "diamond", "earrings"];
+            if (jewelryKeywords.some(keyword => intent.includes(keyword))) {
+                updateContent(
+                    "Better Than Diamond Earrings. <br><span class='text-gold italic'>Ready Tomorrow.</span>",
+                    "Jewelry is cold. A custom song is forever. The ultimate anniversary gesture, composed by a world-class artist and delivered in 24 hours."
                 );
                 return;
             }
 
-            // Priority 6: DEFAULT
+            // PRIORITY 3: LOGISTICAL PANIC
+            const panicKeywords = ["same day", "tomorrow", "overnight", "rush", "24 hours"];
+            if (panicKeywords.some(keyword => intent.includes(keyword))) {
+                updateContent(
+                    "The Only Custom Gift <br><span class='text-gold italic'>Delivered Tomorrow.</span>",
+                    "Commission a classically trained composer today. Receive a studio-quality song by tomorrow evening. 100% Guaranteed Delivery."
+                );
+                return;
+            }
+
+            // PRIORITY 4: FORGOTTEN / GUILT
+            const guiltKeywords = ["forgot", "missed", "late", "apology", "doghouse"];
+            if (guiltKeywords.some(keyword => intent.includes(keyword))) {
+                updateContent(
+                    "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for a Masterpiece.</span>",
+                    "A generic gift says you panicked. A custom song says you planned this for months. Written by a professional artist, delivered tomorrow."
+                );
+                return;
+            }
+
+            // PRIORITY 5: LUXURY / SKEPTIC
+            const luxuryKeywords = ["luxury", "expensive", "premium", "high end"];
+            if (luxuryKeywords.some(keyword => intent.includes(keyword))) {
+                updateContent(
+                    "Classically Trained Quality. <br><span class='text-gold italic'>Delivered in 24 Hours.</span>",
+                    "Don't buy a generic jingle. Commission a professional composer with decades of discipline to write your love story. The ultimate luxury experience."
+                );
+                return;
+            }
+
+            // DEFAULT (Fallback)
             updateContent(
-                "Your Love Story. <br><span class='text-gold italic'>In Song.</span>",
-                "The intimacy of a love letter. The emotional scale of a movie soundtrack. Composed exclusively for her."
+                "The Only Custom Gift Delivered Tomorrow.",
+                "Commission a custom song for your anniversary. Written by a professional composer. Ready in 24 hours."
             );
         }
 
+        // Run on page load
         if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", initDSI);
         } else {
