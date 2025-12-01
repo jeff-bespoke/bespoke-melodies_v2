@@ -1630,29 +1630,17 @@ a {
     --card-glow: 186, 85, 211;
 }
 
-.audio-card:hover {
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2),
-        0 0 40px rgba(var(--card-glow), 0.15);
-    transform: translateY(-8px);
-    border-color: rgba(212, 175, 55, 0.6) !important;
-    z-index: 2;
+opacity: 0;
 }
 
-/* Golden Thread Animation */
-@keyframes shimmer {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
+50% {
+    opacity: 1;
+}
 
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
+100% {
+    transform: translateY(100%);
+    opacity: 0;
+}
 }
 
 .animate-thread {
