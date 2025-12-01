@@ -1,3 +1,204 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Melodies - Urgent Gift</title>
+    {% if settings.favicon != blank %}
+        <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% else %}
+        <link rel="icon" href="data:,">
+    {% endif %}
+
+    <!-- Consolidated Google Tracking (GA4 + Ads) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LF2MB2YSM2');
+      gtag('config', 'AW-17741514624');
+    </script>
+
+    <!-- Global GA4 Event Logger (Moved to Head for Early Capture) -->
+    <script>
+        if (typeof gtag !== 'undefined') {
+            const originalGtag = gtag;
+            window.gtag = function() {
+                const args = Array.from(arguments);
+                if (args[0] === 'event') {
+                    console.log('🎯 GA4 Event:', args[1], args[2] || {});
+                }
+                return originalGtag.apply(this, args);
+            };
+        }
+    </script>
+
+    <!-- Contentsquare -->
+    <script src="https://t.contentsquare.net/uxa/42886a0035531.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'charcoal': '#1a1a1a',
+                        'charcoal-light': '#2d2d2d',
+                        'gold': '#D4AF37',
+                        'gold-hover': '#b5952f',
+                        'off-white': '#f5f5f5',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    {{ 'landing-page.css' | asset_url | stylesheet_tag }}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+    {{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
+    <script>
+        // CONFIGURATION
+        const config = {
+            surveyUrl: "https://tally.so/r/OD1kzg",
+            playlist: {
+                progressiveFunk: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Eine_Kleine_Nachtmusik.mp3?v=1763008066",
+                adultContemporary: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Just_for_Tonight_Our_Lullaby.mp3?v=1763008066",
+                powerBallad: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Whisper_to_me_then.mp3?v=1763008066",
+                popDance: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/pop_dance.mp3?v=1763008066",
+                cinematicRomance: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Run_to_me.mp3?v=1763008066",
+                country: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/long_long_road.mp3?v=1763008066"
+            }
+        };
+    </script>
+
+</head>
+
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <section id="get-started" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden py-16 px-4">
+        <div class="absolute inset-0 z-0">
+            <!-- Piano Keys Background -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-overlay" 
+                 style="background-image: url('https://cdn.shopify.com/s/files/1/0977/4900/8660/files/hero_piano_keys.png?v=1'); /* REPLACE with uploaded image */">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/90 to-charcoal"></div>
+            <!-- Subtle Gold Spotlight Overlay -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent opacity-60"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+            <h1 id="lp-headline" class="text-4xl md:text-6xl font-bold leading-tight tracking-wider text-shadow-lg text-white mb-6">
+                You Didn't Forget. <br>
+                <span class="text-gold italic">You Were Waiting for Perfection.</span>
+            </h1>
+
+            <p id="lp-subhead" class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-8">
+                A bespoke song for your special occasion. Written by a Lincoln Center-trained composer. Orchestrated by AI technology. Delivered in as little as <span class="text-gold font-semibold">6 hours</span>.
+            </p>
+
+            <!-- Hero CTA -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#pricing" class="group inline-flex items-center gap-2 px-8 py-4 bg-gold hover:bg-gold-hover text-charcoal font-bold rounded-lg text-lg shadow-2xl shadow-gold/30 transform hover:-translate-y-1 transition-all duration-300">
+                    See Pricing Options
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="#composer-video" class="inline-flex items-center gap-2 px-6 py-4 border-2 border-white/20 hover:border-gold/50 text-white rounded-lg transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Watch Process Video
+                </a>
+            </div>
+
+            <!-- Credentials Badge -->
+            <div class="mt-12 pt-8 border-t border-white/10">
+                <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-400">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                        </svg>
+                        <span>Lincoln Center Performer</span>
+                    </div>
+                    <div class="hidden sm:block text-white/20">•</div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span><strong class="text-white">20+</strong> Years Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section (Unified Background) -->
+    <section class="pt-12 pb-24 px-4 border-t border-white/5 relative">
+        <!-- Golden Thread (Vertical Line) -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gold/40"></div>
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-sm uppercase tracking-wider text-gold mb-2">Client Stories</p>
+                <h2 class="text-3xl md:text-4xl font-serif text-white tracking-wider">What Our Clients Say</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 (PLACEHOLDER) -->
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700">
+                    <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">“</div>
+                    <div class="flex gap-1 mb-6 relative z-10">
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-200 text-xl leading-relaxed mb-6 font-serif italic relative z-10">
+                        "[PLACEHOLDER: Second testimonial quote. Focus on different angle - maybe the process, communication quality, or specific emotional moment.]"
+                    </p>
+                    <div class="flex items-center gap-3 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 flex items-center justify-center text-gold font-bold text-lg border border-gold/20">
+                            [P]
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold tracking-wide">[PLACEHOLDER: Client Name]</p>
+                            <p class="text-gray-400 text-sm font-light">[Occasion, e.g., "Mother's Day Gift"]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Composer Section (Unified Background) -->
+    <div class="pt-6">
+    <section id="composer" class="py-24 px-4 border-t border-white/5 relative">
+        <div class="max-w-6xl mx-auto space-y-12">
+            <!-- Row 1: Video Player -->
+            <div id="composer-video" class="max-w-lg mx-auto w-full">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gold/30 group w-full transition-all duration-700 hover:shadow-gold/40">
+                    <!-- Premium Title Overlay -->
+                    <div class="absolute top-6 left-6 z-10 pointer-events-none">
+                        <div class="text-gold text-xs font-bold tracking-widest uppercase mb-1">The Process</div>
+                        <h3 class="text-white font-serif text-xl text-shadow-md">Behind the Music</h3>
+                    </div>
+                    <video 
+                        controls 
+                        playsinline
+                        class="w-full h-auto bg-black block"
+                        poster="https://cdn.shopify.com/s/files/1/0977/4900/8660/files/composer_poster.png?v=1764532912">
                         <source src="https://cdn.shopify.com/videos/c/o/v/b789265a5bc14386bc758db24eec9d66.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
