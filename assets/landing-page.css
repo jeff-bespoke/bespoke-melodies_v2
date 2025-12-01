@@ -1637,3 +1637,45 @@ a {
     border-color: rgba(212, 175, 55, 0.6) !important;
     z-index: 2;
 }
+
+/* Golden Thread Animation */
+@keyframes shimmer {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+.animate-thread {
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-thread::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.5), transparent);
+    animation: shimmer 4s infinite ease-in-out;
+}
+
+/* Typography Polish */
+.text-shadow-sm {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
