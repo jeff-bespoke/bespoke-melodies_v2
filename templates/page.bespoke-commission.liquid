@@ -481,7 +481,7 @@
             </div>
 
             <!-- Pricing Grid -->
-            <div class="flex lg:grid lg:grid-cols-3 gap-4 lg:gap-8 items-center overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none pt-12 pb-8 lg:py-0 px-4 lg:px-0 scrollbar-hide">
+            <div id="pricing-scroll-container" class="flex lg:grid lg:grid-cols-3 gap-4 lg:gap-8 items-center overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none pt-12 pb-8 lg:py-0 px-4 lg:px-0 scrollbar-hide">
 
                 <!-- Standard (Muted/Secondary) -->
                 <div
@@ -526,7 +526,7 @@
                 </div>
 
                 <!-- Express (HERO - Most Popular) -->
-                <div
+                <div id="pricing-card-express"
                     class="min-w-[80vw] lg:min-w-0 snap-center order-2 lg:order-2 bg-gradient-to-b from-charcoal-light to-charcoal border-2 border-gold rounded-2xl p-10 transform lg:scale-110 shadow-2xl shadow-gold/20 relative glow-gold">
                     <div
                         class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#D4AF37] via-[#F2D06B] to-[#D4AF37] text-charcoal text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-gold/40">
@@ -1173,11 +1173,229 @@
     <script>
         function openRefundFAQ() {
             const faq = document.getElementById('faq-refund');
+            }
+        }
+
+        // Reset UI when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            if (currentCard) {
+                currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                currentCard = null;
+            }
+        });
+
+        // 🎯 Direct-to-Checkout Function with GA4 Tracking
+        function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire GA4 begin_checkout event
+            if (typeof gtag === 'function') {
+                gtag('event', 'begin_checkout', {
+                    currency: 'USD',
+                    value: price,
+                    items: [{
+                        item_id: variantId,
+                        item_name: 'Bespoke Song - ' + tierName,
+                        item_category: 'Custom Commission',
+                        item_variant: tierName,
+                        price: price,
+                        quantity: 1
+                    }],
+                    tier: tierName,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+                console.log('🎯 GA4 Event: begin_checkout', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+                    variant_id: variantId
+                });
+            }
+            
+            // Redirect to cart with variant
+            window.location.href = '/cart/' + variantId + ':1';
+        }
+
+
+
+    </script>
+
+    {% render 'dsi-logic' %}
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+        (function() {
+            const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+            
+            function checkScrollDepth() {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                
+                for (let depth in scrollDepths) {
+                    if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+                        scrollDepths[depth] = true;
+                        // console.log('🎯 GA4 Event: scroll', {percent_scrolled: parseInt(depth), page_location: window.location.pathname});
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll', {
+                                percent_scrolled: parseInt(depth),
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+            }
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScrollDepth, 100);
+            }, {passive: true});
+        })();
+    </script>
+
+    <!-- FAQ Click Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-question');
+            faqButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const questionText = this.querySelector('span').textContent.trim();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_click', {
+                            question: questionText.substring(0, 100),
+                            page_location: window.location.pathname
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- Sticky Mobile CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal border-t border-gold/30 transform translate-y-full transition-transform duration-300 z-50 md:hidden">
+        <div class="flex items-center justify-between gap-4 max-w-md mx-auto">
+            <div class="text-white text-sm">
+                <div class="font-bold text-gold">Limited Slots</div>
+                <div class="text-xs text-gray-400">Reserve yours today</div>
+            </div>
+            <a href="#pricing" class="bg-gold text-charcoal font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gold-hover transition-colors text-sm">
+                Commission Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                
+                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't Miss Out</h3>
+                <p class="text-gray-300 mb-6">Our composition slots fill up fast. Save your spot now and submit your details later.</p>
+                
+                <div class="space-y-3">
+                    <a href="#pricing" onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full bg-gold hover:bg-gold-hover text-charcoal font-bold py-4 rounded-lg transition-colors">
+                        See Available Slots
+                    </a>
+                    <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full border border-white/20 text-gray-400 hover:text-white py-3 rounded-lg transition-colors text-sm">
+                        No thanks, I'll risk missing out
+                    </button>
+                </div>
+                
+                <p class="text-xs text-gray-500 mt-6 flex items-center justify-center gap-1">
+                    <svg class="w-3 h-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>100% Money-Back Guarantee</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Sticky CTA & Exit Intent
+        document.addEventListener('DOMContentLoaded', () => {
+            const stickyBtn = document.getElementById('sticky-cta');
+            let stickyCTAShown = false;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 800) {
+                    stickyBtn.classList.remove('translate-y-full');
+                } else {
+                    stickyBtn.classList.add('translate-y-full');
+                }
+            });
+
+            // Exit Intent Logic
+            let exitIntentShown = false;
+            const exitModal = document.getElementById('exit-intent-modal');
+            
+            // Desktop: Mouse leave
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    showExitIntent();
+                }
+            });
+            
+            // Mobile: Scroll up speed detection (simple version)
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                let st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st < lastScrollTop - 50 && st > 500 && !exitIntentShown) { // Fast scroll up
+                    // Optional: enable mobile exit intent here
+                    // showExitIntent(); 
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            });
+
+            function showExitIntent() {
+                exitIntentShown = true;
+                exitModal.classList.remove('hidden');
+                exitModal.classList.add('flex');
+            }
+        });
+    </script>
+    <script>
+        function openRefundFAQ() {
+            const faq = document.getElementById('faq-refund');
             if (faq) {
                 faq.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 faq.classList.add('open');
             }
         }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Auto-scroll to Express pricing on mobile
+            const container = document.getElementById('pricing-scroll-container');
+            const target = document.getElementById('pricing-card-express');
+            
+            if (container && target && window.innerWidth < 1024) {
+                // Small delay to ensure layout is stable
+                setTimeout(() => {
+                    const containerWidth = container.offsetWidth;
+                    const targetWidth = target.offsetWidth;
+                    // Calculate center position
+                    // We need to account for the fact that 'offsetLeft' might be tricky with flex order.
+                    // However, scrollLeft is purely about the scrollable area.
+                    // Since Emergency is first (order-1), Express is second (order-2).
+                    // The scroll position should be roughly the width of the first card + gap.
+                    
+                    // Let's try a simpler approach: scrollIntoView with block: 'nearest', inline: 'center'
+                    target.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+                }, 100);
+            }
+        });
     </script>
 </body>
 
