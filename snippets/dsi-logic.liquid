@@ -1,36 +1,30 @@
 <script>
     (function() {
         function initDSI() {
-            console.log("DSI: Initializing...");
             
             // Get user_intent from URL
             const urlParams = new URLSearchParams(window.location.search);
             const rawIntent = urlParams.get('user_intent');
             
-            console.log("DSI: Raw Intent:", rawIntent);
 
             // Get elements
             const headlineEl = document.getElementById('lp-headline');
             const subheadEl = document.getElementById('lp-subhead');
             
-            console.log("DSI: Elements found?", { headline: !!headlineEl, subhead: !!subheadEl });
 
             // If no intent, use default
             if (!rawIntent) {
-                console.log("DSI: No intent detected, using default");
                 updateContent(
-                    "The Only Custom Gift Delivered Tomorrow.",
-                    "Commission a custom song for your anniversary. Written by a professional composer. Ready in 24 hours."
+                    "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for Perfection.</span>",
+                    "A bespoke song for your special occasion. Written by a Lincoln Center-trained composer. Orchestrated by AI technology. Delivered in as little as <span class='text-gold font-semibold'>6 hours</span>."
                 );
                 return;
             }
 
             const intent = decodeURIComponent(rawIntent).toLowerCase();
-            console.log("DSI: Parsed Intent:", intent);
 
             // Helper function to update content
             function updateContent(h1, h2) {
-                console.log("DSI: Updating content...", { h1, h2 });
                 if (headlineEl) headlineEl.innerHTML = h1;
                 if (subheadEl) subheadEl.innerHTML = h2;
             }
@@ -109,9 +103,12 @@
             }
 
             // DEFAULT (Fallback)
+            // Note: We leave the static HTML as is if no intent is found, 
+            // or we can enforce the new CRO copy here to be safe.
+            // Let's enforce the new CRO copy.
             updateContent(
-                "The Only Custom Gift Delivered Tomorrow.",
-                "Commission a custom song for your anniversary. Written by a professional composer. Ready in 24 hours."
+                "You Didn't Forget. <br><span class='text-gold italic'>You Were Waiting for Perfection.</span>",
+                "A bespoke song for your special occasion. Written by a Lincoln Center-trained composer. Orchestrated by AI technology. Delivered in as little as <span class='text-gold font-semibold'>6 hours</span>."
             );
         }
 
