@@ -89,7 +89,7 @@
         <div class="absolute inset-0 z-0">
             <!-- Piano Keys Background -->
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-overlay" 
-                 style="background-image: url('{{ 'hero_piano_keys.png' | file_url }}');">
+                 style="background-image: url('{{ 'hero_piano_keys.jpg' | file_url }}');">
             </div>
             <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/90 to-charcoal"></div>
             <!-- Subtle Gold Spotlight Overlay -->
@@ -1381,29 +1381,7 @@
             }
         }
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Auto-scroll to Express pricing on mobile
-            const container = document.getElementById('pricing-scroll-container');
-            const target = document.getElementById('pricing-card-express');
-            
-            if (container && target && window.innerWidth < 1024) {
-                // Small delay to ensure layout is stable
-                setTimeout(() => {
-                    const containerWidth = container.offsetWidth;
-                    const targetWidth = target.offsetWidth;
-                    // Calculate center position
-                    // We need to account for the fact that 'offsetLeft' might be tricky with flex order.
-                    // However, scrollLeft is purely about the scrollable area.
-                    // Since Emergency is first (order-1), Express is second (order-2).
-                    // The scroll position should be roughly the width of the first card + gap.
-                    
-                    // Let's try a simpler approach: scrollIntoView with block: 'nearest', inline: 'center'
-                    target.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
-                }, 100);
-            }
-        });
-    </script>
+
 </body>
 
 </html>
