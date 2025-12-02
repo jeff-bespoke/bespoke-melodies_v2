@@ -23,19 +23,7 @@
       gtag('config', 'AW-17741514624');
     </script>
 
-    <!-- Global GA4 Event Logger (Moved to Head for Early Capture) -->
-    <script>
-        if (typeof gtag !== 'undefined') {
-            const originalGtag = gtag;
-            window.gtag = function() {
-                const args = Array.from(arguments);
-                if (args[0] === 'event') {
-                    console.log('🎯 GA4 Event:', args[1], args[2] || {});
-                }
-                return originalGtag.apply(this, args);
-            };
-        }
-    </script>
+    <!-- GA4 Event Tracking -->
 
     <!-- Contentsquare -->
     <script src="https://t.contentsquare.net/uxa/42886a0035531.js"></script>
@@ -159,8 +147,8 @@
                 <h2 class="text-3xl md:text-4xl font-serif text-white tracking-wider">What Our Clients Say</h2>
             </div>
             
-            <!-- 2-Column Centered Testimonials -->
-            <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto items-stretch">
+            <!-- 3-Column Testimonials -->
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
                 <!-- Testimonial 1: J.S. -->
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700 flex flex-col">
                     <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">"</div>
@@ -197,6 +185,26 @@
                     <div class="flex items-center gap-3 relative z-10">
                         <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 flex items-center justify-center text-gold font-bold border border-gold/20">
                             L.J.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3: B.D. -->
+                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700 flex flex-col">
+                    <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">"</div>
+                    <div class="flex gap-1 mb-4 relative z-10">
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-200 text-lg leading-relaxed mb-5 font-serif italic relative z-10 flex-grow">
+                        "Jeff is so easy to work with and is a consummate professional, especially on a tight deadline. I would recommend working with him to anybody."
+                    </p>
+                    <div class="flex items-center gap-3 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 flex items-center justify-center text-gold font-bold border border-gold/20">
+                            B.D.
                         </div>
                     </div>
                 </div>
@@ -1037,9 +1045,6 @@
                     tier: tierName,
                     price: price,
                     turnaround: turnaroundTime,
-                    variant_id: variantId
-                });
-            }
             
             // Redirect to cart with variant
             window.location.href = '/cart/' + variantId + ':1';

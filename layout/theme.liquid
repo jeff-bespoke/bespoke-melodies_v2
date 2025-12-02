@@ -135,7 +135,7 @@
                                 currentPath.match(/\/customers?\//);
           
           if (isAccountPage && !isOnSongPortal && !currentPath.includes('/logout')) {
-            console.log('Redirecting customer from', currentPath, 'to song portal');
+            // Redirect to song portal
             window.location.replace(songPortalPath);
           }
         })();

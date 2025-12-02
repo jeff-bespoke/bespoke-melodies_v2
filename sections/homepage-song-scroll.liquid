@@ -346,7 +346,7 @@
               song_title: genre,
               page_location: window.location.pathname
             });
-            console.log('🎯 GA4 Event: audio_play', {song_title: genre});
+            // Fire GA4 event
           }
         } else {
           audio.pause();
@@ -356,7 +356,7 @@
               song_title: genre,
               page_location: window.location.pathname
             });
-            console.log('🎯 GA4 Event: audio_pause', {song_title: genre});
+            // Fire GA4 event
           }
           
           audio.currentTime = 0;
@@ -376,7 +376,7 @@
             song_title: genre,
             page_location: window.location.pathname
           });
-          console.log('🎯 GA4 Event: audio_complete', {song_title: genre});
+          // Fire GA4 event
         }
 
         if (currentAudio === audio) {

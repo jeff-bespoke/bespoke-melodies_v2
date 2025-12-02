@@ -6,7 +6,7 @@ class SongPortal {
   }
 
   init() {
-    console.log('SongPortal init started');
+    // Initialize Song Portal
     this.cards.forEach(card => {
       this.initAudio(card);
       this.initDownloads(card);
@@ -224,7 +224,7 @@ class SongPortal {
     // Toggle change request section
     if (showChangesBtn && changeSection) {
       showChangesBtn.addEventListener('click', () => {
-        console.log('Request Revisions clicked'); // ← This should appear in console
+        // Request revisions handler
         changeSection.style.display = 'block';
         showChangesBtn.style.display = 'none';
 
@@ -316,7 +316,7 @@ class SongPortal {
   }
 
   showFeedback(feedbackDiv, message, type) {
-    console.log('showFeedback called:', message, type, feedbackDiv);
+    // Show feedback message
     if (!feedbackDiv) {
       console.error('Feedback div not found!');
       return;
