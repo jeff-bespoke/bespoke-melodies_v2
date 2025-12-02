@@ -22,6 +22,7 @@
             }
 
             const intent = decodeURIComponent(rawIntent).toLowerCase();
+            localStorage.setItem('user_intent', intent); // Persist for Thank You page
 
             // Helper function to update content
             function updateContent(h1, h2) {
