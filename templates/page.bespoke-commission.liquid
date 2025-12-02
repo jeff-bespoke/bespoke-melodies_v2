@@ -52,6 +52,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="image" href="{{ 'hero_piano_keys.jpg' | file_url }}">
     {{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
     <script>
         // CONFIGURATION
@@ -233,6 +234,7 @@
                     <video 
                         id="main-video"
                         playsinline
+                        preload="none"
                         class="w-full h-auto bg-black block"
                         poster="https://cdn.shopify.com/s/files/1/0977/4900/8660/files/composer_poster.png?v=1764532912">
                         <source src="https://cdn.shopify.com/videos/c/o/v/b789265a5bc14386bc758db24eec9d66.mp4" type="video/mp4">
