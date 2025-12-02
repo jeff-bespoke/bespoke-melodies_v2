@@ -1239,7 +1239,7 @@
             // Retrieve intent for cart attribute
             const intent = localStorage.getItem('user_intent') || '';
 
-            // AJAX Add to Cart with Attributes
+            // AJAX Add to Cart with Attributes AND Properties
             fetch('/cart/add.js', {
                 method: 'POST',
                 headers: {
@@ -1250,7 +1250,8 @@
                         id: variantId,
                         quantity: 1,
                         properties: {
-                            'Turnaround': turnaroundTime
+                            'Turnaround': turnaroundTime,
+                            'User Intent': intent
                         }
                     }],
                     attributes: {
