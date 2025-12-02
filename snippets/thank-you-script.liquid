@@ -1,11 +1,14 @@
 <script>
   (function() {
+    console.log("🔍 Thank You Script Started");
     try {
       // 1. Retrieve the intent we stored on the landing page
       var intent = localStorage.getItem('user_intent');
+      console.log("🔍 Retrieved Intent:", intent);
 
       // 2. Check if it exists and contains "anniversary"
       if (intent && intent.toLowerCase().indexOf('anniversary') !== -1) {
+        console.log("✅ Intent matches 'anniversary'. Preparing to inject form...");
         
         // 3. Create a container for the form
         var container = document.createElement('div');
@@ -31,10 +34,16 @@
         
         // 5. Insert into the page
         // We try to find the main content area of the Order Status page
-        var target = document.querySelector('.os-step__content') || document.querySelector('.content') || document.body;
+        var target = document.querySelector('.os-step__content') || document.querySelector('.content') || document.querySelector('.step__content') || document.body;
+        console.log("🔍 Injection Target Found:", target);
         
         // Insert after the main content (or append to body as fallback)
-        target.appendChild(container);
+        if (target) {
+            target.appendChild(container);
+            console.log("✅ Form injected successfully.");
+        } else {
+            console.error("❌ No valid target element found to inject form.");
+        }
 
         // 6. Load the Tally Widget Script
         var d=document, w="https://tally.so/widgets/embed.js", v=function(){
@@ -44,9 +53,11 @@
         else if(d.querySelector('script[src="'+w+'"]')==null) {
           var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
         }
+      } else {
+        console.log("ℹ️ Intent does not match 'anniversary' or is missing.");
       }
     } catch(e) {
-      console.error('Error injecting Tally form:', e);
+      console.error('❌ Error injecting Tally form:', e);
     }
   })();
 </script>
