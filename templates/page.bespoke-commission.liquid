@@ -1227,8 +1227,38 @@
                 });
             }
             
-            // Redirect to cart with variant
-            window.location.href = '/cart/' + variantId + ':1';
+            // Retrieve intent for cart attribute
+            const intent = localStorage.getItem('user_intent') || '';
+
+            // AJAX Add to Cart with Attributes
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items: [{
+                        id: variantId,
+                        quantity: 1,
+                        properties: {
+                            'Turnaround': turnaroundTime
+                        }
+                    }],
+                    attributes: {
+                        'User Intent': intent
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Redirect to checkout
+                window.location.href = '/checkout';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Fallback
+                window.location.href = '/cart/' + variantId + ':1';
+            });
         }
 
 

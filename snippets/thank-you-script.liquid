@@ -1,51 +1,182 @@
+<!-- 1. Google Ads Conversion Tracking -->
+<!-- Event snippet for Purchase conversion page -->
+<script>
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17741514624/7ZV1CIim3cIbEICP6ItC',
+        'value': {{ checkout.total_price | money_without_currency }},
+        'currency': '{{ checkout.currency }}',
+        'transaction_id': '{{ checkout.order_number }}'
+    });
+  }
+</script>
+
+<!-- 2. Dark Luxury Theme Injection (CSS) -->
+<style>
+  /* Force Dark Theme on Order Status Page */
+  body, .os-header, .os-main, .os-step__content, .content-box, .content-box__row {
+    background-color: #1a1a1a !important; /* Charcoal */
+    color: #f3f4f6 !important; /* Light Gray Text */
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  /* Headings */
+  h1, h2, h3, .os-header__title, .os-step__title {
+    color: #D4AF37 !important; /* Gold */
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  /* Links & Accents */
+  a, .link {
+    color: #D4AF37 !important;
+    text-decoration: none !important;
+  }
+
+  /* Content Boxes (Receipt Area) */
+  .content-box {
+    background: #2a2a2a !important;
+    border: 1px solid #444 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+  }
+  
+  .content-box__row {
+    border-bottom: 1px solid #444 !important;
+  }
+
+  /* Buttons */
+  .btn {
+    background-color: #D4AF37 !important;
+    color: #000 !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    border: none !important;
+  }
+
+  /* Icons/Checkmarks */
+  .os-order-number, .os-header__heading {
+    color: #D4AF37 !important;
+  }
+  svg {
+    fill: #D4AF37 !important;
+  }
+
+  /* Custom Next Steps Section */
+  .custom-next-steps {
+    margin: 40px 0;
+    padding: 30px;
+    background: #222;
+    border: 1px solid #D4AF37;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .step-item {
+    background: #333;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .step-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+  }
+</style>
+
+<!-- 3. Custom Content & Logic Script -->
 <script>
   (function() {
-    console.log("🔍 Thank You Script Started");
+
+
     try {
-      // 1. Retrieve the intent we stored on the landing page
-      var intent = localStorage.getItem('user_intent');
-      console.log("🔍 Retrieved Intent:", intent);
+      // --- A. INJECT CUSTOM "NEXT STEPS" SECTION ---
+      var nextStepsHTML = `
+        <div class="custom-next-steps">
+          <h2>What Happens Next?</h2>
+          <p>Your commission has been secured. Here is your production timeline.</p>
+          <div class="step-grid">
+            <div class="step-item">
+              <span class="step-icon">🎹</span>
+              <h3>1. Composition</h3>
+              <p>Our composer begins drafting your melody immediately.</p>
+            </div>
+            <div class="step-item">
+              <span class="step-icon">🎙️</span>
+              <h3>2. Production</h3>
+              <p>AI orchestration brings the composition to life.</p>
+            </div>
+            <div class="step-item">
+              <span class="step-icon">📩</span>
+              <h3>3. Delivery</h3>
+              <p>You receive your studio-quality song via email.</p>
+            </div>
+          </div>
+        </div>
+      `;
 
-      // 2. Check if it exists and contains "anniversary"
+      // Find insertion point (usually before the order details)
+      var mainContent = document.querySelector('.os-step__content') || document.querySelector('.content');
+      
+      if (mainContent) {
+        var stepsContainer = document.createElement('div');
+        stepsContainer.innerHTML = nextStepsHTML;
+        mainContent.insertBefore(stepsContainer, mainContent.firstChild);
+      }
+
+      // --- B. CONDITIONAL TALLY FORM INJECTION ---
+      // Retrieve intent from Liquid (Server) or LocalStorage (Browser)
+      var liquidIntent = "{{ checkout.attributes['User Intent'] }}"; 
+      var localIntent = localStorage.getItem('user_intent');
+      var intent = liquidIntent || localIntent;
+
+
+
       if (intent && intent.toLowerCase().indexOf('anniversary') !== -1) {
-        console.log("✅ Intent matches 'anniversary'. Preparing to inject form...");
-        
-        // 3. Create a container for the form
-        var container = document.createElement('div');
-        container.style.marginTop = '30px';
-        container.style.marginBottom = '30px';
-        container.style.padding = '20px';
-        container.style.background = '#ffffff';
-        container.style.borderRadius = '8px';
-        container.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-        
-        // Optional: Add a header
-        var header = document.createElement('h2');
-        header.innerText = "Let's Get Started on Your Anniversary Song";
-        header.style.textAlign = 'center';
-        header.style.marginBottom = '20px';
-        header.style.fontFamily = 'serif'; 
-        container.appendChild(header);
 
-        // 4. Inject the Tally Iframe
-        var iframeContainer = document.createElement('div');
-        iframeContainer.innerHTML = '<iframe data-tally-src="https://tally.so/embed/lbaXkv?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="202" frameborder="0" marginheight="0" marginwidth="0" title="Let\'s get started."></iframe>';
-        container.appendChild(iframeContainer);
+
+        var formContainer = document.createElement('div');
+        formContainer.style.marginTop = '40px';
+        formContainer.style.padding = '30px';
+        formContainer.style.background = '#1a1a1a';
+        formContainer.style.border = '1px solid #D4AF37'; // Gold Border
+        formContainer.style.borderRadius = '8px';
+        formContainer.style.textAlign = 'center';
+
+        var formHeader = document.createElement('h2');
+        formHeader.innerText = "Let's Personalize Your Anniversary Song";
+        formHeader.style.color = '#D4AF37';
+        formHeader.style.marginBottom = '10px';
         
-        // 5. Insert into the page
-        // We try to find the main content area of the Order Status page
-        var target = document.querySelector('.os-step__content') || document.querySelector('.content') || document.querySelector('.step__content') || document.body;
-        console.log("🔍 Injection Target Found:", target);
-        
-        // Insert after the main content (or append to body as fallback)
-        if (target) {
-            target.appendChild(container);
-            console.log("✅ Form injected successfully.");
-        } else {
-            console.error("❌ No valid target element found to inject form.");
+        var formSub = document.createElement('p');
+        formSub.innerText = "Please answer a few quick questions to help us capture your story.";
+        formSub.style.color = '#ccc';
+        formSub.style.marginBottom = '20px';
+
+        formContainer.appendChild(formHeader);
+        formContainer.appendChild(formSub);
+
+        var iframeDiv = document.createElement('div');
+        iframeDiv.innerHTML = '<iframe data-tally-src="https://tally.so/embed/lbaXkv?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" title="Anniversary Details"></iframe>';
+        formContainer.appendChild(iframeDiv);
+
+        // Inject after the "Next Steps" we just added
+        if (mainContent) {
+          mainContent.insertBefore(formContainer, mainContent.children[1]); // Insert after Next Steps
         }
 
-        // 6. Load the Tally Widget Script
+        // Load Tally Script
         var d=document, w="https://tally.so/widgets/embed.js", v=function(){
           "undefined"!=typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))
         };
@@ -53,11 +184,10 @@
         else if(d.querySelector('script[src="'+w+'"]')==null) {
           var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
         }
-      } else {
-        console.log("ℹ️ Intent does not match 'anniversary' or is missing.");
       }
+
     } catch(e) {
-      console.error('❌ Error injecting Tally form:', e);
+
     }
   })();
 </script>

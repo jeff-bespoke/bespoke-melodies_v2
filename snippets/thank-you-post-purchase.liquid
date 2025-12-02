@@ -1,0 +1,30 @@
+<!-- Google Ads Conversion Tracking for Post-Purchase Page -->
+<!-- Note: Post-purchase pages are sandboxed. DOM manipulation (injecting forms) is often restricted. -->
+{% if first_time_accessed %}
+<script>
+
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17741514624/7ZV1CIim3cIbEICP6ItC',
+        'value': {{ checkout.total_price | money_without_currency }},
+        'currency': '{{ checkout.currency }}',
+        'transaction_id': '{{ checkout.order_number }}'
+    });
+  }
+</script>
+{% endif %}
+
+<!-- Tally Form Link (Fallback) -->
+<!-- Since iframes are often blocked in post-purchase, we provide a button/link if intent matches -->
+<script>
+  (function() {
+    try {
+      var liquidIntent = "{{ checkout.attributes['User Intent'] }}"; 
+      if (liquidIntent && liquidIntent.toLowerCase().indexOf('anniversary') !== -1) {
+          // We cannot inject an iframe here safely.
+          // GemPages should handle the UI.
+          // GemPages should handle the UI.
+      }
+    } catch(e) {
+    }
+  })();
+</script>

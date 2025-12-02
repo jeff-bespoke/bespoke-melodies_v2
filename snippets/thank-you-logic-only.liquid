@@ -1,0 +1,69 @@
+<!-- 1. Google Ads Conversion Tracking -->
+{% if first_time_accessed %}
+<script>
+
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17741514624/7ZV1CIim3cIbEICP6ItC',
+        'value': {{ checkout.total_price | money_without_currency }},
+        'currency': '{{ checkout.currency }}',
+        'transaction_id': '{{ checkout.order_number }}'
+    });
+  }
+</script>
+{% endif %}
+
+<!-- 2. Tally Form Injection Logic (No Styling) -->
+<script>
+  (function() {
+
+
+    try {
+      // Retrieve intent from Liquid (Server) or LocalStorage (Browser)
+      var liquidIntent = "{{ checkout.attributes['User Intent'] }}"; 
+      var localIntent = localStorage.getItem('user_intent');
+      var intent = liquidIntent || localIntent;
+
+
+
+      if (intent && intent.toLowerCase().indexOf('anniversary') !== -1) {
+
+
+        // Create the iframe HTML
+        var iframeHTML = '<iframe data-tally-src="https://tally.so/embed/lbaXkv?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" title="Anniversary Details"></iframe>';
+        
+        // Create a wrapper div
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = iframeHTML;
+        wrapper.style.width = "100%";
+
+        // TARGETING: Look for a specific container from GemPages first
+        // User should add a Row/Div with ID 'tally-target' in GemPages
+        var target = document.getElementById('tally-target');
+
+        if (target) {
+
+            target.appendChild(wrapper);
+        } else {
+            // Fallback: Inject into standard content area if GemPages container is missing
+            // Fallback: Inject into standard content area if GemPages container is missing
+            var mainContent = document.querySelector('.os-step__content') || document.querySelector('.content');
+            if (mainContent) {
+                mainContent.appendChild(wrapper);
+            }
+        }
+
+        // Load Tally Script
+        var d=document, w="https://tally.so/widgets/embed.js", v=function(){
+          "undefined"!=typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))
+        };
+        if("undefined"!=typeof Tally) v();
+        else if(d.querySelector('script[src="'+w+'"]')==null) {
+          var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
+        }
+      }
+
+    } catch(e) {
+
+    }
+  })();
+</script>
