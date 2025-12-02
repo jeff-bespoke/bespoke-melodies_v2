@@ -142,18 +142,6 @@
     <section class="pt-12 pb-16 px-4 border-t border-white/5 relative">
         <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gold/40"></div>
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <p class="text-sm uppercase tracking-wider text-gold mb-2">Client Stories</p>
-                <h2 class="text-3xl md:text-4xl font-serif text-white tracking-wider">What Our Clients Say</h2>
-            </div>
-            
-            <!-- 3-Column Testimonials -->
-            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
-                <!-- Testimonial 1: J.S. -->
-                <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700 flex flex-col">
-                    <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">"</div>
-                    <div class="flex gap-1 mb-4 relative z-10">
-                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -209,6 +197,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Composer Section (Video + Bio) -->
+    <section id="composer-video" class="py-24 px-4 border-t border-white/5 relative">
+        <div class="max-w-6xl mx-auto space-y-20">
+            <!-- Row 1: Video Player -->
+            <div class="max-w-2xl mx-auto w-full">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gold/30 group w-full transition-all duration-700 hover:shadow-gold/40">
+                    <!-- Ambient Glow -->
                     <div class="absolute -inset-4 bg-gold/20 blur-3xl -z-10 opacity-50 animate-pulse pointer-events-none"></div>
                     
                     <!-- Premium Title Overlay -->
@@ -238,9 +236,46 @@
                 </div>
             </div>
 
+            <!-- Row 2: Bio Section -->
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <!-- Left Column: Portrait -->
                 <div class="relative w-full max-w-md mx-auto md:max-w-none">
+                    <div class="hidden md:block absolute inset-0 bg-gold/10 transform translate-x-4 translate-y-4 rounded-xl"></div>
+                    <img 
+                        src="https://cdn.shopify.com/s/files/1/0977/4900/8660/files/bioshot.png?v=1764464414" 
+                        alt="Jeff Holste - Composer" 
+                        loading="lazy"
+                        class="relative z-10 w-full h-auto rounded-xl shadow-xl grayscale hover:grayscale-0 transition-all duration-500 object-cover block"
+                    >
+                </div>
+
+                <!-- Right Column: Bio Text -->
+                <div class="space-y-4 md:space-y-6 text-center md:text-left">
+                    <h2 id="composer-bio" class="text-3xl md:text-4xl font-serif text-white tracking-wider text-shadow-sm">The Composer</h2>
+                    <div class="w-20 h-1 bg-gold rounded-full mx-auto md:mx-0"></div>
+                    
+                    <div class="text-gray-300 leading-relaxed space-y-4 text-lg font-light">
+                        <p>
+                            My name is Jeff Holste. My background—from the stages of Lincoln Center to a teaching lineage tracing back to Beethoven—taught me more than just mastery of the piano. It taught me how to listen.
+                        </p>
+                        <p>
+                            To hear the emotion inside a story and translate it into sound. That truth transcends genre. Whether your vision calls for a cinematic orchestra, a modern pop arrangement, or a soulful acoustic track, the foundation is always the same.
+                        </p>
+                        <p>
+                            It starts with a human heartbeat, not a computer prompt. I write the melody and structure by hand, ensuring the soul of the song is real before technology ever touches it.
+                        </p>
+                    </div>
+
+                    <div class="pt-6">
+                        <p class="font-serif text-gold text-xl italic">Jeff Holste, Owner & Composer</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--Sonic Palette (6-Grid Player) -->
     <section id="samples" class="py-20 px-4 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
