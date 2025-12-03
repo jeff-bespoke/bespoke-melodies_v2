@@ -1,0 +1,1490 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Melodies - Urgent Gift</title>
+    {% if settings.favicon != blank %}
+        <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {% else %}
+        <link rel="icon" href="data:,">
+    {% endif %}
+
+    <!-- Consolidated Google Tracking (GA4 + Ads) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LF2MB2YSM2');
+      gtag('config', 'AW-17741514624');
+    </script>
+
+    <!-- GA4 Event Tracking -->
+
+    <!-- Contentsquare -->
+    <script src="https://t.contentsquare.net/uxa/42886a0035531.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'charcoal': '#1a1a1a',
+                        'charcoal-light': '#2d2d2d',
+                        'gold': '#D4AF37',
+                        'gold-hover': '#b5952f',
+                        'off-white': '#f5f5f5',
+                        'burgundy': '#5a0e1a',
+                        'emerald-dark': '#022c22',
+                        'champagne': '#f3e5ab',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    {{ 'landing-page.css' | asset_url | stylesheet_tag }}
+    <style>
+        /* Diamond Dust / Snow Effect */
+        .snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: snowfall linear infinite;
+        }
+        @keyframes snowfall {
+            0% { transform: translateY(-10px) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+        }
+        /* Randomize snow */
+        .snowflake:nth-child(1) { left: 10%; width: 2px; height: 2px; animation-duration: 10s; animation-delay: 0s; }
+        .snowflake:nth-child(2) { left: 20%; width: 3px; height: 3px; animation-duration: 12s; animation-delay: 2s; }
+        .snowflake:nth-child(3) { left: 30%; width: 1px; height: 1px; animation-duration: 8s; animation-delay: 4s; }
+        .snowflake:nth-child(4) { left: 40%; width: 2px; height: 2px; animation-duration: 11s; animation-delay: 1s; }
+        .snowflake:nth-child(5) { left: 50%; width: 3px; height: 3px; animation-duration: 13s; animation-delay: 3s; }
+        .snowflake:nth-child(6) { left: 60%; width: 1px; height: 1px; animation-duration: 9s; animation-delay: 5s; }
+        .snowflake:nth-child(7) { left: 70%; width: 2px; height: 2px; animation-duration: 10s; animation-delay: 2s; }
+        .snowflake:nth-child(8) { left: 80%; width: 3px; height: 3px; animation-duration: 14s; animation-delay: 0s; }
+        .snowflake:nth-child(9) { left: 90%; width: 1px; height: 1px; animation-duration: 11s; animation-delay: 4s; }
+        .snowflake:nth-child(10) { left: 95%; width: 2px; height: 2px; animation-duration: 12s; animation-delay: 1s; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="image" href="{{ 'hero_piano_keys.jpg' | file_url }}">
+    {{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
+    <script>
+        // CONFIGURATION
+        const config = {
+            surveyUrl: "https://tally.so/r/OD1kzg",
+            playlist: {
+                progressiveFunk: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Eine_Kleine_Nachtmusik.mp3?v=1763008066",
+                adultContemporary: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Just_for_Tonight_Our_Lullaby.mp3?v=1763008066",
+                powerBallad: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Whisper_to_me_then.mp3?v=1763008066",
+                popDance: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/pop_dance.mp3?v=1763008066",
+                cinematicRomance: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/Run_to_me.mp3?v=1763008066",
+                country: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/long_long_road.mp3?v=1763008066"
+            }
+        };
+    </script>
+
+</head>
+
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <section id="get-started" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden py-16 px-4">
+        <div class="absolute inset-0 z-0">
+            <!-- Piano Keys Background -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60" 
+                 style="background-image: url('{{ 'hero_piano_keys.jpg' | file_url }}');">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/40 to-charcoal"></div>
+            <!-- Subtle Gold Spotlight Overlay -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent opacity-60"></div>
+            <!-- Diamond Dust Snow -->
+            <div class="snow-container">
+                <div class="snowflake"></div><div class="snowflake"></div><div class="snowflake"></div>
+                <div class="snowflake"></div><div class="snowflake"></div><div class="snowflake"></div>
+                <div class="snowflake"></div><div class="snowflake"></div><div class="snowflake"></div>
+                <div class="snowflake"></div>
+            </div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+            <h1 id="lp-headline" class="text-3xl md:text-6xl font-bold leading-tight tracking-wider text-shadow-lg text-white mb-6">
+                The Gift They'll <br>
+                <span class="text-gold italic">Remember Forever.</span>
+            </h1>
+
+            <p id="lp-subhead" class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-8">
+                A bespoke song for your special occasion. Written by a Classically Trained composer. Orchestrated by AI technology. <span class="text-gold font-semibold">Guaranteed Delivery by December 25th.</span>
+            </p>
+
+            <!-- Hero CTA -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#pricing" onclick="gtag('event', 'hero_cta_click', {page_location: window.location.pathname});" class="group inline-flex items-center gap-2 px-8 py-4 bg-gold hover:bg-gold-hover text-charcoal font-bold rounded-lg text-lg shadow-2xl shadow-gold/30 transform hover:-translate-y-1 transition-all duration-300">
+                    Secure Christmas Delivery
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="#composer-video" onclick="gtag('event', 'hero_video_click', {page_location: window.location.pathname});" class="inline-flex items-center gap-2 px-6 py-4 border-2 border-white/20 hover:border-gold/50 text-white rounded-lg transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Watch Process Video
+                </a>
+            </div>
+
+            <!-- Credentials Badge -->
+            <div class="mt-12 pt-8 border-t border-white/10">
+                <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-400">
+                    <a href="#composer-bio" class="flex items-center gap-2 group cursor-pointer hover:text-gold transition-colors">
+                        <svg class="w-5 h-5 text-gold group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                        </svg>
+                        <span>Classically Trained Composer</span>
+                    </a>
+                    <div class="hidden sm:block text-white/20">•</div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span><strong class="text-white">20+</strong> Years Experience</span>
+                    </div>
+                    <div class="hidden sm:block text-white/20">•</div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"/>
+                        </svg>
+                        <span>Versatile in All Genres</span>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="pt-12 pb-16 px-4 border-t border-white/5 relative">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-12 bg-gold/40"></div>
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <p class="text-sm uppercase tracking-wider text-gold mb-2">Real Results</p>
+                <h2 class="text-3xl md:text-4xl font-serif text-white tracking-wider">Don't Take Our Word For It</h2>
+            </div>
+            
+            <!-- 3-Column Testimonials -->
+            <div class="flex md:grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 scrollbar-hide">
+                <!-- Testimonial 1: J.S. -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700 flex flex-col">
+                    <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">"</div>
+                    <div class="flex gap-1 mb-4 relative z-10">
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-200 text-lg leading-relaxed mb-5 font-serif italic relative z-10 flex-grow">
+                        "Each of Jeff's compositions are unique and quality works. Other composers seem to recycle again and again fragments of the same basic melody lines and chord progressions."
+                    </p>
+                    <div class="flex items-center gap-3 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 flex items-center justify-center text-gold font-bold border border-gold/20">
+                            J.S.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2: L.J. -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700 flex flex-col">
+                    <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">"</div>
+                    <div class="flex gap-1 mb-4 relative z-10">
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-200 text-lg leading-relaxed mb-5 font-serif italic relative z-10 flex-grow">
+                        "I am amazed at how quickly Jeff can compose original and enjoyable music! His lyrics and musical compositions demonstrate depth, technical excellence, and passion."
+                    </p>
+                    <div class="flex items-center gap-3 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 flex items-center justify-center text-gold font-bold border border-gold/20">
+                            L.J.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3: B.D. -->
+                <div class="min-w-[85vw] md:min-w-0 snap-center bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 relative overflow-hidden group hover:border-gold/30 transition-all duration-700 flex flex-col">
+                    <div class="absolute top-4 left-4 text-6xl text-gold/10 font-serif leading-none select-none">"</div>
+                    <div class="flex gap-1 mb-4 relative z-10">
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-200 text-lg leading-relaxed mb-5 font-serif italic relative z-10 flex-grow">
+                        "Jeff is so easy to work with and is a consummate professional, especially on a tight deadline. I would recommend working with him to anybody."
+                    </p>
+                    <div class="flex items-center gap-3 relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold/30 to-gold/10 flex items-center justify-center text-gold font-bold border border-gold/20">
+                            B.D.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Composer Section (Video + Bio) -->
+    <section id="composer-video" class="py-24 px-4 border-t border-white/5 relative">
+        <div class="max-w-6xl mx-auto space-y-20">
+            <!-- Row 1: Video Player -->
+            <div class="max-w-2xl mx-auto w-full">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-gold/30 group w-full transition-all duration-700 hover:shadow-gold/40">
+                    <!-- Ambient Glow -->
+                    <div class="absolute -inset-4 bg-gold/20 blur-3xl -z-10 opacity-50 animate-pulse pointer-events-none"></div>
+                    
+                    <!-- Premium Title Overlay -->
+                    <div id="video-title" class="absolute top-6 left-6 z-10 pointer-events-none transition-opacity duration-500">
+                        <div class="text-gold text-xs font-bold tracking-widest uppercase mb-1">The Process</div>
+                        <h3 class="text-white font-serif text-xl text-shadow-md">Behind the Music</h3>
+                    </div>
+
+                    <!-- Video -->
+                    <video 
+                        id="main-video"
+                        playsinline
+                        preload="none"
+                        class="w-full h-auto bg-black block"
+                        poster="https://cdn.shopify.com/s/files/1/0977/4900/8660/files/composer_poster.png?v=1764532912">
+                        <source src="https://cdn.shopify.com/videos/c/o/v/b789265a5bc14386bc758db24eec9d66.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <!-- Custom Play Button Overlay -->
+                    <div id="video-overlay" 
+                         class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all cursor-pointer"
+                         onclick="const v = document.getElementById('main-video'); v.play(); v.controls=true; this.classList.add('hidden'); document.getElementById('video-title').classList.add('opacity-0');">
+                        <div class="w-20 h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+                            <svg class="w-8 h-8 text-gold ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Bio Section -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Column: Portrait -->
+                <div class="relative w-full max-w-md mx-auto md:max-w-none">
+                    <div class="hidden md:block absolute inset-0 bg-gold/10 transform translate-x-4 translate-y-4 rounded-xl"></div>
+                    <img 
+                        src="https://cdn.shopify.com/s/files/1/0977/4900/8660/files/bioshot.png?v=1764464414" 
+                        alt="Jeff Holste - Composer" 
+                        loading="lazy"
+                        class="relative z-10 w-full h-auto rounded-xl shadow-xl grayscale hover:grayscale-0 transition-all duration-500 object-cover block"
+                    >
+                </div>
+
+                <!-- Right Column: Bio Text -->
+                <div class="space-y-4 md:space-y-6 text-center md:text-left">
+                    <h2 id="composer-bio" class="text-3xl md:text-4xl font-serif text-white tracking-wider text-shadow-sm">The Composer</h2>
+                    <div class="w-20 h-1 bg-gold rounded-full mx-auto md:mx-0"></div>
+                    
+                    <div class="text-gray-300 leading-relaxed space-y-4 text-lg font-light">
+                        <p>
+                            My name is Jeff Holste. My background—from the stages of Lincoln Center to a teaching lineage tracing back to Beethoven—taught me more than just mastery of the piano. It taught me how to listen.
+                        </p>
+                        <p>
+                            To hear the emotion inside a story and translate it into sound. That truth transcends genre. Whether your vision calls for a cinematic orchestra, a modern pop arrangement, or a soulful acoustic track, the foundation is always the same.
+                        </p>
+                        <p>
+                            It starts with a human heartbeat, not a computer prompt. I write the melody and structure by hand, ensuring the soul of the song is real before technology ever touches it.
+                        </p>
+                    </div>
+
+                    <div class="pt-6">
+                        <p class="font-serif text-gold text-xl italic">Jeff Holste, Owner & Composer</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--Sonic Palette (6-Grid Player) -->
+    <section id="samples" class="py-20 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-wider text-shadow-sm">Select Your Sound</h2>
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full shadow-[0_0_10px_#D4AF37]"></div>
+            </div>
+
+            <!-- Audio Cards Grid -->
+            <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-hide pb-4">
+                
+                <!-- Card 1: Pop / Romance -->
+                <div class="audio-card genre-pop-romance p-6 rounded-xl relative group cursor-pointer transition-all duration-700 min-w-[80vw] md:min-w-0 snap-center"
+                    onclick="playTrack('cinematicRomance', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-1">Holiday Romance</h3>
+                </div>
+
+                <!-- Card 2: Adult Contemporary -->
+                <div class="audio-card genre-adult-contemporary p-6 rounded-xl relative group cursor-pointer transition-all duration-700 min-w-[80vw] md:min-w-0 snap-center"
+                    onclick="playTrack('adultContemporary', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-1">Winter Warmth</h3>
+                </div>
+
+                <!-- Card 3: Power Ballad -->
+                <div class="audio-card genre-power-ballad p-6 rounded-xl relative group cursor-pointer transition-all duration-700 min-w-[80vw] md:min-w-0 snap-center"
+                    onclick="playTrack('powerBallad', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-1">Festive Ballad</h3>
+                </div>
+
+                <!-- Card 4: Progressive Funk -->
+                <div class="audio-card genre-progressive-funk p-6 rounded-xl relative group cursor-pointer transition-all duration-700 min-w-[80vw] md:min-w-0 snap-center"
+                    onclick="playTrack('progressiveFunk', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-1">Progressive Funk</h3>
+                </div>
+
+                <!-- Card 5: Country -->
+                <div class="audio-card genre-country p-6 rounded-xl relative group cursor-pointer transition-all duration-700 min-w-[80vw] md:min-w-0 snap-center"
+                    onclick="playTrack('country', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-1">Country</h3>
+                </div>
+
+                <!-- Card 6: Cinematic Romance -->
+                <div class="audio-card genre-pop-romance p-6 rounded-xl relative group cursor-pointer transition-all duration-700 min-w-[80vw] md:min-w-0 snap-center"
+                    onclick="playTrack('popDance', this)">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-white/5 rounded-full text-gold group-hover:bg-gold group-hover:text-charcoal transition-colors">
+                            <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"></path>
+                            </svg>
+                            <div class="playing-indicator">
+                                <div class="flex gap-1 h-6 items-end">
+                                    <div class="w-1 bg-gold animate-[bounce_1s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_1.2s_infinite]"></div>
+                                    <div class="w-1 bg-gold animate-[bounce_0.8s_infinite]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-serif text-white mb-1">Dance Pop</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-4 bg-charcoal">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Process Visual (Zig-Zag Layout) -->
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-serif text-white mb-4 tracking-wider text-shadow-sm">How It Works</h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto">A simple, transparent process designed to capture your story perfectly.</p>
+                </div>
+                
+                <div class="space-y-16 relative">
+                    <!-- Connecting Line (Vertical) -->
+                    <div class="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-px bg-gold/30 hidden md:block"></div>
+
+                    <!-- Step 1: Choose Timeline -->
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
+                        <div class="w-full md:w-1/2 text-center md:text-right order-2 md:order-1">
+                            <h4 class="text-2xl font-serif text-white mb-2">1. Choose Your Delivery Date</h4>
+                            <p class="text-gray-400 leading-relaxed">Select your delivery speed. Whether you need it for <span class="text-gold font-serif italic">Christmas Morning</span> or a holiday party, we guarantee on-time delivery.</p>
+                        </div>
+                        <div class="w-full md:w-1/2 flex justify-center md:justify-start order-1 md:order-2">
+                            <div class="w-20 h-20 bg-white/5 backdrop-blur-md rounded-2xl border border-gold/30 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.1)] hover:border-gold/50 transition-all duration-500">
+                                <span class="text-3xl font-serif text-gold">1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Share Vision -->
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
+                        <div class="w-full md:w-1/2 flex justify-center md:justify-end order-1">
+                            <div class="w-20 h-20 bg-white/5 backdrop-blur-md rounded-2xl border border-gold/30 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.1)] hover:border-gold/50 transition-all duration-500">
+                                <span class="text-3xl font-serif text-gold">2</span>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 text-center md:text-left order-2">
+                            <h4 class="text-2xl font-serif text-white mb-2">2. Tell Us Their Story</h4>
+                            <p class="text-gray-400 leading-relaxed">Fill out a simple creative brief <span class="text-gold font-serif italic">after</span> checkout. Tell me about their favorite holiday memories, what makes them special, and the emotions you want to capture.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: I Compose -->
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
+                        <div class="w-full md:w-1/2 text-center md:text-right order-2 md:order-1">
+                            <h4 class="text-2xl font-serif text-white mb-2">3. Unwrap The Magic</h4>
+                            <p class="text-gray-400 leading-relaxed">I start writing <span class="text-gold font-serif italic">immediately</span>. You'll receive a studio-quality song, lyrics, and a private streaming portal ready to play under the tree.</p>
+                        </div>
+                        <div class="w-full md:w-1/2 flex justify-center md:justify-start order-1 md:order-2">
+                            <div class="w-20 h-20 bg-white/5 backdrop-blur-md rounded-2xl border border-gold/30 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.1)] hover:border-gold/50 transition-all duration-500">
+                                <span class="text-3xl font-serif text-gold">3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section id="pricing" class="py-20 px-4 bg-charcoal">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Mobile Scroll Hint -->
+            <div class="md:hidden text-center mb-4 animate-pulse">
+                <span class="text-gold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
+                    Swipe to Compare
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m-4-4H3"></path></svg>
+                </span>
+            </div>
+
+            <!-- Pricing Grid -->
+
+            <div id="pricing-scroll-container" class="flex lg:grid lg:grid-cols-3 gap-4 lg:gap-8 items-center overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none pt-12 pb-8 lg:py-0 px-4 lg:px-0 scrollbar-hide">
+
+                <!-- Standard (Muted/Secondary) -->
+                <div
+                    class="min-w-[80vw] lg:min-w-0 snap-center order-3 lg:order-3 bg-white/5 border border-white/10 rounded-2xl p-6 opacity-80 hover:opacity-100 transition-all duration-700">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="text-xs uppercase tracking-wider text-gray-500">Budget Option</div>
+                        <div class="text-xs font-bold text-green-400 bg-emerald-dark/50 px-2 py-1 rounded border border-green-500/20">Order by Dec 17</div>
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-2">Standard</h3>
+                    <div class="text-2xl font-bold text-gold mb-3">$249</div>
+                    <p class="text-gray-400 text-sm mb-6">1 Week Delivery</p>
+                    
+                    <!-- Features List -->
+                    <div class="text-left space-y-2 mb-6 text-sm">
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Custom composed song</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 016zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>1 revision round</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>MP3 + WAV files</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Private song portal</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="beginCheckout('51587914727700', 249, 'Standard', '1 Week')"
+                        class="block w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors text-center">
+                        Reserve 1-Week Slot
+                    </button>
+                    
+                    <!-- Guarantee Badge (Wax Seal Style) -->
+                    <div class="flex items-center justify-center gap-3 mt-6 group cursor-pointer" onclick="openRefundFAQ()">
+                        <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:via-[#F2D06B] group-hover:to-[#D4AF37] group-hover:text-charcoal transition-all duration-300">
+                            <svg class="w-4 h-4 text-gold group-hover:text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <span class="text-xs text-gray-400 uppercase tracking-wider group-hover:text-gold transition-colors">Risk-Free Guarantee</span>
+                    </div>
+                </div>
+
+                <!-- Express (HERO - Most Popular) -->
+                <div id="pricing-card-express"
+                    class="min-w-[80vw] lg:min-w-0 snap-center order-2 lg:order-2 bg-gradient-to-b from-charcoal-light to-charcoal border-2 border-gold rounded-2xl p-10 transform lg:scale-110 shadow-2xl shadow-gold/20 relative glow-gold">
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#D4AF37] via-[#F2D06B] to-[#D4AF37] text-charcoal text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-gold/40">
+                        Most Popular</div>
+                    <h3 class="text-2xl font-serif text-white mb-2">Express</h3>
+                    <div class="text-4xl font-bold text-gold mb-4">$399</div>
+                    <p class="text-gray-400 text-sm mb-6">Guaranteed by Dec 23</p>
+                    
+                    <!-- Features List -->
+                    <div class="text-left space-y-2 mb-8 text-sm">
+                        <div class="flex items-start gap-2 text-gray-200">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span><strong>Everything in Standard</strong></span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-200">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span><strong>Priority composition queue</strong></span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-200">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Expedited email response</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="beginCheckout('51587916366100', 399, 'Express', '48 Hours')"
+                        class="block w-full py-4 bg-gradient-to-r from-[#D4AF37] via-[#F2D06B] to-[#D4AF37] hover:shadow-gold/50 text-charcoal rounded-lg font-bold transition-all transform hover:-translate-y-0.5 text-center shadow-lg glow-gold border border-white/10">
+                        Get Express Delivery →
+                    </button>
+                    
+                    <!-- Guarantee Badge (Wax Seal Style) -->
+                    <div class="flex items-center justify-center gap-3 mt-6 group cursor-pointer" onclick="openRefundFAQ()">
+                        <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:via-[#F2D06B] group-hover:to-[#D4AF37] group-hover:text-charcoal transition-all duration-300">
+                            <svg class="w-4 h-4 text-gold group-hover:text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider group-hover:text-gold transition-colors">Risk-Free Guarantee</span>
+                    </div>
+                </div>
+
+                <!-- Emergency -->
+                <div
+                    class="min-w-[80vw] lg:min-w-0 snap-center order-1 lg:order-1 bg-white/5 border border-white/10 rounded-2xl p-6 opacity-80 hover:opacity-100 transition-all duration-700">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="text-xs uppercase tracking-wider text-red-400">Urgent</div>
+                        <div class="text-xs font-bold text-red-400 bg-burgundy/50 px-2 py-1 rounded border border-red-500/30">Order by Dec 24</div>
+                    </div>
+                    <h3 class="text-lg font-serif text-white mb-2">Emergency</h3>
+                    <div class="text-2xl font-bold text-gold mb-3">$599</div>
+                    <p class="text-gray-400 text-sm mb-4">24 Hours Delivery</p>
+                    
+                    <!-- Urgency Signal (Removed Placeholder) -->
+                    <div class="mb-4"></div>
+                    
+                    <!-- Features List -->
+                    <div class="text-left space-y-2 mb-6 text-sm">
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span><strong>Everything in Express</strong></span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span><strong>Immediate start</strong></span>
+                        </div>
+                        <div class="flex items-start gap-2 text-gray-300">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Direct priority email access</span>
+                        </div>
+                    </div>
+                    
+                    <button onclick="beginCheckout('51587919610132', 599, 'Emergency', '24 Hours')"
+                        class="block w-full py-3 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors text-center">
+                        Secure 24-Hour Slot
+                    </button>
+                    
+                    <!-- Guarantee Badge (Wax Seal Style) -->
+                    <div class="flex items-center justify-center gap-3 mt-6 group cursor-pointer" onclick="openRefundFAQ()">
+                        <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:via-[#F2D06B] group-hover:to-[#D4AF37] group-hover:text-charcoal transition-all duration-300">
+                            <svg class="w-4 h-4 text-gold group-hover:text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <span class="text-xs text-gray-400 uppercase tracking-wider group-hover:text-gold transition-colors">Risk-Free Guarantee</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Payment Trust Signals -->
+            <div class="flex flex-wrap justify-center items-center gap-6 mt-12 pt-8 border-t border-white/5">
+                <div class="flex items-center gap-2 text-sm text-gray-400">
+                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    <span>Secure Checkout</span>
+                </div>
+                <div class="hidden sm:block text-white/20">•</div>
+                <div class="flex items-center gap-2 text-sm text-gray-400">
+                    <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Secure Checkout</span>
+                </div>
+                <div class="hidden sm:block text-white/20">•</div>
+                <div class="flex items-center gap-2 text-sm text-gray-400">
+                    <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
+                        <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Major Cards Accepted</span>
+                </div>
+            </div>
+
+            <!-- Trust Badges Section -->
+            <div class="max-w-4xl mx-auto mt-20 pt-12 border-t border-gradient-to-r from-transparent via-gold/20 to-transparent">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl md:text-3xl font-serif text-white mb-2">Every Commission Includes</h3>
+                    <p class="text-sm text-gray-400">Premium service meets personal attention</p>
+                </div>
+                
+                <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 scrollbar-hide">
+                    <!-- Badge 1: Progress Tracker -->
+                    <div class="min-w-[80vw] md:min-w-0 snap-center group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-gold/50 transition-all duration-300 text-center relative overflow-hidden hover:shadow-2xl hover:shadow-gold/20 hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gold/30 to-gold/10 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-white font-bold mb-3 text-lg">Your Own Private Song Portal</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed">Real-time tracking, lyric approvals, and revision requests</p>
+                        </div>
+                    </div>
+
+                    <!-- Badge 2: Direct Email -->
+                    <div class="min-w-[80vw] md:min-w-0 snap-center group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-gold/50 transition-all duration-300 text-center relative overflow-hidden hover:shadow-2xl hover:shadow-gold/20 hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gold/30 to-gold/10 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-white font-bold mb-3 text-lg">Direct Email to Jeff</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed">I check my inbox constantly—no automated responses</p>
+                        </div>
+                    </div>
+
+                    <!-- Badge 3: Triple Checkpoint -->
+                    <div class="min-w-[80vw] md:min-w-0 snap-center group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-gold/50 transition-all duration-300 text-center relative overflow-hidden hover:shadow-2xl hover:shadow-gold/20 hover:-translate-y-1">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gold/30 to-gold/10 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-white font-bold mb-3 text-lg">Triple-Checkpoint Refund</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed">100% at lyrics • 50% at production • 25% at final mix</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- FAQ Preview Removed (Merged into Main FAQ) -->
+
+    <!-- The Bespoke Promise (Checkpoint Guarantee) -->
+    <section id="faq" class="py-20 px-4 bg-charcoal-light/20 border-t border-white/5">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-serif text-white mb-16 tracking-wider text-shadow-sm">The Bespoke Promise</h2>
+
+            <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-12 relative overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 scrollbar-hide">
+                <!-- Connecting Line (Desktop) -->
+                <div
+                    class="hidden md:block absolute top-8 left-1/6 right-1/6 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent -z-10">
+                </div>
+
+                <!-- Step 1 -->
+                <div class="group min-w-[70vw] md:min-w-0 snap-center">
+                    <div
+                        class="text-4xl md:text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+                        100%</div>
+                    <h3 class="text-xl font-serif text-white mb-2">Lyric Approval</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Full refund if the lyrics don't move you.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="group min-w-[70vw] md:min-w-0 snap-center">
+                    <div
+                        class="text-4xl md:text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+                        50%</div>
+                    <h3 class="text-xl font-serif text-white mb-2">Pre-Production</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Refund before the final rendering begins.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="group min-w-[70vw] md:min-w-0 snap-center">
+                    <div
+                        class="text-4xl md:text-5xl font-bold text-gold mb-4 group-hover:scale-110 transition-transform duration-300">
+                        25%</div>
+                    <h3 class="text-xl font-serif text-white mb-2">Final Polish</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Refund if the final mix isn't perfect.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Questions -->
+    <section class="py-20 px-4 bg-charcoal-light/20">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif text-white mb-3">Frequently Asked Questions</h2>
+                <div class="w-20 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ: 24 Hours -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            Can I really get a custom song in 24 hours?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            Yes. Emergency tier includes immediate queue prioritization. I personally compose every song, and 24-hour delivery means I dedicate focused time exclusively to your project. Submit your brief by noon EST, receive your song the next day.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ: Creative Brief -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            How does the creative brief work?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            After checkout, you'll receive an email with your private song portal. Inside, there's a guided questionnaire—no musical knowledge required. Just answer questions about your relationship, favorite memories, and the feeling you want. I handle the rest.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            What if I'm not sure how to describe what I want?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            You don't need musical language or a fully formed concept — that's what my process is for.
+                            A short questionnaire and guided chat help me understand the person, story, and emotion behind the song.
+                            From there, I translate your answers into a clear creative direction so you never feel responsible for 'directing' the music.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            How do you make sure the first version is right?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            Most of the work happens before I start composing. The survey, our conversation, and any reference points you share 
+                            give me a strong sense of tone, pacing, and emotional arc. I treat the first version as a finished piece — not a draft — 
+                            so when you hear it, it should feel intentional, polished, and true to what you shared.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            Will the song feel artificial because AI is involved?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            AI is simply the instrument used to perform and render the music — not the author. I write the lyrics, 
+                            shape the melody, define the emotional tone, and guide how the performance should feel. The technology helps 
+                            produce the final delivery, but the meaning, structure, and creative decisions behind the song are fully human. 
+                            The finished piece should feel personal, expressive, and emotionally grounded — not artificial or generic.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div id="faq-refund" class="faq-item bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-gold/30">
+                    <button class="faq-question w-full text-left p-6 flex justify-between items-center group" 
+                            onclick="this.parentElement.classList.toggle('open')">
+                        <span class="text-lg font-serif text-white group-hover:text-gold transition-colors pr-4">
+                            What is your refund policy?
+                        </span>
+                        <svg class="faq-icon w-6 h-6 text-gold flex-shrink-0 transition-transform duration-300" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0">
+                        <div class="p-6 pt-0 text-gray-400 leading-relaxed">
+                            <strong class="text-white">• Before final lyric approval:</strong> Full refund — no questions asked.<br>
+                            <strong class="text-white">• After lyric approval but before first musical rendering:</strong> 50% refund.<br>
+                            <strong class="text-white">• After first musical rendering:</strong> 25% refund.<br>
+                            <strong class="text-white">• After second musical edit:</strong> Work is complete and non-refundable.<br><br>
+                            These stages protect you without locking you in, and I always encourage early communication so we can address 
+                            any misalignment as soon as it appears.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 text-center border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-4 text-sm">
+                <a href="/policies/privacy-policy" class="text-gray-400 hover:text-gold transition-colors">Privacy Policy</a>
+                <span class="hidden md:inline text-gray-600">•</span>
+                <a href="/policies/terms-of-service" class="text-gray-400 hover:text-gold transition-colors">Terms of Service</a>
+                <span class="hidden md:inline text-gray-600">•</span>
+                <a href="/policies/refund-policy" class="text-gray-400 hover:text-gold transition-colors">Refund Policy</a>
+            </div>
+            <p class="text-gray-600 text-sm">&copy; 2025 Bespoke Melodies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA (Mobile/Desktop) -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal/95 backdrop-blur-md border-t border-gold/20 transform translate-y-full transition-transform duration-300 z-50 hidden">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            <div class="hidden md:block">
+                <div class="text-white font-serif">Ready to start?</div>
+                <div class="text-sm text-gray-400">Guaranteed delivery for Christmas.</div>
+            </div>
+            <button onclick="beginCheckout('51587916366100', 399, 'Express', '48 Hours')" 
+                    class="w-full md:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold py-3 px-8 rounded-full transition-all shadow-lg glow-gold">
+                Get it by Christmas ($399)
+            </button>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-gold rounded-2xl p-8 max-w-lg w-full relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" 
+                    class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">🎁</span>
+                </div>
+                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't leave empty handed.</h3>
+                <p class="text-gray-300">
+                    Most customers choose our Express option for the perfect balance of quality and speed!
+                </p>
+            </div>
+            
+            <button onclick="beginCheckout('51587916366100', 399, 'Express', '48 Hours'); document.getElementById('exit-intent-modal').classList.add('hidden');" 
+                    class="w-full bg-gold hover:bg-gold-dark text-charcoal font-bold py-4 px-6 rounded-full transition-all mb-4">
+                Choose Express (Most Popular) →
+            </button>
+            
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" 
+                    class="w-full text-gray-500 hover:text-white text-sm underline">
+                No thanks, I'll come back later
+            </button>
+        </div>
+    </div>
+
+    <!-- Audio Player Logic -->
+    <audio id="audioPlayer" preload="none"></audio>
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        let currentCard = null;
+        let currentTrackInfo = { title: '', genre: '' }; // Track current song for analytics
+        let stickyCTAShown = false;
+        const stickyBtn = document.getElementById('sticky-cta');
+
+        function playTrack(genre, cardElement) {
+            const trackUrl = config.playlist[genre];
+
+            // If clicking the same card that is currently playing
+            if (currentCard === cardElement && !audioPlayer.paused) {
+                audioPlayer.pause();
+                cardElement.classList.remove('active');
+                
+                // 🎯 Track pause event
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_pause', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'duration_seconds': Math.round(audioPlayer.currentTime),
+                        'page_location': window.location.pathname
+                    });
+                }
+                
+                currentCard = null;
+                return;
+            }
+
+            // Reset previous card
+            if (currentCard) {
+                currentCard.classList.remove('active');
+            }
+
+            // Get song info for tracking
+            const title = cardElement.querySelector('h4')?.textContent || cardElement.querySelector('h3')?.textContent || 'Unknown';
+            const genreText = genre; // Use genre parameter as identifier
+            currentTrackInfo = { title, genre: genreText };
+
+            // Play new track
+            audioPlayer.src = trackUrl;
+            audioPlayer.play();
+
+            // Update UI
+            cardElement.classList.add('active');
+            currentCard = cardElement;
+
+            // 🎯 Track audio play event in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'audio_play', {
+                    'song_title': title,
+                    'genre': genreText,
+                    'page_location': window.location.pathname
+                });
+            }
+        }
+
+        // Reset UI when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            if (currentCard) {
+                currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                currentCard = null;
+            }
+        });
+
+        // 🎯 Direct-to-Checkout Function with GA4 Tracking
+        function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire GA4 begin_checkout event
+            if (typeof gtag === 'function') {
+                gtag('event', 'begin_checkout', {
+                    currency: 'USD',
+                    value: price,
+                    items: [{
+                        item_id: variantId,
+                        item_name: 'Bespoke Song - ' + tierName,
+                        item_category: 'Custom Commission',
+                        item_variant: tierName,
+                        price: price,
+                        quantity: 1
+                    }],
+                    tier: tierName,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+                console.log('🎯 GA4 Event: begin_checkout', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+            
+            // Redirect to cart with variant
+            window.location.href = '/cart/' + variantId + ':1';
+        }
+
+
+
+    </script>
+
+    {% render 'dsi-logic' %}
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+        (function() {
+            const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+            
+            function checkScrollDepth() {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                
+                for (let depth in scrollDepths) {
+                    if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+                        scrollDepths[depth] = true;
+                        // console.log('🎯 GA4 Event: scroll', {percent_scrolled: parseInt(depth), page_location: window.location.pathname});
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll', {
+                                percent_scrolled: parseInt(depth),
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+            }
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScrollDepth, 100);
+            }, {passive: true});
+        })();
+    </script>
+
+    <!-- FAQ Click Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-question');
+            faqButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const questionText = this.querySelector('span').textContent.trim();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_click', {
+                            question: questionText.substring(0, 100),
+                            page_location: window.location.pathname
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- Sticky Mobile CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal border-t border-gold/30 transform translate-y-full transition-transform duration-300 z-50 md:hidden">
+        <div class="flex items-center justify-between gap-4 max-w-md mx-auto">
+            <div class="text-white text-sm">
+                <div class="font-bold text-gold">Limited Slots</div>
+                <div class="text-xs text-gray-400">Reserve yours today</div>
+            </div>
+            <a href="#pricing" class="bg-gold text-charcoal font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gold-hover transition-colors text-sm">
+                Commission Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                
+                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't Miss Out</h3>
+                <p class="text-gray-300 mb-6">Our composition slots fill up fast. Save your spot now and submit your details later.</p>
+                
+                <div class="space-y-3">
+                    <a href="#pricing" onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full bg-gold hover:bg-gold-hover text-charcoal font-bold py-4 rounded-lg transition-colors">
+                        See Available Slots
+                    </a>
+                    <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full border border-white/20 text-gray-400 hover:text-white py-3 rounded-lg transition-colors text-sm">
+                        No thanks, I'll risk missing out
+                    </button>
+                </div>
+                
+                <p class="text-xs text-gray-500 mt-6 flex items-center justify-center gap-1">
+                    <svg class="w-3 h-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>100% Money-Back Guarantee</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Sticky CTA & Exit Intent
+        document.addEventListener('DOMContentLoaded', () => {
+            const stickyBtn = document.getElementById('sticky-cta');
+            let stickyCTAShown = false;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 800) {
+                    stickyBtn.classList.remove('translate-y-full');
+                } else {
+                    stickyBtn.classList.add('translate-y-full');
+                }
+            });
+
+            // Exit Intent Logic
+            let exitIntentShown = false;
+            const exitModal = document.getElementById('exit-intent-modal');
+            
+            // Desktop: Mouse leave
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    showExitIntent();
+                }
+            });
+            
+            // Mobile: Scroll up speed detection (simple version)
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                let st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st < lastScrollTop - 50 && st > 500 && !exitIntentShown) { // Fast scroll up
+                    // Optional: enable mobile exit intent here
+                    // showExitIntent(); 
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            });
+
+            function showExitIntent() {
+                exitIntentShown = true;
+                exitModal.classList.remove('hidden');
+                exitModal.classList.add('flex');
+            }
+        });
+    </script>
+    <script>
+        function openRefundFAQ() {
+            const faq = document.getElementById('faq-refund');
+            }
+        }
+
+        // Reset UI when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            if (currentCard) {
+                currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                currentCard = null;
+            }
+        });
+
+        // 🎯 Direct-to-Checkout Function with GA4 Tracking
+        function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire GA4 begin_checkout event
+            if (typeof gtag === 'function') {
+                gtag('event', 'begin_checkout', {
+                    currency: 'USD',
+                    value: price,
+                    items: [{
+                        item_id: variantId,
+                        item_name: 'Bespoke Song - ' + tierName,
+                        item_category: 'Custom Commission',
+                        item_variant: tierName,
+                        price: price,
+                        quantity: 1
+                    }],
+                    tier: tierName,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+                console.log('🎯 GA4 Event: begin_checkout', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+                    variant_id: variantId
+                });
+            }
+            
+            // Retrieve intent for cart attribute
+            const intent = localStorage.getItem('user_intent') || '';
+
+            // AJAX Add to Cart with Attributes AND Properties
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items: [{
+                        id: variantId,
+                        quantity: 1,
+                        properties: {
+                            'Turnaround': turnaroundTime,
+                            'User Intent': intent
+                        }
+                    }],
+                    attributes: {
+                        'User Intent': intent
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Redirect to checkout
+                window.location.href = '/checkout';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Fallback
+                window.location.href = '/cart/' + variantId + ':1';
+            });
+        }
+
+
+
+    </script>
+
+    {% render 'dsi-logic' %}
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+        (function() {
+            const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+            
+            function checkScrollDepth() {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                
+                for (let depth in scrollDepths) {
+                    if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+                        scrollDepths[depth] = true;
+                        // console.log('🎯 GA4 Event: scroll', {percent_scrolled: parseInt(depth), page_location: window.location.pathname});
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll', {
+                                percent_scrolled: parseInt(depth),
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+            }
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScrollDepth, 100);
+            }, {passive: true});
+        })();
+    </script>
+
+    <!-- FAQ Click Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-question');
+            faqButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const questionText = this.querySelector('span').textContent.trim();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_click', {
+                            question: questionText.substring(0, 100),
+                            page_location: window.location.pathname
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- Sticky Mobile CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal border-t border-gold/30 transform translate-y-full transition-transform duration-300 z-50 md:hidden">
+        <div class="flex items-center justify-between gap-4 max-w-md mx-auto">
+            <div class="text-white text-sm">
+                <div class="font-bold text-gold">Limited Slots</div>
+                <div class="text-xs text-gray-400">Reserve yours today</div>
+            </div>
+            <a href="#pricing" class="bg-gold text-charcoal font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gold-hover transition-colors text-sm">
+                Commission Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                
+                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't Miss Out</h3>
+                <p class="text-gray-300 mb-6">Our composition slots fill up fast. Save your spot now and submit your details later.</p>
+                
+                <div class="space-y-3">
+                    <a href="#pricing" onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full bg-gold hover:bg-gold-hover text-charcoal font-bold py-4 rounded-lg transition-colors">
+                        See Available Slots
+                    </a>
+                    <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full border border-white/20 text-gray-400 hover:text-white py-3 rounded-lg transition-colors text-sm">
+                        No thanks, I'll risk missing out
+                    </button>
+                </div>
+                
+                <p class="text-xs text-gray-500 mt-6 flex items-center justify-center gap-1">
+                    <svg class="w-3 h-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>100% Money-Back Guarantee</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Sticky CTA & Exit Intent
+        document.addEventListener('DOMContentLoaded', () => {
+            const stickyBtn = document.getElementById('sticky-cta');
+            let stickyCTAShown = false;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 800) {
+                    stickyBtn.classList.remove('translate-y-full');
+                } else {
+                    stickyBtn.classList.add('translate-y-full');
+                }
+            });
+
+            // Exit Intent Logic
+            let exitIntentShown = false;
+            const exitModal = document.getElementById('exit-intent-modal');
+            
+            // Desktop: Mouse leave
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    showExitIntent();
+                }
+            });
+            
+            // Mobile: Scroll up speed detection (simple version)
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                let st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st < lastScrollTop - 50 && st > 500 && !exitIntentShown) { // Fast scroll up
+                    // Optional: enable mobile exit intent here
+                    // showExitIntent(); 
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            });
+
+            function showExitIntent() {
+                exitIntentShown = true;
+                exitModal.classList.remove('hidden');
+                exitModal.classList.add('flex');
+            }
+        });
+    </script>
+    <script>
+        function openRefundFAQ() {
+            const faq = document.getElementById('faq-refund');
+            if (faq) {
+                faq.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                faq.classList.add('open');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
