@@ -221,7 +221,7 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
     <link rel="preload" as="image" href="{{ 'hero_piano_keys.jpg' | file_url }}">
     {{ 'section-song-portal.css' | asset_url | stylesheet_tag }}
-    <script>
+    <script defer>
         // CONFIGURATION
         const config = {
             surveyUrl: "https://tally.so/r/OD1kzg",
@@ -417,28 +417,31 @@
 
         // Apply DTR on Load
         document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const rawIntent = urlParams.get('user_intent');
-            const h1 = document.getElementById('lp-headline');
-            const sub = document.getElementById('lp-subhead');
+            // Delay execution to ensure we override any other scripts
+            setTimeout(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const rawIntent = urlParams.get('user_intent');
+                const h1 = document.getElementById('lp-headline');
+                const sub = document.getElementById('lp-subhead');
 
-            if (rawIntent) {
-                // Normalize: replace spaces with hyphens to match keys
-                const handle = rawIntent.toLowerCase().replace(/\s+/g, '-');
+                if (rawIntent) {
+                    // Normalize: replace spaces with hyphens to match keys
+                    const handle = rawIntent.toLowerCase().replace(/\s+/g, '-');
 
-                if (dynamicContent[handle]) {
-                    const content = dynamicContent[handle];
-                    if (h1) h1.textContent = content.h1;
-                    if (sub) sub.textContent = content.sub;
-                    
-                    // Update Page Title for Browser Tab
-                    document.title = content.h1 + " | Bespoke Melodies";
+                    if (dynamicContent[handle]) {
+                        const content = dynamicContent[handle];
+                        if (h1) h1.textContent = content.h1;
+                        if (sub) sub.textContent = content.sub;
+                        
+                        // Update Page Title for Browser Tab
+                        document.title = content.h1 + " | Bespoke Melodies";
+                    }
                 }
-            }
 
-            // Reveal content (Anti-Flicker)
-            if (h1) h1.classList.remove('opacity-0');
-            if (sub) sub.classList.remove('opacity-0');
+                // Reveal content (Anti-Flicker)
+                if (h1) h1.classList.remove('opacity-0');
+                if (sub) sub.classList.remove('opacity-0');
+            }, 50); // Small delay to win race conditions
         });
     </script>
 
