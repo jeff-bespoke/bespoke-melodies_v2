@@ -157,6 +157,28 @@
         <link rel="icon" href="data:,">
     {% endif %}
 
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "{{ hero_h1 | escape }}",
+      "description": "{{ page_meta_description | escape }}",
+      "brand": {
+        "@type": "Brand",
+        "name": "Bespoke Melodies"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "url": "{{ shop.url }}{{ page.url }}",
+        "priceCurrency": "USD",
+        "lowPrice": "399",
+        "highPrice": "599",
+        "offerCount": "3"
+      }
+    }
+    </script>
+
     <!-- Consolidated Google Tracking (GA4 + Ads) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF2MB2YSM2"></script>
     <script>
