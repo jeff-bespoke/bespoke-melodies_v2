@@ -151,7 +151,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
                 </a>
-                <a href="#composer-video" onclick="gtag('event', 'hero_video_click', {page_location: window.location.pathname});" class="inline-flex items-center gap-2 px-6 py-4 border-2 border-white/20 hover:border-gold/50 text-white rounded-lg transition-all duration-300">
+                <a href="#composer-video" onclick="gtag('event', 'hero_process_video_click', {page_location: window.location.pathname});" class="inline-flex items-center gap-2 px-6 py-4 border-2 border-white/20 hover:border-gold/50 text-white rounded-lg transition-all duration-300">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -1082,6 +1082,16 @@
 
         // 🎯 Direct-to-Checkout Function with GA4 Tracking
         function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire tier_click event (simpler signal for funnel)
+            if (typeof gtag === 'function') {
+                gtag('event', 'tier_click', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+            }
+            
             // Fire GA4 begin_checkout event
             if (typeof gtag === 'function') {
                 gtag('event', 'begin_checkout', {
@@ -1161,6 +1171,33 @@
             });
         });
     </script>
+    
+    <!-- Pricing Section View Tracking -->
+    <script>
+        (function() {
+            let pricingViewed = false;
+            const pricingSection = document.getElementById('pricing');
+            
+            if (pricingSection && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting && !pricingViewed) {
+                            pricingViewed = true;
+                            if (typeof gtag === 'function') {
+                                gtag('event', 'pricing_section_view', {
+                                    page_location: window.location.pathname
+                                });
+                            }
+                            observer.unobserve(pricingSection);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                observer.observe(pricingSection);
+            }
+        })();
+    </script>
+    
     <!-- Sticky Mobile CTA -->
     <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal border-t border-gold/30 transform translate-y-full transition-transform duration-300 z-50 md:hidden">
         <div class="flex items-center justify-between gap-4 max-w-md mx-auto">
@@ -1274,6 +1311,16 @@
 
         // 🎯 Direct-to-Checkout Function with GA4 Tracking
         function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire tier_click event (simpler signal for funnel)
+            if (typeof gtag === 'function') {
+                gtag('event', 'tier_click', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+            }
+            
             // Fire GA4 begin_checkout event
             if (typeof gtag === 'function') {
                 gtag('event', 'begin_checkout', {
