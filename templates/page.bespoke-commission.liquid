@@ -234,6 +234,204 @@
                 country: "https://cdn.shopify.com/s/files/1/0977/4900/8660/files/long_long_road.mp3?v=1763008066"
             }
         };
+
+        // Dynamic Text Replacement (DTR) Logic
+        const dynamicContent = {
+            'unique-anniversary-gift-for-wife': {
+                h1: "The Most Unique Anniversary Gift for Your Wife: A Custom Song.",
+                sub: "She has the jewelry. I will compose a studio-quality song that tells the story only you two know."
+            },
+            'special-anniversary-gifts-for-him': {
+                h1: "Special Anniversary Gifts for Him: A Custom Song, Professionally Produced.",
+                sub: "Give him a legacy. I translate his life and your history into a track that honors the man he is."
+            },
+            'unique-anniversary-gifts-for-him': {
+                h1: "Unique Anniversary Gifts for Him: A Bespoke Song, Commissioned for Him.",
+                sub: "A one-of-a-kind recording. I take your memories and build a professional piece of music he can keep forever."
+            },
+            'custom-wedding-anniversary-gifts': {
+                h1: "Custom Wedding Anniversary Gifts: Your Story, Recorded as a Song.",
+                sub: "Your vows deserve more than a frame. I re-imagine the emotion of your wedding day as a permanent musical work."
+            },
+            'unique-anniversary-gifts-for-her': {
+                h1: "Unique Anniversary Gifts for Her: A Custom Song, Composed for Her.",
+                sub: "Completely original. I write, play, and produce a song that captures the specific details of her life."
+            },
+            'last-minute-anniversary-gift': {
+                h1: "Last Minute Anniversary Gift: A Custom Song, Delivered in 24 Hours.",
+                sub: "Speed, driven by skill. I dedicate my night to composing and recording a full studio track for you by morning."
+            },
+            'last-minute-anniversary-gifts-for-him': {
+                h1: "Last Minute Anniversary Gifts for Him: Custom Music, Delivered Fast.",
+                sub: "He won't know you waited. I use my professional studio to deliver a broadcast-ready song by tomorrow."
+            },
+            'personalized-anniversary-gifts-for-him': {
+                h1: "Personalized Anniversary Gifts for Him: A Song Written About His Life.",
+                sub: "Real customization. I use his biography and your shared moments to build a track that is undeniably his."
+            },
+            'unique-25th-anniversary-gift-ideas': {
+                h1: "Unique 25th Anniversary Gift Ideas: A Silver Anniversary Composition.",
+                sub: "25 years is monumental. I personally architect a musical tribute worthy of your quarter-century together."
+            },
+            'last-minute-anniversary-gift-for-wife': {
+                h1: "Last Minute Anniversary Gift for Wife: Delivered in 24 Hours.",
+                sub: "Don't panic. I will take your story today and have a beautiful, studio-quality song in your inbox tomorrow."
+            },
+            'same-day-anniversary-gift': {
+                h1: "Same Day Anniversary Gift: Commission a Custom Song Today.",
+                sub: "I can help. I clear my schedule to write, record, and master your story before the day ends."
+            },
+            'unique-50th-anniversary-gifts': {
+                h1: "Unique 50th Anniversary Gifts: A Golden Jubilee Commission.",
+                sub: "A 50-year legacy deserves a masterpiece. I compose a classical-grade tribute for this lifetime milestone."
+            },
+            'personalised-anniversary-gifts-for-her': {
+                h1: "Personalised Anniversary Gifts for Her: A Song Written Just for Her.",
+                sub: "Your details, my craft. I deliver a high-quality musical composition that references your specific history."
+            },
+            'custom-anniversary-gifts-for-him': {
+                h1: "Custom Anniversary Gifts for Him: A Pro Song Commission.",
+                sub: "High-impact and authentic. I structure your story into a track that honors his character and your bond."
+            },
+            'personalized-25th-wedding-anniversary-gifts': {
+                h1: "Personalized 25th Wedding Anniversary Gifts: A Custom Song Commission.",
+                sub: "25 years of history, compressed into one powerful track. I handle the composition and production personally."
+            },
+            'personalized-anniversary-gifts-for-her': {
+                h1: "Personalized Anniversary Gifts for Her: A Bespoke Song Recording.",
+                sub: "She wants to feel seen. I provide the musical expertise to turn your feelings into a professional recording."
+            },
+            'custom-anniversary-gifts-for-her': {
+                h1: "Custom Anniversary Gifts for Her: Your Memories, Professionally Recorded.",
+                sub: "I turn your relationship timeline into a cohesive, beautiful song. No AI gimmicks, just skilled composition."
+            },
+            'personalized-50th-anniversary-gifts': {
+                h1: "Personalized 50th Anniversary Gifts: A Custom Musical Tribute.",
+                sub: "Honor 50 years with a permanent asset. A studio-quality song commissioned specifically for your family."
+            },
+            'personalized-gifts-for-husband-for-anniversary': {
+                h1: "Personalized Gifts for Husband: A Custom Track About Your Marriage.",
+                sub: "A gift he will actually play. I produce a radio-quality song filled with the inside jokes only he understands."
+            },
+            'forgot-anniversary': {
+                h1: "Forgot Anniversary? Commission a Custom Song, Delivered Today.",
+                sub: "I can save the day. I write and produce a thoughtful, high-effort gift for you on an emergency timeline."
+            },
+            'last-minute-anniversary-gifts-for-wife': {
+                h1: "Last Minute Anniversary Gifts for Wife: A Custom Song, Ready Tonight.",
+                sub: "Immediate execution. I take your prompt and deliver a fully mastered song before your dinner reservation."
+            },
+            'last-minute-anniversary-ideas-for-him': {
+                h1: "Last Minute Anniversary Ideas for Him: A Custom Song, Produced Overnight.",
+                sub: "Impressive and fast. Commission a professional track today, and I'll ensure you have the file tomorrow morning."
+            },
+            'last-minute-anniversary-presents': {
+                h1: "Last Minute Anniversary Presents: Custom Music, Sent via Email.",
+                sub: "Zero shipping time. I create a permanent emotional asset for you in less than 24 hours."
+            },
+            'anniversary-gifts-for-him-last-minute': {
+                h1: "Anniversary Gifts for Him (Last Minute): Professional Music, Fast.",
+                sub: "Get the credit for a \"planned\" gift. I execute your custom song commission with a 24-hour turnaround."
+            },
+            'anniversary-gift-delivered-tomorrow': {
+                h1: "Anniversary Gift Delivered Tomorrow: A Custom Song Commission.",
+                sub: "Order now, receive tomorrow. I spend the night composing and recording so you meet your deadline."
+            },
+            'quick-anniversary-gift-for-wife': {
+                h1: "Quick Anniversary Gift for Wife: A Custom Song, Delivered Instantly.",
+                sub: "Fast doesn't mean careless. I provide a high-ticket bespoke service with accelerated delivery."
+            },
+            'next-day-anniversary-gift': {
+                h1: "Next Day Anniversary Gift: A Custom Song in Your Inbox by Morning.",
+                sub: "I guarantee the timeline. I write, record, and master your personal story into a song overnight."
+            },
+            'last-minute-anniversary-gifts-for-couple': {
+                h1: "Last Minute Anniversary Gifts for Couples: Their Story, in a Song.",
+                sub: "The ultimate joint gift. I turn their shared history into a professional recording, delivered in time for the party."
+            },
+            'last-minute-anniversary-celebration-ideas': {
+                h1: "Last Minute Anniversary Celebration: Premiere a Custom Song Tonight.",
+                sub: "Elevate the event. Commission a track today and play it as the centerpiece of your celebration."
+            },
+            'emergency-anniversary-gift': {
+                h1: "Emergency Anniversary Gift: A Custom Song, Delivered ASAP.",
+                sub: "You are my priority. I drop everything to compose and record your gift for instant delivery."
+            },
+            'urgent-anniversary-gift': {
+                h1: "Urgent Anniversary Gift: A Custom Song Commission, Today.",
+                sub: "Real urgency requires real expertise. I use my classical training to produce a high-quality song for you, fast."
+            },
+            'i-forgot-my-anniversary': {
+                h1: "I Forgot My Anniversary: Fix It With a Custom Song Today.",
+                sub: "A high-effort solution. I write a song that proves you care, delivered instantly to your inbox."
+            },
+            'forgot-anniversary-what-to-do': {
+                h1: "Forgot Anniversary? Commission a Masterpiece Now.",
+                sub: "Don't scramble for generic gifts. Hire a professional composer to save the day with a custom track."
+            },
+            'i-forgot-our-anniversary': {
+                h1: "I Forgot Our Anniversary: Recover With a Custom Song Overnight.",
+                sub: "Let's turn it around. I transform your relationship history into a beautiful song, ready by tomorrow."
+            },
+            'forgot-anniversary-gift-for-wife': {
+                h1: "Forgot Anniversary Gift for Wife? I'll Write Her a Song Tonight.",
+                sub: "Better than flowers. A custom, studio-quality recording that shows deep thought, delivered in hours."
+            },
+            'same-day-anniversary-gift-for-wife': {
+                h1: "Same Day Anniversary Gift for Wife: Custom Music, Ready in Hours.",
+                sub: "The fastest high-quality gift possible. I compose and record a dedicated song for her today."
+            },
+            'emergency-anniversary-gift-for-wife': {
+                h1: "Emergency Anniversary Gift for Wife: A Bespoke Song, Instantly.",
+                sub: "Zero shipping time. I create a deeply personal, professional song and email it the moment it's done."
+            },
+            'overnight-anniversary-gift': {
+                h1: "Overnight Anniversary Gift: Commission Today, Receive Tomorrow.",
+                sub: "While you sleep, I record. Wake up to a fully produced custom song waiting in your inbox."
+            },
+            'anniversary-gift-delivered-today': {
+                h1: "Anniversary Gift Delivered Today: A Custom Song, Sent Digitally.",
+                sub: "No logistics. Just high-quality art delivered directly to your email the same day you order."
+            },
+            'rush-anniversary-gift': {
+                h1: "Rush Anniversary Gift: A Studio-Quality Song, Expedited.",
+                sub: "Priority handling. I apply professional composition standards to a rush timeline for perfect results."
+            },
+            'best-last-minute-anniversary-gift': {
+                h1: "The Best Last Minute Anniversary Gift: A Custom Song Commission.",
+                sub: "Beats any store-bought item. A unique, made-to-order piece of art that arrives in hours."
+            },
+            'fast-anniversary-gift-for-wife': {
+                h1: "Fast Anniversary Gift for Wife: High-End Custom Music.",
+                sub: "High velocity, high value. I deliver a premium, personalized song without the wait time."
+            },
+            'forgot-anniversary-gift': {
+                h1: "Forgot Anniversary Gift? Commission a Custom Song Now.",
+                sub: "A powerful recovery. I create a permanent musical tribute that makes up for the memory lapse."
+            },
+            'anniversary-gift-in-24-hours': {
+                h1: "Anniversary Gift in 24 Hours: Your Custom Song, Delivered.",
+                sub: "Guaranteed timing. I dedicate the next 24 hours to writing and producing your specific track."
+            }
+        };
+
+        // Apply DTR on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userIntent = urlParams.get('user_intent');
+
+            if (userIntent && dynamicContent[userIntent]) {
+                const content = dynamicContent[userIntent];
+                const h1 = document.getElementById('lp-headline');
+                const sub = document.getElementById('lp-subhead');
+
+                if (h1) h1.textContent = content.h1;
+                if (sub) sub.textContent = content.sub;
+                
+                // Update Page Title for Browser Tab
+                document.title = content.h1 + " | Bespoke Melodies";
+            }
+        });
     </script>
 
 </head>
