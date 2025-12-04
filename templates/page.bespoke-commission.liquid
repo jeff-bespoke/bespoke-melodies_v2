@@ -418,19 +418,27 @@
         // Apply DTR on Load
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const userIntent = urlParams.get('user_intent');
+            const rawIntent = urlParams.get('user_intent');
+            const h1 = document.getElementById('lp-headline');
+            const sub = document.getElementById('lp-subhead');
 
-            if (userIntent && dynamicContent[userIntent]) {
-                const content = dynamicContent[userIntent];
-                const h1 = document.getElementById('lp-headline');
-                const sub = document.getElementById('lp-subhead');
+            if (rawIntent) {
+                // Normalize: replace spaces with hyphens to match keys
+                const handle = rawIntent.toLowerCase().replace(/\s+/g, '-');
 
-                if (h1) h1.textContent = content.h1;
-                if (sub) sub.textContent = content.sub;
-                
-                // Update Page Title for Browser Tab
-                document.title = content.h1 + " | Bespoke Melodies";
+                if (dynamicContent[handle]) {
+                    const content = dynamicContent[handle];
+                    if (h1) h1.textContent = content.h1;
+                    if (sub) sub.textContent = content.sub;
+                    
+                    // Update Page Title for Browser Tab
+                    document.title = content.h1 + " | Bespoke Melodies";
+                }
             }
+
+            // Reveal content (Anti-Flicker)
+            if (h1) h1.classList.remove('opacity-0');
+            if (sub) sub.classList.remove('opacity-0');
         });
     </script>
 
@@ -451,10 +459,10 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
-            <h1 id="lp-headline" class="text-3xl md:text-6xl font-bold leading-tight tracking-wider text-shadow-lg text-white mb-6">
+            <h1 id="lp-headline" class="text-3xl md:text-6xl font-bold leading-tight tracking-wider text-shadow-lg text-white mb-6 opacity-0 transition-opacity duration-500">
                 {{ hero_h1 }}
             </h1>
-            <p id="lp-subhead" class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-8">
+            <p id="lp-subhead" class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-8 opacity-0 transition-opacity duration-500">
                 {{ hero_sub }}
             </p>
 
