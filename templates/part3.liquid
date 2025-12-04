@@ -1,0 +1,343 @@
+    <!-- Footer -->
+    <footer class="bg-charcoal py-12 px-4 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-white font-serif text-xl tracking-wider">Bespoke Melodies</div>
+            <div class="text-gray-500 text-sm">© {{ 'now' | date: "%Y" }} Bespoke Melodies. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    
+    <!-- Audio Player Logic -->
+    <audio id="audioPlayer" preload="none"></audio>
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        let currentCard = null;
+        let currentTrackInfo = { title: '', genre: '' }; // Track current song for analytics
+        let stickyCTAShown = false;
+        const stickyBtn = document.getElementById('sticky-cta');
+
+        function playTrack(genre, cardElement) {
+            const trackUrl = config.playlist[genre];
+
+            // If clicking the same card that is currently playing
+            if (currentCard === cardElement && !audioPlayer.paused) {
+                audioPlayer.pause();
+                cardElement.classList.remove('active');
+                
+                // 🎯 Track pause event
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_pause', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'duration_seconds': Math.round(audioPlayer.currentTime),
+                        'page_location': window.location.pathname
+                    });
+                }
+                
+                currentCard = null;
+                return;
+            }
+
+            // Reset previous card
+            if (currentCard) {
+                currentCard.classList.remove('active');
+            }
+
+            // Get song info for tracking
+            const title = cardElement.querySelector('h3')?.textContent || 'Unknown';
+            const genreText = genre; // Use genre parameter as identifier
+            currentTrackInfo = { title, genre: genreText };
+
+            // Play new track
+            audioPlayer.src = trackUrl;
+            audioPlayer.play();
+
+            // Update UI
+            cardElement.classList.add('active');
+            currentCard = cardElement;
+
+            // 🎯 Track audio play event in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'audio_play', {
+                    'song_title': title,
+                    'genre': genreText,
+                    'page_location': window.location.pathname
+                });
+            }
+        }
+
+        // Reset UI when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            if (currentCard) {
+                currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                currentCard = null;
+            }
+        });
+
+        // 🎯 Direct-to-Checkout Function with GA4 Tracking
+        function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire GA4 begin_checkout event
+            if (typeof gtag === 'function') {
+                gtag('event', 'begin_checkout', {
+                    currency: 'USD',
+                    value: price,
+                    items: [{
+                        item_id: variantId,
+                        item_name: 'Bespoke Song - ' + tierName,
+                        item_category: 'Custom Commission',
+                        item_variant: tierName,
+                        price: price,
+                        quantity: 1
+                    }],
+                    tier: tierName,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+                console.log('🎯 GA4 Event: begin_checkout', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+                    variant_id: variantId
+                });
+            }
+            
+            // Retrieve intent for cart attribute
+            const intent = localStorage.getItem('user_intent') || '';
+
+            // AJAX Add to Cart with Attributes AND Properties
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items: [{
+                        id: variantId,
+                        quantity: 1,
+                        properties: {
+                            'Turnaround': turnaroundTime,
+                            'User Intent': intent
+                        }
+                    }],
+                    attributes: {
+                        'User Intent': intent
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Redirect to checkout
+                window.location.href = '/checkout';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Fallback
+                window.location.href = '/cart/' + variantId + ':1';
+            });
+        }
+        
+        function openRefundFAQ() {
+            const faqSection = document.getElementById('faq-refund');
+            if (faqSection) {
+                faqSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Add a small delay to allow scroll to complete before opening
+                setTimeout(() => {
+                    if (!faqSection.classList.contains('open')) {
+                        // Find the button inside and simulate a click to trigger the toggle logic
+                        const btn = faqSection.querySelector('.faq-question');
+                        if (btn) btn.click();
+                    }
+                    // Add a highlight effect
+                    faqSection.classList.add('border-gold');
+                    setTimeout(() => {
+                        faqSection.classList.remove('border-gold');
+                    }, 2000);
+                }, 500);
+            }
+        }
+    </script>
+
+    {% render 'dsi-logic' %}
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+        (function() {
+            const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+            
+            function checkScrollDepth() {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                
+                for (let depth in scrollDepths) {
+                    if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+                        scrollDepths[depth] = true;
+                        // console.log('🎯 GA4 Event: scroll', {percent_scrolled: parseInt(depth), page_location: window.location.pathname});
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll', {
+                                percent_scrolled: parseInt(depth),
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+            }
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScrollDepth, 100);
+            }, {passive: true});
+        })();
+    </script>
+
+    <!-- FAQ Click Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-question');
+            faqButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const questionText = this.querySelector('span').textContent.trim();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_click', {
+                            question: questionText.substring(0, 100),
+                            page_location: window.location.pathname
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <!-- Mobile Pricing Auto-Scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only run on mobile/tablet widths
+            if (window.innerWidth < 1024) {
+                const container = document.getElementById('pricing-scroll-container');
+                const expressCard = document.getElementById('pricing-card-express');
+                
+                if (container && expressCard) {
+                    // Calculate center position
+                    const containerWidth = container.offsetWidth;
+                    const cardWidth = expressCard.offsetWidth;
+                    const cardLeft = expressCard.offsetLeft;
+                    
+                    // Scroll to center the Express card
+                    const scrollPosition = cardLeft - (containerWidth / 2) + (cardWidth / 2);
+                    
+                    // Use setTimeout to ensure layout is stable
+                    setTimeout(() => {
+                        container.scrollTo({
+                            left: scrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 500);
+                }
+            }
+        });
+    </script>
+
+    <!-- Sticky Mobile CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal border-t border-gold/30 transform translate-y-full transition-transform duration-300 z-50 md:hidden">
+        <div class="flex items-center justify-between gap-4 max-w-md mx-auto">
+            <div class="text-white text-sm">
+                <div class="font-bold text-gold">Limited Slots</div>
+                <div class="text-xs text-gray-400">Reserve yours today</div>
+            </div>
+            <a href="#pricing" class="bg-gold text-charcoal font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gold-hover transition-colors text-sm">
+                Commission Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                
+                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't Miss Out</h3>
+                <p class="text-gray-300 mb-6">Our composition slots fill up fast. Save your spot now and submit your details later.</p>
+                
+                <div class="space-y-3">
+                    <a href="#pricing" onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full bg-gold hover:bg-gold-hover text-charcoal font-bold py-4 rounded-lg transition-colors">
+                        See Available Slots
+                    </a>
+                    <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full border border-white/20 text-gray-400 hover:text-white py-3 rounded-lg transition-colors text-sm">
+                        No thanks, I'll risk missing out
+                    </button>
+                </div>
+                
+                <p class="text-xs text-gray-500 mt-6 flex items-center justify-center gap-1">
+                    <svg class="w-3 h-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>100% Money-Back Guarantee</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Sticky CTA & Exit Intent
+        document.addEventListener('DOMContentLoaded', () => {
+            const stickyBtn = document.getElementById('sticky-cta');
+            let stickyCTAShown = false;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 800) {
+                    stickyBtn.classList.remove('translate-y-full');
+                } else {
+                    stickyBtn.classList.add('translate-y-full');
+                }
+            });
+
+            // Exit Intent Logic
+            let exitIntentShown = false;
+            const exitModal = document.getElementById('exit-intent-modal');
+            
+            function showExitIntent() {
+                exitModal.classList.remove('hidden');
+                exitIntentShown = true;
+                // 🎯 Track exit intent
+                if (typeof gtag === 'function') {
+                    gtag('event', 'exit_intent_shown', {
+                        page_location: window.location.pathname
+                    });
+                }
+            }
+            
+            // Desktop: Mouse leave
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    showExitIntent();
+                }
+            });
+            
+            // Mobile: Scroll up speed detection (simple version)
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                let st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st < lastScrollTop - 50 && st > 500 && !exitIntentShown) { // Fast scroll up
+                   // Optional: enable mobile exit intent here if desired
+                   // showExitIntent(); 
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            }, {passive: true});
+        });
+    </script>
+</body>
+</html>
