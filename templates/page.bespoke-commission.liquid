@@ -1,11 +1,156 @@
 {% layout none %}
 <!DOCTYPE html>
+{% assign hero_h1 = "The Perfect Last Minute Anniversary Gift for Him" %}
+{% assign hero_sub = "You Didn't Forget. You Were Waiting for Perfection." %}
+{% assign page_title_tag = "Unique Anniversary Gifts for Him | Bespoke Melodies" %}
+{% assign page_meta_description = "Looking for a unique anniversary gift for him? Commission a bespoke custom song written by a classically trained composer. The perfect last-minute anniversary gift, delivered in 24 hours." %}
+
+{% case page.handle %}
+  {% when 'unique-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "The Most Unique Anniversary Gift for Your Wife: A Custom Song." %}
+    {% assign hero_sub = "She has the jewelry. I will compose a studio-quality song that tells the story only you two know." %}
+  {% when 'special-anniversary-gifts-for-him' %}
+    {% assign hero_h1 = "Special Anniversary Gifts for Him: A Custom Song, Professionally Produced." %}
+    {% assign hero_sub = "Give him a legacy. I translate his life and your history into a track that honors the man he is." %}
+  {% when 'unique-anniversary-gifts-for-him' %}
+    {% assign hero_h1 = "Unique Anniversary Gifts for Him: A Bespoke Song, Commissioned for Him." %}
+    {% assign hero_sub = "A one-of-a-kind recording. I take your memories and build a professional piece of music he can keep forever." %}
+  {% when 'custom-wedding-anniversary-gifts' %}
+    {% assign hero_h1 = "Custom Wedding Anniversary Gifts: Your Story, Recorded as a Song." %}
+    {% assign hero_sub = "Your vows deserve more than a frame. I re-imagine the emotion of your wedding day as a permanent musical work." %}
+  {% when 'unique-anniversary-gifts-for-her' %}
+    {% assign hero_h1 = "Unique Anniversary Gifts for Her: A Custom Song, Composed for Her." %}
+    {% assign hero_sub = "Completely original. I write, play, and produce a song that captures the specific details of her life." %}
+  {% when 'last-minute-anniversary-gift' %}
+    {% assign hero_h1 = "Last Minute Anniversary Gift: A Custom Song, Delivered in 24 Hours." %}
+    {% assign hero_sub = "Speed, driven by skill. I dedicate my night to composing and recording a full studio track for you by morning." %}
+  {% when 'last-minute-anniversary-gifts-for-him' %}
+    {% assign hero_h1 = "Last Minute Anniversary Gifts for Him: Custom Music, Delivered Fast." %}
+    {% assign hero_sub = "He won't know you waited. I use my professional studio to deliver a broadcast-ready song by tomorrow." %}
+  {% when 'personalized-anniversary-gifts-for-him' %}
+    {% assign hero_h1 = "Personalized Anniversary Gifts for Him: A Song Written About His Life." %}
+    {% assign hero_sub = "Real customization. I use his biography and your shared moments to build a track that is undeniably his." %}
+  {% when 'unique-25th-anniversary-gift-ideas' %}
+    {% assign hero_h1 = "Unique 25th Anniversary Gift Ideas: A Silver Anniversary Composition." %}
+    {% assign hero_sub = "25 years is monumental. I personally architect a musical tribute worthy of your quarter-century together." %}
+  {% when 'last-minute-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "Last Minute Anniversary Gift for Wife: Delivered in 24 Hours." %}
+    {% assign hero_sub = "Don't panic. I will take your story today and have a beautiful, studio-quality song in your inbox tomorrow." %}
+  {% when 'same-day-anniversary-gift' %}
+    {% assign hero_h1 = "Same Day Anniversary Gift: Commission a Custom Song Today." %}
+    {% assign hero_sub = "I can help. I clear my schedule to write, record, and master your story before the day ends." %}
+  {% when 'unique-50th-anniversary-gifts' %}
+    {% assign hero_h1 = "Unique 50th Anniversary Gifts: A Golden Jubilee Commission." %}
+    {% assign hero_sub = "A 50-year legacy deserves a masterpiece. I compose a classical-grade tribute for this lifetime milestone." %}
+  {% when 'personalised-anniversary-gifts-for-her' %}
+    {% assign hero_h1 = "Personalised Anniversary Gifts for Her: A Song Written Just for Her." %}
+    {% assign hero_sub = "Your details, my craft. I deliver a high-quality musical composition that references your specific history." %}
+  {% when 'custom-anniversary-gifts-for-him' %}
+    {% assign hero_h1 = "Custom Anniversary Gifts for Him: A Pro Song Commission." %}
+    {% assign hero_sub = "High-impact and authentic. I structure your story into a track that honors his character and your bond." %}
+  {% when 'personalized-25th-wedding-anniversary-gifts' %}
+    {% assign hero_h1 = "Personalized 25th Wedding Anniversary Gifts: A Custom Song Commission." %}
+    {% assign hero_sub = "25 years of history, compressed into one powerful track. I handle the composition and production personally." %}
+  {% when 'personalized-anniversary-gifts-for-her' %}
+    {% assign hero_h1 = "Personalized Anniversary Gifts for Her: A Bespoke Song Recording." %}
+    {% assign hero_sub = "She wants to feel seen. I provide the musical expertise to turn your feelings into a professional recording." %}
+  {% when 'custom-anniversary-gifts-for-her' %}
+    {% assign hero_h1 = "Custom Anniversary Gifts for Her: Your Memories, Professionally Recorded." %}
+    {% assign hero_sub = "I turn your relationship timeline into a cohesive, beautiful song. No AI gimmicks, just skilled composition." %}
+  {% when 'personalized-50th-anniversary-gifts' %}
+    {% assign hero_h1 = "Personalized 50th Anniversary Gifts: A Custom Musical Tribute." %}
+    {% assign hero_sub = "Honor 50 years with a permanent asset. A studio-quality song commissioned specifically for your family." %}
+  {% when 'personalized-gifts-for-husband-for-anniversary' %}
+    {% assign hero_h1 = "Personalized Gifts for Husband: A Custom Track About Your Marriage." %}
+    {% assign hero_sub = "A gift he will actually play. I produce a radio-quality song filled with the inside jokes only he understands." %}
+  {% when 'forgot-anniversary' %}
+    {% assign hero_h1 = "Forgot Anniversary? Commission a Custom Song, Delivered Today." %}
+    {% assign hero_sub = "I can save the day. I write and produce a thoughtful, high-effort gift for you on an emergency timeline." %}
+  {% when 'last-minute-anniversary-gifts-for-wife' %}
+    {% assign hero_h1 = "Last Minute Anniversary Gifts for Wife: A Custom Song, Ready Tonight." %}
+    {% assign hero_sub = "Immediate execution. I take your prompt and deliver a fully mastered song before your dinner reservation." %}
+  {% when 'last-minute-anniversary-ideas-for-him' %}
+    {% assign hero_h1 = "Last Minute Anniversary Ideas for Him: A Custom Song, Produced Overnight." %}
+    {% assign hero_sub = "Impressive and fast. Commission a professional track today, and I'll ensure you have the file tomorrow morning." %}
+  {% when 'last-minute-anniversary-presents' %}
+    {% assign hero_h1 = "Last Minute Anniversary Presents: Custom Music, Sent via Email." %}
+    {% assign hero_sub = "Zero shipping time. I create a permanent emotional asset for you in less than 24 hours." %}
+  {% when 'anniversary-gifts-for-him-last-minute' %}
+    {% assign hero_h1 = "Anniversary Gifts for Him (Last Minute): Professional Music, Fast." %}
+    {% assign hero_sub = "Get the credit for a \"planned\" gift. I execute your custom song commission with a 24-hour turnaround." %}
+  {% when 'anniversary-gift-delivered-tomorrow' %}
+    {% assign hero_h1 = "Anniversary Gift Delivered Tomorrow: A Custom Song Commission." %}
+    {% assign hero_sub = "Order now, receive tomorrow. I spend the night composing and recording so you meet your deadline." %}
+  {% when 'quick-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "Quick Anniversary Gift for Wife: A Custom Song, Delivered Instantly." %}
+    {% assign hero_sub = "Fast doesn't mean careless. I provide a high-ticket bespoke service with accelerated delivery." %}
+  {% when 'next-day-anniversary-gift' %}
+    {% assign hero_h1 = "Next Day Anniversary Gift: A Custom Song in Your Inbox by Morning." %}
+    {% assign hero_sub = "I guarantee the timeline. I write, record, and master your personal story into a song overnight." %}
+  {% when 'last-minute-anniversary-gifts-for-couple' %}
+    {% assign hero_h1 = "Last Minute Anniversary Gifts for Couples: Their Story, in a Song." %}
+    {% assign hero_sub = "The ultimate joint gift. I turn their shared history into a professional recording, delivered in time for the party." %}
+  {% when 'last-minute-anniversary-celebration-ideas' %}
+    {% assign hero_h1 = "Last Minute Anniversary Celebration: Premiere a Custom Song Tonight." %}
+    {% assign hero_sub = "Elevate the event. Commission a track today and play it as the centerpiece of your celebration." %}
+  {% when 'emergency-anniversary-gift' %}
+    {% assign hero_h1 = "Emergency Anniversary Gift: A Custom Song, Delivered ASAP." %}
+    {% assign hero_sub = "You are my priority. I drop everything to compose and record your gift for instant delivery." %}
+  {% when 'urgent-anniversary-gift' %}
+    {% assign hero_h1 = "Urgent Anniversary Gift: A Custom Song Commission, Today." %}
+    {% assign hero_sub = "Real urgency requires real expertise. I use my classical training to produce a high-quality song for you, fast." %}
+  {% when 'i-forgot-my-anniversary' %}
+    {% assign hero_h1 = "I Forgot My Anniversary: Fix It With a Custom Song Today." %}
+    {% assign hero_sub = "A high-effort solution. I write a song that proves you care, delivered instantly to your inbox." %}
+  {% when 'forgot-anniversary-what-to-do' %}
+    {% assign hero_h1 = "Forgot Anniversary? Commission a Masterpiece Now." %}
+    {% assign hero_sub = "Don't scramble for generic gifts. Hire a professional composer to save the day with a custom track." %}
+  {% when 'i-forgot-our-anniversary' %}
+    {% assign hero_h1 = "I Forgot Our Anniversary: Recover With a Custom Song Overnight." %}
+    {% assign hero_sub = "Let's turn it around. I transform your relationship history into a beautiful song, ready by tomorrow." %}
+  {% when 'forgot-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "Forgot Anniversary Gift for Wife? I'll Write Her a Song Tonight." %}
+    {% assign hero_sub = "Better than flowers. A custom, studio-quality recording that shows deep thought, delivered in hours." %}
+  {% when 'same-day-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "Same Day Anniversary Gift for Wife: Custom Music, Ready in Hours." %}
+    {% assign hero_sub = "The fastest high-quality gift possible. I compose and record a dedicated song for her today." %}
+  {% when 'emergency-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "Emergency Anniversary Gift for Wife: A Bespoke Song, Instantly." %}
+    {% assign hero_sub = "Zero shipping time. I create a deeply personal, professional song and email it the moment it's done." %}
+  {% when 'overnight-anniversary-gift' %}
+    {% assign hero_h1 = "Overnight Anniversary Gift: Commission Today, Receive Tomorrow." %}
+    {% assign hero_sub = "While you sleep, I record. Wake up to a fully produced custom song waiting in your inbox." %}
+  {% when 'anniversary-gift-delivered-today' %}
+    {% assign hero_h1 = "Anniversary Gift Delivered Today: A Custom Song, Sent Digitally." %}
+    {% assign hero_sub = "No logistics. Just high-quality art delivered directly to your email the same day you order." %}
+  {% when 'rush-anniversary-gift' %}
+    {% assign hero_h1 = "Rush Anniversary Gift: A Studio-Quality Song, Expedited." %}
+    {% assign hero_sub = "Priority handling. I apply professional composition standards to a rush timeline for perfect results." %}
+  {% when 'best-last-minute-anniversary-gift' %}
+    {% assign hero_h1 = "The Best Last Minute Anniversary Gift: A Custom Song Commission." %}
+    {% assign hero_sub = "Beats any store-bought item. A unique, made-to-order piece of art that arrives in hours." %}
+  {% when 'fast-anniversary-gift-for-wife' %}
+    {% assign hero_h1 = "Fast Anniversary Gift for Wife: High-End Custom Music." %}
+    {% assign hero_sub = "High velocity, high value. I deliver a premium, personalized song without the wait time." %}
+  {% when 'forgot-anniversary-gift' %}
+    {% assign hero_h1 = "Forgot Anniversary Gift? Commission a Custom Song Now." %}
+    {% assign hero_sub = "A powerful recovery. I create a permanent musical tribute that makes up for the memory lapse." %}
+  {% when 'anniversary-gift-in-24-hours' %}
+    {% assign hero_h1 = "Anniversary Gift in 24 Hours: Your Custom Song, Delivered." %}
+    {% assign hero_sub = "Guaranteed timing. I dedicate the next 24 hours to writing and producing your specific track." %}
+{% endcase %}
+
+{% if page.handle != 'bespoke-commission' and page.handle != 'bespoke-commission-christmas' %}
+  {% assign page_title_tag = hero_h1 | append: " | Bespoke Melodies" %}
+  {% assign page_meta_description = hero_sub | append: " Commission a custom song today." %}
+{% endif %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bespoke Melodies - Urgent Gift</title>
+    <title>{{ page_title_tag }}</title>
+    <meta name="description" content="{{ page_meta_description }}">
     {% if settings.favicon != blank %}
         <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {% else %}
@@ -87,12 +232,10 @@
 
         <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
             <h1 id="lp-headline" class="text-3xl md:text-6xl font-bold leading-tight tracking-wider text-shadow-lg text-white mb-6">
-                You Didn't Forget. <br>
-                <span class="text-gold italic">You Were Waiting for Perfection.</span>
+                {{ hero_h1 }}
             </h1>
-
             <p id="lp-subhead" class="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-8">
-                A bespoke song for your special occasion. Written by a Classically Trained composer. Orchestrated by AI technology. Delivered in as little as <span class="text-gold font-semibold">24 hours</span>.
+                {{ hero_sub }}
             </p>
 
             <!-- Hero CTA -->
@@ -904,44 +1047,294 @@
         </div>
     </footer>
 
-    <!-- Sticky CTA (Mobile/Desktop) -->
-    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal/95 backdrop-blur-md border-t border-gold/20 transform translate-y-full transition-transform duration-300 z-50 hidden">
-        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
-            <div class="hidden md:block">
-                <div class="text-white font-serif">Ready to start?</div>
-                <div class="text-sm text-gray-400">Your song can be ready in 48 hours.</div>
+    <!-- Sticky Mobile CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 p-4 bg-charcoal border-t border-gold/30 transform translate-y-full transition-transform duration-300 z-50 md:hidden">
+        <div class="flex items-center justify-between gap-4 max-w-md mx-auto">
+            <div class="text-white text-sm">
+                <div class="font-bold text-gold">Limited Slots</div>
+                <div class="text-xs text-gray-400">Reserve yours today</div>
             </div>
-            <button onclick="beginCheckout('51587916366100', 399, 'Express', '48 Hours')" 
-                    class="w-full md:w-auto bg-gold hover:bg-gold-dark text-charcoal font-bold py-3 px-8 rounded-full transition-all shadow-lg glow-gold">
-                Start Express Commission ($399)
-            </button>
+            <a href="#pricing" class="bg-gold text-charcoal font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gold-hover transition-colors text-sm">
+                Commission Now
+            </a>
         </div>
     </div>
 
     <!-- Exit Intent Modal -->
     <div id="exit-intent-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="bg-charcoal border border-gold rounded-2xl p-8 max-w-lg w-full relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
-            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" 
-                    class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+        <div class="bg-charcoal border border-gold/30 rounded-2xl max-w-lg w-full p-8 relative shadow-2xl shadow-gold/20 transform scale-100 transition-all">
+            <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span class="text-3xl">🎁</span>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
-                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't leave empty handed.</h3>
-                <p class="text-gray-300">
-                    Most customers choose our Express option for the perfect balance of quality and speed!
+                
+                <h3 class="text-2xl font-serif text-white mb-2">Wait! Don't Miss Out</h3>
+                <p class="text-gray-300 mb-6">Our composition slots fill up fast. Save your spot now and submit your details later.</p>
+                
+                <div class="space-y-3">
+                    <a href="#pricing" onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full bg-gold hover:bg-gold-hover text-charcoal font-bold py-4 rounded-lg transition-colors">
+                        See Available Slots
+                    </a>
+                    <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" class="block w-full border border-white/20 text-gray-400 hover:text-white py-3 rounded-lg transition-colors text-sm">
+                        No thanks, I'll risk missing out
+                    </button>
+                </div>
+                
+                <p class="text-xs text-gray-500 mt-6 flex items-center justify-center gap-1">
+                    <svg class="w-3 h-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>100% Money-Back Guarantee</span>
                 </p>
             </div>
+        </div>
+    </div>
+
+    <!-- Audio Player Logic -->
+    <audio id="audioPlayer" preload="none"></audio>
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        let currentCard = null;
+        let currentTrackInfo = { title: '', genre: '' }; // Track current song for analytics
+        
+        function playTrack(genre, cardElement) {
+            const trackUrl = config.playlist[genre];
+
+            // If clicking the same card that is currently playing
+            if (currentCard === cardElement && !audioPlayer.paused) {
+                audioPlayer.pause();
+                cardElement.classList.remove('active');
+                
+                // 🎯 Track pause event
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_pause', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'duration_seconds': Math.round(audioPlayer.currentTime),
+                        'page_location': window.location.pathname
+                    });
+                }
+                
+                currentCard = null;
+                return;
+            }
+
+            // Reset previous card
+            if (currentCard) {
+                currentCard.classList.remove('active');
+            }
+
+            // Get song info for tracking
+            const title = cardElement.querySelector('h4')?.textContent || cardElement.querySelector('h3')?.textContent || 'Unknown';
+            const genreText = genre; // Use genre parameter as identifier
+            currentTrackInfo = { title, genre: genreText };
+
+            // Play new track
+            audioPlayer.src = trackUrl;
+            audioPlayer.play();
+
+            // Update UI
+            cardElement.classList.add('active');
+            currentCard = cardElement;
+
+            // 🎯 Track audio play event in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'audio_play', {
+                    'song_title': title,
+                    'genre': genreText,
+                    'page_location': window.location.pathname
+                });
+            }
+        }
+
+        // Reset UI when audio ends
+        audioPlayer.addEventListener('ended', () => {
+            if (currentCard) {
+                currentCard.classList.remove('active');
+                
+                // 🎯 Track audio completion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'audio_complete', {
+                        'song_title': currentTrackInfo.title,
+                        'genre': currentTrackInfo.genre,
+                        'page_location': window.location.pathname
+                    });
+                }
+                currentCard = null;
+            }
+        });
+
+        // 🎯 Direct-to-Checkout Function with GA4 Tracking
+        function beginCheckout(variantId, price, tierName, turnaroundTime) {
+            // Fire GA4 begin_checkout event
+            if (typeof gtag === 'function') {
+                gtag('event', 'begin_checkout', {
+                    currency: 'USD',
+                    value: price,
+                    items: [{
+                        item_id: variantId,
+                        item_name: 'Bespoke Song - ' + tierName,
+                        item_category: 'Custom Commission',
+                        item_variant: tierName,
+                        price: price,
+                        quantity: 1
+                    }],
+                    tier: tierName,
+                    turnaround: turnaroundTime,
+                    page_location: window.location.pathname
+                });
+                console.log('🎯 GA4 Event: begin_checkout', {
+                    tier: tierName,
+                    price: price,
+                    turnaround: turnaroundTime,
+                    variant_id: variantId
+                });
+            }
             
-            <button onclick="beginCheckout('51587916366100', 399, 'Express', '48 Hours'); document.getElementById('exit-intent-modal').classList.add('hidden');" 
-                    class="w-full bg-gold hover:bg-gold-dark text-charcoal font-bold py-4 px-6 rounded-full transition-all mb-4">
-                Choose Express (Most Popular) →
-            </button>
+            // Retrieve intent for cart attribute
+            const intent = localStorage.getItem('user_intent') || '';
+
+            // AJAX Add to Cart with Attributes AND Properties
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items: [{
+                        id: variantId,
+                        quantity: 1,
+                        properties: {
+                            'Turnaround': turnaroundTime,
+                            'User Intent': intent
+                        }
+                    }],
+                    attributes: {
+                        'User Intent': intent
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Redirect to checkout
+                window.location.href = '/checkout';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Fallback
+                window.location.href = '/cart/' + variantId + ':1';
+            });
+        }
+    </script>
+
+    {% render 'dsi-logic' %}
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+        (function() {
+            const scrollDepths = {25: false, 50: false, 75: false, 100: false};
+            
+            function checkScrollDepth() {
+                const scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                
+                for (let depth in scrollDepths) {
+                    if (!scrollDepths[depth] && scrollPercent >= parseInt(depth)) {
+                        scrollDepths[depth] = true;
+                        // console.log('🎯 GA4 Event: scroll', {percent_scrolled: parseInt(depth), page_location: window.location.pathname});
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'scroll', {
+                                percent_scrolled: parseInt(depth),
+                                page_location: window.location.pathname
+                            });
+                        }
+                    }
+                }
+            }
+            
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScrollDepth, 100);
+            }, {passive: true});
+        })();
+    </script>
+
+    <!-- FAQ Click Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqButtons = document.querySelectorAll('.faq-question');
+            faqButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const questionText = this.querySelector('span').textContent.trim();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_click', {
+                            question: questionText.substring(0, 100),
+                            page_location: window.location.pathname
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Initialize Sticky CTA & Exit Intent
+        document.addEventListener('DOMContentLoaded', () => {
+            const stickyBtn = document.getElementById('sticky-cta');
+            let stickyCTAShown = false;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 800) {
+                    stickyBtn.classList.remove('translate-y-full');
+                } else {
+                    stickyBtn.classList.add('translate-y-full');
+                }
+            });
+
+            // Exit Intent Logic
+            let exitIntentShown = false;
+            const exitModal = document.getElementById('exit-intent-modal');
+            
+            // Desktop: Mouse leave
+            document.addEventListener('mouseleave', (e) => {
+                if (e.clientY < 10 && !exitIntentShown) {
+                    showExitIntent();
+                }
+            });
+            
+            // Mobile: Scroll up speed detection (simple version)
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                let st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st < lastScrollTop - 50 && st > 500 && !exitIntentShown) { // Fast scroll up
+                    // Optional: enable mobile exit intent here
+                    // showExitIntent(); 
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            });
+
+            function showExitIntent() {
+                exitIntentShown = true;
+                exitModal.classList.remove('hidden');
+                exitModal.classList.add('flex');
+            }
+        });
+    </script>
+    <script>
+        function openRefundFAQ() {
+            const faq = document.getElementById('faq-refund');
+            if (faq) {
+                faq.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                faq.classList.add('open');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
             
             <button onclick="document.getElementById('exit-intent-modal').classList.add('hidden')" 
                     class="w-full text-gray-500 hover:text-white text-sm underline">
