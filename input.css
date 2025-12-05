@@ -3,15 +3,299 @@
 @tailwind utilities;
 
 /* ============================================
-   CUSTOM SCROLLBAR
+   MOBILE SCROLL CONTAINER SYSTEM
+   This is the core pattern for all horizontal 
+   scroll sections on mobile
    ============================================ */
+
+/* Horizontal scroll container - default is scroll on mobile */
+.mobile-scroll-container {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+}
+
+.mobile-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Cards inside scroll containers */
+.mobile-scroll-card {
+    flex-shrink: 0;
+    min-width: 80vw;
+    scroll-snap-align: center;
+}
+
+/* Desktop: becomes grid */
+@media (min-width: 768px) {
+    .mobile-scroll-container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: visible;
+        scroll-snap-type: none;
+        padding-bottom: 0;
+    }
+
+    .mobile-scroll-card {
+        min-width: 0;
+    }
+}
+
+/* ============================================
+   BASE UTILITIES (Always applied)
+   ============================================ */
+
+/* Flex */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-stretch {
+    align-items: stretch;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+/* Gap */
+.gap-1 {
+    gap: 0.25rem;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-3 {
+    gap: 0.75rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.gap-6 {
+    gap: 1.5rem;
+}
+
+.gap-8 {
+    gap: 2rem;
+}
+
+.gap-12 {
+    gap: 3rem;
+}
+
+/* Space-x (margin-based spacing) */
+.space-x-4> :not([hidden])~ :not([hidden]) {
+    margin-left: 1rem;
+}
+
+.space-x-6> :not([hidden])~ :not([hidden]) {
+    margin-left: 1.5rem;
+}
+
+/* Min-width for scroll cards */
+.min-w-\[70vw\] {
+    min-width: 70vw;
+}
+
+.min-w-\[80vw\] {
+    min-width: 80vw;
+}
+
+.min-w-\[85vw\] {
+    min-width: 85vw;
+}
+
+/* Overflow */
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.overflow-visible {
+    overflow: visible;
+}
+
+/* Scroll snap */
+.snap-x {
+    scroll-snap-type: x mandatory;
+}
+
+.snap-mandatory {
+    scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+    scroll-snap-align: center;
+}
+
+.snap-none {
+    scroll-snap-type: none;
+}
+
+/* Scrollbar hide */
+.scrollbar-hide {
+    scrollbar-width: none;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
 
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+/* Order (for reordering cards on desktop) */
+.order-1 {
+    order: 1;
+}
+
+.order-2 {
+    order: 2;
+}
+
+.order-3 {
+    order: 3;
+}
+
+/* ============================================
+   md: BREAKPOINT (768px+)
+   ============================================ */
+@media (min-width: 768px) {
+    .md\:grid {
+        display: grid;
+    }
+
+    .md\:flex-row {
+        flex-direction: row;
+    }
+
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .md\:min-w-0 {
+        min-width: 0;
+    }
+
+    .md\:overflow-visible {
+        overflow: visible;
+    }
+
+    .md\:snap-none {
+        scroll-snap-type: none;
+    }
+
+    .md\:gap-6 {
+        gap: 1.5rem;
+    }
+
+    .md\:gap-8 {
+        gap: 2rem;
+    }
+
+    .md\:gap-12 {
+        gap: 3rem;
+    }
+
+    .md\:gap-16 {
+        gap: 4rem;
+    }
+
+    .md\:pb-0 {
+        padding-bottom: 0;
+    }
+
+    .md\:order-1 {
+        order: 1;
+    }
+
+    .md\:order-2 {
+        order: 2;
+    }
+
+    .md\:order-3 {
+        order: 3;
+    }
+
+    .md\:hidden {
+        display: none;
+    }
+}
+
+/* ============================================
+   lg: BREAKPOINT (1024px+)
+   ============================================ */
+@media (min-width: 1024px) {
+    .lg\:grid {
+        display: grid;
+    }
+
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lg\:min-w-0 {
+        min-width: 0;
+    }
+
+    .lg\:overflow-visible {
+        overflow: visible;
+    }
+
+    .lg\:snap-none {
+        scroll-snap-type: none;
+    }
+
+    .lg\:gap-8 {
+        gap: 2rem;
+    }
+
+    .lg\:py-0 {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .lg\:px-0 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .lg\:order-1 {
+        order: 1;
+    }
+
+    .lg\:order-2 {
+        order: 2;
+    }
+
+    .lg\:order-3 {
+        order: 3;
+    }
 }
 
 /* ============================================
@@ -45,7 +329,7 @@
 }
 
 /* ============================================
-   CARD HOVER
+   CARD HOVER EFFECTS
    ============================================ */
 .card-hover {
     transition: all 0.3s ease;
@@ -77,7 +361,7 @@
     background-color: rgba(212, 175, 55, 0.1);
 }
 
-/* Play/Pause icon visibility */
+/* Play/Pause visibility */
 .playing-indicator {
     display: none;
 }
@@ -140,7 +424,7 @@
 }
 
 /* ============================================
-   FAQ STYLING
+   FAQ STYLES
    ============================================ */
 .faq-item {
     background: rgba(255, 255, 255, 0.03);
@@ -191,7 +475,7 @@
 }
 
 /* ============================================
-   SNOW EFFECT
+   SNOW EFFECT (Christmas Page)
    ============================================ */
 @keyframes snowfall {
     0% {
@@ -246,89 +530,6 @@
 }
 
 /* ============================================
-   GAP UTILITIES (Critical for card spacing)
-   ============================================ */
-.gap-2 {
-    gap: 0.5rem;
-}
-
-.gap-3 {
-    gap: 0.75rem;
-}
-
-.gap-4 {
-    gap: 1rem;
-}
-
-.gap-6 {
-    gap: 1.5rem;
-}
-
-.gap-8 {
-    gap: 2rem;
-}
-
-.gap-12 {
-    gap: 3rem;
-}
-
-/* Space-x utilities */
-.space-x-4> :not([hidden])~ :not([hidden]) {
-    margin-left: 1rem;
-}
-
-.space-x-6> :not([hidden])~ :not([hidden]) {
-    margin-left: 1.5rem;
-}
-
-/* ============================================
-   MOBILE HORIZONTAL SCROLL FIX
-   ============================================ */
-@media (max-width: 767px) {
-    .min-w-\[70vw\] {
-        min-width: 70vw !important;
-    }
-
-    .min-w-\[80vw\] {
-        min-width: 80vw !important;
-    }
-
-    .min-w-\[85vw\] {
-        min-width: 85vw !important;
-    }
-
-    .overflow-x-auto {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .snap-x {
-        scroll-snap-type: x mandatory !important;
-    }
-
-    .snap-center {
-        scroll-snap-align: center !important;
-    }
-
-    .flex-shrink-0 {
-        flex-shrink: 0 !important;
-    }
-
-    /* Force gap on mobile */
-    .gap-4 {
-        gap: 1rem !important;
-    }
-
-    .gap-6 {
-        gap: 1.5rem !important;
-    }
-
-    .gap-8 {
-        gap: 2rem !important;
-    }
-}
-
-/* ============================================
    GROUP HOVER EFFECTS
    ============================================ */
 .group:hover .group-hover\:scale-110 {
@@ -352,7 +553,7 @@
 }
 
 /* ============================================
-   HOVER EFFECTS
+   HOVER TRANSFORMS
    ============================================ */
 .hover\:border-gold:hover {
     border-color: #D4AF37 !important;
