@@ -22,6 +22,28 @@ module.exports = {
             fontFamily: {
                 'serif': ['"Playfair Display"', 'serif'],
                 'sans': ['"Inter"', 'sans-serif'],
+            },
+            // MOBILE CARD SIZING - Named utilities instead of arbitrary values
+            minWidth: {
+                'card': '85vw',      // Mobile scroll cards
+                'card-sm': '75vw',   // Smaller mobile cards
+                'card-lg': '90vw',   // Larger mobile cards
+            },
+            width: {
+                'card': '85vw',
+                'card-sm': '75vw',
+                'card-lg': '90vw',
+            },
+            // Scroll padding for edge spacing
+            padding: {
+                'scroll': '1.5rem',  // 24px for scroll container edges
+            },
+            margin: {
+                'scroll': '1.5rem',
+            },
+            // Flex basis for scroll cards
+            flexBasis: {
+                'card': '85vw',
             }
         }
     },

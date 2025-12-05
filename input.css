@@ -12,6 +12,27 @@
     scrollbar-width: none;
 }
 
+/* === MOBILE CARD WIDTHS === */
+/* These utilities are for horizontal scroll cards on mobile */
+.min-w-card {
+    min-width: 85vw;
+}
+
+.min-w-card-sm {
+    min-width: 75vw;
+}
+
+.min-w-card-lg {
+    min-width: 90vw;
+}
+
+/* Desktop: Reset card widths - Tailwind should handle this but adding fallback */
+@media (min-width: 768px) {
+    .md\:min-w-0 {
+        min-width: 0;
+    }
+}
+
 /* Text shadows */
 .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
