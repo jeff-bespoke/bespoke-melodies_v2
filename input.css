@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar hiding */
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -12,7 +14,9 @@
     scrollbar-width: none;
 }
 
-/* Text shadows */
+/* ============================================
+   TEXT SHADOWS
+   ============================================ */
 .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -25,7 +29,9 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Gold glow effect */
+/* ============================================
+   GOLD EFFECTS
+   ============================================ */
 .glow-gold {
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
@@ -34,12 +40,13 @@
     box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
 
-/* Gold gradient */
 .gold-gradient {
     background: linear-gradient(135deg, #D4AF37 0%, #F2D06B 50%, #D4AF37 100%);
 }
 
-/* Card hover effect */
+/* ============================================
+   CARD HOVER
+   ============================================ */
 .card-hover {
     transition: all 0.3s ease;
 }
@@ -49,7 +56,9 @@
     box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
 }
 
-/* Audio card styles */
+/* ============================================
+   AUDIO CARD STYLES
+   ============================================ */
 .audio-card {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(10px);
@@ -97,7 +106,9 @@
     display: none;
 }
 
-/* Genre card backgrounds */
+/* ============================================
+   GENRE BACKGROUNDS
+   ============================================ */
 .genre-pop-romance {
     background: linear-gradient(135deg, #4a1a1f 0%, #2a1520 50%, #1a1a1a 100%);
     border: 1px solid rgba(183, 110, 121, 0.4);
@@ -128,7 +139,9 @@
     border: 1px solid rgba(186, 85, 211, 0.4);
 }
 
-/* FAQ styling */
+/* ============================================
+   FAQ STYLING
+   ============================================ */
 .faq-item {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -154,7 +167,9 @@
     transform: rotate(180deg);
 }
 
-/* Modal */
+/* ============================================
+   MODAL
+   ============================================ */
 .modal {
     opacity: 0;
     visibility: hidden;
@@ -175,7 +190,9 @@
     scroll-margin-top: 30px;
 }
 
-/* Snow effect */
+/* ============================================
+   SNOW EFFECT
+   ============================================ */
 @keyframes snowfall {
     0% {
         transform: translateY(-10vh) rotate(0deg);
@@ -211,7 +228,7 @@
 }
 
 /* ============================================
-   PREMIUM PRICING CARD HOVER EFFECTS
+   PRICING CARD HOVER
    ============================================ */
 .pricing-tier {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -221,17 +238,47 @@
 .pricing-tier:hover {
     transform: translateY(-8px) scale(1.02);
     border-color: rgba(212, 175, 55, 0.5);
-    box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(212, 175, 55, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .pricing-tier.popular:hover {
-    box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        0 0 40px rgba(212, 175, 55, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   GAP UTILITIES (Critical for card spacing)
+   ============================================ */
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-3 {
+    gap: 0.75rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.gap-6 {
+    gap: 1.5rem;
+}
+
+.gap-8 {
+    gap: 2rem;
+}
+
+.gap-12 {
+    gap: 3rem;
+}
+
+/* Space-x utilities */
+.space-x-4> :not([hidden])~ :not([hidden]) {
+    margin-left: 1rem;
+}
+
+.space-x-6> :not([hidden])~ :not([hidden]) {
+    margin-left: 1.5rem;
 }
 
 /* ============================================
@@ -266,6 +313,19 @@
     .flex-shrink-0 {
         flex-shrink: 0 !important;
     }
+
+    /* Force gap on mobile */
+    .gap-4 {
+        gap: 1rem !important;
+    }
+
+    .gap-6 {
+        gap: 1.5rem !important;
+    }
+
+    .gap-8 {
+        gap: 2rem !important;
+    }
 }
 
 /* ============================================
@@ -291,7 +351,9 @@
     transform: translateX(0.25rem);
 }
 
-/* HOVER EFFECTS */
+/* ============================================
+   HOVER EFFECTS
+   ============================================ */
 .hover\:border-gold:hover {
     border-color: #D4AF37 !important;
 }
