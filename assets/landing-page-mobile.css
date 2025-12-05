@@ -1,0 +1,195 @@
+/* ============================================
+   BESPOKE MELODIES - MOBILE PREMIUM EXPERIENCE
+   A holistic mobile-first CSS layer for 
+   space, scrollability, elegance, and simplicity
+   ============================================ */
+
+@media (max-width: 767px) {
+
+    /* ========================================
+       GLOBAL SPACING
+       Every section gets generous padding
+       ======================================== */
+    section {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    /* ========================================
+       HORIZONTAL SCROLL CONTAINERS
+       Break out of parent padding, then add
+       internal padding for proper edge spacing
+       ======================================== */
+    .mobile-scroll-container {
+        display: flex !important;
+        gap: 1rem;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+
+        /* Break out of section padding */
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+
+        /* Add internal padding for edge spacing */
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 1rem;
+
+        /* Hide scrollbar */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .mobile-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* ========================================
+       SCROLL CARDS
+       Consistent sizing with peek effect
+       ======================================== */
+    .mobile-scroll-card {
+        flex: 0 0 85vw !important;
+        min-width: 85vw !important;
+        max-width: 85vw !important;
+        scroll-snap-align: center;
+    }
+
+    /* Slightly smaller cards for sections with more items */
+    .mobile-scroll-card-sm {
+        flex: 0 0 75vw !important;
+        min-width: 75vw !important;
+        max-width: 75vw !important;
+        scroll-snap-align: center;
+    }
+
+    /* ========================================
+       TESTIMONIALS
+       Premium glassmorphism cards
+       ======================================== */
+    section:has(h2:contains("Don't Take Our Word")) .flex,
+    #testimonials .flex {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* ========================================
+       AUDIO SAMPLES (Select Your Sound)
+       Full-width scroll with elegant cards
+       ======================================== */
+    #samples .flex {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .audio-card {
+        flex: 0 0 80vw !important;
+        min-width: 80vw !important;
+    }
+
+    /* ========================================
+       PRICING SECTION
+       Horizontal scroll with clear hierarchy
+       ======================================== */
+    #pricing .flex,
+    #pricing-scroll-container {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* ========================================
+       COMPOSER SECTION
+       Stacked photo above text, centered
+       ======================================== */
+    #composer-video .grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    #composer-video img {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    /* ========================================
+       TRUST BADGES (Every Commission Includes)
+       ======================================== */
+    .max-w-4xl .flex:has(.min-w-\[80vw\]) {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* ========================================
+       BESPOKE PROMISE SECTION
+       ======================================== */
+    #faq .flex {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* ========================================
+       TYPOGRAPHY - Mobile readable sizes
+       ======================================== */
+    h1 {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+    }
+
+    h2 {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+    }
+
+    h3 {
+        font-size: 1.25rem !important;
+    }
+
+    /* ========================================
+       VERTICAL RHYTHM
+       Consistent spacing between elements
+       ======================================== */
+    section {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+    }
+
+    /* Hero needs more space */
+    section:first-of-type {
+        padding-top: 2rem !important;
+    }
+
+    /* ========================================
+       BUTTONS - Touch friendly
+       ======================================== */
+    button,
+    a.bg-gold,
+    [role="button"] {
+        min-height: 48px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    /* ========================================
+       CARDS - Consistent styling
+       ======================================== */
+    .min-w-\[80vw\],
+    .min-w-\[85vw\],
+    .min-w-\[70vw\] {
+        flex-shrink: 0 !important;
+    }
+}

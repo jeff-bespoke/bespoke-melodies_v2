@@ -2,26 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================
-   MOBILE SCROLL CONTAINER PADDING
-   Uses pseudo-elements as invisible spacers
-   at start/end of scroll containers
-   ============================================ */
-.mobile-scroll-px::before,
-.mobile-scroll-px::after {
-    content: '';
-    flex-shrink: 0;
-    width: 1rem;
-}
-
-@media (min-width: 768px) {
-
-    .mobile-scroll-px::before,
-    .mobile-scroll-px::after {
-        display: none;
-    }
-}
-
 /* Custom scrollbar hiding */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
