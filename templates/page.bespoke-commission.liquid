@@ -183,7 +183,7 @@
         "@type": "AggregateOffer",
         "url": "{{ shop.url }}{{ page.url }}",
         "priceCurrency": "USD",
-        "lowPrice": "249",
+        "lowPrice": "599",
         "highPrice": "599",
         "offerCount": "3"
       }
@@ -204,7 +204,29 @@
     <!-- Contentsquare (deferred for performance) -->
     <script defer src="https://t.contentsquare.net/uxa/42886a0035531.js"></script>
     
-    <!-- Stylesheet (pre-compiled Tailwind utilities) -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'charcoal': '#1a1a1a',
+                        'charcoal-light': '#2d2d2d',
+                        'gold': '#D4AF37',
+                        'gold-hover': '#b5952f',
+                        'off-white': '#f5f5f5',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Stylesheet -->
     {{ 'landing-page.css' | asset_url | stylesheet_tag }}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
