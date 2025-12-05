@@ -209,6 +209,87 @@
     
     <!-- Additional custom styles -->
     {{ 'landing-page.css' | asset_url | stylesheet_tag }}
+    
+    <!-- MOBILE CRITICAL FIXES - Inline to override everything -->
+    <style>
+    @media (max-width: 767px) {
+        /* Testimonials - horizontal scroll with proper card sizing */
+        #testimonials .flex {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            gap: 1rem !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+        }
+        #testimonials .flex > div {
+            flex: 0 0 85vw !important;
+            min-width: 85vw !important;
+            max-width: 85vw !important;
+        }
+        
+        /* Composer Bio - photo on TOP, not side */
+        #composer-video .flex.flex-col,
+        #composer-video .grid {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        
+        /* Audio Cards - horizontal scroll */
+        #samples .flex {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            gap: 1rem !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+        }
+        #samples .flex > .audio-card {
+            flex: 0 0 85vw !important;
+            min-width: 85vw !important;
+            max-width: 85vw !important;
+        }
+        
+        /* Trust Badges - horizontal scroll */
+        #pricing .max-w-4xl .flex {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            gap: 1rem !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+        }
+        #pricing .max-w-4xl .flex > div {
+            flex: 0 0 85vw !important;
+            min-width: 85vw !important;
+            max-width: 85vw !important;
+        }
+        
+        /* Bespoke Promise - horizontal scroll */
+        #faq .flex {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            gap: 1rem !important;
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+        }
+        #faq .flex > .group {
+            flex: 0 0 85vw !important;
+            min-width: 85vw !important;
+            max-width: 85vw !important;
+        }
+        
+        /* Hide scrollbars but keep functionality */
+        .scrollbar-hide::-webkit-scrollbar,
+        #testimonials .flex::-webkit-scrollbar,
+        #samples .flex::-webkit-scrollbar,
+        #pricing .max-w-4xl .flex::-webkit-scrollbar,
+        #faq .flex::-webkit-scrollbar {
+            display: none !important;
+        }
+    }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
