@@ -2,305 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================
-   MOBILE SCROLL CONTAINER SYSTEM
-   This is the core pattern for all horizontal 
-   scroll sections on mobile
-   ============================================ */
-
-/* Horizontal scroll container - default is scroll on mobile */
-.mobile-scroll-container {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 1rem;
-    scrollbar-width: none;
-}
-
-.mobile-scroll-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* Cards inside scroll containers */
-.mobile-scroll-card {
-    flex-shrink: 0;
-    min-width: 80vw;
-    scroll-snap-align: center;
-}
-
-/* Desktop: becomes grid */
-@media (min-width: 768px) {
-    .mobile-scroll-container {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        overflow: visible;
-        scroll-snap-type: none;
-        padding-bottom: 0;
-    }
-
-    .mobile-scroll-card {
-        min-width: 0;
-    }
-}
-
-/* ============================================
-   BASE UTILITIES (Always applied)
-   ============================================ */
-
-/* Flex */
-.flex {
-    display: flex;
-}
-
-.flex-col {
-    flex-direction: column;
-}
-
-.flex-shrink-0 {
-    flex-shrink: 0;
-}
-
-.items-center {
-    align-items: center;
-}
-
-.items-stretch {
-    align-items: stretch;
-}
-
-.justify-center {
-    justify-content: center;
-}
-
-/* Gap */
-.gap-1 {
-    gap: 0.25rem;
-}
-
-.gap-2 {
-    gap: 0.5rem;
-}
-
-.gap-3 {
-    gap: 0.75rem;
-}
-
-.gap-4 {
-    gap: 1rem;
-}
-
-.gap-6 {
-    gap: 1.5rem;
-}
-
-.gap-8 {
-    gap: 2rem;
-}
-
-.gap-12 {
-    gap: 3rem;
-}
-
-/* Space-x (margin-based spacing) */
-.space-x-4> :not([hidden])~ :not([hidden]) {
-    margin-left: 1rem;
-}
-
-.space-x-6> :not([hidden])~ :not([hidden]) {
-    margin-left: 1.5rem;
-}
-
-/* Min-width for scroll cards */
-.min-w-\[70vw\] {
-    min-width: 70vw;
-}
-
-.min-w-\[80vw\] {
-    min-width: 80vw;
-}
-
-.min-w-\[85vw\] {
-    min-width: 85vw;
-}
-
-/* Overflow */
-.overflow-hidden {
-    overflow: hidden;
-}
-
-.overflow-x-auto {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.overflow-visible {
-    overflow: visible;
-}
-
-/* Scroll snap */
-.snap-x {
-    scroll-snap-type: x mandatory;
-}
-
-.snap-mandatory {
-    scroll-snap-type: x mandatory;
-}
-
-.snap-center {
-    scroll-snap-align: center;
-}
-
-.snap-none {
-    scroll-snap-type: none;
-}
-
-/* Scrollbar hide */
-.scrollbar-hide {
-    scrollbar-width: none;
-}
-
+/* Custom scrollbar hiding */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
 
-/* Order (for reordering cards on desktop) */
-.order-1 {
-    order: 1;
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.order-2 {
-    order: 2;
-}
-
-.order-3 {
-    order: 3;
-}
-
-/* ============================================
-   md: BREAKPOINT (768px+)
-   ============================================ */
-@media (min-width: 768px) {
-    .md\:grid {
-        display: grid;
-    }
-
-    .md\:flex-row {
-        flex-direction: row;
-    }
-
-    .md\:grid-cols-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .md\:grid-cols-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .md\:min-w-0 {
-        min-width: 0;
-    }
-
-    .md\:overflow-visible {
-        overflow: visible;
-    }
-
-    .md\:snap-none {
-        scroll-snap-type: none;
-    }
-
-    .md\:gap-6 {
-        gap: 1.5rem;
-    }
-
-    .md\:gap-8 {
-        gap: 2rem;
-    }
-
-    .md\:gap-12 {
-        gap: 3rem;
-    }
-
-    .md\:gap-16 {
-        gap: 4rem;
-    }
-
-    .md\:pb-0 {
-        padding-bottom: 0;
-    }
-
-    .md\:order-1 {
-        order: 1;
-    }
-
-    .md\:order-2 {
-        order: 2;
-    }
-
-    .md\:order-3 {
-        order: 3;
-    }
-
-    .md\:hidden {
-        display: none;
-    }
-}
-
-/* ============================================
-   lg: BREAKPOINT (1024px+)
-   ============================================ */
-@media (min-width: 1024px) {
-    .lg\:grid {
-        display: grid;
-    }
-
-    .lg\:grid-cols-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .lg\:min-w-0 {
-        min-width: 0;
-    }
-
-    .lg\:overflow-visible {
-        overflow: visible;
-    }
-
-    .lg\:snap-none {
-        scroll-snap-type: none;
-    }
-
-    .lg\:gap-8 {
-        gap: 2rem;
-    }
-
-    .lg\:py-0 {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-
-    .lg\:px-0 {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .lg\:order-1 {
-        order: 1;
-    }
-
-    .lg\:order-2 {
-        order: 2;
-    }
-
-    .lg\:order-3 {
-        order: 3;
-    }
-}
-
-/* ============================================
-   TEXT SHADOWS
-   ============================================ */
+/* Text shadows */
 .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -313,9 +25,7 @@
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* ============================================
-   GOLD EFFECTS
-   ============================================ */
+/* Gold effects */
 .glow-gold {
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
@@ -328,9 +38,7 @@
     background: linear-gradient(135deg, #D4AF37 0%, #F2D06B 50%, #D4AF37 100%);
 }
 
-/* ============================================
-   CARD HOVER EFFECTS
-   ============================================ */
+/* Card hover */
 .card-hover {
     transition: all 0.3s ease;
 }
@@ -340,9 +48,7 @@
     box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
 }
 
-/* ============================================
-   AUDIO CARD STYLES
-   ============================================ */
+/* Audio cards */
 .audio-card {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(10px);
@@ -361,7 +67,7 @@
     background-color: rgba(212, 175, 55, 0.1);
 }
 
-/* Play/Pause visibility */
+/* Play/Pause */
 .playing-indicator {
     display: none;
 }
@@ -390,9 +96,7 @@
     display: none;
 }
 
-/* ============================================
-   GENRE BACKGROUNDS
-   ============================================ */
+/* Genre backgrounds */
 .genre-pop-romance {
     background: linear-gradient(135deg, #4a1a1f 0%, #2a1520 50%, #1a1a1a 100%);
     border: 1px solid rgba(183, 110, 121, 0.4);
@@ -423,9 +127,7 @@
     border: 1px solid rgba(186, 85, 211, 0.4);
 }
 
-/* ============================================
-   FAQ STYLES
-   ============================================ */
+/* FAQ */
 .faq-item {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -451,9 +153,7 @@
     transform: rotate(180deg);
 }
 
-/* ============================================
-   MODAL
-   ============================================ */
+/* Modal */
 .modal {
     opacity: 0;
     visibility: hidden;
@@ -474,9 +174,7 @@
     scroll-margin-top: 30px;
 }
 
-/* ============================================
-   SNOW EFFECT (Christmas Page)
-   ============================================ */
+/* Snow effect */
 @keyframes snowfall {
     0% {
         transform: translateY(-10vh) rotate(0deg);
@@ -511,9 +209,7 @@
     pointer-events: none;
 }
 
-/* ============================================
-   PRICING CARD HOVER
-   ============================================ */
+/* Pricing card hover */
 .pricing-tier {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -529,9 +225,7 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* ============================================
-   GROUP HOVER EFFECTS
-   ============================================ */
+/* Group hover effects */
 .group:hover .group-hover\:scale-110 {
     transform: scale(1.1);
 }
@@ -552,9 +246,7 @@
     transform: translateX(0.25rem);
 }
 
-/* ============================================
-   HOVER TRANSFORMS
-   ============================================ */
+/* Hover effects */
 .hover\:border-gold:hover {
     border-color: #D4AF37 !important;
 }
